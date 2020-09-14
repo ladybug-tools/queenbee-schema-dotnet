@@ -105,7 +105,7 @@ namespace QueenbeeSDK.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented, JsonSetting.ConvertSetting);
+            return JsonConvert.SerializeObject(this, Formatting.Indented, JsonSetting.AnyOfConvertSetting);
         }
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace QueenbeeSDK.Model
         /// <returns>DAGOutputParameter object</returns>
         public static DAGOutputParameter FromJson(string json)
         {
-            var obj = JsonConvert.DeserializeObject<DAGOutputParameter>(json, JsonSetting.ConvertSetting);
+            var obj = JsonConvert.DeserializeObject<DAGOutputParameter>(json, JsonSetting.AnyOfConvertSetting);
             return obj;
         }
 

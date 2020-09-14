@@ -170,7 +170,7 @@ this.{{name}} = {{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}};
         /// <returns>JSON string presentation of the object</returns>
         public {{#parent}}{{^isArrayModel}}override {{/isArrayModel}}{{/parent}}{{^parent}}virtual {{/parent}}string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented, JsonSetting.ConvertSetting);
+            return JsonConvert.SerializeObject(this, Formatting.Indented, JsonSetting.AnyOfConvertSetting);
         }
 
         /// <summary>
@@ -179,7 +179,7 @@ this.{{name}} = {{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}};
         /// <returns>{{classname}} object</returns>
         public static {{classname}} FromJson(string json)
         {
-            var obj = JsonConvert.DeserializeObject<{{classname}}>(json, JsonSetting.ConvertSetting);
+            var obj = JsonConvert.DeserializeObject<{{classname}}>(json, JsonSetting.AnyOfConvertSetting);
             return obj;
         }
 

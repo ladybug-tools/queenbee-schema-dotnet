@@ -5,6 +5,6 @@
     "packageVersion": "1.16.3",
     "targetFramework": "v4.5",
     "sourceFolder": "src",
-    "optionalAssemblyInfo": true,
-    "optionalProjectFile": true
+    "optionalAssemblyInfo": false,
+    "optionalProjectFile": false
 }

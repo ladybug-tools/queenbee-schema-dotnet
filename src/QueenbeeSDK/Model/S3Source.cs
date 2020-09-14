@@ -151,7 +151,7 @@ namespace QueenbeeSDK.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented, JsonSetting.ConvertSetting);
+            return JsonConvert.SerializeObject(this, Formatting.Indented, JsonSetting.AnyOfConvertSetting);
         }
 
         /// <summary>
@@ -160,7 +160,7 @@ namespace QueenbeeSDK.Model
         /// <returns>S3Source object</returns>
         public static S3Source FromJson(string json)
         {
-            var obj = JsonConvert.DeserializeObject<S3Source>(json, JsonSetting.ConvertSetting);
+            var obj = JsonConvert.DeserializeObject<S3Source>(json, JsonSetting.AnyOfConvertSetting);
             return obj;
         }
 

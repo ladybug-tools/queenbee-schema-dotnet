@@ -240,10 +240,10 @@ def check_types(source_json_url):
 
 def cleanup(projectName):
     root = os.path.dirname(os.path.dirname(__file__))
-    # # remove Client folder
-    # target_folder = os.path.join(root, 'src', projectName, 'Client')
-    # if os.path.exists(target_folder):
-    #     shutil.rmtree(target_folder)
+    # remove Client folder
+    target_folder = os.path.join(root, 'src', projectName, 'Client')
+    if os.path.exists(target_folder):
+        shutil.rmtree(target_folder)
     # remove all *AllOf.cs files
     target_folder = os.path.join(root, 'src', projectName, 'Model')
     class_files = [x for x in os.listdir(target_folder) if x.endswith("AllOf.cs")]
