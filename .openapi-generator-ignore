@@ -30,3 +30,4 @@ build.bat
 build.sh
 git_push.sh
 mono_nunit_test.sh
+packages.config
