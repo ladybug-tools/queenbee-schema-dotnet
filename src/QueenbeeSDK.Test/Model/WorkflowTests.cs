@@ -13,9 +13,11 @@ namespace QueenbeeSDK.Test
         [SetUp]
         public void Init()
         {
+            // get recipe
             var recipePath = @"C:\Users\mingo\ladybug_tools\resources\recipes\honeybee_radiance_recipe\annual_daylight.yaml";
             var recipe = new LocalRecipeSelection("ladybug-tools", "annual-daylight", "a99fe012a53d7259168e7c4183a7e479621b4a5010de050c0bd95bcb771333e8", recipePath);
 
+            // create arguments
             var paramArgs = new List<DAGTaskParameterArgument>()
             {
                 new DAGTaskParameterArgument("wea", new InputParameterReference("wea"), "BostonLoganIntLArpt.wea"),
@@ -25,6 +27,7 @@ namespace QueenbeeSDK.Test
             var artifactArgs = new List<DAGTaskArtifactArgument>() {  };
             var args = new DAGTaskArgument(paramArgs);
 
+            // create workflow
             this.instance = new Workflow(recipe, args);
         }
 
