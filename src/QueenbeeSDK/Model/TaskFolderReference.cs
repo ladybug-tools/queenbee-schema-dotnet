@@ -30,7 +30,7 @@ namespace QueenbeeSDK.Model
     /// </summary>
     [DataContract]
     [JsonConverter(typeof(JsonSubtypes), "Type")]
-    public partial class TaskFolderReference : TaskReference,  IEquatable<TaskFolderReference>, IValidatableObject
+    public partial class TaskFolderReference : TaskReferenceBase,  IEquatable<TaskFolderReference>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TaskFolderReference" /> class.

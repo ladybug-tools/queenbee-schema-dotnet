@@ -66,50 +66,7 @@ namespace QueenbeeSDK.Test
             //Assert.IsInstanceOf(typeof(TaskReference), instance);
         }
 
-        /// <summary>
-        /// Test deserialize a TaskFileReference from type TaskReference
-        /// </summary>
-        [Test]
-        public void TaskFileReferenceDeserializeFromTaskReferenceTest()
-        {
-            // TODO uncomment below to test deserialize a TaskFileReference from type TaskReference
-            //Assert.IsInstanceOf(typeof(TaskReference), JsonConvert.DeserializeObject<TaskReference>(new TaskFileReference().ToJson()));
-        }
-        /// <summary>
-        /// Test deserialize a TaskPathReference from type TaskReference
-        /// </summary>
-        [Test]
-        public void TaskPathReferenceDeserializeFromTaskReferenceTest()
-        {
-            // TODO uncomment below to test deserialize a TaskPathReference from type TaskReference
-            //Assert.IsInstanceOf(typeof(TaskReference), JsonConvert.DeserializeObject<TaskReference>(new TaskPathReference().ToJson()));
-        }
-        /// <summary>
-        /// Test deserialize a TaskFolderReference from type TaskReference
-        /// </summary>
-        [Test]
-        public void TaskFolderReferenceDeserializeFromTaskReferenceTest()
-        {
-            // TODO uncomment below to test deserialize a TaskFolderReference from type TaskReference
-            //Assert.IsInstanceOf(typeof(TaskReference), JsonConvert.DeserializeObject<TaskReference>(new TaskFolderReference().ToJson()));
-        }
 
-        /// <summary>
-        /// Test the property 'Name'
-        /// </summary>
-        [Test]
-        public void NameTest()
-        {
-            // TODO unit test for the property 'Name'
-        }
-        /// <summary>
-        /// Test the property 'Variable'
-        /// </summary>
-        [Test]
-        public void VariableTest()
-        {
-            // TODO unit test for the property 'Variable'
-        }
         /// <summary>
         /// Test the property 'Type'
         /// </summary>

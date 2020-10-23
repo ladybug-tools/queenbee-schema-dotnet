@@ -26,38 +26,50 @@ using System.ComponentModel.DataAnnotations;
 namespace QueenbeeSDK.Model
 {
     /// <summary>
-    /// An input folder reference
+    /// An input reference.
     /// </summary>
     [DataContract]
     [JsonConverter(typeof(JsonSubtypes), "Type")]
-    public partial class InputFolderReference : InputReferenceBase,  IEquatable<InputFolderReference>, IValidatableObject
+    [JsonSubtypes.KnownSubType(typeof(InputFileReference), "InputFileReference")]
+    [JsonSubtypes.KnownSubType(typeof(InputPathReference), "InputPathReference")]
+    [JsonSubtypes.KnownSubType(typeof(InputFolderReference), "InputFolderReference")]
+    [JsonSubtypes.KnownSubType(typeof(InputReference), "InputReference")]
+    public partial class InputReferenceBase : BaseReference,  IEquatable<InputReferenceBase>, IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="InputFolderReference" /> class.
+        /// Initializes a new instance of the <see cref="InputReferenceBase" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected InputFolderReference() { }
+        protected InputReferenceBase() { }
         /// <summary>
-        /// Initializes a new instance of the <see cref="InputFolderReference" /> class.
+        /// Initializes a new instance of the <see cref="InputReferenceBase" /> class.
         /// </summary>
-        /// <param name="annotations">An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries..</param>
         /// <param name="variable">The name of the DAG input variable (required).</param>
-        public InputFolderReference
+        /// <param name="annotations">An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries..</param>
+        public InputReferenceBase
         (
-            string variable, // Required parameters
+           string variable, // Required parameters
             Dictionary<string, string> annotations= default // Optional parameters
-        ) : base(annotations: annotations, variable: variable)// BaseClass
+        ) : base(annotations: annotations)// BaseClass
         {
+            // to ensure "variable" is required (not null)
+            this.Variable = variable ?? throw new ArgumentNullException("variable is a required property for InputReferenceBase and cannot be null");
 
             // Set non-required readonly properties with defaultValue
-            this.Type = "InputFolderReference";
+            this.Type = "_InputReferenceBase";
         }
         
+        /// <summary>
+        /// The name of the DAG input variable
+        /// </summary>
+        /// <value>The name of the DAG input variable</value>
+        [DataMember(Name="variable", EmitDefaultValue=false)]
+        public string Variable { get; set; } 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "InputFolderReference";
+        public string Type { get; private set; }  = "_InputReferenceBase";
         
         /// <summary>
         /// Returns the string presentation of the object
@@ -66,8 +78,9 @@ namespace QueenbeeSDK.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class InputFolderReference {\n");
+            sb.Append("class InputReferenceBase {\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
+            sb.Append("  Variable: ").Append(Variable).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -85,18 +98,18 @@ namespace QueenbeeSDK.Model
         /// <summary>
         /// Returns the object from JSON string
         /// </summary>
-        /// <returns>InputFolderReference object</returns>
-        public static InputFolderReference FromJson(string json)
+        /// <returns>InputReferenceBase object</returns>
+        public static InputReferenceBase FromJson(string json)
         {
-            var obj = JsonConvert.DeserializeObject<InputFolderReference>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<InputReferenceBase>(json, JsonSetting.AnyOfConvertSetting);
             return obj;
         }
 
         /// <summary>
         /// Creates a new instance with the same properties.
         /// </summary>
-        /// <returns>InputFolderReference object</returns>
-        public InputFolderReference DuplicateInputFolderReference()
+        /// <returns>InputReferenceBase object</returns>
+        public InputReferenceBase DuplicateInputReferenceBase()
         {
             return FromJson(this.ToJson());
         }
@@ -108,20 +121,25 @@ namespace QueenbeeSDK.Model
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as InputFolderReference);
+            return this.Equals(input as InputReferenceBase);
         }
 
         /// <summary>
-        /// Returns true if InputFolderReference instances are equal
+        /// Returns true if InputReferenceBase instances are equal
         /// </summary>
-        /// <param name="input">Instance of InputFolderReference to be compared</param>
+        /// <param name="input">Instance of InputReferenceBase to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(InputFolderReference input)
+        public bool Equals(InputReferenceBase input)
         {
             if (input == null)
                 return false;
 
             return base.Equals(input) && 
+                (
+                    this.Variable == input.Variable ||
+                    (this.Variable != null &&
+                    this.Variable.Equals(input.Variable))
+                ) && base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
@@ -138,6 +156,8 @@ namespace QueenbeeSDK.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
+                if (this.Variable != null)
+                    hashCode = hashCode * 59 + this.Variable.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;
@@ -151,9 +171,19 @@ namespace QueenbeeSDK.Model
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            return this.BaseValidate(validationContext);
+        }
+
+        /// <summary>
+        /// To validate all properties of the instance
+        /// </summary>
+        /// <param name="validationContext">Validation context</param>
+        /// <returns>Validation Result</returns>
+        protected IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> BaseValidate(ValidationContext validationContext)
+        {
             foreach(var x in base.BaseValidate(validationContext)) yield return x;
             // Type (string) pattern
-            Regex regexType = new Regex(@"^InputFolderReference$", RegexOptions.CultureInvariant);
+            Regex regexType = new Regex(@"^_InputReferenceBase$", RegexOptions.CultureInvariant);
             if (false == regexType.Match(this.Type).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });

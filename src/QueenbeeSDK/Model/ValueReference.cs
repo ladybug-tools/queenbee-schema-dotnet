@@ -59,7 +59,7 @@ namespace QueenbeeSDK.Model
         /// A fixed value for this reference.
         /// </summary>
         /// <value>A fixed value for this reference.</value>
-        [DataMember(Name="value", EmitDefaultValue=false)]
+        [DataMember(Name="value", EmitDefaultValue=true)]
         public object Value { get; set; } 
         /// <summary>
         /// Gets or Sets Type
