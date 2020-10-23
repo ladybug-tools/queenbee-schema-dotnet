@@ -2,6 +2,7 @@ import os
 import sys
 import urllib.request
 import json
+import shutil
 
 
 args = sys.argv[1:]
@@ -30,3 +31,35 @@ with open(config_file, "w") as jsonFile:
     json.dump(config_data, jsonFile, indent=4)
 
 
+def cleanup(projectName):
+    root = os.path.dirname(os.path.dirname(__file__))
+    # remove Client folder
+    project_dir = os.path.join(root, 'src', projectName)
+    target_folder = os.path.join(project_dir, 'Client')
+    if os.path.exists(target_folder):
+        shutil.rmtree(target_folder)
+    
+    # remove Api folder
+    target_folder = os.path.join(project_dir, 'Api')
+    if os.path.exists(target_folder):
+        shutil.rmtree(target_folder)
+
+    # remove Model folder
+    target_folder = os.path.join(project_dir, 'Model')
+    if os.path.exists(target_folder):
+        shutil.rmtree(target_folder)
+    
+    # remove docs folder
+    target_folder = os.path.join(root, 'docs')
+    if os.path.exists(target_folder):
+        shutil.rmtree(target_folder)
+    
+    # remove test folder
+    target_folder = project_dir + '.Test'
+    if os.path.exists(target_folder):
+        shutil.rmtree(target_folder)
+
+
+
+
+cleanup('QueenbeeSDK')
