@@ -49,7 +49,7 @@ def fix_constructor(read_data):
     replace_new = [
         ", ",
         "",
-        "",   # remove "," at begining of required
+        " ",   # remove "," at begining of required
         "",   # remove "," at begining of optional
         ", ",  # remove one comma of in two or more commas before "//Required parameters"
         " ",
@@ -138,7 +138,7 @@ def replace_anyof_type(read_data, anyof_types):
     for items in anyof_types:
         if len(items) > 0:
             replace_source = "AnyOf%s" % ("".join(items))
-            replace_new = "AnyOf<%s>" % (",".join(items).replace('number', 'double').replace('integer', 'int'))
+            replace_new = "AnyOf<%s>" % (", ".join(items).replace('number', 'double').replace('integer', 'int').replace('boolean', 'bool'))
             rex = "(%s)(?=[ >])" % replace_source # find replace_source only with " "(space) or ">" follows
             if re.findall(rex, data) != []:
                 data = re.sub(rex, replace_new, data)
