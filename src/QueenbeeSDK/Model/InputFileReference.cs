@@ -30,7 +30,7 @@ namespace QueenbeeSDK.Model
     /// </summary>
     [DataContract]
     [JsonConverter(typeof(JsonSubtypes), "Type")]
-    public partial class InputFileReference : InputReference,  IEquatable<InputFileReference>, IValidatableObject
+    public partial class InputFileReference : InputReferenceBase,  IEquatable<InputFileReference>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="InputFileReference" /> class.

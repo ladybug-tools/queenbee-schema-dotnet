@@ -26,14 +26,11 @@ using System.ComponentModel.DataAnnotations;
 namespace QueenbeeSDK.Model
 {
     /// <summary>
-    /// An input reference.
+    /// An input parameter reference which is not a file or a folder.  For a file or a folder use InputFileReference, InputFolderReference or InputPathReference instead.
     /// </summary>
     [DataContract]
     [JsonConverter(typeof(JsonSubtypes), "Type")]
-    [JsonSubtypes.KnownSubType(typeof(InputFileReference), "InputFileReference")]
-    [JsonSubtypes.KnownSubType(typeof(InputPathReference), "InputPathReference")]
-    [JsonSubtypes.KnownSubType(typeof(InputFolderReference), "InputFolderReference")]
-    public partial class InputReference : BaseReference,  IEquatable<InputReference>, IValidatableObject
+    public partial class InputReference : InputReferenceBase,  IEquatable<InputReference>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="InputReference" /> class.
@@ -43,32 +40,24 @@ namespace QueenbeeSDK.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="InputReference" /> class.
         /// </summary>
-        /// <param name="variable">The name of the DAG input variable (required).</param>
         /// <param name="annotations">An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries..</param>
+        /// <param name="variable">The name of the DAG input variable (required).</param>
         public InputReference
         (
-           string variable, // Required parameters
+            string variable, // Required parameters
             Dictionary<string, string> annotations= default // Optional parameters
-        ) : base(annotations: annotations)// BaseClass
+        ) : base(annotations: annotations, variable: variable)// BaseClass
         {
-            // to ensure "variable" is required (not null)
-            this.Variable = variable ?? throw new ArgumentNullException("variable is a required property for InputReference and cannot be null");
 
             // Set non-required readonly properties with defaultValue
-            this.Type = "_InputReference";
+            this.Type = "InputReference";
         }
         
-        /// <summary>
-        /// The name of the DAG input variable
-        /// </summary>
-        /// <value>The name of the DAG input variable</value>
-        [DataMember(Name="variable", EmitDefaultValue=false)]
-        public string Variable { get; set; } 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "_InputReference";
+        public string Type { get; private set; }  = "InputReference";
         
         /// <summary>
         /// Returns the string presentation of the object
@@ -79,7 +68,6 @@ namespace QueenbeeSDK.Model
             var sb = new StringBuilder();
             sb.Append("class InputReference {\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
-            sb.Append("  Variable: ").Append(Variable).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -135,11 +123,6 @@ namespace QueenbeeSDK.Model
 
             return base.Equals(input) && 
                 (
-                    this.Variable == input.Variable ||
-                    (this.Variable != null &&
-                    this.Variable.Equals(input.Variable))
-                ) && base.Equals(input) && 
-                (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
@@ -155,8 +138,6 @@ namespace QueenbeeSDK.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                if (this.Variable != null)
-                    hashCode = hashCode * 59 + this.Variable.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;
@@ -170,19 +151,9 @@ namespace QueenbeeSDK.Model
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            return this.BaseValidate(validationContext);
-        }
-
-        /// <summary>
-        /// To validate all properties of the instance
-        /// </summary>
-        /// <param name="validationContext">Validation context</param>
-        /// <returns>Validation Result</returns>
-        protected IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> BaseValidate(ValidationContext validationContext)
-        {
             foreach(var x in base.BaseValidate(validationContext)) yield return x;
             // Type (string) pattern
-            Regex regexType = new Regex(@"^_InputReference$", RegexOptions.CultureInvariant);
+            Regex regexType = new Regex(@"^InputReference$", RegexOptions.CultureInvariant);
             if (false == regexType.Match(this.Type).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });

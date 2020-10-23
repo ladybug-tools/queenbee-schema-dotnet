@@ -30,7 +30,7 @@ namespace QueenbeeSDK.Model
     /// </summary>
     [DataContract]
     [JsonConverter(typeof(JsonSubtypes), "Type")]
-    public partial class TaskPathReference : TaskReference,  IEquatable<TaskPathReference>, IValidatableObject
+    public partial class TaskPathReference : TaskReferenceBase,  IEquatable<TaskPathReference>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TaskPathReference" /> class.

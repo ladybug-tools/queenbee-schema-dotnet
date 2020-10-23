@@ -67,6 +67,15 @@ namespace QueenbeeSDK.Test
         }
 
         /// <summary>
+        /// Test deserialize a InputReferenceBase from type BaseReference
+        /// </summary>
+        [Test]
+        public void InputReferenceBaseDeserializeFromBaseReferenceTest()
+        {
+            // TODO uncomment below to test deserialize a InputReferenceBase from type BaseReference
+            //Assert.IsInstanceOf(typeof(BaseReference), JsonConvert.DeserializeObject<BaseReference>(new InputReferenceBase().ToJson()));
+        }
+        /// <summary>
         /// Test deserialize a ValueReference from type BaseReference
         /// </summary>
         [Test]
@@ -76,15 +85,6 @@ namespace QueenbeeSDK.Test
             //Assert.IsInstanceOf(typeof(BaseReference), JsonConvert.DeserializeObject<BaseReference>(new ValueReference().ToJson()));
         }
         /// <summary>
-        /// Test deserialize a TaskReference from type BaseReference
-        /// </summary>
-        [Test]
-        public void TaskReferenceDeserializeFromBaseReferenceTest()
-        {
-            // TODO uncomment below to test deserialize a TaskReference from type BaseReference
-            //Assert.IsInstanceOf(typeof(BaseReference), JsonConvert.DeserializeObject<BaseReference>(new TaskReference().ToJson()));
-        }
-        /// <summary>
         /// Test deserialize a FolderReference from type BaseReference
         /// </summary>
         [Test]
@@ -92,6 +92,15 @@ namespace QueenbeeSDK.Test
         {
             // TODO uncomment below to test deserialize a FolderReference from type BaseReference
             //Assert.IsInstanceOf(typeof(BaseReference), JsonConvert.DeserializeObject<BaseReference>(new FolderReference().ToJson()));
+        }
+        /// <summary>
+        /// Test deserialize a TaskReferenceBase from type BaseReference
+        /// </summary>
+        [Test]
+        public void TaskReferenceBaseDeserializeFromBaseReferenceTest()
+        {
+            // TODO uncomment below to test deserialize a TaskReferenceBase from type BaseReference
+            //Assert.IsInstanceOf(typeof(BaseReference), JsonConvert.DeserializeObject<BaseReference>(new TaskReferenceBase().ToJson()));
         }
         /// <summary>
         /// Test deserialize a FileReference from type BaseReference
@@ -110,15 +119,6 @@ namespace QueenbeeSDK.Test
         {
             // TODO uncomment below to test deserialize a ValueFileReference from type BaseReference
             //Assert.IsInstanceOf(typeof(BaseReference), JsonConvert.DeserializeObject<BaseReference>(new ValueFileReference().ToJson()));
-        }
-        /// <summary>
-        /// Test deserialize a InputReference from type BaseReference
-        /// </summary>
-        [Test]
-        public void InputReferenceDeserializeFromBaseReferenceTest()
-        {
-            // TODO uncomment below to test deserialize a InputReference from type BaseReference
-            //Assert.IsInstanceOf(typeof(BaseReference), JsonConvert.DeserializeObject<BaseReference>(new InputReference().ToJson()));
         }
         /// <summary>
         /// Test deserialize a ValueListReference from type BaseReference

@@ -66,42 +66,7 @@ namespace QueenbeeSDK.Test
             //Assert.IsInstanceOf(typeof(InputReference), instance);
         }
 
-        /// <summary>
-        /// Test deserialize a InputFileReference from type InputReference
-        /// </summary>
-        [Test]
-        public void InputFileReferenceDeserializeFromInputReferenceTest()
-        {
-            // TODO uncomment below to test deserialize a InputFileReference from type InputReference
-            //Assert.IsInstanceOf(typeof(InputReference), JsonConvert.DeserializeObject<InputReference>(new InputFileReference().ToJson()));
-        }
-        /// <summary>
-        /// Test deserialize a InputPathReference from type InputReference
-        /// </summary>
-        [Test]
-        public void InputPathReferenceDeserializeFromInputReferenceTest()
-        {
-            // TODO uncomment below to test deserialize a InputPathReference from type InputReference
-            //Assert.IsInstanceOf(typeof(InputReference), JsonConvert.DeserializeObject<InputReference>(new InputPathReference().ToJson()));
-        }
-        /// <summary>
-        /// Test deserialize a InputFolderReference from type InputReference
-        /// </summary>
-        [Test]
-        public void InputFolderReferenceDeserializeFromInputReferenceTest()
-        {
-            // TODO uncomment below to test deserialize a InputFolderReference from type InputReference
-            //Assert.IsInstanceOf(typeof(InputReference), JsonConvert.DeserializeObject<InputReference>(new InputFolderReference().ToJson()));
-        }
 
-        /// <summary>
-        /// Test the property 'Variable'
-        /// </summary>
-        [Test]
-        public void VariableTest()
-        {
-            // TODO unit test for the property 'Variable'
-        }
         /// <summary>
         /// Test the property 'Type'
         /// </summary>

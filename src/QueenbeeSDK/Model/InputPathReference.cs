@@ -30,7 +30,7 @@ namespace QueenbeeSDK.Model
     /// </summary>
     [DataContract]
     [JsonConverter(typeof(JsonSubtypes), "Type")]
-    public partial class InputPathReference : InputReference,  IEquatable<InputPathReference>, IValidatableObject
+    public partial class InputPathReference : InputReferenceBase,  IEquatable<InputPathReference>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="InputPathReference" /> class.

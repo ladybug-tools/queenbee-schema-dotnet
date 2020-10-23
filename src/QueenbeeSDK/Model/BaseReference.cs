@@ -30,12 +30,12 @@ namespace QueenbeeSDK.Model
     /// </summary>
     [DataContract]
     [JsonConverter(typeof(JsonSubtypes), "Type")]
+    [JsonSubtypes.KnownSubType(typeof(InputReferenceBase), "_InputReferenceBase")]
     [JsonSubtypes.KnownSubType(typeof(ValueReference), "ValueReference")]
-    [JsonSubtypes.KnownSubType(typeof(TaskReference), "_TaskReference")]
     [JsonSubtypes.KnownSubType(typeof(FolderReference), "FolderReference")]
+    [JsonSubtypes.KnownSubType(typeof(TaskReferenceBase), "_TaskReferenceBase")]
     [JsonSubtypes.KnownSubType(typeof(FileReference), "FileReference")]
     [JsonSubtypes.KnownSubType(typeof(ValueFileReference), "ValueFileReference")]
-    [JsonSubtypes.KnownSubType(typeof(InputReference), "_InputReference")]
     [JsonSubtypes.KnownSubType(typeof(ValueListReference), "ValueListReference")]
     [JsonSubtypes.KnownSubType(typeof(ItemReference), "ItemReference")]
     public partial class BaseReference : OpenAPIGenBaseModel,  IEquatable<BaseReference>, IValidatableObject

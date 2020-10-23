@@ -61,7 +61,7 @@ namespace QueenbeeSDK.Model
         /// Reference to a file or a task output. Task output must be file.
         /// </summary>
         /// <value>Reference to a file or a task output. Task output must be file.</value>
-        [DataMember(Name="from", EmitDefaultValue=false)]
+        [DataMember(Name="from", EmitDefaultValue=true)]
         public object From { get; set; } 
         /// <summary>
         /// Gets or Sets Type
