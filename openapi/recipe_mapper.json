@@ -55,8 +55,8 @@
     "ValueReference": "queenbee.io.reference",
     "_ArtifactSource": "queenbee.recipe.artifact_source",
     "_BaseReference": "queenbee.io.reference",
-    "_InputReference": "queenbee.io.reference",
-    "_TaskReference": "queenbee.io.reference"
+    "_InputReferenceBase": "queenbee.io.reference",
+    "_TaskReferenceBase": "queenbee.io.reference"
   },
   "enums": {
     "DependencyType": "queenbee.recipe.dependency",
