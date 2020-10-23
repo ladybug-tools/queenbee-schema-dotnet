@@ -49,15 +49,7 @@ namespace QueenbeeSDK.Model
         ) : base(annotations: annotations)// BaseClass
         {
             // to ensure "url" is required (not null)
-            if (url == null)
-            {
-                throw new InvalidDataException("url is a required property for HTTP and cannot be null");
-            }
-            else
-            {
-                this.Url = url;
-            }
-            
+            this.Url = url ?? throw new ArgumentNullException("url is a required property for HTTP and cannot be null");
 
             // Set non-required readonly properties with defaultValue
             this.Type = "HTTP";
@@ -68,13 +60,11 @@ namespace QueenbeeSDK.Model
         /// </summary>
         /// <value>For a HTTP endpoint this can be http://climate.onebuilding.org.</value>
         [DataMember(Name="url", EmitDefaultValue=false)]
-        [JsonProperty("url")]
-        public string Url { get;  set; } 
+        public string Url { get; set; } 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
         public string Type { get; private set; }  = "HTTP";
         
         /// <summary>

@@ -74,7 +74,6 @@ namespace QueenbeeSDK.Model
         /// </summary>
         /// <value>A base class to use when there is no baseclass available to fall on.</value>
         [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
         public string Type { get; private set; }  = "InvalidType";
         
         /// <summary>

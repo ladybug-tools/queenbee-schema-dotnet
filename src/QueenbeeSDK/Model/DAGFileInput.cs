@@ -53,15 +53,7 @@ namespace QueenbeeSDK.Model
         ) : base()// BaseClass
         {
             // to ensure "name" is required (not null)
-            if (name == null)
-            {
-                throw new InvalidDataException("name is a required property for DAGFileInput and cannot be null");
-            }
-            else
-            {
-                this.Name = name;
-            }
-            
+            this.Name = name ?? throw new ArgumentNullException("name is a required property for DAGFileInput and cannot be null");
             this.Annotations = annotations;
             this.Description = description;
             this.Default = _default;
@@ -77,48 +69,41 @@ namespace QueenbeeSDK.Model
         /// </summary>
         /// <value>Input name.</value>
         [DataMember(Name="name", EmitDefaultValue=false)]
-        [JsonProperty("name")]
-        public string Name { get;  set; } 
+        public string Name { get; set; } 
         /// <summary>
         /// An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.
         /// </summary>
         /// <value>An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.</value>
         [DataMember(Name="annotations", EmitDefaultValue=false)]
-        [JsonProperty("annotations")]
-        public Dictionary<string, string> Annotations { get;  set; } 
+        public Dictionary<string, string> Annotations { get; set; } 
         /// <summary>
         /// Optional description for input.
         /// </summary>
         /// <value>Optional description for input.</value>
         [DataMember(Name="description", EmitDefaultValue=false)]
-        [JsonProperty("description")]
-        public string Description { get;  set; } 
+        public string Description { get; set; } 
         /// <summary>
         /// The default source for file if the value is not provided.
         /// </summary>
         /// <value>The default source for file if the value is not provided.</value>
         [DataMember(Name="default", EmitDefaultValue=false)]
-        [JsonProperty("default")]
-        public AnyOf<HTTP, S3, ProjectFolder> Default { get;  set; } 
+        public AnyOf<HTTP, S3, ProjectFolder> Default { get; set; } 
         /// <summary>
         /// An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec.
         /// </summary>
         /// <value>An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec.</value>
         [DataMember(Name="spec", EmitDefaultValue=false)]
-        [JsonProperty("spec")]
-        public Object Spec { get;  set; } 
+        public Object Spec { get; set; } 
         /// <summary>
         /// Optional list of extensions for file. The check for extension is case-insensitive.
         /// </summary>
         /// <value>Optional list of extensions for file. The check for extension is case-insensitive.</value>
         [DataMember(Name="extensions", EmitDefaultValue=false)]
-        [JsonProperty("extensions")]
-        public List<string> Extensions { get;  set; } 
+        public List<string> Extensions { get; set; } 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
         public string Type { get; private set; }  = "DAGFileInput";
         
         /// <summary>

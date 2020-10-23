@@ -51,25 +51,9 @@ namespace QueenbeeSDK.Model
         ) : base()// BaseClass
         {
             // to ensure "name" is required (not null)
-            if (name == null)
-            {
-                throw new InvalidDataException("name is a required property for TaskPathArgument and cannot be null");
-            }
-            else
-            {
-                this.Name = name;
-            }
-            
+            this.Name = name ?? throw new ArgumentNullException("name is a required property for TaskPathArgument and cannot be null");
             // to ensure "from" is required (not null)
-            if (from == null)
-            {
-                throw new InvalidDataException("from is a required property for TaskPathArgument and cannot be null");
-            }
-            else
-            {
-                this.From = from;
-            }
-            
+            this.From = from ?? throw new ArgumentNullException("from is a required property for TaskPathArgument and cannot be null");
             this.Annotations = annotations;
             this.SubPath = subPath;
 
@@ -82,35 +66,30 @@ namespace QueenbeeSDK.Model
         /// </summary>
         /// <value>Argument name. The name must match one of the input names from Task&#39;s template which can be a function or DAG.</value>
         [DataMember(Name="name", EmitDefaultValue=false)]
-        [JsonProperty("name")]
-        public string Name { get;  set; } 
+        public string Name { get; set; } 
         /// <summary>
         /// A reference to a DAG input, a DAG output or another task output. You can also use the ValueReference type to hard-code an input value.
         /// </summary>
         /// <value>A reference to a DAG input, a DAG output or another task output. You can also use the ValueReference type to hard-code an input value.</value>
         [DataMember(Name="from", EmitDefaultValue=false)]
-        [JsonProperty("from")]
-        public AnyOf<InputFileReference, InputFolderReference, InputPathReference, TaskFileReference, TaskFolderReference, TaskPathReference, ValueFileReference, ValueFolderReference> From { get;  set; } 
+        public AnyOf<InputFileReference, InputFolderReference, InputPathReference, TaskFileReference, TaskFolderReference, TaskPathReference, ValueFileReference, ValueFolderReference> From { get; set; } 
         /// <summary>
         /// An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.
         /// </summary>
         /// <value>An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.</value>
         [DataMember(Name="annotations", EmitDefaultValue=false)]
-        [JsonProperty("annotations")]
-        public Dictionary<string, string> Annotations { get;  set; } 
+        public Dictionary<string, string> Annotations { get; set; } 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
         public string Type { get; private set; }  = "TaskPathArgument";
         /// <summary>
         /// A sub_path inside the path that is provided in the &#x60;&#x60;from&#x60;&#x60; field. Use sub_path to only access part of the Path that is needed instead of copying all the files and folders inside the path.
         /// </summary>
         /// <value>A sub_path inside the path that is provided in the &#x60;&#x60;from&#x60;&#x60; field. Use sub_path to only access part of the Path that is needed instead of copying all the files and folders inside the path.</value>
         [DataMember(Name="sub_path", EmitDefaultValue=false)]
-        [JsonProperty("sub_path")]
-        public string SubPath { get;  set; } 
+        public string SubPath { get; set; } 
         
         /// <summary>
         /// Returns the string presentation of the object

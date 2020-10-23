@@ -51,15 +51,7 @@ namespace QueenbeeSDK.Model
         ) : base(name: name, annotations: annotations, description: description)// BaseClass
         {
             // to ensure "from" is required (not null)
-            if (from == null)
-            {
-                throw new InvalidDataException("from is a required property for DAGPathOutput and cannot be null");
-            }
-            else
-            {
-                this.From = from;
-            }
-            
+            this.From = from ?? throw new ArgumentNullException("from is a required property for DAGPathOutput and cannot be null");
 
             // Set non-required readonly properties with defaultValue
             this.Type = "DAGPathOutput";
@@ -70,13 +62,11 @@ namespace QueenbeeSDK.Model
         /// </summary>
         /// <value>Reference to a file, folder or a task output. Task output must either be a file or a folder.</value>
         [DataMember(Name="from", EmitDefaultValue=false)]
-        [JsonProperty("from")]
-        public AnyOf<TaskReference, FileReference, FolderReference> From { get;  set; } 
+        public AnyOf<TaskReference, FileReference, FolderReference> From { get; set; } 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
         public string Type { get; private set; }  = "DAGPathOutput";
         
         /// <summary>

@@ -52,35 +52,11 @@ namespace QueenbeeSDK.Model
         ) : base(annotations: annotations)// BaseClass
         {
             // to ensure "key" is required (not null)
-            if (key == null)
-            {
-                throw new InvalidDataException("key is a required property for S3 and cannot be null");
-            }
-            else
-            {
-                this.Key = key;
-            }
-            
+            this.Key = key ?? throw new ArgumentNullException("key is a required property for S3 and cannot be null");
             // to ensure "endpoint" is required (not null)
-            if (endpoint == null)
-            {
-                throw new InvalidDataException("endpoint is a required property for S3 and cannot be null");
-            }
-            else
-            {
-                this.Endpoint = endpoint;
-            }
-            
+            this.Endpoint = endpoint ?? throw new ArgumentNullException("endpoint is a required property for S3 and cannot be null");
             // to ensure "bucket" is required (not null)
-            if (bucket == null)
-            {
-                throw new InvalidDataException("bucket is a required property for S3 and cannot be null");
-            }
-            else
-            {
-                this.Bucket = bucket;
-            }
-            
+            this.Bucket = bucket ?? throw new ArgumentNullException("bucket is a required property for S3 and cannot be null");
             this.CredentialsPath = credentialsPath;
 
             // Set non-required readonly properties with defaultValue
@@ -92,35 +68,30 @@ namespace QueenbeeSDK.Model
         /// </summary>
         /// <value>The path inside the bucket to source artifacts from.</value>
         [DataMember(Name="key", EmitDefaultValue=false)]
-        [JsonProperty("key")]
-        public string Key { get;  set; } 
+        public string Key { get; set; } 
         /// <summary>
         /// The HTTP endpoint to reach the S3 bucket.
         /// </summary>
         /// <value>The HTTP endpoint to reach the S3 bucket.</value>
         [DataMember(Name="endpoint", EmitDefaultValue=false)]
-        [JsonProperty("endpoint")]
-        public string Endpoint { get;  set; } 
+        public string Endpoint { get; set; } 
         /// <summary>
         /// The name of the S3 bucket on the host server.
         /// </summary>
         /// <value>The name of the S3 bucket on the host server.</value>
         [DataMember(Name="bucket", EmitDefaultValue=false)]
-        [JsonProperty("bucket")]
-        public string Bucket { get;  set; } 
+        public string Bucket { get; set; } 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
         public string Type { get; private set; }  = "S3";
         /// <summary>
         /// Path to the file holding the AccessKey and SecretAccessKey to authenticate to the bucket. Assumes public bucket access if none are specified.
         /// </summary>
         /// <value>Path to the file holding the AccessKey and SecretAccessKey to authenticate to the bucket. Assumes public bucket access if none are specified.</value>
         [DataMember(Name="credentials_path", EmitDefaultValue=false)]
-        [JsonProperty("credentials_path")]
-        public string CredentialsPath { get;  set; } 
+        public string CredentialsPath { get; set; } 
         
         /// <summary>
         /// Returns the string presentation of the object

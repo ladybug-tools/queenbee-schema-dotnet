@@ -49,15 +49,7 @@ namespace QueenbeeSDK.Model
         ) : base(annotations: annotations)// BaseClass
         {
             // to ensure "value" is required (not null)
-            if (value == null)
-            {
-                throw new InvalidDataException("value is a required property for ValueListReference and cannot be null");
-            }
-            else
-            {
-                this.Value = value;
-            }
-            
+            this.Value = value ?? throw new ArgumentNullException("value is a required property for ValueListReference and cannot be null");
 
             // Set non-required readonly properties with defaultValue
             this.Type = "ValueListReference";
@@ -68,13 +60,11 @@ namespace QueenbeeSDK.Model
         /// </summary>
         /// <value>A fixed value for this reference.</value>
         [DataMember(Name="value", EmitDefaultValue=false)]
-        [JsonProperty("value")]
-        public List<object> Value { get;  set; } 
+        public List<object> Value { get; set; } 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
         public string Type { get; private set; }  = "ValueListReference";
         
         /// <summary>

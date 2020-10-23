@@ -50,25 +50,9 @@ namespace QueenbeeSDK.Model
         ) : base()// BaseClass
         {
             // to ensure "name" is required (not null)
-            if (name == null)
-            {
-                throw new InvalidDataException("name is a required property for TaskArgument and cannot be null");
-            }
-            else
-            {
-                this.Name = name;
-            }
-            
+            this.Name = name ?? throw new ArgumentNullException("name is a required property for TaskArgument and cannot be null");
             // to ensure "from" is required (not null)
-            if (from == null)
-            {
-                throw new InvalidDataException("from is a required property for TaskArgument and cannot be null");
-            }
-            else
-            {
-                this.From = from;
-            }
-            
+            this.From = from ?? throw new ArgumentNullException("from is a required property for TaskArgument and cannot be null");
             this.Annotations = annotations;
 
             // Set non-required readonly properties with defaultValue
@@ -80,27 +64,23 @@ namespace QueenbeeSDK.Model
         /// </summary>
         /// <value>Argument name. The name must match one of the input names from Task&#39;s template which can be a function or DAG.</value>
         [DataMember(Name="name", EmitDefaultValue=false)]
-        [JsonProperty("name")]
-        public string Name { get;  set; } 
+        public string Name { get; set; } 
         /// <summary>
         /// A reference to a DAG input, a DAG output or another task output. You can also use the ValueReference type to hard-code an input value.
         /// </summary>
         /// <value>A reference to a DAG input, a DAG output or another task output. You can also use the ValueReference type to hard-code an input value.</value>
         [DataMember(Name="from", EmitDefaultValue=false)]
-        [JsonProperty("from")]
-        public AnyOf<InputReference, TaskReference, ItemReference, ValueReference> From { get;  set; } 
+        public AnyOf<InputReference, TaskReference, ItemReference, ValueReference> From { get; set; } 
         /// <summary>
         /// An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.
         /// </summary>
         /// <value>An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.</value>
         [DataMember(Name="annotations", EmitDefaultValue=false)]
-        [JsonProperty("annotations")]
-        public Dictionary<string, string> Annotations { get;  set; } 
+        public Dictionary<string, string> Annotations { get; set; } 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
         public string Type { get; private set; }  = "TaskArgument";
         
         /// <summary>

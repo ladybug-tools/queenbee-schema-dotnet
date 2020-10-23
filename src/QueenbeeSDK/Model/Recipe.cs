@@ -51,15 +51,7 @@ namespace QueenbeeSDK.Model
         ) : base()// BaseClass
         {
             // to ensure "flow" is required (not null)
-            if (flow == null)
-            {
-                throw new InvalidDataException("flow is a required property for Recipe and cannot be null");
-            }
-            else
-            {
-                this.Flow = flow;
-            }
-            
+            this.Flow = flow ?? throw new ArgumentNullException("flow is a required property for Recipe and cannot be null");
             this.Annotations = annotations;
             this.Metadata = metadata;
             this.Dependencies = dependencies;
@@ -73,34 +65,29 @@ namespace QueenbeeSDK.Model
         /// </summary>
         /// <value>A list of tasks to create a DAG recipe.</value>
         [DataMember(Name="flow", EmitDefaultValue=false)]
-        [JsonProperty("flow")]
-        public List<DAG> Flow { get;  set; } 
+        public List<DAG> Flow { get; set; } 
         /// <summary>
         /// An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.
         /// </summary>
         /// <value>An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.</value>
         [DataMember(Name="annotations", EmitDefaultValue=false)]
-        [JsonProperty("annotations")]
-        public Dictionary<string, string> Annotations { get;  set; } 
+        public Dictionary<string, string> Annotations { get; set; } 
         /// <summary>
         /// Recipe metadata information.
         /// </summary>
         /// <value>Recipe metadata information.</value>
         [DataMember(Name="metadata", EmitDefaultValue=false)]
-        [JsonProperty("metadata")]
-        public MetaData Metadata { get;  set; } 
+        public MetaData Metadata { get; set; } 
         /// <summary>
         /// A list of operators and other recipes this recipe depends on.
         /// </summary>
         /// <value>A list of operators and other recipes this recipe depends on.</value>
         [DataMember(Name="dependencies", EmitDefaultValue=false)]
-        [JsonProperty("dependencies")]
-        public List<Dependency> Dependencies { get;  set; } 
+        public List<Dependency> Dependencies { get; set; } 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
         public string Type { get; private set; }  = "Recipe";
         
         /// <summary>

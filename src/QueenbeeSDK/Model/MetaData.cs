@@ -59,25 +59,9 @@ namespace QueenbeeSDK.Model
         ) : base()// BaseClass
         {
             // to ensure "name" is required (not null)
-            if (name == null)
-            {
-                throw new InvalidDataException("name is a required property for MetaData and cannot be null");
-            }
-            else
-            {
-                this.Name = name;
-            }
-            
+            this.Name = name ?? throw new ArgumentNullException("name is a required property for MetaData and cannot be null");
             // to ensure "tag" is required (not null)
-            if (tag == null)
-            {
-                throw new InvalidDataException("tag is a required property for MetaData and cannot be null");
-            }
-            else
-            {
-                this.Tag = tag;
-            }
-            
+            this.Tag = tag ?? throw new ArgumentNullException("tag is a required property for MetaData and cannot be null");
             this.Annotations = annotations;
             this.AppVersion = appVersion;
             this.Keywords = keywords;
@@ -98,90 +82,77 @@ namespace QueenbeeSDK.Model
         /// </summary>
         /// <value>Package name. Make it descriptive and helpful ;)</value>
         [DataMember(Name="name", EmitDefaultValue=false)]
-        [JsonProperty("name")]
-        public string Name { get;  set; } 
+        public string Name { get; set; } 
         /// <summary>
         /// The tag of the package
         /// </summary>
         /// <value>The tag of the package</value>
         [DataMember(Name="tag", EmitDefaultValue=false)]
-        [JsonProperty("tag")]
-        public string Tag { get;  set; } 
+        public string Tag { get; set; } 
         /// <summary>
         /// An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.
         /// </summary>
         /// <value>An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.</value>
         [DataMember(Name="annotations", EmitDefaultValue=false)]
-        [JsonProperty("annotations")]
-        public Dictionary<string, string> Annotations { get;  set; } 
+        public Dictionary<string, string> Annotations { get; set; } 
         /// <summary>
         /// The version of the application code underlying the manifest
         /// </summary>
         /// <value>The version of the application code underlying the manifest</value>
         [DataMember(Name="app_version", EmitDefaultValue=false)]
-        [JsonProperty("app_version")]
-        public string AppVersion { get;  set; } 
+        public string AppVersion { get; set; } 
         /// <summary>
         /// A list of keywords to search the package by
         /// </summary>
         /// <value>A list of keywords to search the package by</value>
         [DataMember(Name="keywords", EmitDefaultValue=false)]
-        [JsonProperty("keywords")]
-        public List<string> Keywords { get;  set; } 
+        public List<string> Keywords { get; set; } 
         /// <summary>
         /// A list of maintainers for the package
         /// </summary>
         /// <value>A list of maintainers for the package</value>
         [DataMember(Name="maintainers", EmitDefaultValue=false)]
-        [JsonProperty("maintainers")]
-        public List<Maintainer> Maintainers { get;  set; } 
+        public List<Maintainer> Maintainers { get; set; } 
         /// <summary>
         /// The URL of this package&#39;s home page
         /// </summary>
         /// <value>The URL of this package&#39;s home page</value>
         [DataMember(Name="home", EmitDefaultValue=false)]
-        [JsonProperty("home")]
-        public string Home { get;  set; } 
+        public string Home { get; set; } 
         /// <summary>
         /// A list of URLs to source code for this project
         /// </summary>
         /// <value>A list of URLs to source code for this project</value>
         [DataMember(Name="sources", EmitDefaultValue=false)]
-        [JsonProperty("sources")]
-        public List<string> Sources { get;  set; } 
+        public List<string> Sources { get; set; } 
         /// <summary>
         /// A URL to an SVG or PNG image to be used as an icon
         /// </summary>
         /// <value>A URL to an SVG or PNG image to be used as an icon</value>
         [DataMember(Name="icon", EmitDefaultValue=false)]
-        [JsonProperty("icon")]
-        public string Icon { get;  set; } 
+        public string Icon { get; set; } 
         /// <summary>
         /// Whether this package is deprecated
         /// </summary>
         /// <value>Whether this package is deprecated</value>
         [DataMember(Name="deprecated", EmitDefaultValue=false)]
-        [JsonProperty("deprecated")]
-        public bool Deprecated { get;  set; } 
+        public bool Deprecated { get; set; } 
         /// <summary>
         /// A description of what this package does
         /// </summary>
         /// <value>A description of what this package does</value>
         [DataMember(Name="description", EmitDefaultValue=false)]
-        [JsonProperty("description")]
-        public string Description { get;  set; } 
+        public string Description { get; set; } 
         /// <summary>
         /// The license information.
         /// </summary>
         /// <value>The license information.</value>
         [DataMember(Name="license", EmitDefaultValue=false)]
-        [JsonProperty("license")]
-        public License License { get;  set; } 
+        public License License { get; set; } 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
         public string Type { get; private set; }  = "MetaData";
         
         /// <summary>

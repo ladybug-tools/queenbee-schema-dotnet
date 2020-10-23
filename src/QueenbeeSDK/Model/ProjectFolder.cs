@@ -53,15 +53,13 @@ namespace QueenbeeSDK.Model
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
         public string Type { get; private set; }  = "ProjectFolder";
         /// <summary>
         /// The path to a folder where files and folders can be sourced. For a local filesystem this can be \&quot;C:\\Users\\me\\simulations\\test\&quot;.
         /// </summary>
         /// <value>The path to a folder where files and folders can be sourced. For a local filesystem this can be \&quot;C:\\Users\\me\\simulations\\test\&quot;.</value>
         [DataMember(Name="path", EmitDefaultValue=false)]
-        [JsonProperty("path")]
-        public string Path { get;  set; } 
+        public string Path { get; set; } 
         
         /// <summary>
         /// Returns the string presentation of the object
