@@ -10,6 +10,7 @@
 .vs
 node_modules/
 package-lock.json
+packages.config
 
 # Build results
 

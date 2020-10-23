@@ -17,6 +17,6 @@ npx @openapitools/openapi-generator-cli generate -i "openapi/recipe_inheritance.
 python .openapi-generator/post_gen_script.py "openapi/recipe_inheritance.json" 
 
 # build, test, pack
-dotnet build -c Release /nowarn:CS0472,CS0108,CS1591
+dotnet build -c Release
 dotnet test -c Release
 dotnet pack .\\src\\QueenbeeSDK\\QueenbeeSDK.csproj -o ../../output -c Release --no-build
