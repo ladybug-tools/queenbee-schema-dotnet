@@ -258,12 +258,11 @@ def cleanup(projectName):
         cs_file = os.path.join(docs_folder, f)
         os.remove(cs_file)
     # remove all *AllOfTests.cs files
-    target_folder = os.path.join(root, 'src', f'{projectName}.Test', 'Model')
+    target_folder = os.path.join(root, 'src', f'{projectName}.Test')
     print(f"Checking {target_folder}")
-    class_files = [x for x in os.listdir(target_folder) if x.endswith("AllOfTests.cs")]
-    for f in class_files:
-        cs_file = os.path.join(target_folder, f)
-        os.remove(cs_file)
+    if os.path.exists(target_folder):
+        shutil.rmtree(target_folder)
+    
 
 
 args = sys.argv[1:]
