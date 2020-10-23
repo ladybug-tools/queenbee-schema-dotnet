@@ -310,9 +310,9 @@
       "description": "<SchemaDefinition schemaRef=\"#/components/schemas/_BaseReference\" />\n"
     },
     {
-      "name": "_inputreference_model",
-      "x-displayName": "_InputReference",
-      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/_InputReference\" />\n"
+      "name": "_inputreferencebase_model",
+      "x-displayName": "_InputReferenceBase",
+      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/_InputReferenceBase\" />\n"
     },
     {
       "name": "_openapigenbasemodel_model",
@@ -320,9 +320,9 @@
       "description": "<SchemaDefinition schemaRef=\"#/components/schemas/_OpenAPIGenBaseModel\" />\n"
     },
     {
-      "name": "_taskreference_model",
-      "x-displayName": "_TaskReference",
-      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/_TaskReference\" />\n"
+      "name": "_taskreferencebase_model",
+      "x-displayName": "_TaskReferenceBase",
+      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/_TaskReferenceBase\" />\n"
     }
   ],
   "x-tagGroups": [
@@ -331,9 +331,9 @@
       "tags": [
         "_artifactsource_model",
         "_basereference_model",
-        "_inputreference_model",
+        "_inputreferencebase_model",
         "_openapigenbasemodel_model",
-        "_taskreference_model",
+        "_taskreferencebase_model",
         "dag_model",
         "dagarrayinput_model",
         "dagarrayoutput_model",
@@ -1305,7 +1305,7 @@
       "TaskReference": {
         "allOf": [
           {
-            "$ref": "#/components/schemas/_TaskReference"
+            "$ref": "#/components/schemas/_TaskReferenceBase"
           },
           {
             "type": "object",
@@ -1750,7 +1750,7 @@
       "InputReference": {
         "allOf": [
           {
-            "$ref": "#/components/schemas/_InputReference"
+            "$ref": "#/components/schemas/_InputReferenceBase"
           },
           {
             "type": "object",
@@ -1766,7 +1766,7 @@
           }
         ],
         "title": "InputReference",
-        "description": "An input parameter reference which is not a file or a folder.\n\nUse InputFileReference, InputFolderReference or InputPathReference instead.",
+        "description": "An input parameter reference which is not a file or a folder.\n\nFor a file or a folder use InputFileReference, InputFolderReference or\nInputPathReference instead.",
         "discriminator": {
           "propertyName": "type"
         }
@@ -1893,7 +1893,7 @@
       "InputFileReference": {
         "allOf": [
           {
-            "$ref": "#/components/schemas/_InputReference"
+            "$ref": "#/components/schemas/_InputReferenceBase"
           },
           {
             "type": "object",
@@ -1917,7 +1917,7 @@
       "InputFolderReference": {
         "allOf": [
           {
-            "$ref": "#/components/schemas/_InputReference"
+            "$ref": "#/components/schemas/_InputReferenceBase"
           },
           {
             "type": "object",
@@ -1941,7 +1941,7 @@
       "InputPathReference": {
         "allOf": [
           {
-            "$ref": "#/components/schemas/_InputReference"
+            "$ref": "#/components/schemas/_InputReferenceBase"
           },
           {
             "type": "object",
@@ -1965,7 +1965,7 @@
       "TaskFileReference": {
         "allOf": [
           {
-            "$ref": "#/components/schemas/_TaskReference"
+            "$ref": "#/components/schemas/_TaskReferenceBase"
           },
           {
             "type": "object",
@@ -1989,7 +1989,7 @@
       "TaskFolderReference": {
         "allOf": [
           {
-            "$ref": "#/components/schemas/_TaskReference"
+            "$ref": "#/components/schemas/_TaskReferenceBase"
           },
           {
             "type": "object",
@@ -2013,7 +2013,7 @@
       "TaskPathReference": {
         "allOf": [
           {
-            "$ref": "#/components/schemas/_TaskReference"
+            "$ref": "#/components/schemas/_TaskReferenceBase"
           },
           {
             "type": "object",
@@ -2531,7 +2531,7 @@
           "propertyName": "type"
         }
       },
-      "_InputReference": {
+      "_InputReferenceBase": {
         "allOf": [
           {
             "$ref": "#/components/schemas/_BaseReference"
@@ -2549,21 +2549,21 @@
               },
               "type": {
                 "title": "Type",
-                "default": "_InputReference",
-                "pattern": "^_InputReference$",
+                "default": "_InputReferenceBase",
+                "pattern": "^_InputReferenceBase$",
                 "type": "string",
                 "readOnly": true
               }
             }
           }
         ],
-        "title": "_InputReference",
+        "title": "_InputReferenceBase",
         "description": "An input reference.",
         "discriminator": {
           "propertyName": "type"
         }
       },
-      "_TaskReference": {
+      "_TaskReferenceBase": {
         "allOf": [
           {
             "$ref": "#/components/schemas/_BaseReference"
@@ -2587,15 +2587,15 @@
               },
               "type": {
                 "title": "Type",
-                "default": "_TaskReference",
-                "pattern": "^_TaskReference$",
+                "default": "_TaskReferenceBase",
+                "pattern": "^_TaskReferenceBase$",
                 "type": "string",
                 "readOnly": true
               }
             }
           }
         ],
-        "title": "_TaskReference",
+        "title": "_TaskReferenceBase",
         "description": "A Task Reference",
         "discriminator": {
           "propertyName": "type"
