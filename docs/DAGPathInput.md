@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Annotations** | **Dictionary&lt;string, string&gt;** | An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries. | [optional] 
 **Description** | **string** | Optional description for input. | [optional] 
 **Default** | [**AnyOfHTTPS3ProjectFolder**](AnyOfHTTPS3ProjectFolder.md) | The default source for file if the value is not provided. | [optional] 
-**Spec** | **Object** | An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec. | [optional] 
+**Spec** | [**Object**](.md) | An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec. | [optional] 
 **Extensions** | **List&lt;string&gt;** | Optional list of extensions for path. The check for extension is case-insensitive. The extension will only be validated for file inputs. | [optional] 
 **Type** | **string** |  | [optional] [readonly] [default to "DAGPathInput"]
 

@@ -55,25 +55,9 @@ namespace QueenbeeSDK.Model
         ) : base()// BaseClass
         {
             // to ensure "name" is required (not null)
-            if (name == null)
-            {
-                throw new InvalidDataException("name is a required property for DAGTask and cannot be null");
-            }
-            else
-            {
-                this.Name = name;
-            }
-            
+            this.Name = name ?? throw new ArgumentNullException("name is a required property for DAGTask and cannot be null");
             // to ensure "template" is required (not null)
-            if (template == null)
-            {
-                throw new InvalidDataException("template is a required property for DAGTask and cannot be null");
-            }
-            else
-            {
-                this.Template = template;
-            }
-            
+            this.Template = template ?? throw new ArgumentNullException("template is a required property for DAGTask and cannot be null");
             this.Annotations = annotations;
             this.Arguments = arguments;
             this.Needs = needs;
@@ -90,62 +74,53 @@ namespace QueenbeeSDK.Model
         /// </summary>
         /// <value>Name for this task. It must be unique in a DAG.</value>
         [DataMember(Name="name", EmitDefaultValue=false)]
-        [JsonProperty("name")]
-        public string Name { get;  set; } 
+        public string Name { get; set; } 
         /// <summary>
         /// Template name. A template is a Function or a DAG. This template must be available in the dependencies.
         /// </summary>
         /// <value>Template name. A template is a Function or a DAG. This template must be available in the dependencies.</value>
         [DataMember(Name="template", EmitDefaultValue=false)]
-        [JsonProperty("template")]
-        public string Template { get;  set; } 
+        public string Template { get; set; } 
         /// <summary>
         /// An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.
         /// </summary>
         /// <value>An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.</value>
         [DataMember(Name="annotations", EmitDefaultValue=false)]
-        [JsonProperty("annotations")]
-        public Dictionary<string, string> Annotations { get;  set; } 
+        public Dictionary<string, string> Annotations { get; set; } 
         /// <summary>
         /// The input arguments for this task.
         /// </summary>
         /// <value>The input arguments for this task.</value>
         [DataMember(Name="arguments", EmitDefaultValue=false)]
-        [JsonProperty("arguments")]
-        public List<AnyOf<TaskArgument, TaskPathArgument>> Arguments { get;  set; } 
+        public List<AnyOf<TaskArgument, TaskPathArgument>> Arguments { get; set; } 
         /// <summary>
         /// List of DAG tasks that this task depends on and needs to be executed before this task.
         /// </summary>
         /// <value>List of DAG tasks that this task depends on and needs to be executed before this task.</value>
         [DataMember(Name="needs", EmitDefaultValue=false)]
-        [JsonProperty("needs")]
-        public List<string> Needs { get;  set; } 
+        public List<string> Needs { get; set; } 
         /// <summary>
         /// Loop configuration for this task.
         /// </summary>
         /// <value>Loop configuration for this task.</value>
         [DataMember(Name="loop", EmitDefaultValue=false)]
-        [JsonProperty("loop")]
-        public DAGTaskLoop Loop { get;  set; } 
+        public DAGTaskLoop Loop { get; set; } 
         /// <summary>
         /// A path relative to the current folder context where artifacts should be saved. This is useful when performing a loop or invoking another workflow and wanting to save results in a specific sub_folder.
         /// </summary>
         /// <value>A path relative to the current folder context where artifacts should be saved. This is useful when performing a loop or invoking another workflow and wanting to save results in a specific sub_folder.</value>
         [DataMember(Name="sub_folder", EmitDefaultValue=false)]
-        [JsonProperty("sub_folder")]
-        public string SubFolder { get;  set; } 
+        public string SubFolder { get; set; } 
         /// <summary>
         /// List of task returns.
         /// </summary>
         /// <value>List of task returns.</value>
         [DataMember(Name="returns", EmitDefaultValue=false)]
-        [JsonProperty("returns")]
-        public List<AnyOf<TaskReturn, TaskPathReturn>> Returns { get;  set; } 
+        public List<AnyOf<TaskReturn, TaskPathReturn>> Returns { get; set; } 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
         public string Type { get; private set; }  = "DAGTask";
         
         /// <summary>

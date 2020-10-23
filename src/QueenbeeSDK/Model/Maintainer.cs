@@ -50,15 +50,7 @@ namespace QueenbeeSDK.Model
         ) : base()// BaseClass
         {
             // to ensure "name" is required (not null)
-            if (name == null)
-            {
-                throw new InvalidDataException("name is a required property for Maintainer and cannot be null");
-            }
-            else
-            {
-                this.Name = name;
-            }
-            
+            this.Name = name ?? throw new ArgumentNullException("name is a required property for Maintainer and cannot be null");
             this.Annotations = annotations;
             this.Email = email;
 
@@ -71,27 +63,23 @@ namespace QueenbeeSDK.Model
         /// </summary>
         /// <value>The name of the author/maintainer person or organization.</value>
         [DataMember(Name="name", EmitDefaultValue=false)]
-        [JsonProperty("name")]
-        public string Name { get;  set; } 
+        public string Name { get; set; } 
         /// <summary>
         /// An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.
         /// </summary>
         /// <value>An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.</value>
         [DataMember(Name="annotations", EmitDefaultValue=false)]
-        [JsonProperty("annotations")]
-        public Dictionary<string, string> Annotations { get;  set; } 
+        public Dictionary<string, string> Annotations { get; set; } 
         /// <summary>
         /// The email address of the author/maintainer person or organization.
         /// </summary>
         /// <value>The email address of the author/maintainer person or organization.</value>
         [DataMember(Name="email", EmitDefaultValue=false)]
-        [JsonProperty("email")]
-        public string Email { get;  set; } 
+        public string Email { get; set; } 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
         public string Type { get; private set; }  = "Maintainer";
         
         /// <summary>

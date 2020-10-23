@@ -60,7 +60,6 @@ namespace QueenbeeSDK.Model
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
         public string Type { get; private set; }  = "DAGStringInput";
         
         /// <summary>

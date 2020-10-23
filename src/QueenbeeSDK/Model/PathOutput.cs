@@ -52,15 +52,7 @@ namespace QueenbeeSDK.Model
         ) : base(name: name, annotations: annotations, description: description)// BaseClass
         {
             // to ensure "path" is required (not null)
-            if (path == null)
-            {
-                throw new InvalidDataException("path is a required property for PathOutput and cannot be null");
-            }
-            else
-            {
-                this.Path = path;
-            }
-            
+            this.Path = path ?? throw new ArgumentNullException("path is a required property for PathOutput and cannot be null");
 
             // Set non-required readonly properties with defaultValue
             this.Type = "PathOutput";
@@ -71,13 +63,11 @@ namespace QueenbeeSDK.Model
         /// </summary>
         /// <value>Path to the output artifact relative to where the function command is executed.</value>
         [DataMember(Name="path", EmitDefaultValue=false)]
-        [JsonProperty("path")]
-        public string Path { get;  set; } 
+        public string Path { get; set; } 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
         public string Type { get; private set; }  = "PathOutput";
         
         /// <summary>

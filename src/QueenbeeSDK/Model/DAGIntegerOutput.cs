@@ -51,15 +51,7 @@ namespace QueenbeeSDK.Model
         ) : base(name: name, annotations: annotations, description: description)// BaseClass
         {
             // to ensure "from" is required (not null)
-            if (from == null)
-            {
-                throw new InvalidDataException("from is a required property for DAGIntegerOutput and cannot be null");
-            }
-            else
-            {
-                this.From = from;
-            }
-            
+            this.From = from ?? throw new ArgumentNullException("from is a required property for DAGIntegerOutput and cannot be null");
 
             // Set non-required readonly properties with defaultValue
             this.Type = "DAGIntegerOutput";
@@ -70,13 +62,11 @@ namespace QueenbeeSDK.Model
         /// </summary>
         /// <value>Reference to a file or a task output. Task output must be file.</value>
         [DataMember(Name="from", EmitDefaultValue=false)]
-        [JsonProperty("from")]
-        public AnyOf<TaskReference, FileReference> From { get;  set; } 
+        public AnyOf<TaskReference, FileReference> From { get; set; } 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
         public string Type { get; private set; }  = "DAGIntegerOutput";
         
         /// <summary>

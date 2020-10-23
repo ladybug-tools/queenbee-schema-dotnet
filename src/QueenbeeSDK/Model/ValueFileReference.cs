@@ -50,15 +50,7 @@ namespace QueenbeeSDK.Model
         ) : base(annotations: annotations)// BaseClass
         {
             // to ensure "path" is required (not null)
-            if (path == null)
-            {
-                throw new InvalidDataException("path is a required property for ValueFileReference and cannot be null");
-            }
-            else
-            {
-                this.Path = path;
-            }
-            
+            this.Path = path ?? throw new ArgumentNullException("path is a required property for ValueFileReference and cannot be null");
 
             // Set non-required readonly properties with defaultValue
             this.Type = "ValueFileReference";
@@ -69,13 +61,11 @@ namespace QueenbeeSDK.Model
         /// </summary>
         /// <value>A fixed value for this reference.</value>
         [DataMember(Name="path", EmitDefaultValue=false)]
-        [JsonProperty("path")]
-        public string Path { get;  set; } 
+        public string Path { get; set; } 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
         public string Type { get; private set; }  = "ValueFileReference";
         
         /// <summary>

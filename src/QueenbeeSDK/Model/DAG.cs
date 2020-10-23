@@ -53,34 +53,10 @@ namespace QueenbeeSDK.Model
         ) : base(annotations: annotations, inputs: inputs, outputs: outputs)// BaseClass
         {
             // to ensure "name" is required (not null)
-            if (name == null)
-            {
-                throw new InvalidDataException("name is a required property for DAG and cannot be null");
-            }
-            else
-            {
-                this.Name = name;
-            }
-            
+            this.Name = name ?? throw new ArgumentNullException("name is a required property for DAG and cannot be null");
             // to ensure "tasks" is required (not null)
-            if (tasks == null)
-            {
-                throw new InvalidDataException("tasks is a required property for DAG and cannot be null");
-            }
-            else
-            {
-                this.Tasks = tasks;
-            }
-            
-            // use default value if no "failFast" provided
-            if (failFast == null)
-            {
-                this.FailFast =true;
-            }
-            else
-            {
-                this.FailFast = failFast;
-            }
+            this.Tasks = tasks ?? throw new ArgumentNullException("tasks is a required property for DAG and cannot be null");
+            this.FailFast = failFast;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "DAG";
@@ -91,27 +67,23 @@ namespace QueenbeeSDK.Model
         /// </summary>
         /// <value>A unique name for this dag.</value>
         [DataMember(Name="name", EmitDefaultValue=false)]
-        [JsonProperty("name")]
-        public string Name { get;  set; } 
+        public string Name { get; set; } 
         /// <summary>
         /// Tasks are a list of DAG steps
         /// </summary>
         /// <value>Tasks are a list of DAG steps</value>
         [DataMember(Name="tasks", EmitDefaultValue=false)]
-        [JsonProperty("tasks")]
-        public List<DAGTask> Tasks { get;  set; } 
+        public List<DAGTask> Tasks { get; set; } 
         /// <summary>
         /// Stop scheduling new steps, as soon as it detects that one of the DAG nodes is failed. Default is True.
         /// </summary>
         /// <value>Stop scheduling new steps, as soon as it detects that one of the DAG nodes is failed. Default is True.</value>
         [DataMember(Name="fail_fast", EmitDefaultValue=false)]
-        [JsonProperty("fail_fast")]
-        public bool FailFast { get;  set; }  = true;
+        public bool FailFast { get; set; }  = true;
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
         public string Type { get; private set; }  = "DAG";
         
         /// <summary>

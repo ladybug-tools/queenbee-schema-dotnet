@@ -62,15 +62,7 @@ namespace QueenbeeSDK.Model
         ) : base()// BaseClass
         {
             // to ensure "name" is required (not null)
-            if (name == null)
-            {
-                throw new InvalidDataException("name is a required property for GenericOutput and cannot be null");
-            }
-            else
-            {
-                this.Name = name;
-            }
-            
+            this.Name = name ?? throw new ArgumentNullException("name is a required property for GenericOutput and cannot be null");
             this.Annotations = annotations;
             this.Description = description;
 
@@ -83,28 +75,24 @@ namespace QueenbeeSDK.Model
         /// </summary>
         /// <value>Output name.</value>
         [DataMember(Name="name", EmitDefaultValue=false)]
-        [JsonProperty("name")]
-        public string Name { get;  set; } 
+        public string Name { get; set; } 
         /// <summary>
         /// An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.
         /// </summary>
         /// <value>An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.</value>
         [DataMember(Name="annotations", EmitDefaultValue=false)]
-        [JsonProperty("annotations")]
-        public Dictionary<string, string> Annotations { get;  set; } 
+        public Dictionary<string, string> Annotations { get; set; } 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
         public string Type { get; private set; }  = "GenericOutput";
         /// <summary>
         /// Optional description for output.
         /// </summary>
         /// <value>Optional description for output.</value>
         [DataMember(Name="description", EmitDefaultValue=false)]
-        [JsonProperty("description")]
-        public string Description { get;  set; } 
+        public string Description { get; set; } 
         
         /// <summary>
         /// Returns the string presentation of the object

@@ -52,15 +52,7 @@ namespace QueenbeeSDK.Model
         ) : base(annotations: annotations)// BaseClass
         {
             // to ensure "variable" is required (not null)
-            if (variable == null)
-            {
-                throw new InvalidDataException("variable is a required property for InputReference and cannot be null");
-            }
-            else
-            {
-                this.Variable = variable;
-            }
-            
+            this.Variable = variable ?? throw new ArgumentNullException("variable is a required property for InputReference and cannot be null");
 
             // Set non-required readonly properties with defaultValue
             this.Type = "_InputReference";
@@ -71,13 +63,11 @@ namespace QueenbeeSDK.Model
         /// </summary>
         /// <value>The name of the DAG input variable</value>
         [DataMember(Name="variable", EmitDefaultValue=false)]
-        [JsonProperty("variable")]
-        public string Variable { get;  set; } 
+        public string Variable { get; set; } 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
         public string Type { get; private set; }  = "_InputReference";
         
         /// <summary>

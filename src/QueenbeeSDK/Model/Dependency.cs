@@ -58,46 +58,13 @@ namespace QueenbeeSDK.Model
            Dictionary<string, string> annotations= default, string hash= default, string alias= default// Optional parameters
         ) : base()// BaseClass
         {
-            // to ensure "type" is required (not null)
-            if (type == null)
-            {
-                throw new InvalidDataException("type is a required property for Dependency and cannot be null");
-            }
-            else
-            {
-                this.Type = type;
-            }
-            
+            this.Type = type;
             // to ensure "name" is required (not null)
-            if (name == null)
-            {
-                throw new InvalidDataException("name is a required property for Dependency and cannot be null");
-            }
-            else
-            {
-                this.Name = name;
-            }
-            
+            this.Name = name ?? throw new ArgumentNullException("name is a required property for Dependency and cannot be null");
             // to ensure "tag" is required (not null)
-            if (tag == null)
-            {
-                throw new InvalidDataException("tag is a required property for Dependency and cannot be null");
-            }
-            else
-            {
-                this.Tag = tag;
-            }
-            
+            this.Tag = tag ?? throw new ArgumentNullException("tag is a required property for Dependency and cannot be null");
             // to ensure "source" is required (not null)
-            if (source == null)
-            {
-                throw new InvalidDataException("source is a required property for Dependency and cannot be null");
-            }
-            else
-            {
-                this.Source = source;
-            }
-            
+            this.Source = source ?? throw new ArgumentNullException("source is a required property for Dependency and cannot be null");
             this.Annotations = annotations;
             this.Hash = hash;
             this.Alias = alias;
@@ -110,43 +77,37 @@ namespace QueenbeeSDK.Model
         /// </summary>
         /// <value>Workflow name. This name should be unique among all the resources in your resource. Use an alias if this is not the case.</value>
         [DataMember(Name="name", EmitDefaultValue=false)]
-        [JsonProperty("name")]
-        public string Name { get;  set; } 
+        public string Name { get; set; } 
         /// <summary>
         /// Tag of the resource.
         /// </summary>
         /// <value>Tag of the resource.</value>
         [DataMember(Name="tag", EmitDefaultValue=false)]
-        [JsonProperty("tag")]
-        public string Tag { get;  set; } 
+        public string Tag { get; set; } 
         /// <summary>
         /// URL to a repository where this resource can be found.
         /// </summary>
         /// <value>URL to a repository where this resource can be found.</value>
         [DataMember(Name="source", EmitDefaultValue=false)]
-        [JsonProperty("source")]
-        public string Source { get;  set; } 
+        public string Source { get; set; } 
         /// <summary>
         /// An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.
         /// </summary>
         /// <value>An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.</value>
         [DataMember(Name="annotations", EmitDefaultValue=false)]
-        [JsonProperty("annotations")]
-        public Dictionary<string, string> Annotations { get;  set; } 
+        public Dictionary<string, string> Annotations { get; set; } 
         /// <summary>
         /// The digest hash of the dependency when retrieved from its source. This is locked when the resource dependencies are downloaded.
         /// </summary>
         /// <value>The digest hash of the dependency when retrieved from its source. This is locked when the resource dependencies are downloaded.</value>
         [DataMember(Name="hash", EmitDefaultValue=false)]
-        [JsonProperty("hash")]
-        public string Hash { get;  set; } 
+        public string Hash { get; set; } 
         /// <summary>
         /// An optional alias to refer to this dependency. Useful if the name is already used somewhere else.
         /// </summary>
         /// <value>An optional alias to refer to this dependency. Useful if the name is already used somewhere else.</value>
         [DataMember(Name="alias", EmitDefaultValue=false)]
-        [JsonProperty("alias")]
-        public string Alias { get;  set; } 
+        public string Alias { get; set; } 
         
         /// <summary>
         /// Returns the string presentation of the object

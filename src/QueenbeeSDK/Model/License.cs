@@ -50,15 +50,7 @@ namespace QueenbeeSDK.Model
         ) : base()// BaseClass
         {
             // to ensure "name" is required (not null)
-            if (name == null)
-            {
-                throw new InvalidDataException("name is a required property for License and cannot be null");
-            }
-            else
-            {
-                this.Name = name;
-            }
-            
+            this.Name = name ?? throw new ArgumentNullException("name is a required property for License and cannot be null");
             this.Annotations = annotations;
             this.Url = url;
 
@@ -71,27 +63,23 @@ namespace QueenbeeSDK.Model
         /// </summary>
         /// <value>The license name used for the package.</value>
         [DataMember(Name="name", EmitDefaultValue=false)]
-        [JsonProperty("name")]
-        public string Name { get;  set; } 
+        public string Name { get; set; } 
         /// <summary>
         /// An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.
         /// </summary>
         /// <value>An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.</value>
         [DataMember(Name="annotations", EmitDefaultValue=false)]
-        [JsonProperty("annotations")]
-        public Dictionary<string, string> Annotations { get;  set; } 
+        public Dictionary<string, string> Annotations { get; set; } 
         /// <summary>
         /// A URL to the license used for the package.
         /// </summary>
         /// <value>A URL to the license used for the package.</value>
         [DataMember(Name="url", EmitDefaultValue=false)]
-        [JsonProperty("url")]
-        public string Url { get;  set; } 
+        public string Url { get; set; } 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
         public string Type { get; private set; }  = "License";
         
         /// <summary>

@@ -54,13 +54,11 @@ namespace QueenbeeSDK.Model
         /// </summary>
         /// <value>The name of the looped item variable (use dot notation for nested json values)</value>
         [DataMember(Name="variable", EmitDefaultValue=false)]
-        [JsonProperty("variable")]
-        public string Variable { get;  set; } 
+        public string Variable { get; set; } 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
         public string Type { get; private set; }  = "ItemReference";
         
         /// <summary>

@@ -51,16 +51,7 @@ namespace QueenbeeSDK.Model
         ) : base(name: name, annotations: annotations, description: description)// BaseClass
         {
             // to ensure "from" is required (not null)
-            if (from == null)
-            {
-                throw new InvalidDataException("from is a required property for FromOutput and cannot be null");
-            }
-            else
-            {
-                this.From = from;
-            }
-            
-            this.From = from;
+            this.From = from ?? throw new ArgumentNullException("from is a required property for FromOutput and cannot be null");
 
             // Set non-required readonly properties with defaultValue
             this.Type = "FromOutput";
@@ -70,14 +61,12 @@ namespace QueenbeeSDK.Model
         /// Reference to a file or a task output. Task output must be file.
         /// </summary>
         /// <value>Reference to a file or a task output. Task output must be file.</value>
-        [DataMember(Name="from", EmitDefaultValue=true)]
-        [JsonProperty("from")]
-        public object From { get;  set; } 
+        [DataMember(Name="from", EmitDefaultValue=false)]
+        public object From { get; set; } 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
         public string Type { get; private set; }  = "FromOutput";
         
         /// <summary>
