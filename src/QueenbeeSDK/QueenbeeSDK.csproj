@@ -2,28 +2,31 @@
 
   <PropertyGroup>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <TargetFramework>NET452</TargetFramework>
+	  <TargetFrameworks>netstandard2.0;NET452</TargetFrameworks>
     <AssemblyName>QueenbeeSDK</AssemblyName>
     <PackageId>QueenbeeSDK</PackageId>
     <OutputType>Library</OutputType>
     <Authors>Ladybug Tools</Authors>
     <Company>Ladybug Tools</Company>
     <AssemblyTitle>QueenbeeSDK</AssemblyTitle>
-    <Description>A library generated from a OpenAPI doc</Description>
-    <Copyright>No Copyright</Copyright>
+    <Description>This is the .Net version of Queenbee Schema</Description>
+    <Copyright>Copyright © 2020 Ladybug Tools LLC</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RootNamespace>QueenbeeSDK</RootNamespace>
     <Version>1.17.3</Version>
-    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\QueenbeeSDK.xml</DocumentationFile>
-    <RepositoryUrl>https://github.com/GIT_USER_ID/GIT_REPO_ID.git</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <PackageReleaseNotes>Minor update</PackageReleaseNotes>
+    <DocumentationFile></DocumentationFile>
+    <RepositoryUrl>https://github.com/ladybug-tools/queenbee-schema-dotnet</RepositoryUrl>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <NoWarn>1701;1702;1591;0108;0472</NoWarn>
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="JsonSubTypes" Version="1.7.0" />
+    <PackageReference Include="JsonSubTypes" Version="1.8.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="RestSharp" Version="106.11.4" />
-    <PackageReference Include="Polly" Version="7.2.0" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
   </ItemGroup>
 
