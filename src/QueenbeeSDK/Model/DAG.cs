@@ -30,7 +30,7 @@ namespace QueenbeeSDK.Model
     /// </summary>
     [DataContract]
     [JsonConverter(typeof(JsonSubtypes), "Type")]
-    public partial class DAG : IOBase,  IEquatable<DAG>, IValidatableObject
+    public partial class DAG : OpenAPIGenBaseModel,  IEquatable<DAG>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DAG" /> class.
@@ -42,20 +42,23 @@ namespace QueenbeeSDK.Model
         /// </summary>
         /// <param name="name">A unique name for this dag. (required).</param>
         /// <param name="tasks">Tasks are a list of DAG steps (required).</param>
-        /// <param name="failFast">Stop scheduling new steps, as soon as it detects that one of the DAG nodes is failed. Default is True. (default to true).</param>
         /// <param name="annotations">An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries..</param>
-        /// <param name="inputs">Place-holder. Overwrite this!.</param>
-        /// <param name="outputs">Place-holder. Overwrite this!.</param>
+        /// <param name="inputs">Inputs for the DAG..</param>
+        /// <param name="outputs">Outputs of the DAG that can be used by other DAGs..</param>
+        /// <param name="failFast">Stop scheduling new steps, as soon as it detects that one of the DAG nodes is failed. Default is True. (default to true).</param>
         public DAG
         (
            string name, List<DAGTask> tasks, // Required parameters
-            Dictionary<string, string> annotations= default, List<object> inputs= default, List<object> outputs= default, bool failFast = true // Optional parameters
-        ) : base(annotations: annotations, inputs: inputs, outputs: outputs)// BaseClass
+           Dictionary<string, string> annotations= default, List<AnyOf<DAGStringInput, DAGIntegerInput, DAGNumberInput, DAGBooleanInput, DAGFolderInput, DAGFileInput, DAGPathInput, DAGArrayInput, DAGObjectInput>> inputs= default, List<AnyOf<DAGStringOutput, DAGIntegerOutput, DAGNumberOutput, DAGBooleanOutput, DAGFolderOutput, DAGFileOutput, DAGPathOutput, DAGArrayOutput, DAGObjectOutput>> outputs= default, bool failFast = true // Optional parameters
+        ) : base()// BaseClass
         {
             // to ensure "name" is required (not null)
             this.Name = name ?? throw new ArgumentNullException("name is a required property for DAG and cannot be null");
             // to ensure "tasks" is required (not null)
             this.Tasks = tasks ?? throw new ArgumentNullException("tasks is a required property for DAG and cannot be null");
+            this.Annotations = annotations;
+            this.Inputs = inputs;
+            this.Outputs = outputs;
             this.FailFast = failFast;
 
             // Set non-required readonly properties with defaultValue
@@ -74,6 +77,24 @@ namespace QueenbeeSDK.Model
         /// <value>Tasks are a list of DAG steps</value>
         [DataMember(Name="tasks", EmitDefaultValue=false)]
         public List<DAGTask> Tasks { get; set; } 
+        /// <summary>
+        /// An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.
+        /// </summary>
+        /// <value>An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.</value>
+        [DataMember(Name="annotations", EmitDefaultValue=false)]
+        public Dictionary<string, string> Annotations { get; set; } 
+        /// <summary>
+        /// Inputs for the DAG.
+        /// </summary>
+        /// <value>Inputs for the DAG.</value>
+        [DataMember(Name="inputs", EmitDefaultValue=false)]
+        public List<AnyOf<DAGStringInput, DAGIntegerInput, DAGNumberInput, DAGBooleanInput, DAGFolderInput, DAGFileInput, DAGPathInput, DAGArrayInput, DAGObjectInput>> Inputs { get; set; } 
+        /// <summary>
+        /// Outputs of the DAG that can be used by other DAGs.
+        /// </summary>
+        /// <value>Outputs of the DAG that can be used by other DAGs.</value>
+        [DataMember(Name="outputs", EmitDefaultValue=false)]
+        public List<AnyOf<DAGStringOutput, DAGIntegerOutput, DAGNumberOutput, DAGBooleanOutput, DAGFolderOutput, DAGFileOutput, DAGPathOutput, DAGArrayOutput, DAGObjectOutput>> Outputs { get; set; } 
         /// <summary>
         /// Stop scheduling new steps, as soon as it detects that one of the DAG nodes is failed. Default is True.
         /// </summary>
@@ -97,6 +118,9 @@ namespace QueenbeeSDK.Model
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  Tasks: ").Append(Tasks).Append("\n");
+            sb.Append("  Annotations: ").Append(Annotations).Append("\n");
+            sb.Append("  Inputs: ").Append(Inputs).Append("\n");
+            sb.Append("  Outputs: ").Append(Outputs).Append("\n");
             sb.Append("  FailFast: ").Append(FailFast).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("}\n");
@@ -164,6 +188,24 @@ namespace QueenbeeSDK.Model
                     this.Tasks.SequenceEqual(input.Tasks)
                 ) && base.Equals(input) && 
                 (
+                    this.Annotations == input.Annotations ||
+                    this.Annotations != null &&
+                    input.Annotations != null &&
+                    this.Annotations.SequenceEqual(input.Annotations)
+                ) && base.Equals(input) && 
+                (
+                    this.Inputs == input.Inputs ||
+                    this.Inputs != null &&
+                    input.Inputs != null &&
+                    this.Inputs.SequenceEqual(input.Inputs)
+                ) && base.Equals(input) && 
+                (
+                    this.Outputs == input.Outputs ||
+                    this.Outputs != null &&
+                    input.Outputs != null &&
+                    this.Outputs.SequenceEqual(input.Outputs)
+                ) && base.Equals(input) && 
+                (
                     this.FailFast == input.FailFast ||
                     (this.FailFast != null &&
                     this.FailFast.Equals(input.FailFast))
@@ -188,6 +230,12 @@ namespace QueenbeeSDK.Model
                     hashCode = hashCode * 59 + this.Name.GetHashCode();
                 if (this.Tasks != null)
                     hashCode = hashCode * 59 + this.Tasks.GetHashCode();
+                if (this.Annotations != null)
+                    hashCode = hashCode * 59 + this.Annotations.GetHashCode();
+                if (this.Inputs != null)
+                    hashCode = hashCode * 59 + this.Inputs.GetHashCode();
+                if (this.Outputs != null)
+                    hashCode = hashCode * 59 + this.Outputs.GetHashCode();
                 if (this.FailFast != null)
                     hashCode = hashCode * 59 + this.FailFast.GetHashCode();
                 if (this.Type != null)

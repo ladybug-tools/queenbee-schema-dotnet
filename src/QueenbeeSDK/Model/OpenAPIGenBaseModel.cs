@@ -44,6 +44,7 @@ namespace QueenbeeSDK.Model
     [JsonSubtypes.KnownSubType(typeof(Maintainer), "Maintainer")]
     [JsonSubtypes.KnownSubType(typeof(DAGArrayInput), "DAGArrayInput")]
     [JsonSubtypes.KnownSubType(typeof(GenericOutput), "GenericOutput")]
+    [JsonSubtypes.KnownSubType(typeof(DAG), "DAG")]
     [JsonSubtypes.KnownSubType(typeof(DAGObjectInput), "DAGObjectInput")]
     [JsonSubtypes.KnownSubType(typeof(DAGBooleanInput), "DAGBooleanInput")]
     [JsonSubtypes.KnownSubType(typeof(MetaData), "MetaData")]
