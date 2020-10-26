@@ -16,13 +16,16 @@ new_version = f'{schema_version}.0'
 
 # Check the version from nuget
 api = f'https://api.nuget.org/v3-flatcontainer/{package_name}/index.json'
-with urllib.request.urlopen(api) as r:
-    data = json.loads(r.read())
-    versions = [v for v in data['versions'] if v.startswith(schema_version)]
-    if versions != []:
-        versions.sort(reverse=True)
-        new_version = versions[0]
-        print(f'Found latest version on Nuget: {new_version}')
+try:
+    with urllib.request.urlopen(api) as r:
+        data = json.loads(r.read())
+        versions = [v for v in data['versions'] if v.startswith(schema_version)]
+        if versions != []:
+            versions.sort(reverse=True)
+            new_version = versions[0]
+            print(f'Found latest version on Nuget: {new_version}')
+except urllib.error.HTTPError:
+    pass
 
 
 # increment version
