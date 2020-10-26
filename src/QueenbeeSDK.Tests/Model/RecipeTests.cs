@@ -33,7 +33,7 @@ namespace QueenbeeSDK.Test
     public class RecipeTests
     {
         // TODO uncomment below to declare an instance variable for Recipe
-        //private Recipe instance;
+        private Recipe instance;
 
         /// <summary>
         /// Setup before each test
@@ -41,8 +41,10 @@ namespace QueenbeeSDK.Test
         [SetUp]
         public void Init()
         {
-            // TODO uncomment below to create an instance of Recipe
-            //instance = new Recipe();
+            var path = @"..\..\..\TestSource\daylight-factor.json";
+            string text = System.IO.File.ReadAllText(path);
+            //instance = SubmitSimulation.FromJson(text);
+            instance = Recipe.FromJson(text);
         }
 
         /// <summary>
@@ -60,7 +62,6 @@ namespace QueenbeeSDK.Test
         [Test]
         public void RecipeInstanceTest()
         {
-            // TODO uncomment below to test "IsInstanceOf" Recipe
             //Assert.IsInstanceOf(typeof(Recipe), instance);
         }
 

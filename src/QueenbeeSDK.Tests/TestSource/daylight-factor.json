@@ -1,0 +1,192 @@
+{
+    "name": "main",
+    "inputs": [
+       {
+          "name": "sensor-grids",
+          "type": "DAGArrayInput",
+          "items_type": "String",
+          "description": "A list of input grid names (e.g. room). These grids must be available under\nmodel/grids folder.\n"
+       },
+       {
+          "name": "sensor-count",
+          "type": "DAGIntegerInput",
+          "spec": {
+             "type": "integer",
+             "minimum": 1
+          },
+          "description": "The maximum number of grid points per parallel execution",
+          "default": 200
+       },
+       {
+          "name": "radiance-parameters",
+          "type": "DAGStringInput",
+          "description": "The radiance parameters for ray tracing",
+          "default": "-ab 2"
+       },
+       {
+          "name": "model",
+          "type": "DAGFolderInput",
+          "description": "Radiance model folder."
+       }
+    ],
+    "tasks": [
+       {
+          "name": "generate-sky",
+          "template": "honeybee-radiance/100000-lux-sky",
+          "returns": [
+             {
+                "name": "sky",
+                "type": "TaskPathReturn",
+                "path": "resources/100000_lux.sky"
+             }
+          ]
+       },
+       {
+          "name": "create-octree",
+          "template": "honeybee-radiance/create-octree-with-sky",
+          "needs": [
+             "generate-sky"
+          ],
+          "arguments": [
+             {
+                "name": "model",
+                "type": "TaskPathArgument",
+                "from": {
+                   "type": "InputFolderReference",
+                   "variable": "model"
+                }
+             },
+             {
+                "name": "sky",
+                "type": "TaskPathArgument",
+                "from": {
+                   "type": "TaskFileReference",
+                   "name": "generate-sky",
+                   "variable": "sky"
+                }
+             }
+          ],
+          "returns": [
+             {
+                "name": "scene-file",
+                "type": "TaskPathReturn",
+                "path": "resources/scene.oct"
+             }
+          ]
+       },
+       {
+          "name": "daylight-factor-ray-tracing",
+          "template": "ray-tracing",
+          "needs": [
+             "create-octree"
+          ],
+          "loop": {
+             "from": {
+                "type": "InputReference",
+                "variable": "sensor-grids"
+             }
+          },
+          "sub_folder": "initial_results/{{item}}",
+          "arguments": [
+             {
+                "name": "sensor-grid-name",
+                "type": "TaskArgument",
+                "from": {
+                   "type": "ValueReference",
+                   "value": "{{item}}"
+                }
+             },
+             {
+                "name": "sensor-count",
+                "type": "TaskArgument",
+                "from": {
+                   "type": "InputReference",
+                   "variable": "sensor-count"
+                }
+             },
+             {
+                "name": "radiance-parameters",
+                "type": "TaskArgument",
+                "from": {
+                   "type": "InputReference",
+                   "variable": "radiance-parameters"
+                }
+             },
+             {
+                "name": "octree-file",
+                "type": "TaskPathArgument",
+                "from": {
+                   "type": "TaskFileReference",
+                   "name": "create-octree",
+                   "variable": "scene-file"
+                }
+             },
+             {
+                "name": "sensor-grid",
+                "type": "TaskPathArgument",
+                "from": {
+                   "type": "InputFolderReference",
+                   "variable": "model"
+                },
+                "sub_path": "grid/{{item}}.pts"
+             }
+          ]
+       },
+       {
+          "name": "aggregate-results",
+          "template": "honeybee-radiance/merge-files",
+          "needs": [
+             "daylight-factor-ray-tracing"
+          ],
+          "loop": {
+             "from": {
+                "type": "InputReference",
+                "variable": "sensor-grids"
+             }
+          },
+          "arguments": [
+             {
+                "name": "name",
+                "type": "TaskArgument",
+                "from": {
+                   "type": "ValueReference",
+                   "value": "grid"
+                }
+             },
+             {
+                "name": "extension",
+                "type": "TaskArgument",
+                "from": {
+                   "type": "ValueReference",
+                   "value": ".res"
+                }
+             },
+             {
+                "name": "results-folder",
+                "type": "TaskPathArgument",
+                "from": {
+                   "type": "ValueFolderReference",
+                   "path": "initial_results/{{item}}/results"
+                }
+             }
+          ],
+          "returns": [
+             {
+                "name": "result-file",
+                "type": "TaskPathReturn",
+                "path": "results/{{item}}.res"
+             }
+          ]
+       }
+    ],
+    "outputs": [
+       {
+          "name": "results",
+          "type": "DAGFolderOutput",
+          "from": {
+             "type": "FolderReference",
+             "path": "results"
+          }
+       }
+    ]
+ }
