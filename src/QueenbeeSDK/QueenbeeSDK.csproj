@@ -16,6 +16,7 @@
     <Version>1.17.3</Version>
     <DocumentationFile></DocumentationFile>
     <RepositoryUrl>https://github.com/ladybug-tools/queenbee-schema-dotnet</RepositoryUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
