@@ -1,4 +1,4 @@
-[![Build](https://github.com/ladybug-tools/honeybee-schema-dotnet/workflows/CD/badge.svg)](https://github.com/ladybug-tools/honeybee-schema-dotnet/actions) [![NuGet Version and Downloads count](https://buildstats.info/nuget/PollinationSDK?dWidth=50)](https://www.nuget.org/packages/PollinationSDK)
+[![Build](https://github.com/ladybug-tools/queenbee-schema-dotnet/workflows/CD/badge.svg)](https://github.com/ladybug-tools/queenbee-schema-dotnet/actions) [![NuGet Version and Downloads count](https://buildstats.info/nuget/QueenbeeSDK?dWidth=50)](https://www.nuget.org/packages/QueenbeeSDK)
 # QueenbeeSDK - the C# library for the Queenbee Recipe Schema
 
 Documentation for Queenbee recipe schema.
