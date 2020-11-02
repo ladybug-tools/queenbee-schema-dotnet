@@ -1,8 +1,8 @@
 using Newtonsoft.Json;
 using System.Runtime.Serialization;
-namespace HoneybeeSchema
+namespace QueenbeeSDK
 {
-    public partial class OpenAPIGenBaseModel
+    public partial class OpenAPIGenBaseModel: QueenbeeObject
     {
         /// <summary>
         /// Gets or Sets Type
