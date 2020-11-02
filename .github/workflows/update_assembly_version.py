@@ -6,7 +6,7 @@ import urllib.request
 package_name = 'QueenbeeSDK'
 
 # Check the version from config
-config_file = os.path.join(os.getcwd(), '.openapi-generator', 'config.json')
+config_file = os.path.join(os.getcwd(), '.openapi-config.json')
 with open(config_file, "r") as jsonFile:
     config_data = json.load(jsonFile)
 
