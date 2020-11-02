@@ -1,6 +1,5 @@
 import os
 import sys
-import urllib.request
 import json
 import shutil
 
@@ -8,24 +7,23 @@ import shutil
 args = sys.argv[1:]
 version = ""
 
-if args == []:
-    source_json_url = "https://www.ladybug.tools/queenbee/_static/schemas/recipe-openapi.json"
-    json_url = urllib.request.urlopen(source_json_url)
-    data = json.loads(json_url.read())
+model_json = args[0]
+with open(model_json, "r") as jsonFile:
+    data = json.load(jsonFile)
     version = data['info']['version']
-else:
-    version = args[0]
+
 
 print(version)
 version = version.replace('v', '')
 
 
-config_file = os.path.join(os.getcwd(), '.openapi-generator', 'config.json')
+config_file = os.path.join(os.getcwd(), 'openapi-config.json')
 
 with open(config_file, "r") as jsonFile:
     config_data = json.load(jsonFile)
 
 config_data["packageVersion"] = version
+package_name = config_data["packageName"]
 
 with open(config_file, "w") as jsonFile:
     json.dump(config_data, jsonFile, indent=4)
@@ -33,33 +31,18 @@ with open(config_file, "w") as jsonFile:
 
 def cleanup(projectName):
     root = os.path.dirname(os.path.dirname(__file__))
-    # remove Client folder
-    project_dir = os.path.join(root, 'src', projectName)
-    target_folder = os.path.join(project_dir, 'Client')
-    if os.path.exists(target_folder):
-        shutil.rmtree(target_folder)
-    
-    # remove Api folder
-    target_folder = os.path.join(project_dir, 'Api')
-    if os.path.exists(target_folder):
-        shutil.rmtree(target_folder)
-
-    # remove Model folder
-    target_folder = os.path.join(project_dir, 'Model')
-    if os.path.exists(target_folder):
-        shutil.rmtree(target_folder)
-    
-    # remove docs folder
+    # remove docs
     target_folder = os.path.join(root, 'docs')
     if os.path.exists(target_folder):
         shutil.rmtree(target_folder)
-    
-    # remove test folder
-    target_folder = project_dir + '.Test'
+    # remove Model folder
+    target_folder = os.path.join(root, 'src', projectName, 'Model')
+    if os.path.exists(target_folder):
+        shutil.rmtree(target_folder)
+    # remove interface
+    target_folder = os.path.join(root, 'src', projectName, 'interface')
     if os.path.exists(target_folder):
         shutil.rmtree(target_folder)
 
 
-
-
-cleanup('QueenbeeSDK')
+cleanup(package_name)

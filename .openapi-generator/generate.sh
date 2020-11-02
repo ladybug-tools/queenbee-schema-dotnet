@@ -1,22 +1,11 @@
-#!/bin/bash
+python3 .openapi-generator/pre_gen_script.py ".openapi-docs/model_inheritance.json"
 
-# install 
-npm install @openapitools/openapi-generator-cli
+npx @openapitools/openapi-generator-cli generate -i ".openapi-docs/model_inheritance.json"  -t ".openapi-generator/templates/csharp" -g csharp -o . --skip-validate-spec -c openapi-config.json 
 
-# check version
-# npx @openapitools/openapi-generator-cli version-manager list
-# use 5.0.0
+python3 .openapi-generator/post_gen_script.py ".openapi-docs/model_inheritance.json"
 
-# check version, clean up
-python .openapi-generator/pre_gen_script.py 
+python3 .openapi-generator/update_assembly_version.py
 
-# generate
-npx @openapitools/openapi-generator-cli generate -i "openapi/recipe_inheritance.json" -t ".openapi-generator/templates/csharp" -g csharp -o . --skip-validate-spec -c .openapi-generator/config.json 
+python3 .openapi-generator/create_interface.py ".openapi-docs/model_mapper.json"
 
-# fix anyof, clean up
-python .openapi-generator/post_gen_script.py "openapi/recipe_inheritance.json" 
-
-# build, test, pack
-dotnet build -c Release
-dotnet test -c Release
-dotnet pack .\\src\\QueenbeeSDK\\QueenbeeSDK.csproj -o ../../output -c Release --no-build
+# dotnet build -c Release -f netstandard2.0 src/HoneybeeSchema
