@@ -2,7 +2,7 @@
     "packageName": "QueenbeeSDK",
     "projectName": "QueenbeeSDK",
     "packageUrl": "https://github.com/ladybug-tools/queenbee",
-    "packageVersion": "1.17.3",
+    "packageVersion": "1.6.6",
     "sourceFolder": "src",
     "optionalAssemblyInfo": false,
     "optionalProjectFile": false

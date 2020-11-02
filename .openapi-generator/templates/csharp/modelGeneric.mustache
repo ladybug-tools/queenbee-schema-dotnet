@@ -1,15 +1,14 @@
     /// <summary>
     /// {{#description}}{{.}}{{/description}}{{^description}}{{classname}}{{/description}}
     /// </summary>
-    [DataContract]
+    [DataContract(Name = "{{{name}}}")]
     {{#discriminator}}
-    [JsonConverter(typeof(JsonSubtypes), "{{{discriminatorName}}}")]{{#children}}
-    [JsonSubtypes.KnownSubType(typeof({{classname}}), "{{^vendorExtensions.x-discriminator-value}}{{name}}{{/vendorExtensions.x-discriminator-value}}{{#vendorExtensions.x-discriminator-value}}{{{vendorExtensions.x-discriminator-value}}}{{/vendorExtensions.x-discriminator-value}}")]{{/children}}
+    [JsonConverter(typeof(JsonSubtypes), "{{{discriminatorName}}}")]
+    {{#children}}
+    [JsonSubtypes.KnownSubType(typeof({{classname}}), "{{^vendorExtensions.x-discriminator-value}}{{name}}{{/vendorExtensions.x-discriminator-value}}{{#vendorExtensions.x-discriminator-value}}{{{vendorExtensions.x-discriminator-value}}}{{/vendorExtensions.x-discriminator-value}}")]
+    {{/children}}
     {{/discriminator}}
-    {{#generatePropertyChanged}}
-    [ImplementPropertyChanged]
-    {{/generatePropertyChanged}}
-    {{>visibility}} partial class {{classname}} : {{#parent}}{{{parent}}}, {{/parent}} IEquatable<{{classname}}>{{^netStandard}}{{#validatable}}, IValidatableObject{{/validatable}}{{/netStandard}}
+    {{>visibility}} partial class {{classname}} : {{#parent}}{{{parent}}}, {{/parent}}IEquatable<{{classname}}>{{#validatable}}, IValidatableObject{{/validatable}}
     {
         {{#vars}}
         {{#items.isEnum}}
@@ -32,7 +31,7 @@
         /// <value>{{description}}</value>
         {{/description}}
         [DataMember(Name="{{baseName}}", EmitDefaultValue={{#vendorExtensions.x-emit-default-value}}true{{/vendorExtensions.x-emit-default-value}}{{^vendorExtensions.x-emit-default-value}}{{#isNullable}}true{{/isNullable}}{{^isNullable}}false{{/isNullable}}{{/vendorExtensions.x-emit-default-value}})]
-        public {{#complexType}}{{{complexType}}}{{/complexType}}{{^complexType}}{{{datatypeWithEnum}}}{{/complexType}}{{^isContainer}}{{^required}}?{{/required}}{{/isContainer}} {{name}} { get; set; }  {{#defaultValue}} = {{{defaultValue}}};{{/defaultValue}} 
+        public {{#complexType}}{{{complexType}}}{{/complexType}}{{^complexType}}{{{datatypeWithEnum}}}{{/complexType}}{{^isContainer}}{{^required}}{{^isEnum}}?{{/isEnum}}{{/required}}{{/isContainer}} {{name}} { get; set; }  {{#defaultValue}} = {{#isEnum}}{{{datatypeWithEnum}}}Enum""{{{defaultValue}}}""Enum{{/isEnum}}{{^isEnum}}{{{defaultValue}}}{{/isEnum}};{{/defaultValue}} 
         {{/isEnum}}
         {{/vars}}
     {{#hasRequired}}
@@ -41,33 +40,30 @@
         /// Initializes a new instance of the <see cref="{{classname}}" /> class.
         /// </summary>
         [JsonConstructorAttribute]
+        {{^isAdditionalPropertiesTrue}}
         protected {{classname}}() { }
+        {{/isAdditionalPropertiesTrue}}
+        {{#isAdditionalPropertiesTrue}}
+        protected {{classname}}()
+        {
+            this.AdditionalProperties = new Dictionary<string, object>();
+        }
+        {{/isAdditionalPropertiesTrue}}
     {{/hasOnlyReadOnly}}
     {{/hasRequired}}
         /// <summary>
         /// Initializes a new instance of the <see cref="{{classname}}" /> class.
         /// </summary>
-        {{#vars}}
-        {{^isReadOnly}}
+        {{#readWriteVars}}
         /// <param name="{{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}}">{{#description}}{{description}}{{/description}}{{^description}}{{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}}{{/description}}{{#required}} (required){{/required}}{{#defaultValue}} (default to {{defaultValue}}){{/defaultValue}}.</param>
-        {{/isReadOnly}}
-        {{/vars}}
-        {{#parent}}
-        {{#parentModel}}
-        {{#allVars}}
-        {{^isReadOnly}}
-        /// <param name="{{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}}">{{#description}}{{description}}{{/description}}{{^description}}{{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}}{{/description}}{{#required}} (required){{/required}}{{#defaultValue}} (default to {{defaultValue}}){{/defaultValue}}.</param>
-        {{/isReadOnly}}
-        {{/allVars}}
-        {{/parentModel}}
-        {{/parent}}
+        {{/readWriteVars}}
     {{#hasOnlyReadOnly}}
         [JsonConstructorAttribute]
     {{/hasOnlyReadOnly}}
         public {{classname}}
         (
             {{#parent}}{{#parentModel}}{{#allVars}}{{^isReadOnly}}{{#required}}{{{datatypeWithEnum}}} {{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}}{{#hasMore}}, {{/hasMore}}{{/required}}{{/isReadOnly}}{{/allVars}}{{/parentModel}}{{/parent}}, {{#vars}}{{^isReadOnly}}{{#required}}{{{datatypeWithEnum}}} {{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}}{{#hasMore}}, {{/hasMore}}{{/required}}{{/isReadOnly}}{{/vars}}{{#hasRequired}}{{#hasOptional}}, {{/hasOptional}}{{/hasRequired}}// Required parameters
-            {{#parent}}{{#parentModel}}{{#allVars}}{{^isReadOnly}}{{^required}}{{{datatypeWithEnum}}}{{#isEnum}}{{^isContainer}}?{{/isContainer}}{{/isEnum}} {{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}}{{#defaultValue}} = {{{defaultValue}}}{{/defaultValue}}{{^defaultValue}}= default{{/defaultValue}}{{#hasMore}}, {{/hasMore}}{{/required}}{{/isReadOnly}}{{/allVars}}{{/parentModel}}{{/parent}}, {{#vars}}{{^isReadOnly}}{{^required}}{{{datatypeWithEnum}}}{{#isEnum}}{{^isContainer}}?{{/isContainer}}{{/isEnum}} {{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}}{{#defaultValue}} = {{{defaultValue}}}{{/defaultValue}}{{^defaultValue}}= default{{/defaultValue}}{{#hasMore}}, {{/hasMore}}{{/required}}{{/isReadOnly}}{{/vars}}// Optional parameters
+            {{#parent}}{{#parentModel}}{{#allVars}}{{^isReadOnly}}{{^required}}{{{datatypeWithEnum}}} {{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}}{{#defaultValue}} = {{#isEnum}}{{{datatypeWithEnum}}}Enum""{{{defaultValue}}}""Enum{{/isEnum}}{{^isEnum}}{{{defaultValue}}}{{/isEnum}}{{/defaultValue}}{{^defaultValue}}= default{{/defaultValue}}{{#hasMore}}, {{/hasMore}}{{/required}}{{/isReadOnly}}{{/allVars}}{{/parentModel}}{{/parent}}, {{#vars}}{{^isReadOnly}}{{^required}}{{{datatypeWithEnum}}} {{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}}{{#defaultValue}} = {{#isEnum}}{{{datatypeWithEnum}}}Enum""{{{defaultValue}}}""Enum{{/isEnum}}{{^isEnum}}{{{defaultValue}}}{{/isEnum}}{{/defaultValue}}{{^defaultValue}}= default{{/defaultValue}}{{#hasMore}}, {{/hasMore}}{{/required}}{{/isReadOnly}}{{/vars}}// Optional parameters
         ){{#parent}} : base({{#parentModel}}{{#allVars}}{{^isReadOnly}}{{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}}: {{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}}{{#hasMore}}, {{/hasMore}}{{/isReadOnly}}{{/allVars}}{{/parentModel}}){{/parent}}// BaseClass
         {
             {{#vars}}
@@ -105,6 +101,9 @@
             {{/isReadOnly}}
             {{/isInherited}}
             {{/vars}}
+            {{#isAdditionalPropertiesTrue}}
+            this.AdditionalProperties = new Dictionary<string, object>();
+            {{/isAdditionalPropertiesTrue}}
 
             // Set non-required readonly properties with defaultValue
             {{#vars}}
@@ -121,48 +120,57 @@
             {{/isInherited}}
             {{/vars}}
         }
-        
+
         {{#vars}}
         {{^isInherited}}
         {{^isEnum}}
+        {{^isReadOnly}}
         /// <summary>
         /// {{^description}}Gets or Sets {{{name}}}{{/description}}{{#description}}{{description}}{{/description}}
         /// </summary>{{#description}}
         /// <value>{{description}}</value>{{/description}}
-        [DataMember(Name="{{baseName}}", EmitDefaultValue={{#vendorExtensions.x-emit-default-value}}true{{/vendorExtensions.x-emit-default-value}}{{^vendorExtensions.x-emit-default-value}}{{#isNullable}}true{{/isNullable}}{{^isNullable}}false{{/isNullable}}{{/vendorExtensions.x-emit-default-value}})]{{#isDate}}
-        [JsonConverter(typeof(OpenAPIDateConverter))]{{/isDate}}
-        public {{{dataType}}} {{name}} { get;{{#isReadOnly}} private{{/isReadOnly}} set; } {{#defaultValue}} = {{{defaultValue}}};{{/defaultValue}}
+        [DataMember(Name = "{{baseName}}"{{#required}}, IsRequired = true{{/required}}, EmitDefaultValue = {{#vendorExtensions.x-emit-default-value}}true{{/vendorExtensions.x-emit-default-value}}{{^vendorExtensions.x-emit-default-value}}{{#isNullable}}true{{/isNullable}}{{^isNullable}}{{#defaultValue}}true{{/defaultValue}}{{^defaultValue}}false{{/defaultValue}}{{/isNullable}}{{/vendorExtensions.x-emit-default-value}})]
+        {{#isDate}}[JsonConverter(typeof(OpenAPIDateConverter))]{{/isDate}}
+        public {{{dataType}}} {{name}} { get; set; } {{#defaultValue}} = {{{defaultValue}}};{{/defaultValue}}
+        {{/isReadOnly}}
         {{/isEnum}}
         {{/isInherited}}
         {{/vars}}
-        
+        {{#isAdditionalPropertiesTrue}}
+        /// <summary>
+        /// Gets or Sets additional properties
+        /// </summary>
+        [JsonExtensionData]
+        public IDictionary<string, object> AdditionalProperties { get; set; }
+
+        {{/isAdditionalPropertiesTrue}}
+
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
+            return "{{classname}}";
+        }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
+        /// <returns>String presentation of the object</returns>
+        public override string ToString(bool detailed)
+        {
+            if (!detailed)
+                return this.ToString();
+            
             var sb = new StringBuilder();
-            sb.Append("class {{classname}} {\n");
-            {{#parent}}
-            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
-            {{/parent}}
-            {{#vars}}
+            sb.Append("{{classname}}:\n");
+            {{#allVars}}
             sb.Append("  {{name}}: ").Append({{name}}).Append("\n");
-            {{/vars}}
-            sb.Append("}\n");
+            {{/allVars}}
             return sb.ToString();
         }
   
-        /// <summary>
-        /// Returns the JSON string presentation of the object
-        /// </summary>
-        /// <returns>JSON string presentation of the object</returns>
-        public {{#parent}}{{^isArrayModel}}override {{/isArrayModel}}{{/parent}}{{^parent}}virtual {{/parent}}string ToJson()
-        {
-            return JsonConvert.SerializeObject(this, Formatting.Indented, JsonSetting.AnyOfConvertSetting);
-        }
-
         /// <summary>
         /// Returns the object from JSON string
         /// </summary>
@@ -170,17 +178,39 @@
         public static {{classname}} FromJson(string json)
         {
             var obj = JsonConvert.DeserializeObject<{{classname}}>(json, JsonSetting.AnyOfConvertSetting);
-            return obj;
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>{{classname}} object</returns>
-        public {{classname}} Duplicate{{classname}}()
+        public virtual {{classname}} Duplicate{{classname}}()
         {
             return FromJson(this.ToJson());
         }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override OpenAPIGenBaseModel Duplicate()
+        {
+            return Duplicate{{classname}}();
+        }
+
+        {{#parent}}
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override {{{parent}}} Duplicate{{#parent}}{{{parent}}}{{/parent}}()
+        {
+            return Duplicate{{classname}}();
+        }
+        {{/parent}}
      
         /// <summary>
         /// Returns true if objects are equal
@@ -201,7 +231,6 @@
         {
             if (input == null)
                 return false;
-
             return {{#vars}}{{#parent}}base.Equals(input) && {{/parent}}{{^isContainer}}
                 (
                     this.{{name}} == input.{{name}} ||
@@ -291,30 +320,52 @@
         {
 {{/hasChildren}}
             {{#parent}}
-            {{^isArrayModel}}
-            {{^isMapModel}}
+            {{^isArray}}
+            {{^isMap}}
             foreach(var x in base.BaseValidate(validationContext)) yield return x;
-            {{/isMapModel}}
-            {{/isArrayModel}}
+            {{/isMap}}
+            {{/isArray}}
             {{/parent}}
             {{#vars}}
             {{#hasValidation}}
+            {{#isEnum}}
+            {{#maxLength}}
+            // {{{name}}} ({{{dataType}}}) maxLength
+            if(this.{{{name}}} != null && this.{{{name}}}.ToString().Length > {{maxLength}})
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for {{{name}}}, length must be less than {{maxLength}}.", new [] { "{{{name}}}" });
+            }
+            {{/maxLength}}
+            {{/isEnum}}
+            {{^isEnum}}
             {{#maxLength}}
             // {{{name}}} ({{{dataType}}}) maxLength
             if(this.{{{name}}} != null && this.{{{name}}}.Length > {{maxLength}})
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for {{{name}}}, length must be less than {{maxLength}}.", new [] { "{{{name}}}" });
             }
-
             {{/maxLength}}
+            {{/isEnum}}
+
+			{{#isEnum}}
+            {{#minLength}}
+            // {{{name}}} ({{{dataType}}}) minLength
+            if(this.{{{name}}} != null && this.{{{name}}}.ToString().Length < {{minLength}})
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for {{{name}}}, length must be greater than {{minLength}}.", new [] { "{{{name}}}" });
+            }
+            {{/minLength}}
+            {{/isEnum}}
+            {{^isEnum}}
             {{#minLength}}
             // {{{name}}} ({{{dataType}}}) minLength
             if(this.{{{name}}} != null && this.{{{name}}}.Length < {{minLength}})
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for {{{name}}}, length must be greater than {{minLength}}.", new [] { "{{{name}}}" });
             }
-
             {{/minLength}}
+            {{/isEnum}}
+            
             {{#maximum}}
             // {{{name}}} ({{{dataType}}}) maximum
             if(this.{{{name}}} > ({{{dataType}}}){{maximum}})

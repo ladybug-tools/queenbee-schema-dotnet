@@ -1,8 +1,12 @@
-import re, os, json
+import re
+import os
+import json
 import urllib.request
 
+
+
 # Check the version from config
-config_file = os.path.join(os.getcwd(), '.openapi-generator', 'config.json')
+config_file = os.path.join(os.getcwd(), 'openapi-config.json')
 with open(config_file, "r") as jsonFile:
     config_data = json.load(jsonFile)
 
@@ -10,8 +14,10 @@ schema_version = config_data["packageVersion"]
 print(f'Schema_version: {schema_version}')
 new_version = f'{schema_version}.0'
 
+package_name = config_data["packageName"]
+
 # Check the version from nuget
-api = 'https://api.nuget.org/v3-flatcontainer/PollinationSDK/index.json'
+api = f'https://api.nuget.org/v3-flatcontainer/{package_name}/index.json'
 with urllib.request.urlopen(api) as r:
     data = json.loads(r.read())
     versions = [v for v in data['versions'] if v.startswith(schema_version)]
@@ -39,7 +45,7 @@ elif version_digits[-1] != '0':
 print(f'New version: {new_version}')
 
 # update the version
-assembly_file = os.path.join(os.getcwd(), 'src', 'PollinationSDK', 'PollinationSDK.csproj')
+assembly_file = os.path.join(os.getcwd(), 'src', package_name, f'{package_name}.csproj')
 
 with open(assembly_file, encoding='utf-8', mode='r') as csFile:
     s = csFile.read()
