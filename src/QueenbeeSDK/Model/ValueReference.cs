@@ -35,7 +35,12 @@ namespace QueenbeeSDK
         /// Initializes a new instance of the <see cref="ValueReference" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected ValueReference() { }
+        protected ValueReference() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "ValueReference";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="ValueReference" /> class.
         /// </summary>

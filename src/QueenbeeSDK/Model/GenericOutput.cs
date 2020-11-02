@@ -47,7 +47,12 @@ namespace QueenbeeSDK
         /// Initializes a new instance of the <see cref="GenericOutput" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected GenericOutput() { }
+        protected GenericOutput() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "GenericOutput";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="GenericOutput" /> class.
         /// </summary>

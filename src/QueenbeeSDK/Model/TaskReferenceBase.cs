@@ -39,7 +39,12 @@ namespace QueenbeeSDK
         /// Initializes a new instance of the <see cref="TaskReferenceBase" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected TaskReferenceBase() { }
+        protected TaskReferenceBase() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "_TaskReferenceBase";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="TaskReferenceBase" /> class.
         /// </summary>

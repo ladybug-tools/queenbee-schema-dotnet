@@ -31,11 +31,17 @@ namespace QueenbeeSDK
     [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class DAG : OpenAPIGenBaseModel, IEquatable<DAG>, IValidatableObject
     {
+        public override string Type { get => base.Type; protected internal set => base.Type = value; }
         /// <summary>
         /// Initializes a new instance of the <see cref="DAG" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected DAG() { }
+        protected DAG() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "DAG";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="DAG" /> class.
         /// </summary>

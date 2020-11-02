@@ -35,7 +35,12 @@ namespace QueenbeeSDK
         /// Initializes a new instance of the <see cref="S3" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected S3() { }
+        protected S3() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "S3";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="S3" /> class.
         /// </summary>

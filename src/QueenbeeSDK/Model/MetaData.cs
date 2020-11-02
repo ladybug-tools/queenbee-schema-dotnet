@@ -35,7 +35,12 @@ namespace QueenbeeSDK
         /// Initializes a new instance of the <see cref="MetaData" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected MetaData() { }
+        protected MetaData() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "MetaData";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="MetaData" /> class.
         /// </summary>

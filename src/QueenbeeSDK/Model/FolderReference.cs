@@ -35,7 +35,12 @@ namespace QueenbeeSDK
         /// Initializes a new instance of the <see cref="FolderReference" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected FolderReference() { }
+        protected FolderReference() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "FolderReference";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="FolderReference" /> class.
         /// </summary>

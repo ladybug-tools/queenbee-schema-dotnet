@@ -35,7 +35,12 @@ namespace QueenbeeSDK
         /// Initializes a new instance of the <see cref="TaskArgument" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected TaskArgument() { }
+        protected TaskArgument() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "TaskArgument";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="TaskArgument" /> class.
         /// </summary>

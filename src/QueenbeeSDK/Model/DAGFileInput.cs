@@ -35,7 +35,12 @@ namespace QueenbeeSDK
         /// Initializes a new instance of the <see cref="DAGFileInput" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected DAGFileInput() { }
+        protected DAGFileInput() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "DAGFileInput";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="DAGFileInput" /> class.
         /// </summary>

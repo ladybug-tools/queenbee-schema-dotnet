@@ -35,12 +35,17 @@ namespace QueenbeeSDK
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
-        public DependencyType DepandencyType { get; set; }   
+        public DependencyType DependencyType { get; set; }   
         /// <summary>
         /// Initializes a new instance of the <see cref="Dependency" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Dependency() { }
+        protected Dependency() 
+        {
+            // Set non-required readonly properties with defaultValue
+            this.Type = "Dependency";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="Dependency" /> class.
         /// </summary>
@@ -57,7 +62,7 @@ namespace QueenbeeSDK
             Dictionary<string, string> annotations= default, string hash= default, string alias= default// Optional parameters
         ) : base()// BaseClass
         {
-            this.DepandencyType = type;
+            this.DependencyType = type;
             // to ensure "name" is required (not null)
             this.Name = name ?? throw new ArgumentNullException("name is a required property for Dependency and cannot be null");
             // to ensure "tag" is required (not null)
@@ -135,7 +140,7 @@ namespace QueenbeeSDK
             
             var sb = new StringBuilder();
             sb.Append("Dependency:\n");
-            sb.Append("  Type: ").Append(DepandencyType).Append("\n");
+            sb.Append("  Type: ").Append(DependencyType).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  Tag: ").Append(Tag).Append("\n");
             sb.Append("  Source: ").Append(Source).Append("\n");
@@ -205,9 +210,9 @@ namespace QueenbeeSDK
                 return false;
             return base.Equals(input) && 
                 (
-                    this.DepandencyType == input.DepandencyType ||
-                    (this.DepandencyType != null &&
-                    this.DepandencyType.Equals(input.DepandencyType))
+                    this.DependencyType == input.DependencyType ||
+                    (this.DependencyType != null &&
+                    this.DependencyType.Equals(input.DependencyType))
                 ) && base.Equals(input) && 
                 (
                     this.Name == input.Name ||
@@ -251,8 +256,8 @@ namespace QueenbeeSDK
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                if (this.DepandencyType != null)
-                    hashCode = hashCode * 59 + this.DepandencyType.GetHashCode();
+                if (this.DependencyType != null)
+                    hashCode = hashCode * 59 + this.DependencyType.GetHashCode();
                 if (this.Name != null)
                     hashCode = hashCode * 59 + this.Name.GetHashCode();
                 if (this.Tag != null)

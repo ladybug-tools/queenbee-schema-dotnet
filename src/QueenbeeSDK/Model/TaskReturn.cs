@@ -35,7 +35,12 @@ namespace QueenbeeSDK
         /// Initializes a new instance of the <see cref="TaskReturn" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected TaskReturn() { }
+        protected TaskReturn() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "TaskReturn";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="TaskReturn" /> class.
         /// </summary>

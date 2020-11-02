@@ -35,7 +35,12 @@ namespace QueenbeeSDK
         /// Initializes a new instance of the <see cref="InputFileReference" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected InputFileReference() { }
+        protected InputFileReference() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "InputFileReference";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="InputFileReference" /> class.
         /// </summary>

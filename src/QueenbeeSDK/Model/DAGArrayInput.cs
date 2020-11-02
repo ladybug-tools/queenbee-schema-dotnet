@@ -40,7 +40,12 @@ namespace QueenbeeSDK
         /// Initializes a new instance of the <see cref="DAGArrayInput" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected DAGArrayInput() { }
+        protected DAGArrayInput() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "DAGArrayInput";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="DAGArrayInput" /> class.
         /// </summary>

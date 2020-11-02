@@ -36,7 +36,12 @@ namespace QueenbeeSDK
         /// Initializes a new instance of the <see cref="GenericInput" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected GenericInput() { }
+        protected GenericInput() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "GenericInput";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="GenericInput" /> class.
         /// </summary>

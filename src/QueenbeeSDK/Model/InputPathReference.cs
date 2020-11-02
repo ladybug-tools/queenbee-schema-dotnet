@@ -35,7 +35,12 @@ namespace QueenbeeSDK
         /// Initializes a new instance of the <see cref="InputPathReference" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected InputPathReference() { }
+        protected InputPathReference() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "InputPathReference";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="InputPathReference" /> class.
         /// </summary>

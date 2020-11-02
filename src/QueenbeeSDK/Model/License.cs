@@ -35,7 +35,12 @@ namespace QueenbeeSDK
         /// Initializes a new instance of the <see cref="License" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected License() { }
+        protected License() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "License";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="License" /> class.
         /// </summary>
