@@ -15,7 +15,6 @@ using System;
 using System.Linq;
 using System.IO;
 using System.Collections.Generic;
-using QueenbeeSDK.Model;
 using QueenbeeSDK;
 
 using System.Reflection;
