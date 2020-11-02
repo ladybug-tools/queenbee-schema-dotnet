@@ -3,7 +3,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Linq;
 
-namespace QueenbeeSDK.Model
+namespace QueenbeeSDK
 {
     public class AnyOfJsonConverter : JsonConverter<AnyOf>
     {

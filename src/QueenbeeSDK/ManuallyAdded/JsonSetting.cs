@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace QueenbeeSDK.Model
+namespace QueenbeeSDK
 {
 	public static class JsonSetting
 	{
