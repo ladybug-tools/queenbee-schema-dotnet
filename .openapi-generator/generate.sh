@@ -6,6 +6,6 @@ python3 .openapi-generator/post_gen_script.py ".openapi-docs/model_inheritance.j
 
 python3 .openapi-generator/update_assembly_version.py
 
-python3 .openapi-generator/create_interface.py ".openapi-docs/model_mapper.json"
+# python3 .openapi-generator/create_interface.py ".openapi-docs/model_mapper.json"
 
 # dotnet build -c Release -f netstandard2.0 src/HoneybeeSchema
