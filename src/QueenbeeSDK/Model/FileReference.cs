@@ -35,7 +35,12 @@ namespace QueenbeeSDK
         /// Initializes a new instance of the <see cref="FileReference" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected FileReference() { }
+        protected FileReference() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "FileReference";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="FileReference" /> class.
         /// </summary>

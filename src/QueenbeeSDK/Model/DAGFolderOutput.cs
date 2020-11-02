@@ -35,7 +35,12 @@ namespace QueenbeeSDK
         /// Initializes a new instance of the <see cref="DAGFolderOutput" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected DAGFolderOutput() { }
+        protected DAGFolderOutput() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "DAGFolderOutput";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="DAGFolderOutput" /> class.
         /// </summary>

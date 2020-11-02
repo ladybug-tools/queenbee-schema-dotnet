@@ -35,7 +35,12 @@ namespace QueenbeeSDK
         /// Initializes a new instance of the <see cref="Recipe" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Recipe() { }
+        protected Recipe() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "Recipe";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="Recipe" /> class.
         /// </summary>

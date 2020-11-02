@@ -35,7 +35,12 @@ namespace QueenbeeSDK
         /// Initializes a new instance of the <see cref="DAGStringOutput" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected DAGStringOutput() { }
+        protected DAGStringOutput() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "DAGStringOutput";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="DAGStringOutput" /> class.
         /// </summary>

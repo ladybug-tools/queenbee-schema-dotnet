@@ -35,7 +35,12 @@ namespace QueenbeeSDK
         /// Initializes a new instance of the <see cref="DAGTask" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected DAGTask() { }
+        protected DAGTask() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "DAGTask";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="DAGTask" /> class.
         /// </summary>

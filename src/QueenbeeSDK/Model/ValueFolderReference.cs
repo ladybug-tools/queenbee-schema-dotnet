@@ -35,7 +35,12 @@ namespace QueenbeeSDK
         /// Initializes a new instance of the <see cref="ValueFolderReference" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected ValueFolderReference() { }
+        protected ValueFolderReference() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "ValueFolderReference";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="ValueFolderReference" /> class.
         /// </summary>

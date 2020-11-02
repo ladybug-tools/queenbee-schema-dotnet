@@ -35,7 +35,12 @@ namespace QueenbeeSDK
         /// Initializes a new instance of the <see cref="TaskPathReturn" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected TaskPathReturn() { }
+        protected TaskPathReturn() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "TaskPathReturn";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="TaskPathReturn" /> class.
         /// </summary>

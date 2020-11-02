@@ -35,7 +35,12 @@ namespace QueenbeeSDK
         /// Initializes a new instance of the <see cref="DAGPathInput" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected DAGPathInput() { }
+        protected DAGPathInput() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "DAGPathInput";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="DAGPathInput" /> class.
         /// </summary>

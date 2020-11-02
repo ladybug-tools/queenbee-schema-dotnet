@@ -35,7 +35,12 @@ namespace QueenbeeSDK
         /// Initializes a new instance of the <see cref="TaskPathArgument" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected TaskPathArgument() { }
+        protected TaskPathArgument() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "TaskPathArgument";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="TaskPathArgument" /> class.
         /// </summary>

@@ -35,7 +35,12 @@ namespace QueenbeeSDK
         /// Initializes a new instance of the <see cref="InputFolderReference" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected InputFolderReference() { }
+        protected InputFolderReference() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "InputFolderReference";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="InputFolderReference" /> class.
         /// </summary>

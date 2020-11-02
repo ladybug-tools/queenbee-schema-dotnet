@@ -36,7 +36,12 @@ namespace QueenbeeSDK
         /// Initializes a new instance of the <see cref="PathOutput" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected PathOutput() { }
+        protected PathOutput() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "PathOutput";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="PathOutput" /> class.
         /// </summary>

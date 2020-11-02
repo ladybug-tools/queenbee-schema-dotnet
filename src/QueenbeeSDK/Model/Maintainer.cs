@@ -35,7 +35,12 @@ namespace QueenbeeSDK
         /// Initializes a new instance of the <see cref="Maintainer" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Maintainer() { }
+        protected Maintainer() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "Maintainer";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="Maintainer" /> class.
         /// </summary>

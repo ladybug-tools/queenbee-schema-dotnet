@@ -35,7 +35,12 @@ namespace QueenbeeSDK
         /// Initializes a new instance of the <see cref="TaskFolderReference" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected TaskFolderReference() { }
+        protected TaskFolderReference() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "TaskFolderReference";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="TaskFolderReference" /> class.
         /// </summary>

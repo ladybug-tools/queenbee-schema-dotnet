@@ -35,7 +35,12 @@ namespace QueenbeeSDK
         /// Initializes a new instance of the <see cref="HTTP" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected HTTP() { }
+        protected HTTP() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "HTTP";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="HTTP" /> class.
         /// </summary>

@@ -35,7 +35,12 @@ namespace QueenbeeSDK
         /// Initializes a new instance of the <see cref="FromOutput" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected FromOutput() { }
+        protected FromOutput() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "FromOutput";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="FromOutput" /> class.
         /// </summary>
