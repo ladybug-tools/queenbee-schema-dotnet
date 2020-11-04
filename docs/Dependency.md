@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Type** | **DependencyType** |  | 
+**Type** | **DependencyType** | The type of dependency | [readonly] 
 **Name** | **string** | Workflow name. This name should be unique among all the resources in your resource. Use an alias if this is not the case. | 
 **Tag** | **string** | Tag of the resource. | 
 **Source** | **string** | URL to a repository where this resource can be found. | 
