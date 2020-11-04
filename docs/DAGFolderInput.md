@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **Description** | **string** | Optional description for input. | [optional] 
 **Default** | [**AnyOfHTTPS3ProjectFolder**](AnyOfHTTPS3ProjectFolder.md) | The default source for file if the value is not provided. | [optional] 
 **Spec** | **Object** | An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec. | [optional] 
+**Alias** | [**List&lt;AnyOfDAGGenericInputAliasDAGStringInputAliasDAGIntegerInputAliasDAGNumberInputAliasDAGBooleanInputAliasDAGFolderInputAliasDAGFileInputAliasDAGPathInputAliasDAGArrayInputAliasDAGObjectInputAlias&gt;**](AnyOfDAGGenericInputAliasDAGStringInputAliasDAGIntegerInputAliasDAGNumberInputAliasDAGBooleanInputAliasDAGFolderInputAliasDAGFileInputAliasDAGPathInputAliasDAGArrayInputAliasDAGObjectInputAlias.md) | A list of aliases for this input in different platforms. | [optional] 
 **Type** | **string** |  | [optional] [readonly] [default to "DAGFolderInput"]
 
 [[Back to Model list]](../README.md#documentation-for-models)
