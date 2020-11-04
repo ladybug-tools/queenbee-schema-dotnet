@@ -33,7 +33,7 @@ os.mkdir(saving_dir)
 
 
 # downlaod model
-json_file = f"{base_url}/model_inheritance.json"
+json_file = f"{base_url}/queenbee_inheritance.json"
 download(json_file, saving_dir)
 
 # download model mapper
