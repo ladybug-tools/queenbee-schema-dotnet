@@ -42,7 +42,7 @@ namespace QueenbeeSDK
         /// Enum Operator for value: operator
         /// </summary>
         [EnumMember(Value = "operator")]
-        operator = 2
+        _operator = 2
 
     }
 
