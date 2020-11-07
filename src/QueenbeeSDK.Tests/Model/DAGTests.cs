@@ -9,6 +9,7 @@ using QueenbeeSDK;
 
 using System.Reflection;
 using Newtonsoft.Json;
+using System.Net;
 
 namespace QueenbeeSDK.Test
 {
@@ -22,9 +23,37 @@ namespace QueenbeeSDK.Test
         [SetUp]
         public void Init()
         {
-            var path = @"..\..\..\TestSource\daylight-factor.json";
-            string text = System.IO.File.ReadAllText(path);
-            instance = DAG.FromJson(text);
+            // load from url
+            //var url = @"https://raw.githubusercontent.com/ladybug-tools/queenbee/io-refactor/tests/assets/recipes/baked/daylight-factor.yaml";
+            //using (var wc = new WebClient())
+            //{
+            //    var yaml = wc.DownloadString(url);
+            //    var deserializer = new YamlDotNet.Serialization.Deserializer();
+            //    var yamlObject = deserializer.Deserialize(new StringReader(yaml));
+
+            //    var json = JsonConvert.SerializeObject(yamlObject);
+            //    var recipe = Recipe.FromJson(json);
+
+            //    this.instance = recipe.Flow.First();
+            //}
+
+
+            // load local yaml file
+            var path = @"..\..\..\TestSource\daylight-factor.yaml";
+            string yaml = System.IO.File.ReadAllText(path);
+            var deserializer = new YamlDotNet.Serialization.Deserializer();
+            var yamlObject = deserializer.Deserialize(new StringReader(yaml));
+
+            var json = JsonConvert.SerializeObject(yamlObject);
+            var recipe = Recipe.FromJson(json);
+            this.instance = recipe.Flow.First();
+
+
+            // load local json file
+            //var path = @"..\..\..\TestSource\daylight-factor.json";
+            //string text = System.IO.File.ReadAllText(path);
+            //var recipe = Recipe.FromJson(text);
+            //this.instance = recipe.Flow.First();
         }
 
         /// <summary>
@@ -55,36 +84,51 @@ namespace QueenbeeSDK.Test
             var value = this.instance.Name;
             var target = "main";
 
-            Assert.IsTrue(value == target);
+            Assert.IsTrue(value.EndsWith(target));
         }
 
         [Test]
         public void InputsTest()
         {
             var value = this.instance.Inputs.Count;
-            var target = 4;
+            //var target = 4;
 
-            Assert.IsTrue(value == target);
+            Assert.IsTrue(value > 0);
 
-            var input = this.instance.Inputs.First().Obj as DAGArrayInput;
+            var input = this.instance.Inputs.OfType<DAGFileInput>().First();
             Assert.IsTrue(input != null);
-            Assert.IsTrue(input.Type == "DAGArrayInput");
-            Assert.IsTrue(input.Name == "sensor-grids");
+            Assert.IsTrue(input.Type == "DAGFileInput");
+            Assert.IsTrue(input.Name == "input-grid");
+        }
+
+        [Test]
+        public void InputAliasTest()
+        {
+            var input = this.instance.Inputs.OfType<DAGFileInput>().First(_=>_.Name == "model_hbjson");
+            Assert.IsTrue(input != null);
+
+            var alias = input.Alias.OfType<DAGGenericInputAlias>().First();
+            Assert.IsTrue(alias.Name == "model");
+            Assert.IsTrue(alias.Platform.First() == "grasshopper");
+
+            var pythonHandler = alias.Handler.OfType<IOAliasHandler>().First(_ => _.Language == "python");
+            Assert.IsTrue(pythonHandler.Function == "hb_model_to_hbjson");
+
         }
 
         [Test]
         public void OutputsTest()
         {
             var value = this.instance.Outputs.Count;
-            var target = 1;
+            //var target = 2;
 
-            Assert.IsTrue(value == target);
+            Assert.IsTrue(value > 0);
 
-            var input = this.instance.Outputs.First().Obj as DAGFolderOutput;
+            var input = this.instance.Outputs.OfType<DAGFolderOutput>().First();
             Assert.IsTrue(input != null);
-            Assert.IsTrue(input.Name == "results");
+            Assert.IsTrue(input.Name == "data");
 
-            Assert.IsTrue(input.From.Obj as FolderReference != null);
+            Assert.IsTrue(input.From.Obj is TaskReference);
         }
         /// <summary>
         /// Test the property 'Tasks'
@@ -93,15 +137,15 @@ namespace QueenbeeSDK.Test
         public void TasksTest()
         {
             var value = this.instance.Tasks.Count;
-            var target = 4;
+            //var target = 4;
 
-            Assert.IsTrue(value == target);
+            Assert.IsTrue(value > 0);
 
-            var input = this.instance.Tasks.First() as DAGTask;
+            var input = this.instance.Tasks.OfType<DAGTask>().First(_=>_.Name == "generate-sky");
             Assert.IsTrue(input != null);
             Assert.IsTrue(input.Type == "DAGTask");
             Assert.IsTrue(input.Name == "generate-sky");
-            Assert.IsTrue((input.Returns.First().Obj as TaskPathReturn).Name == "sky");
+            Assert.IsTrue((input.Returns.OfType<TaskPathReturn>().First()).Name == "sky");
         }
         /// <summary>
         /// Test the property 'FailFast'
@@ -125,6 +169,8 @@ namespace QueenbeeSDK.Test
 
             Assert.IsTrue(value == target);
         }
+
+
 
     }
 
