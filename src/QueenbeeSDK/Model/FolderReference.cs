@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace QueenbeeSDK
     /// Reference to a folder.
     /// </summary>
     [DataContract(Name = "FolderReference")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class FolderReference : BaseReference, IEquatable<FolderReference>, IValidatableObject
     {
         /// <summary>
@@ -64,7 +62,6 @@ namespace QueenbeeSDK
         /// </summary>
         /// <value>Relative path to a folder.</value>
         [DataMember(Name = "path", IsRequired = true, EmitDefaultValue = false)]
-        
         public string Path { get; set; } 
 
         /// <summary>

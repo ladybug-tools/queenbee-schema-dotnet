@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,28 +27,6 @@ namespace QueenbeeSDK
     /// Base class for all output types.  The baseclass uses a name to source the output.
     /// </summary>
     [DataContract(Name = "GenericOutput")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
-    [JsonSubtypes.KnownSubType(typeof(PathOutput), "PathOutput")]
-    [JsonSubtypes.KnownSubType(typeof(DAGBooleanOutput), "DAGBooleanOutput")]
-    [JsonSubtypes.KnownSubType(typeof(DAGArrayOutputAlias), "DAGArrayOutputAlias")]
-    [JsonSubtypes.KnownSubType(typeof(DAGIntegerOutputAlias), "DAGIntegerOutputAlias")]
-    [JsonSubtypes.KnownSubType(typeof(DAGPathOutput), "DAGPathOutput")]
-    [JsonSubtypes.KnownSubType(typeof(DAGFolderOutput), "DAGFolderOutput")]
-    [JsonSubtypes.KnownSubType(typeof(DAGPathOutputAlias), "DAGPathOutputAlias")]
-    [JsonSubtypes.KnownSubType(typeof(DAGArrayOutput), "DAGArrayOutput")]
-    [JsonSubtypes.KnownSubType(typeof(TaskReturn), "TaskReturn")]
-    [JsonSubtypes.KnownSubType(typeof(DAGFolderOutputAlias), "DAGFolderOutputAlias")]
-    [JsonSubtypes.KnownSubType(typeof(DAGIntegerOutput), "DAGIntegerOutput")]
-    [JsonSubtypes.KnownSubType(typeof(DAGObjectOutput), "DAGObjectOutput")]
-    [JsonSubtypes.KnownSubType(typeof(DAGStringOutput), "DAGStringOutput")]
-    [JsonSubtypes.KnownSubType(typeof(DAGStringOutputAlias), "DAGStringOutputAlias")]
-    [JsonSubtypes.KnownSubType(typeof(DAGFileOutput), "DAGFileOutput")]
-    [JsonSubtypes.KnownSubType(typeof(DAGNumberOutputAlias), "DAGNumberOutputAlias")]
-    [JsonSubtypes.KnownSubType(typeof(DAGFileOutputAlias), "DAGFileOutputAlias")]
-    [JsonSubtypes.KnownSubType(typeof(DAGBooleanOutputAlias), "DAGBooleanOutputAlias")]
-    [JsonSubtypes.KnownSubType(typeof(FromOutput), "FromOutput")]
-    [JsonSubtypes.KnownSubType(typeof(DAGNumberOutput), "DAGNumberOutput")]
-    [JsonSubtypes.KnownSubType(typeof(DAGObjectOutputAlias), "DAGObjectOutputAlias")]
     public partial class GenericOutput : OpenAPIGenBaseModel, IEquatable<GenericOutput>, IValidatableObject
     {
         /// <summary>
@@ -88,21 +65,18 @@ namespace QueenbeeSDK
         /// </summary>
         /// <value>Output name.</value>
         [DataMember(Name = "name", IsRequired = true, EmitDefaultValue = false)]
-        
         public string Name { get; set; } 
         /// <summary>
         /// An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.
         /// </summary>
         /// <value>An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.</value>
         [DataMember(Name = "annotations", EmitDefaultValue = false)]
-        
         public Dictionary<string, string> Annotations { get; set; } 
         /// <summary>
         /// Optional description for output.
         /// </summary>
         /// <value>Optional description for output.</value>
         [DataMember(Name = "description", EmitDefaultValue = false)]
-        
         public string Description { get; set; } 
 
         /// <summary>
@@ -197,15 +171,15 @@ namespace QueenbeeSDK
                     this.Name.Equals(input.Name))
                 ) && base.Equals(input) && 
                 (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
+                ) && base.Equals(input) && 
+                (
                     this.Annotations == input.Annotations ||
                     this.Annotations != null &&
                     input.Annotations != null &&
                     this.Annotations.SequenceEqual(input.Annotations)
-                ) && base.Equals(input) && 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
                 ) && base.Equals(input) && 
                 (
                     this.Description == input.Description ||
@@ -225,10 +199,10 @@ namespace QueenbeeSDK
                 int hashCode = base.GetHashCode();
                 if (this.Name != null)
                     hashCode = hashCode * 59 + this.Name.GetHashCode();
-                if (this.Annotations != null)
-                    hashCode = hashCode * 59 + this.Annotations.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
+                if (this.Annotations != null)
+                    hashCode = hashCode * 59 + this.Annotations.GetHashCode();
                 if (this.Description != null)
                     hashCode = hashCode * 59 + this.Description.GetHashCode();
                 return hashCode;

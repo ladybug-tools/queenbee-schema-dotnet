@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,9 +27,6 @@ namespace QueenbeeSDK
     /// Base class for output classes that source &#x60;&#x60;from&#x60;&#x60; an object.  See DAG output classes for more examples.
     /// </summary>
     [DataContract(Name = "FromOutput")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
-    [JsonSubtypes.KnownSubType(typeof(DAGGenericOutput), "DAGGenericOutput")]
-    [JsonSubtypes.KnownSubType(typeof(DAGGenericOutputAlias), "DAGGenericOutputAlias")]
     public partial class FromOutput : GenericOutput, IEquatable<FromOutput>, IValidatableObject
     {
         /// <summary>
@@ -68,7 +64,6 @@ namespace QueenbeeSDK
         /// </summary>
         /// <value>Reference to a file or a task output. Task output must be file.</value>
         [DataMember(Name = "from", IsRequired = true, EmitDefaultValue = true)]
-        
         public object From { get; set; } 
 
         /// <summary>

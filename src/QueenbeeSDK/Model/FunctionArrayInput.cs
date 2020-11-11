@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace QueenbeeSDK
     /// An array input.  You can add additional validation by defining a JSONSchema specification.  See http://json-schema.org/understanding-json-schema/reference/array.html for more information.
     /// </summary>
     [DataContract(Name = "FunctionArrayInput")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class FunctionArrayInput : OpenAPIGenBaseModel, IEquatable<FunctionArrayInput>, IValidatableObject
     {
         /// <summary>
@@ -60,7 +58,7 @@ namespace QueenbeeSDK
         public FunctionArrayInput
         (
              string name, // Required parameters
-            Dictionary<string, string> annotations= default, string description= default, List<object> _default= default, Object spec= default, List<AnyOf<DAGGenericInputAlias,DAGStringInputAlias,DAGIntegerInputAlias,DAGNumberInputAlias,DAGBooleanInputAlias,DAGFolderInputAlias,DAGFileInputAlias,DAGPathInputAlias,DAGArrayInputAlias,DAGObjectInputAlias>> alias= default, ItemType itemsType= ItemType.String // Optional parameters
+            Dictionary<string, string> annotations= default, string description= default, List<object> _default= default, Object spec= default, List<AnyOf<DAGGenericInputAlias,DAGStringInputAlias,DAGIntegerInputAlias,DAGNumberInputAlias,DAGBooleanInputAlias,DAGFolderInputAlias,DAGFileInputAlias,DAGPathInputAlias,DAGArrayInputAlias,DAGJSONObjectInputAlias>> alias= default, ItemType itemsType= ItemType.String // Optional parameters
         ) : base()// BaseClass
         {
             // to ensure "name" is required (not null)
@@ -81,43 +79,37 @@ namespace QueenbeeSDK
         /// </summary>
         /// <value>Input name.</value>
         [DataMember(Name = "name", IsRequired = true, EmitDefaultValue = false)]
-        
         public string Name { get; set; } 
         /// <summary>
         /// An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.
         /// </summary>
         /// <value>An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.</value>
         [DataMember(Name = "annotations", EmitDefaultValue = false)]
-        
         public Dictionary<string, string> Annotations { get; set; } 
         /// <summary>
         /// Optional description for input.
         /// </summary>
         /// <value>Optional description for input.</value>
         [DataMember(Name = "description", EmitDefaultValue = false)]
-        
         public string Description { get; set; } 
         /// <summary>
         /// Default value to use for an input if a value was not supplied.
         /// </summary>
         /// <value>Default value to use for an input if a value was not supplied.</value>
         [DataMember(Name = "default", EmitDefaultValue = false)]
-        
         public List<object> Default { get; set; } 
         /// <summary>
         /// An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec.
         /// </summary>
         /// <value>An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec.</value>
         [DataMember(Name = "spec", EmitDefaultValue = false)]
-        
         public Object Spec { get; set; } 
         /// <summary>
         /// A list of aliases for this input in different platforms.
         /// </summary>
         /// <value>A list of aliases for this input in different platforms.</value>
         [DataMember(Name = "alias", EmitDefaultValue = false)]
-        
-        public List<AnyOf<DAGGenericInputAlias,DAGStringInputAlias,DAGIntegerInputAlias,DAGNumberInputAlias,DAGBooleanInputAlias,DAGFolderInputAlias,DAGFileInputAlias,DAGPathInputAlias,DAGArrayInputAlias,DAGObjectInputAlias>> Alias { get; set; } 
+        public List<AnyOf<DAGGenericInputAlias,DAGStringInputAlias,DAGIntegerInputAlias,DAGNumberInputAlias,DAGBooleanInputAlias,DAGFolderInputAlias,DAGFileInputAlias,DAGPathInputAlias,DAGArrayInputAlias,DAGJSONObjectInputAlias>> Alias { get; set; } 
 
         /// <summary>
         /// Returns the string presentation of the object

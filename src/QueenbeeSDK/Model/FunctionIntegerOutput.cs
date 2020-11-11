@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace QueenbeeSDK
     /// Function integer output.  This output loads the content from a file as an integer.
     /// </summary>
     [DataContract(Name = "FunctionIntegerOutput")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class FunctionIntegerOutput : FunctionStringOutput, IEquatable<FunctionIntegerOutput>, IValidatableObject
     {
         /// <summary>

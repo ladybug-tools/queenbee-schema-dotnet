@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace QueenbeeSDK
     /// DAG alias integer output.  This output loads the content from a file as an integer.
     /// </summary>
     [DataContract(Name = "DAGIntegerOutputAlias")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class DAGIntegerOutputAlias : GenericOutput, IEquatable<DAGIntegerOutputAlias>, IValidatableObject
     {
         /// <summary>
@@ -72,21 +70,18 @@ namespace QueenbeeSDK
         /// </summary>
         /// <value>Reference to a file or a task output. Task output must be file.</value>
         [DataMember(Name = "from", IsRequired = true, EmitDefaultValue = false)]
-        
         public AnyOf<TaskReference,FileReference> From { get; set; } 
         /// <summary>
         /// Name of the client platform (e.g. Grasshopper, Revit, etc). The value can be any strings as long as it has been agreed between client-side developer and author of the recipe.
         /// </summary>
         /// <value>Name of the client platform (e.g. Grasshopper, Revit, etc). The value can be any strings as long as it has been agreed between client-side developer and author of the recipe.</value>
         [DataMember(Name = "platform", IsRequired = true, EmitDefaultValue = false)]
-        
         public List<string> Platform { get; set; } 
         /// <summary>
         /// List of process actions to process the input or output value.
         /// </summary>
         /// <value>List of process actions to process the input or output value.</value>
         [DataMember(Name = "handler", IsRequired = true, EmitDefaultValue = false)]
-        
         public List<IOAliasHandler> Handler { get; set; } 
 
         /// <summary>

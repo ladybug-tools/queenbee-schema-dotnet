@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace QueenbeeSDK
     /// A Directed Acyclic Graph containing a list of tasks.
     /// </summary>
     [DataContract(Name = "DAG")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class DAG : OpenAPIGenBaseModel, IEquatable<DAG>, IValidatableObject
     {
         /// <summary>
@@ -53,7 +51,7 @@ namespace QueenbeeSDK
         public DAG
         (
              string name, List<DAGTask> tasks, // Required parameters
-            Dictionary<string, string> annotations= default, List<AnyOf<DAGGenericInput,DAGStringInput,DAGIntegerInput,DAGNumberInput,DAGBooleanInput,DAGFolderInput,DAGFileInput,DAGPathInput,DAGArrayInput,DAGObjectInput>> inputs= default, List<AnyOf<DAGGenericOutput,DAGStringOutput,DAGIntegerOutput,DAGNumberOutput,DAGBooleanOutput,DAGFolderOutput,DAGFileOutput,DAGPathOutput,DAGArrayOutput,DAGObjectOutput>> outputs= default, bool failFast = true // Optional parameters
+            Dictionary<string, string> annotations= default, List<AnyOf<DAGGenericInput,DAGStringInput,DAGIntegerInput,DAGNumberInput,DAGBooleanInput,DAGFolderInput,DAGFileInput,DAGPathInput,DAGArrayInput,DAGJSONObjectInput>> inputs= default, List<AnyOf<DAGGenericOutput,DAGStringOutput,DAGIntegerOutput,DAGNumberOutput,DAGBooleanOutput,DAGFolderOutput,DAGFileOutput,DAGPathOutput,DAGArrayOutput,DAGJSONObjectOutput>> outputs= default, bool failFast = true // Optional parameters
         ) : base()// BaseClass
         {
             // to ensure "name" is required (not null)
@@ -74,42 +72,36 @@ namespace QueenbeeSDK
         /// </summary>
         /// <value>A unique name for this dag.</value>
         [DataMember(Name = "name", IsRequired = true, EmitDefaultValue = false)]
-        
         public string Name { get; set; } 
         /// <summary>
         /// Tasks are a list of DAG steps
         /// </summary>
         /// <value>Tasks are a list of DAG steps</value>
         [DataMember(Name = "tasks", IsRequired = true, EmitDefaultValue = false)]
-        
         public List<DAGTask> Tasks { get; set; } 
         /// <summary>
         /// An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.
         /// </summary>
         /// <value>An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.</value>
         [DataMember(Name = "annotations", EmitDefaultValue = false)]
-        
         public Dictionary<string, string> Annotations { get; set; } 
         /// <summary>
         /// Inputs for the DAG.
         /// </summary>
         /// <value>Inputs for the DAG.</value>
         [DataMember(Name = "inputs", EmitDefaultValue = false)]
-        
-        public List<AnyOf<DAGGenericInput,DAGStringInput,DAGIntegerInput,DAGNumberInput,DAGBooleanInput,DAGFolderInput,DAGFileInput,DAGPathInput,DAGArrayInput,DAGObjectInput>> Inputs { get; set; } 
+        public List<AnyOf<DAGGenericInput,DAGStringInput,DAGIntegerInput,DAGNumberInput,DAGBooleanInput,DAGFolderInput,DAGFileInput,DAGPathInput,DAGArrayInput,DAGJSONObjectInput>> Inputs { get; set; } 
         /// <summary>
         /// Outputs of the DAG that can be used by other DAGs.
         /// </summary>
         /// <value>Outputs of the DAG that can be used by other DAGs.</value>
         [DataMember(Name = "outputs", EmitDefaultValue = false)]
-        
-        public List<AnyOf<DAGGenericOutput,DAGStringOutput,DAGIntegerOutput,DAGNumberOutput,DAGBooleanOutput,DAGFolderOutput,DAGFileOutput,DAGPathOutput,DAGArrayOutput,DAGObjectOutput>> Outputs { get; set; } 
+        public List<AnyOf<DAGGenericOutput,DAGStringOutput,DAGIntegerOutput,DAGNumberOutput,DAGBooleanOutput,DAGFolderOutput,DAGFileOutput,DAGPathOutput,DAGArrayOutput,DAGJSONObjectOutput>> Outputs { get; set; } 
         /// <summary>
         /// Stop scheduling new steps, as soon as it detects that one of the DAG nodes is failed. Default is True.
         /// </summary>
         /// <value>Stop scheduling new steps, as soon as it detects that one of the DAG nodes is failed. Default is True.</value>
         [DataMember(Name = "fail_fast", EmitDefaultValue = true)]
-        
         public bool FailFast { get; set; }  = true;
 
         /// <summary>

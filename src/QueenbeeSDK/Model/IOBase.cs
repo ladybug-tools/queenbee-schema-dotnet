@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace QueenbeeSDK
     /// A reusable model for classes with Input and Output (IO) objects.  IOBase is the baseclass for Function, DAG and Workflow.
     /// </summary>
     [DataContract(Name = "IOBase")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class IOBase : OpenAPIGenBaseModel, IEquatable<IOBase>, IValidatableObject
     {
         /// <summary>
@@ -40,7 +38,7 @@ namespace QueenbeeSDK
         public IOBase
         (
              // Required parameters
-            Dictionary<string, string> annotations= default, List<object> inputs= default, List<object> outputs= default // Optional parameters
+            Dictionary<string, string> annotations= default, List<object> inputs= default, List<object> outputs= default// Optional parameters
         ) : base()// BaseClass
         {
             this.Annotations = annotations;
@@ -56,21 +54,18 @@ namespace QueenbeeSDK
         /// </summary>
         /// <value>An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.</value>
         [DataMember(Name = "annotations", EmitDefaultValue = false)]
-        
         public Dictionary<string, string> Annotations { get; set; } 
         /// <summary>
         /// Place-holder. Overwrite this!
         /// </summary>
         /// <value>Place-holder. Overwrite this!</value>
         [DataMember(Name = "inputs", EmitDefaultValue = false)]
-        
         public List<object> Inputs { get; set; } 
         /// <summary>
         /// Place-holder. Overwrite this!
         /// </summary>
         /// <value>Place-holder. Overwrite this!</value>
         [DataMember(Name = "outputs", EmitDefaultValue = false)]
-        
         public List<object> Outputs { get; set; } 
 
         /// <summary>
@@ -160,6 +155,11 @@ namespace QueenbeeSDK
                 return false;
             return base.Equals(input) && 
                 (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
+                ) && base.Equals(input) && 
+                (
                     this.Annotations == input.Annotations ||
                     this.Annotations != null &&
                     input.Annotations != null &&
@@ -176,11 +176,6 @@ namespace QueenbeeSDK
                     this.Outputs != null &&
                     input.Outputs != null &&
                     this.Outputs.SequenceEqual(input.Outputs)
-                ) && base.Equals(input) && 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
                 );
         }
 
@@ -193,14 +188,14 @@ namespace QueenbeeSDK
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Annotations != null)
                     hashCode = hashCode * 59 + this.Annotations.GetHashCode();
                 if (this.Inputs != null)
                     hashCode = hashCode * 59 + this.Inputs.GetHashCode();
                 if (this.Outputs != null)
                     hashCode = hashCode * 59 + this.Outputs.GetHashCode();
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;
             }
         }

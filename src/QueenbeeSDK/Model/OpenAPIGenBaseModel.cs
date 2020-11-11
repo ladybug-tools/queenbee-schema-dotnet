@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,52 +27,6 @@ namespace QueenbeeSDK
     /// OpenAPIGenBaseModel
     /// </summary>
     [DataContract(Name = "_OpenAPIGenBaseModel")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
-    [JsonSubtypes.KnownSubType(typeof(DAGFileInput), "DAGFileInput")]
-    [JsonSubtypes.KnownSubType(typeof(Recipe), "Recipe")]
-    [JsonSubtypes.KnownSubType(typeof(DAGIntegerInputAlias), "DAGIntegerInputAlias")]
-    [JsonSubtypes.KnownSubType(typeof(FunctionFolderInput), "FunctionFolderInput")]
-    [JsonSubtypes.KnownSubType(typeof(IOBase), "IOBase")]
-    [JsonSubtypes.KnownSubType(typeof(FunctionBooleanInput), "FunctionBooleanInput")]
-    [JsonSubtypes.KnownSubType(typeof(TaskArgument), "TaskArgument")]
-    [JsonSubtypes.KnownSubType(typeof(LocalConfig), "LocalConfig")]
-    [JsonSubtypes.KnownSubType(typeof(Dependency), "Dependency")]
-    [JsonSubtypes.KnownSubType(typeof(DAGTask), "DAGTask")]
-    [JsonSubtypes.KnownSubType(typeof(FunctionIntegerInput), "FunctionIntegerInput")]
-    [JsonSubtypes.KnownSubType(typeof(DAGArrayInputAlias), "DAGArrayInputAlias")]
-    [JsonSubtypes.KnownSubType(typeof(Maintainer), "Maintainer")]
-    [JsonSubtypes.KnownSubType(typeof(DAGArrayInput), "DAGArrayInput")]
-    [JsonSubtypes.KnownSubType(typeof(FunctionFileInput), "FunctionFileInput")]
-    [JsonSubtypes.KnownSubType(typeof(DAGObjectInput), "DAGObjectInput")]
-    [JsonSubtypes.KnownSubType(typeof(DAGTaskLoop), "DAGTaskLoop")]
-    [JsonSubtypes.KnownSubType(typeof(DAGNumberInput), "DAGNumberInput")]
-    [JsonSubtypes.KnownSubType(typeof(FunctionNumberInput), "FunctionNumberInput")]
-    [JsonSubtypes.KnownSubType(typeof(GenericInput), "GenericInput")]
-    [JsonSubtypes.KnownSubType(typeof(Operator), "Operator")]
-    [JsonSubtypes.KnownSubType(typeof(DAGObjectInputAlias), "DAGObjectInputAlias")]
-    [JsonSubtypes.KnownSubType(typeof(IOAliasHandler), "IOAliasHandler")]
-    [JsonSubtypes.KnownSubType(typeof(FunctionArrayInput), "FunctionArrayInput")]
-    [JsonSubtypes.KnownSubType(typeof(DAGIntegerInput), "DAGIntegerInput")]
-    [JsonSubtypes.KnownSubType(typeof(FunctionObjectInput), "FunctionObjectInput")]
-    [JsonSubtypes.KnownSubType(typeof(License), "License")]
-    [JsonSubtypes.KnownSubType(typeof(DAGFolderInput), "DAGFolderInput")]
-    [JsonSubtypes.KnownSubType(typeof(DAGPathInput), "DAGPathInput")]
-    [JsonSubtypes.KnownSubType(typeof(DAGBooleanInputAlias), "DAGBooleanInputAlias")]
-    [JsonSubtypes.KnownSubType(typeof(DAGFileInputAlias), "DAGFileInputAlias")]
-    [JsonSubtypes.KnownSubType(typeof(DAGNumberInputAlias), "DAGNumberInputAlias")]
-    [JsonSubtypes.KnownSubType(typeof(ArtifactSource), "_ArtifactSource")]
-    [JsonSubtypes.KnownSubType(typeof(BaseReference), "_BaseReference")]
-    [JsonSubtypes.KnownSubType(typeof(FunctionPathInput), "FunctionPathInput")]
-    [JsonSubtypes.KnownSubType(typeof(GenericOutput), "GenericOutput")]
-    [JsonSubtypes.KnownSubType(typeof(DAG), "DAG")]
-    [JsonSubtypes.KnownSubType(typeof(DAGBooleanInput), "DAGBooleanInput")]
-    [JsonSubtypes.KnownSubType(typeof(MetaData), "MetaData")]
-    [JsonSubtypes.KnownSubType(typeof(DAGPathInputAlias), "DAGPathInputAlias")]
-    [JsonSubtypes.KnownSubType(typeof(Config), "Config")]
-    [JsonSubtypes.KnownSubType(typeof(Function), "Function")]
-    [JsonSubtypes.KnownSubType(typeof(DAGFolderInputAlias), "DAGFolderInputAlias")]
-    [JsonSubtypes.KnownSubType(typeof(TaskPathArgument), "TaskPathArgument")]
-    [JsonSubtypes.KnownSubType(typeof(DockerConfig), "DockerConfig")]
     public partial class OpenAPIGenBaseModel : IEquatable<OpenAPIGenBaseModel>, IValidatableObject
     {
         /// <summary>

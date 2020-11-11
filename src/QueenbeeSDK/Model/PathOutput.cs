@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,11 +27,6 @@ namespace QueenbeeSDK
     /// Base class for output classes that source tha output from a path.  An example of using PathOutput is TaskFile and TaskFolder outputs.
     /// </summary>
     [DataContract(Name = "PathOutput")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
-    [JsonSubtypes.KnownSubType(typeof(FunctionFolderOutput), "FunctionFolderOutput")]
-    [JsonSubtypes.KnownSubType(typeof(FunctionFileOutput), "FunctionFileOutput")]
-    [JsonSubtypes.KnownSubType(typeof(TaskPathReturn), "TaskPathReturn")]
-    [JsonSubtypes.KnownSubType(typeof(FunctionPathOutput), "FunctionPathOutput")]
     public partial class PathOutput : GenericOutput, IEquatable<PathOutput>, IValidatableObject
     {
         /// <summary>
@@ -70,7 +64,6 @@ namespace QueenbeeSDK
         /// </summary>
         /// <value>Path to the output artifact relative to where the function command is executed.</value>
         [DataMember(Name = "path", IsRequired = true, EmitDefaultValue = false)]
-        
         public string Path { get; set; } 
 
         /// <summary>

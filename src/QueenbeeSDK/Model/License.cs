@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace QueenbeeSDK
     /// License information for the Package
     /// </summary>
     [DataContract(Name = "License")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class License : OpenAPIGenBaseModel, IEquatable<License>, IValidatableObject
     {
         /// <summary>
@@ -50,7 +48,7 @@ namespace QueenbeeSDK
         public License
         (
              string name, // Required parameters
-            Dictionary<string, string> annotations= default, string url= default // Optional parameters
+            Dictionary<string, string> annotations= default, string url= default// Optional parameters
         ) : base()// BaseClass
         {
             // to ensure "name" is required (not null)
@@ -67,21 +65,18 @@ namespace QueenbeeSDK
         /// </summary>
         /// <value>The license name used for the package.</value>
         [DataMember(Name = "name", IsRequired = true, EmitDefaultValue = false)]
-        
         public string Name { get; set; } 
         /// <summary>
         /// An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.
         /// </summary>
         /// <value>An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.</value>
         [DataMember(Name = "annotations", EmitDefaultValue = false)]
-        
         public Dictionary<string, string> Annotations { get; set; } 
         /// <summary>
         /// A URL to the license used for the package.
         /// </summary>
         /// <value>A URL to the license used for the package.</value>
         [DataMember(Name = "url", EmitDefaultValue = false)]
-        
         public string Url { get; set; } 
 
         /// <summary>
@@ -176,6 +171,11 @@ namespace QueenbeeSDK
                     this.Name.Equals(input.Name))
                 ) && base.Equals(input) && 
                 (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
+                ) && base.Equals(input) && 
+                (
                     this.Annotations == input.Annotations ||
                     this.Annotations != null &&
                     input.Annotations != null &&
@@ -185,11 +185,6 @@ namespace QueenbeeSDK
                     this.Url == input.Url ||
                     (this.Url != null &&
                     this.Url.Equals(input.Url))
-                ) && base.Equals(input) && 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
                 );
         }
 
@@ -204,12 +199,12 @@ namespace QueenbeeSDK
                 int hashCode = base.GetHashCode();
                 if (this.Name != null)
                     hashCode = hashCode * 59 + this.Name.GetHashCode();
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Annotations != null)
                     hashCode = hashCode * 59 + this.Annotations.GetHashCode();
                 if (this.Url != null)
                     hashCode = hashCode * 59 + this.Url.GetHashCode();
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;
             }
         }

@@ -1,5 +1,5 @@
 
-# QueenbeeSDK.Model.FunctionObjectInput
+# QueenbeeSDK.Model.FunctionJSONObjectInput
 
 ## Properties
 
@@ -10,8 +10,8 @@ Name | Type | Description | Notes
 **Description** | **string** | Optional description for input. | [optional] 
 **Default** | **Object** | Default value to use for an input if a value was not supplied. | [optional] 
 **Spec** | **Object** | An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec. | [optional] 
-**Alias** | [**List&lt;AnyOfDAGGenericInputAliasDAGStringInputAliasDAGIntegerInputAliasDAGNumberInputAliasDAGBooleanInputAliasDAGFolderInputAliasDAGFileInputAliasDAGPathInputAliasDAGArrayInputAliasDAGObjectInputAlias&gt;**](AnyOfDAGGenericInputAliasDAGStringInputAliasDAGIntegerInputAliasDAGNumberInputAliasDAGBooleanInputAliasDAGFolderInputAliasDAGFileInputAliasDAGPathInputAliasDAGArrayInputAliasDAGObjectInputAlias.md) | A list of aliases for this input in different platforms. | [optional] 
-**Type** | **string** |  | [optional] [readonly] [default to "FunctionObjectInput"]
+**Alias** | [**List&lt;AnyOfDAGGenericInputAliasDAGStringInputAliasDAGIntegerInputAliasDAGNumberInputAliasDAGBooleanInputAliasDAGFolderInputAliasDAGFileInputAliasDAGPathInputAliasDAGArrayInputAliasDAGJSONObjectInputAlias&gt;**](AnyOfDAGGenericInputAliasDAGStringInputAliasDAGIntegerInputAliasDAGNumberInputAliasDAGBooleanInputAliasDAGFolderInputAliasDAGFileInputAliasDAGPathInputAliasDAGArrayInputAliasDAGJSONObjectInputAlias.md) | A list of aliases for this input in different platforms. | [optional] 
+**Type** | **string** |  | [optional] [readonly] [default to "FunctionJSONObjectInput"]
 
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to API list]](../README.md#documentation-for-api-endpoints)

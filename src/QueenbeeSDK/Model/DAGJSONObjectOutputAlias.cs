@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -27,22 +26,21 @@ namespace QueenbeeSDK
     /// <summary>
     /// DAG alias object output.  This output loads the content from a file as a JSON object.
     /// </summary>
-    [DataContract(Name = "DAGObjectOutputAlias")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
-    public partial class DAGObjectOutputAlias : GenericOutput, IEquatable<DAGObjectOutputAlias>, IValidatableObject
+    [DataContract(Name = "DAGJSONObjectOutputAlias")]
+    public partial class DAGJSONObjectOutputAlias : GenericOutput, IEquatable<DAGJSONObjectOutputAlias>, IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="DAGObjectOutputAlias" /> class.
+        /// Initializes a new instance of the <see cref="DAGJSONObjectOutputAlias" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected DAGObjectOutputAlias() 
+        protected DAGJSONObjectOutputAlias() 
         { 
             // Set non-required readonly properties with defaultValue
-            this.Type = "DAGObjectOutputAlias";
+            this.Type = "DAGJSONObjectOutputAlias";
         }
         
         /// <summary>
-        /// Initializes a new instance of the <see cref="DAGObjectOutputAlias" /> class.
+        /// Initializes a new instance of the <see cref="DAGJSONObjectOutputAlias" /> class.
         /// </summary>
         /// <param name="from">Reference to a file or a task output. Task output must be file. (required).</param>
         /// <param name="platform">Name of the client platform (e.g. Grasshopper, Revit, etc). The value can be any strings as long as it has been agreed between client-side developer and author of the recipe. (required).</param>
@@ -50,21 +48,21 @@ namespace QueenbeeSDK
         /// <param name="name">Output name. (required).</param>
         /// <param name="annotations">An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries..</param>
         /// <param name="description">Optional description for output..</param>
-        public DAGObjectOutputAlias
+        public DAGJSONObjectOutputAlias
         (
             string name, AnyOf<TaskReference,FileReference> from, List<string> platform, List<IOAliasHandler> handler, // Required parameters
             Dictionary<string, string> annotations= default, string description= default // Optional parameters
         ) : base(name: name, annotations: annotations, description: description)// BaseClass
         {
             // to ensure "from" is required (not null)
-            this.From = from ?? throw new ArgumentNullException("from is a required property for DAGObjectOutputAlias and cannot be null");
+            this.From = from ?? throw new ArgumentNullException("from is a required property for DAGJSONObjectOutputAlias and cannot be null");
             // to ensure "platform" is required (not null)
-            this.Platform = platform ?? throw new ArgumentNullException("platform is a required property for DAGObjectOutputAlias and cannot be null");
+            this.Platform = platform ?? throw new ArgumentNullException("platform is a required property for DAGJSONObjectOutputAlias and cannot be null");
             // to ensure "handler" is required (not null)
-            this.Handler = handler ?? throw new ArgumentNullException("handler is a required property for DAGObjectOutputAlias and cannot be null");
+            this.Handler = handler ?? throw new ArgumentNullException("handler is a required property for DAGJSONObjectOutputAlias and cannot be null");
 
             // Set non-required readonly properties with defaultValue
-            this.Type = "DAGObjectOutputAlias";
+            this.Type = "DAGJSONObjectOutputAlias";
         }
 
         /// <summary>
@@ -72,21 +70,18 @@ namespace QueenbeeSDK
         /// </summary>
         /// <value>Reference to a file or a task output. Task output must be file.</value>
         [DataMember(Name = "from", IsRequired = true, EmitDefaultValue = false)]
-        
         public AnyOf<TaskReference,FileReference> From { get; set; } 
         /// <summary>
         /// Name of the client platform (e.g. Grasshopper, Revit, etc). The value can be any strings as long as it has been agreed between client-side developer and author of the recipe.
         /// </summary>
         /// <value>Name of the client platform (e.g. Grasshopper, Revit, etc). The value can be any strings as long as it has been agreed between client-side developer and author of the recipe.</value>
         [DataMember(Name = "platform", IsRequired = true, EmitDefaultValue = false)]
-        
         public List<string> Platform { get; set; } 
         /// <summary>
         /// List of process actions to process the input or output value.
         /// </summary>
         /// <value>List of process actions to process the input or output value.</value>
         [DataMember(Name = "handler", IsRequired = true, EmitDefaultValue = false)]
-        
         public List<IOAliasHandler> Handler { get; set; } 
 
         /// <summary>
@@ -95,7 +90,7 @@ namespace QueenbeeSDK
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            return "DAGObjectOutputAlias";
+            return "DAGJSONObjectOutputAlias";
         }
 
         /// <summary>
@@ -108,7 +103,7 @@ namespace QueenbeeSDK
                 return this.ToString();
             
             var sb = new StringBuilder();
-            sb.Append("DAGObjectOutputAlias:\n");
+            sb.Append("DAGJSONObjectOutputAlias:\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  Annotations: ").Append(Annotations).Append("\n");
@@ -122,10 +117,10 @@ namespace QueenbeeSDK
         /// <summary>
         /// Returns the object from JSON string
         /// </summary>
-        /// <returns>DAGObjectOutputAlias object</returns>
-        public static DAGObjectOutputAlias FromJson(string json)
+        /// <returns>DAGJSONObjectOutputAlias object</returns>
+        public static DAGJSONObjectOutputAlias FromJson(string json)
         {
-            var obj = JsonConvert.DeserializeObject<DAGObjectOutputAlias>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<DAGJSONObjectOutputAlias>(json, JsonSetting.AnyOfConvertSetting);
             if (obj == null)
                 return null;
             return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
@@ -134,8 +129,8 @@ namespace QueenbeeSDK
         /// <summary>
         /// Creates a new instance with the same properties.
         /// </summary>
-        /// <returns>DAGObjectOutputAlias object</returns>
-        public virtual DAGObjectOutputAlias DuplicateDAGObjectOutputAlias()
+        /// <returns>DAGJSONObjectOutputAlias object</returns>
+        public virtual DAGJSONObjectOutputAlias DuplicateDAGJSONObjectOutputAlias()
         {
             return FromJson(this.ToJson());
         }
@@ -146,7 +141,7 @@ namespace QueenbeeSDK
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return DuplicateDAGObjectOutputAlias();
+            return DuplicateDAGJSONObjectOutputAlias();
         }
 
         /// <summary>
@@ -155,7 +150,7 @@ namespace QueenbeeSDK
         /// <returns>OpenAPIGenBaseModel</returns>
         public override GenericOutput DuplicateGenericOutput()
         {
-            return DuplicateDAGObjectOutputAlias();
+            return DuplicateDAGJSONObjectOutputAlias();
         }
      
         /// <summary>
@@ -165,15 +160,15 @@ namespace QueenbeeSDK
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as DAGObjectOutputAlias);
+            return this.Equals(input as DAGJSONObjectOutputAlias);
         }
 
         /// <summary>
-        /// Returns true if DAGObjectOutputAlias instances are equal
+        /// Returns true if DAGJSONObjectOutputAlias instances are equal
         /// </summary>
-        /// <param name="input">Instance of DAGObjectOutputAlias to be compared</param>
+        /// <param name="input">Instance of DAGJSONObjectOutputAlias to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(DAGObjectOutputAlias input)
+        public bool Equals(DAGJSONObjectOutputAlias input)
         {
             if (input == null)
                 return false;
@@ -234,7 +229,7 @@ namespace QueenbeeSDK
 
             
             // Type (string) pattern
-            Regex regexType = new Regex(@"^DAGObjectOutputAlias$", RegexOptions.CultureInvariant);
+            Regex regexType = new Regex(@"^DAGJSONObjectOutputAlias$", RegexOptions.CultureInvariant);
             if (false == regexType.Match(this.Type).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });

@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace QueenbeeSDK
     /// A Queenbee Recipe
     /// </summary>
     [DataContract(Name = "Recipe")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class Recipe : OpenAPIGenBaseModel, IEquatable<Recipe>, IValidatableObject
     {
         /// <summary>
@@ -51,7 +49,7 @@ namespace QueenbeeSDK
         public Recipe
         (
              List<DAG> flow, // Required parameters
-            Dictionary<string, string> annotations= default, MetaData metadata= default, List<Dependency> dependencies= default // Optional parameters
+            Dictionary<string, string> annotations= default, MetaData metadata= default, List<Dependency> dependencies= default// Optional parameters
         ) : base()// BaseClass
         {
             // to ensure "flow" is required (not null)
@@ -69,28 +67,24 @@ namespace QueenbeeSDK
         /// </summary>
         /// <value>A list of tasks to create a DAG recipe.</value>
         [DataMember(Name = "flow", IsRequired = true, EmitDefaultValue = false)]
-        
         public List<DAG> Flow { get; set; } 
         /// <summary>
         /// An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.
         /// </summary>
         /// <value>An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.</value>
         [DataMember(Name = "annotations", EmitDefaultValue = false)]
-        
         public Dictionary<string, string> Annotations { get; set; } 
         /// <summary>
         /// Recipe metadata information.
         /// </summary>
         /// <value>Recipe metadata information.</value>
         [DataMember(Name = "metadata", EmitDefaultValue = false)]
-        
         public MetaData Metadata { get; set; } 
         /// <summary>
         /// A list of operators and other recipes this recipe depends on.
         /// </summary>
         /// <value>A list of operators and other recipes this recipe depends on.</value>
         [DataMember(Name = "dependencies", EmitDefaultValue = false)]
-        
         public List<Dependency> Dependencies { get; set; } 
 
         /// <summary>
@@ -187,6 +181,11 @@ namespace QueenbeeSDK
                     this.Flow.SequenceEqual(input.Flow)
                 ) && base.Equals(input) && 
                 (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
+                ) && base.Equals(input) && 
+                (
                     this.Annotations == input.Annotations ||
                     this.Annotations != null &&
                     input.Annotations != null &&
@@ -202,11 +201,6 @@ namespace QueenbeeSDK
                     this.Dependencies != null &&
                     input.Dependencies != null &&
                     this.Dependencies.SequenceEqual(input.Dependencies)
-                ) && base.Equals(input) && 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
                 );
         }
 
@@ -221,14 +215,14 @@ namespace QueenbeeSDK
                 int hashCode = base.GetHashCode();
                 if (this.Flow != null)
                     hashCode = hashCode * 59 + this.Flow.GetHashCode();
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Annotations != null)
                     hashCode = hashCode * 59 + this.Annotations.GetHashCode();
                 if (this.Metadata != null)
                     hashCode = hashCode * 59 + this.Metadata.GetHashCode();
                 if (this.Dependencies != null)
                     hashCode = hashCode * 59 + this.Dependencies.GetHashCode();
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;
             }
         }

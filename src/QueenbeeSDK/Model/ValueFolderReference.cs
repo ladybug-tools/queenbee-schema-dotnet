@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace QueenbeeSDK
     /// A reference to a fixed folder.
     /// </summary>
     [DataContract(Name = "ValueFolderReference")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class ValueFolderReference : ValueFileReference, IEquatable<ValueFolderReference>, IValidatableObject
     {
         /// <summary>

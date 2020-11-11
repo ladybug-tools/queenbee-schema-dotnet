@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,8 +27,6 @@ namespace QueenbeeSDK
     /// Base class for DAG inputs.  This class adds a handler to input to handle the process of loading the input from different graphical interfaces.
     /// </summary>
     [DataContract(Name = "DAGGenericInput")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
-    [JsonSubtypes.KnownSubType(typeof(DAGStringInput), "DAGStringInput")]
     public partial class DAGGenericInput : GenericInput, IEquatable<DAGGenericInput>, IValidatableObject
     {
         /// <summary>
@@ -54,7 +51,7 @@ namespace QueenbeeSDK
         public DAGGenericInput
         (
             string name, // Required parameters
-            Dictionary<string, string> annotations= default, string description= default, string _default= default, Object spec= default, List<AnyOf<DAGGenericInputAlias,DAGStringInputAlias,DAGIntegerInputAlias,DAGNumberInputAlias,DAGBooleanInputAlias,DAGFolderInputAlias,DAGFileInputAlias,DAGPathInputAlias,DAGArrayInputAlias,DAGObjectInputAlias>> alias= default // Optional parameters
+            Dictionary<string, string> annotations= default, string description= default, string _default= default, Object spec= default, List<AnyOf<DAGGenericInputAlias,DAGStringInputAlias,DAGIntegerInputAlias,DAGNumberInputAlias,DAGBooleanInputAlias,DAGFolderInputAlias,DAGFileInputAlias,DAGPathInputAlias,DAGArrayInputAlias,DAGJSONObjectInputAlias>> alias= default // Optional parameters
         ) : base(name: name, annotations: annotations, description: description, _default: _default, spec: spec)// BaseClass
         {
             this.Alias = alias;
@@ -68,8 +65,7 @@ namespace QueenbeeSDK
         /// </summary>
         /// <value>A list of aliases for this input in different platforms.</value>
         [DataMember(Name = "alias", EmitDefaultValue = false)]
-        
-        public List<AnyOf<DAGGenericInputAlias,DAGStringInputAlias,DAGIntegerInputAlias,DAGNumberInputAlias,DAGBooleanInputAlias,DAGFolderInputAlias,DAGFileInputAlias,DAGPathInputAlias,DAGArrayInputAlias,DAGObjectInputAlias>> Alias { get; set; } 
+        public List<AnyOf<DAGGenericInputAlias,DAGStringInputAlias,DAGIntegerInputAlias,DAGNumberInputAlias,DAGBooleanInputAlias,DAGFolderInputAlias,DAGFileInputAlias,DAGPathInputAlias,DAGArrayInputAlias,DAGJSONObjectInputAlias>> Alias { get; set; } 
 
         /// <summary>
         /// Returns the string presentation of the object

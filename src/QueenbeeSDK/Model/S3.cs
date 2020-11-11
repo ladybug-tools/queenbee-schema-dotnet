@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace QueenbeeSDK
     /// S3 Source  An S3 bucket artifact Source.
     /// </summary>
     [DataContract(Name = "S3")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class S3 : ArtifactSource, IEquatable<S3>, IValidatableObject
     {
         /// <summary>
@@ -52,7 +50,7 @@ namespace QueenbeeSDK
         public S3
         (
              string key, string endpoint, string bucket, // Required parameters
-            Dictionary<string, string> annotations= default, string credentialsPath= default// Optional parameters
+            Dictionary<string, string> annotations= default, string credentialsPath= default // Optional parameters
         ) : base(annotations: annotations)// BaseClass
         {
             // to ensure "key" is required (not null)
@@ -72,28 +70,24 @@ namespace QueenbeeSDK
         /// </summary>
         /// <value>The path inside the bucket to source artifacts from.</value>
         [DataMember(Name = "key", IsRequired = true, EmitDefaultValue = false)]
-        
         public string Key { get; set; } 
         /// <summary>
         /// The HTTP endpoint to reach the S3 bucket.
         /// </summary>
         /// <value>The HTTP endpoint to reach the S3 bucket.</value>
         [DataMember(Name = "endpoint", IsRequired = true, EmitDefaultValue = false)]
-        
         public string Endpoint { get; set; } 
         /// <summary>
         /// The name of the S3 bucket on the host server.
         /// </summary>
         /// <value>The name of the S3 bucket on the host server.</value>
         [DataMember(Name = "bucket", IsRequired = true, EmitDefaultValue = false)]
-        
         public string Bucket { get; set; } 
         /// <summary>
         /// Path to the file holding the AccessKey and SecretAccessKey to authenticate to the bucket. Assumes public bucket access if none are specified.
         /// </summary>
         /// <value>Path to the file holding the AccessKey and SecretAccessKey to authenticate to the bucket. Assumes public bucket access if none are specified.</value>
         [DataMember(Name = "credentials_path", EmitDefaultValue = false)]
-        
         public string CredentialsPath { get; set; } 
 
         /// <summary>
@@ -200,14 +194,14 @@ namespace QueenbeeSDK
                     this.Bucket.Equals(input.Bucket))
                 ) && base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
-                ) && base.Equals(input) && 
-                (
                     this.CredentialsPath == input.CredentialsPath ||
                     (this.CredentialsPath != null &&
                     this.CredentialsPath.Equals(input.CredentialsPath))
+                ) && base.Equals(input) && 
+                (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
                 );
         }
 
@@ -226,10 +220,10 @@ namespace QueenbeeSDK
                     hashCode = hashCode * 59 + this.Endpoint.GetHashCode();
                 if (this.Bucket != null)
                     hashCode = hashCode * 59 + this.Bucket.GetHashCode();
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.CredentialsPath != null)
                     hashCode = hashCode * 59 + this.CredentialsPath.GetHashCode();
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;
             }
         }

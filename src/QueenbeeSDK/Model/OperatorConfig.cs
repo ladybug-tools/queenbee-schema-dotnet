@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -27,39 +26,38 @@ namespace QueenbeeSDK
     /// <summary>
     /// Operator configuration.  The config is used to schedule functions on a desktop or in other contexts (ie: Docker).
     /// </summary>
-    [DataContract(Name = "Config")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
-    public partial class Config : OpenAPIGenBaseModel, IEquatable<Config>, IValidatableObject
+    [DataContract(Name = "OperatorConfig")]
+    public partial class OperatorConfig : OpenAPIGenBaseModel, IEquatable<OperatorConfig>, IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Config" /> class.
+        /// Initializes a new instance of the <see cref="OperatorConfig" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Config() 
+        protected OperatorConfig() 
         { 
             // Set non-required readonly properties with defaultValue
-            this.Type = "Config";
+            this.Type = "OperatorConfig";
         }
         
         /// <summary>
-        /// Initializes a new instance of the <see cref="Config" /> class.
+        /// Initializes a new instance of the <see cref="OperatorConfig" /> class.
         /// </summary>
         /// <param name="docker">The configuration to use this operator in a docker container (required).</param>
         /// <param name="annotations">An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries..</param>
         /// <param name="local">The configuration to use this operator locally.</param>
-        public Config
+        public OperatorConfig
         (
              DockerConfig docker, // Required parameters
-            Dictionary<string, string> annotations= default, LocalConfig local= default // Optional parameters
+            Dictionary<string, string> annotations= default, LocalConfig local= default// Optional parameters
         ) : base()// BaseClass
         {
             // to ensure "docker" is required (not null)
-            this.Docker = docker ?? throw new ArgumentNullException("docker is a required property for Config and cannot be null");
+            this.Docker = docker ?? throw new ArgumentNullException("docker is a required property for OperatorConfig and cannot be null");
             this.Annotations = annotations;
             this.Local = local;
 
             // Set non-required readonly properties with defaultValue
-            this.Type = "Config";
+            this.Type = "OperatorConfig";
         }
 
         /// <summary>
@@ -67,21 +65,18 @@ namespace QueenbeeSDK
         /// </summary>
         /// <value>The configuration to use this operator in a docker container</value>
         [DataMember(Name = "docker", IsRequired = true, EmitDefaultValue = false)]
-        
         public DockerConfig Docker { get; set; } 
         /// <summary>
         /// An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.
         /// </summary>
         /// <value>An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.</value>
         [DataMember(Name = "annotations", EmitDefaultValue = false)]
-        
         public Dictionary<string, string> Annotations { get; set; } 
         /// <summary>
         /// The configuration to use this operator locally
         /// </summary>
         /// <value>The configuration to use this operator locally</value>
         [DataMember(Name = "local", EmitDefaultValue = false)]
-        
         public LocalConfig Local { get; set; } 
 
         /// <summary>
@@ -90,7 +85,7 @@ namespace QueenbeeSDK
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            return "Config";
+            return "OperatorConfig";
         }
 
         /// <summary>
@@ -103,7 +98,7 @@ namespace QueenbeeSDK
                 return this.ToString();
             
             var sb = new StringBuilder();
-            sb.Append("Config:\n");
+            sb.Append("OperatorConfig:\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Docker: ").Append(Docker).Append("\n");
             sb.Append("  Annotations: ").Append(Annotations).Append("\n");
@@ -114,10 +109,10 @@ namespace QueenbeeSDK
         /// <summary>
         /// Returns the object from JSON string
         /// </summary>
-        /// <returns>Config object</returns>
-        public static Config FromJson(string json)
+        /// <returns>OperatorConfig object</returns>
+        public static OperatorConfig FromJson(string json)
         {
-            var obj = JsonConvert.DeserializeObject<Config>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<OperatorConfig>(json, JsonSetting.AnyOfConvertSetting);
             if (obj == null)
                 return null;
             return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
@@ -126,8 +121,8 @@ namespace QueenbeeSDK
         /// <summary>
         /// Creates a new instance with the same properties.
         /// </summary>
-        /// <returns>Config object</returns>
-        public virtual Config DuplicateConfig()
+        /// <returns>OperatorConfig object</returns>
+        public virtual OperatorConfig DuplicateOperatorConfig()
         {
             return FromJson(this.ToJson());
         }
@@ -138,7 +133,7 @@ namespace QueenbeeSDK
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return DuplicateConfig();
+            return DuplicateOperatorConfig();
         }
 
         /// <summary>
@@ -147,7 +142,7 @@ namespace QueenbeeSDK
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
         {
-            return DuplicateConfig();
+            return DuplicateOperatorConfig();
         }
      
         /// <summary>
@@ -157,15 +152,15 @@ namespace QueenbeeSDK
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as Config);
+            return this.Equals(input as OperatorConfig);
         }
 
         /// <summary>
-        /// Returns true if Config instances are equal
+        /// Returns true if OperatorConfig instances are equal
         /// </summary>
-        /// <param name="input">Instance of Config to be compared</param>
+        /// <param name="input">Instance of OperatorConfig to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(Config input)
+        public bool Equals(OperatorConfig input)
         {
             if (input == null)
                 return false;
@@ -174,6 +169,11 @@ namespace QueenbeeSDK
                     this.Docker == input.Docker ||
                     (this.Docker != null &&
                     this.Docker.Equals(input.Docker))
+                ) && base.Equals(input) && 
+                (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
                 ) && base.Equals(input) && 
                 (
                     this.Annotations == input.Annotations ||
@@ -185,11 +185,6 @@ namespace QueenbeeSDK
                     this.Local == input.Local ||
                     (this.Local != null &&
                     this.Local.Equals(input.Local))
-                ) && base.Equals(input) && 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
                 );
         }
 
@@ -204,12 +199,12 @@ namespace QueenbeeSDK
                 int hashCode = base.GetHashCode();
                 if (this.Docker != null)
                     hashCode = hashCode * 59 + this.Docker.GetHashCode();
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Annotations != null)
                     hashCode = hashCode * 59 + this.Annotations.GetHashCode();
                 if (this.Local != null)
                     hashCode = hashCode * 59 + this.Local.GetHashCode();
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;
             }
         }
@@ -225,7 +220,7 @@ namespace QueenbeeSDK
 
             
             // Type (string) pattern
-            Regex regexType = new Regex(@"^Config$", RegexOptions.CultureInvariant);
+            Regex regexType = new Regex(@"^OperatorConfig", RegexOptions.CultureInvariant);
             if (false == regexType.Match(this.Type).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });

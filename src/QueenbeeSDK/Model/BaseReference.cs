@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,15 +27,6 @@ namespace QueenbeeSDK
     /// A Base reference model.
     /// </summary>
     [DataContract(Name = "_BaseReference")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
-    [JsonSubtypes.KnownSubType(typeof(InputReferenceBase), "_InputReferenceBase")]
-    [JsonSubtypes.KnownSubType(typeof(ValueReference), "ValueReference")]
-    [JsonSubtypes.KnownSubType(typeof(FileReference), "FileReference")]
-    [JsonSubtypes.KnownSubType(typeof(ItemReference), "ItemReference")]
-    [JsonSubtypes.KnownSubType(typeof(FolderReference), "FolderReference")]
-    [JsonSubtypes.KnownSubType(typeof(TaskReferenceBase), "_TaskReferenceBase")]
-    [JsonSubtypes.KnownSubType(typeof(ValueFileReference), "ValueFileReference")]
-    [JsonSubtypes.KnownSubType(typeof(ValueListReference), "ValueListReference")]
     public partial class BaseReference : OpenAPIGenBaseModel, IEquatable<BaseReference>, IValidatableObject
     {
         /// <summary>
@@ -46,7 +36,7 @@ namespace QueenbeeSDK
         public BaseReference
         (
              // Required parameters
-            Dictionary<string, string> annotations= default // Optional parameters
+            Dictionary<string, string> annotations= default// Optional parameters
         ) : base()// BaseClass
         {
             this.Annotations = annotations;
@@ -60,7 +50,6 @@ namespace QueenbeeSDK
         /// </summary>
         /// <value>An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.</value>
         [DataMember(Name = "annotations", EmitDefaultValue = false)]
-        
         public Dictionary<string, string> Annotations { get; set; } 
 
         /// <summary>
@@ -148,15 +137,15 @@ namespace QueenbeeSDK
                 return false;
             return base.Equals(input) && 
                 (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
+                ) && base.Equals(input) && 
+                (
                     this.Annotations == input.Annotations ||
                     this.Annotations != null &&
                     input.Annotations != null &&
                     this.Annotations.SequenceEqual(input.Annotations)
-                ) && base.Equals(input) && 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
                 );
         }
 
@@ -169,10 +158,10 @@ namespace QueenbeeSDK
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                if (this.Annotations != null)
-                    hashCode = hashCode * 59 + this.Annotations.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
+                if (this.Annotations != null)
+                    hashCode = hashCode * 59 + this.Annotations.GetHashCode();
                 return hashCode;
             }
         }

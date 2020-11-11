@@ -18,65 +18,45 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
 namespace QueenbeeSDK
 {
     /// <summary>
-    /// DAG object output.  This output loads the content from a file as a JSON object.
+    /// Function object output.  This output loads the content from a file as a JSON object.
     /// </summary>
-    [DataContract(Name = "DAGObjectOutput")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
-    public partial class DAGObjectOutput : GenericOutput, IEquatable<DAGObjectOutput>, IValidatableObject
+    [DataContract(Name = "FunctionJSONObjectOutput")]
+    public partial class FunctionJSONObjectOutput : FunctionStringOutput, IEquatable<FunctionJSONObjectOutput>, IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="DAGObjectOutput" /> class.
+        /// Initializes a new instance of the <see cref="FunctionJSONObjectOutput" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected DAGObjectOutput() 
+        protected FunctionJSONObjectOutput() 
         { 
             // Set non-required readonly properties with defaultValue
-            this.Type = "DAGObjectOutput";
+            this.Type = "FunctionJSONObjectOutput";
         }
         
         /// <summary>
-        /// Initializes a new instance of the <see cref="DAGObjectOutput" /> class.
+        /// Initializes a new instance of the <see cref="FunctionJSONObjectOutput" /> class.
         /// </summary>
-        /// <param name="from">Reference to a file or a task output. Task output must be file. (required).</param>
-        /// <param name="alias">A list of additional processes for loading this output on different platforms..</param>
         /// <param name="name">Output name. (required).</param>
         /// <param name="annotations">An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries..</param>
         /// <param name="description">Optional description for output..</param>
-        public DAGObjectOutput
+        /// <param name="path">Path to the output artifact relative to where the function command is executed. (required).</param>
+        public FunctionJSONObjectOutput
         (
-            string name, AnyOf<TaskReference,FileReference> from, // Required parameters
-            Dictionary<string, string> annotations= default, string description= default, List<AnyOf<DAGGenericOutputAlias,DAGStringOutputAlias,DAGIntegerOutputAlias,DAGNumberOutputAlias,DAGBooleanOutputAlias,DAGFolderOutputAlias,DAGFileOutputAlias,DAGPathOutputAlias,DAGArrayOutputAlias,DAGObjectOutputAlias>> alias= default // Optional parameters
-        ) : base(name: name, annotations: annotations, description: description)// BaseClass
+            string name, string path, // Required parameters
+            Dictionary<string, string> annotations= default, string description= default // Optional parameters
+        ) : base(name: name, annotations: annotations, description: description, path: path)// BaseClass
         {
-            // to ensure "from" is required (not null)
-            this.From = from ?? throw new ArgumentNullException("from is a required property for DAGObjectOutput and cannot be null");
-            this.Alias = alias;
 
             // Set non-required readonly properties with defaultValue
-            this.Type = "DAGObjectOutput";
+            this.Type = "FunctionJSONObjectOutput";
         }
 
-        /// <summary>
-        /// Reference to a file or a task output. Task output must be file.
-        /// </summary>
-        /// <value>Reference to a file or a task output. Task output must be file.</value>
-        [DataMember(Name = "from", IsRequired = true, EmitDefaultValue = false)]
-        
-        public AnyOf<TaskReference,FileReference> From { get; set; } 
-        /// <summary>
-        /// A list of additional processes for loading this output on different platforms.
-        /// </summary>
-        /// <value>A list of additional processes for loading this output on different platforms.</value>
-        [DataMember(Name = "alias", EmitDefaultValue = false)]
-        
-        public List<AnyOf<DAGGenericOutputAlias,DAGStringOutputAlias,DAGIntegerOutputAlias,DAGNumberOutputAlias,DAGBooleanOutputAlias,DAGFolderOutputAlias,DAGFileOutputAlias,DAGPathOutputAlias,DAGArrayOutputAlias,DAGObjectOutputAlias>> Alias { get; set; } 
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -84,7 +64,7 @@ namespace QueenbeeSDK
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            return "DAGObjectOutput";
+            return "FunctionJSONObjectOutput";
         }
 
         /// <summary>
@@ -97,23 +77,22 @@ namespace QueenbeeSDK
                 return this.ToString();
             
             var sb = new StringBuilder();
-            sb.Append("DAGObjectOutput:\n");
+            sb.Append("FunctionJSONObjectOutput:\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  Annotations: ").Append(Annotations).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
-            sb.Append("  From: ").Append(From).Append("\n");
-            sb.Append("  Alias: ").Append(Alias).Append("\n");
+            sb.Append("  Path: ").Append(Path).Append("\n");
             return sb.ToString();
         }
   
         /// <summary>
         /// Returns the object from JSON string
         /// </summary>
-        /// <returns>DAGObjectOutput object</returns>
-        public static DAGObjectOutput FromJson(string json)
+        /// <returns>FunctionJSONObjectOutput object</returns>
+        public static FunctionJSONObjectOutput FromJson(string json)
         {
-            var obj = JsonConvert.DeserializeObject<DAGObjectOutput>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<FunctionJSONObjectOutput>(json, JsonSetting.AnyOfConvertSetting);
             if (obj == null)
                 return null;
             return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
@@ -122,8 +101,8 @@ namespace QueenbeeSDK
         /// <summary>
         /// Creates a new instance with the same properties.
         /// </summary>
-        /// <returns>DAGObjectOutput object</returns>
-        public virtual DAGObjectOutput DuplicateDAGObjectOutput()
+        /// <returns>FunctionJSONObjectOutput object</returns>
+        public virtual FunctionJSONObjectOutput DuplicateFunctionJSONObjectOutput()
         {
             return FromJson(this.ToJson());
         }
@@ -134,16 +113,16 @@ namespace QueenbeeSDK
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return DuplicateDAGObjectOutput();
+            return DuplicateFunctionJSONObjectOutput();
         }
 
         /// <summary>
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>OpenAPIGenBaseModel</returns>
-        public override GenericOutput DuplicateGenericOutput()
+        public override FunctionStringOutput DuplicateFunctionStringOutput()
         {
-            return DuplicateDAGObjectOutput();
+            return DuplicateFunctionJSONObjectOutput();
         }
      
         /// <summary>
@@ -153,30 +132,19 @@ namespace QueenbeeSDK
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as DAGObjectOutput);
+            return this.Equals(input as FunctionJSONObjectOutput);
         }
 
         /// <summary>
-        /// Returns true if DAGObjectOutput instances are equal
+        /// Returns true if FunctionJSONObjectOutput instances are equal
         /// </summary>
-        /// <param name="input">Instance of DAGObjectOutput to be compared</param>
+        /// <param name="input">Instance of FunctionJSONObjectOutput to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(DAGObjectOutput input)
+        public bool Equals(FunctionJSONObjectOutput input)
         {
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    this.From == input.From ||
-                    (this.From != null &&
-                    this.From.Equals(input.From))
-                ) && base.Equals(input) && 
-                (
-                    this.Alias == input.Alias ||
-                    this.Alias != null &&
-                    input.Alias != null &&
-                    this.Alias.SequenceEqual(input.Alias)
-                ) && base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
@@ -193,10 +161,6 @@ namespace QueenbeeSDK
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                if (this.From != null)
-                    hashCode = hashCode * 59 + this.From.GetHashCode();
-                if (this.Alias != null)
-                    hashCode = hashCode * 59 + this.Alias.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;
@@ -214,7 +178,7 @@ namespace QueenbeeSDK
 
             
             // Type (string) pattern
-            Regex regexType = new Regex(@"^DAGObjectOutput$", RegexOptions.CultureInvariant);
+            Regex regexType = new Regex(@"^FunctionJSONObjectOutput$", RegexOptions.CultureInvariant);
             if (false == regexType.Match(this.Type).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });

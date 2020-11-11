@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,8 +27,6 @@ namespace QueenbeeSDK
     /// A String input.  You can add additional validation by defining a JSONSchema specification.  See http://json-schema.org/understanding-json-schema/reference/string.html#string for more information.  .. code-block:: python      \&quot;schema\&quot;: {         \&quot;type\&quot;: \&quot;string\&quot;,         \&quot;maxLength\&quot;: 50,         \&quot;pattern\&quot;: \&quot;(?i)(^.*\\.epw$)\&quot;     }
     /// </summary>
     [DataContract(Name = "DAGStringInput")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
-    [JsonSubtypes.KnownSubType(typeof(FunctionStringInput), "FunctionStringInput")]
     public partial class DAGStringInput : DAGGenericInput, IEquatable<DAGStringInput>, IValidatableObject
     {
         /// <summary>
@@ -54,7 +51,7 @@ namespace QueenbeeSDK
         public DAGStringInput
         (
             string name, // Required parameters
-            Dictionary<string, string> annotations= default, string description= default, string _default= default, Object spec= default, List<AnyOf<DAGGenericInputAlias,DAGStringInputAlias,DAGIntegerInputAlias,DAGNumberInputAlias,DAGBooleanInputAlias,DAGFolderInputAlias,DAGFileInputAlias,DAGPathInputAlias,DAGArrayInputAlias,DAGObjectInputAlias>> alias= default // Optional parameters
+            Dictionary<string, string> annotations= default, string description= default, string _default= default, Object spec= default, List<AnyOf<DAGGenericInputAlias,DAGStringInputAlias,DAGIntegerInputAlias,DAGNumberInputAlias,DAGBooleanInputAlias,DAGFolderInputAlias,DAGFileInputAlias,DAGPathInputAlias,DAGArrayInputAlias,DAGJSONObjectInputAlias>> alias= default // Optional parameters
         ) : base(name: name, annotations: annotations, description: description, _default: _default, spec: spec, alias: alias)// BaseClass
         {
 

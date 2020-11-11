@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace QueenbeeSDK
     /// A single task in a DAG flow.
     /// </summary>
     [DataContract(Name = "DAGTask")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class DAGTask : OpenAPIGenBaseModel, IEquatable<DAGTask>, IValidatableObject
     {
         /// <summary>
@@ -55,7 +53,7 @@ namespace QueenbeeSDK
         public DAGTask
         (
              string name, string template, // Required parameters
-            Dictionary<string, string> annotations= default, List<AnyOf<TaskArgument,TaskPathArgument>> arguments= default, List<string> needs= default, DAGTaskLoop loop= default, string subFolder= default, List<AnyOf<TaskReturn,TaskPathReturn>> returns= default // Optional parameters
+            Dictionary<string, string> annotations= default, List<AnyOf<TaskArgument,TaskPathArgument>> arguments= default, List<string> needs= default, DAGTaskLoop loop= default, string subFolder= default, List<AnyOf<TaskReturn,TaskPathReturn>> returns= default// Optional parameters
         ) : base()// BaseClass
         {
             // to ensure "name" is required (not null)
@@ -78,56 +76,48 @@ namespace QueenbeeSDK
         /// </summary>
         /// <value>Name for this task. It must be unique in a DAG.</value>
         [DataMember(Name = "name", IsRequired = true, EmitDefaultValue = false)]
-        
         public string Name { get; set; } 
         /// <summary>
         /// Template name. A template is a Function or a DAG. This template must be available in the dependencies.
         /// </summary>
         /// <value>Template name. A template is a Function or a DAG. This template must be available in the dependencies.</value>
         [DataMember(Name = "template", IsRequired = true, EmitDefaultValue = false)]
-        
         public string Template { get; set; } 
         /// <summary>
         /// An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.
         /// </summary>
         /// <value>An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.</value>
         [DataMember(Name = "annotations", EmitDefaultValue = false)]
-        
         public Dictionary<string, string> Annotations { get; set; } 
         /// <summary>
         /// The input arguments for this task.
         /// </summary>
         /// <value>The input arguments for this task.</value>
         [DataMember(Name = "arguments", EmitDefaultValue = false)]
-        
         public List<AnyOf<TaskArgument,TaskPathArgument>> Arguments { get; set; } 
         /// <summary>
         /// List of DAG tasks that this task depends on and needs to be executed before this task.
         /// </summary>
         /// <value>List of DAG tasks that this task depends on and needs to be executed before this task.</value>
         [DataMember(Name = "needs", EmitDefaultValue = false)]
-        
         public List<string> Needs { get; set; } 
         /// <summary>
         /// Loop configuration for this task.
         /// </summary>
         /// <value>Loop configuration for this task.</value>
         [DataMember(Name = "loop", EmitDefaultValue = false)]
-        
         public DAGTaskLoop Loop { get; set; } 
         /// <summary>
         /// A path relative to the current folder context where artifacts should be saved. This is useful when performing a loop or invoking another workflow and wanting to save results in a specific sub_folder.
         /// </summary>
         /// <value>A path relative to the current folder context where artifacts should be saved. This is useful when performing a loop or invoking another workflow and wanting to save results in a specific sub_folder.</value>
         [DataMember(Name = "sub_folder", EmitDefaultValue = false)]
-        
         public string SubFolder { get; set; } 
         /// <summary>
         /// List of task returns.
         /// </summary>
         /// <value>List of task returns.</value>
         [DataMember(Name = "returns", EmitDefaultValue = false)]
-        
         public List<AnyOf<TaskReturn,TaskPathReturn>> Returns { get; set; } 
 
         /// <summary>
@@ -232,6 +222,11 @@ namespace QueenbeeSDK
                     this.Template.Equals(input.Template))
                 ) && base.Equals(input) && 
                 (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
+                ) && base.Equals(input) && 
+                (
                     this.Annotations == input.Annotations ||
                     this.Annotations != null &&
                     input.Annotations != null &&
@@ -264,11 +259,6 @@ namespace QueenbeeSDK
                     this.Returns != null &&
                     input.Returns != null &&
                     this.Returns.SequenceEqual(input.Returns)
-                ) && base.Equals(input) && 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
                 );
         }
 
@@ -285,6 +275,8 @@ namespace QueenbeeSDK
                     hashCode = hashCode * 59 + this.Name.GetHashCode();
                 if (this.Template != null)
                     hashCode = hashCode * 59 + this.Template.GetHashCode();
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Annotations != null)
                     hashCode = hashCode * 59 + this.Annotations.GetHashCode();
                 if (this.Arguments != null)
@@ -297,8 +289,6 @@ namespace QueenbeeSDK
                     hashCode = hashCode * 59 + this.SubFolder.GetHashCode();
                 if (this.Returns != null)
                     hashCode = hashCode * 59 + this.Returns.GetHashCode();
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;
             }
         }

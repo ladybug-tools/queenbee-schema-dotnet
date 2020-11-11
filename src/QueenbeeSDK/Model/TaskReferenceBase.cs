@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,11 +27,6 @@ namespace QueenbeeSDK
     /// A Task Reference
     /// </summary>
     [DataContract(Name = "_TaskReferenceBase")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
-    [JsonSubtypes.KnownSubType(typeof(TaskReference), "TaskReference")]
-    [JsonSubtypes.KnownSubType(typeof(TaskFolderReference), "TaskFolderReference")]
-    [JsonSubtypes.KnownSubType(typeof(TaskFileReference), "TaskFileReference")]
-    [JsonSubtypes.KnownSubType(typeof(TaskPathReference), "TaskPathReference")]
     public partial class TaskReferenceBase : BaseReference, IEquatable<TaskReferenceBase>, IValidatableObject
     {
         /// <summary>
@@ -71,14 +65,12 @@ namespace QueenbeeSDK
         /// </summary>
         /// <value>The name of the task to pull output data from.</value>
         [DataMember(Name = "name", IsRequired = true, EmitDefaultValue = false)]
-        
         public string Name { get; set; } 
         /// <summary>
         /// The name of the variable.
         /// </summary>
         /// <value>The name of the variable.</value>
         [DataMember(Name = "variable", IsRequired = true, EmitDefaultValue = false)]
-        
         public string Variable { get; set; } 
 
         /// <summary>

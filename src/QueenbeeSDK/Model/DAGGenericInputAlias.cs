@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,8 +27,6 @@ namespace QueenbeeSDK
     /// Base class for DAG Alias inputs.  This class adds a handler to input to handle the process of loading the input from different graphical interfaces.
     /// </summary>
     [DataContract(Name = "DAGGenericInputAlias")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
-    [JsonSubtypes.KnownSubType(typeof(DAGStringInputAlias), "DAGStringInputAlias")]
     public partial class DAGGenericInputAlias : GenericInput, IEquatable<DAGGenericInputAlias>, IValidatableObject
     {
         /// <summary>
@@ -72,14 +69,12 @@ namespace QueenbeeSDK
         /// </summary>
         /// <value>Name of the client platform (e.g. Grasshopper, Revit, etc). The value can be any strings as long as it has been agreed between client-side developer and author of the recipe.</value>
         [DataMember(Name = "platform", IsRequired = true, EmitDefaultValue = false)]
-        
         public List<string> Platform { get; set; } 
         /// <summary>
         /// List of process actions to process the input or output value.
         /// </summary>
         /// <value>List of process actions to process the input or output value.</value>
         [DataMember(Name = "handler", IsRequired = true, EmitDefaultValue = false)]
-        
         public List<IOAliasHandler> Handler { get; set; } 
 
         /// <summary>

@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace QueenbeeSDK
     /// A file or a folder input.  Use this input only in cases that the input can be either a file or folder. For file or folder-only inputs see File and Folder.  Path is a special string input. Unlike other string inputs, a path will be copied from its location to execution folder when a workflow is executed.  You can add additional validation by defining a JSONSchema specification.  See http://json-schema.org/understanding-json-schema/reference/string.html#string for more information.  .. code-block:: python      # a file with maximum 50 characters with an &#x60;&#x60;epw&#x60;&#x60; extension.      \&quot;schema\&quot;: {         \&quot;type\&quot;: \&quot;string\&quot;,         \&quot;maxLength\&quot;: 50,         \&quot;pattern\&quot;: \&quot;(?i)(^.*\\.epw$)\&quot;     }
     /// </summary>
     [DataContract(Name = "FunctionPathInput")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class FunctionPathInput : OpenAPIGenBaseModel, IEquatable<FunctionPathInput>, IValidatableObject
     {
         /// <summary>
@@ -55,7 +53,7 @@ namespace QueenbeeSDK
         public FunctionPathInput
         (
              string name, string path, // Required parameters
-            Dictionary<string, string> annotations= default, string description= default, AnyOf<HTTP,S3,ProjectFolder> _default= default, Object spec= default, List<AnyOf<DAGGenericInputAlias,DAGStringInputAlias,DAGIntegerInputAlias,DAGNumberInputAlias,DAGBooleanInputAlias,DAGFolderInputAlias,DAGFileInputAlias,DAGPathInputAlias,DAGArrayInputAlias,DAGObjectInputAlias>> alias= default, List<string> extensions= default // Optional parameters
+            Dictionary<string, string> annotations= default, string description= default, AnyOf<HTTP,S3,ProjectFolder> _default= default, Object spec= default, List<AnyOf<DAGGenericInputAlias,DAGStringInputAlias,DAGIntegerInputAlias,DAGNumberInputAlias,DAGBooleanInputAlias,DAGFolderInputAlias,DAGFileInputAlias,DAGPathInputAlias,DAGArrayInputAlias,DAGJSONObjectInputAlias>> alias= default, List<string> extensions= default // Optional parameters
         ) : base()// BaseClass
         {
             // to ensure "name" is required (not null)
@@ -78,56 +76,48 @@ namespace QueenbeeSDK
         /// </summary>
         /// <value>Input name.</value>
         [DataMember(Name = "name", IsRequired = true, EmitDefaultValue = false)]
-        
         public string Name { get; set; } 
         /// <summary>
         /// Path to the target location that the input will be copied to.  This path is relative to the working directory where the command is executed.
         /// </summary>
         /// <value>Path to the target location that the input will be copied to.  This path is relative to the working directory where the command is executed.</value>
         [DataMember(Name = "path", IsRequired = true, EmitDefaultValue = false)]
-        
         public string Path { get; set; } 
         /// <summary>
         /// An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.
         /// </summary>
         /// <value>An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.</value>
         [DataMember(Name = "annotations", EmitDefaultValue = false)]
-        
         public Dictionary<string, string> Annotations { get; set; } 
         /// <summary>
         /// Optional description for input.
         /// </summary>
         /// <value>Optional description for input.</value>
         [DataMember(Name = "description", EmitDefaultValue = false)]
-        
         public string Description { get; set; } 
         /// <summary>
         /// The default source for file if the value is not provided.
         /// </summary>
         /// <value>The default source for file if the value is not provided.</value>
         [DataMember(Name = "default", EmitDefaultValue = false)]
-        
         public AnyOf<HTTP,S3,ProjectFolder> Default { get; set; } 
         /// <summary>
         /// An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec.
         /// </summary>
         /// <value>An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec.</value>
         [DataMember(Name = "spec", EmitDefaultValue = false)]
-        
         public Object Spec { get; set; } 
         /// <summary>
         /// A list of aliases for this input in different platforms.
         /// </summary>
         /// <value>A list of aliases for this input in different platforms.</value>
         [DataMember(Name = "alias", EmitDefaultValue = false)]
-        
-        public List<AnyOf<DAGGenericInputAlias,DAGStringInputAlias,DAGIntegerInputAlias,DAGNumberInputAlias,DAGBooleanInputAlias,DAGFolderInputAlias,DAGFileInputAlias,DAGPathInputAlias,DAGArrayInputAlias,DAGObjectInputAlias>> Alias { get; set; } 
+        public List<AnyOf<DAGGenericInputAlias,DAGStringInputAlias,DAGIntegerInputAlias,DAGNumberInputAlias,DAGBooleanInputAlias,DAGFolderInputAlias,DAGFileInputAlias,DAGPathInputAlias,DAGArrayInputAlias,DAGJSONObjectInputAlias>> Alias { get; set; } 
         /// <summary>
         /// Optional list of extensions for file. The check for extension is case-insensitive.
         /// </summary>
         /// <value>Optional list of extensions for file. The check for extension is case-insensitive.</value>
         [DataMember(Name = "extensions", EmitDefaultValue = false)]
-        
         public List<string> Extensions { get; set; } 
 
         /// <summary>

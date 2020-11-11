@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace QueenbeeSDK
     /// DAG generic alias output.  In most cases, you should not be using the generic output unless you need a dynamic output that changes its type in different platforms because of returning different objects in handler.
     /// </summary>
     [DataContract(Name = "DAGGenericOutputAlias")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class DAGGenericOutputAlias : FromOutput, IEquatable<DAGGenericOutputAlias>, IValidatableObject
     {
         /// <summary>
@@ -70,14 +68,12 @@ namespace QueenbeeSDK
         /// </summary>
         /// <value>Name of the client platform (e.g. Grasshopper, Revit, etc). The value can be any strings as long as it has been agreed between client-side developer and author of the recipe.</value>
         [DataMember(Name = "platform", IsRequired = true, EmitDefaultValue = false)]
-        
         public List<string> Platform { get; set; } 
         /// <summary>
         /// List of process actions to process the input or output value.
         /// </summary>
         /// <value>List of process actions to process the input or output value.</value>
         [DataMember(Name = "handler", IsRequired = true, EmitDefaultValue = false)]
-        
         public List<IOAliasHandler> Handler { get; set; } 
 
         /// <summary>

@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -27,22 +26,21 @@ namespace QueenbeeSDK
     /// <summary>
     /// A JSON object input.  JSON objects are similar to Python dictionaries.  You can add additional validation by defining a JSONSchema specification.  See http://json-schema.org/understanding-json-schema/reference/object.html for more information.
     /// </summary>
-    [DataContract(Name = "FunctionObjectInput")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
-    public partial class FunctionObjectInput : OpenAPIGenBaseModel, IEquatable<FunctionObjectInput>, IValidatableObject
+    [DataContract(Name = "FunctionJSONObjectInput")]
+    public partial class FunctionJSONObjectInput : OpenAPIGenBaseModel, IEquatable<FunctionJSONObjectInput>, IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="FunctionObjectInput" /> class.
+        /// Initializes a new instance of the <see cref="FunctionJSONObjectInput" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected FunctionObjectInput() 
+        protected FunctionJSONObjectInput() 
         { 
             // Set non-required readonly properties with defaultValue
-            this.Type = "FunctionObjectInput";
+            this.Type = "FunctionJSONObjectInput";
         }
         
         /// <summary>
-        /// Initializes a new instance of the <see cref="FunctionObjectInput" /> class.
+        /// Initializes a new instance of the <see cref="FunctionJSONObjectInput" /> class.
         /// </summary>
         /// <param name="name">Input name. (required).</param>
         /// <param name="annotations">An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries..</param>
@@ -50,14 +48,14 @@ namespace QueenbeeSDK
         /// <param name="_default">Default value to use for an input if a value was not supplied..</param>
         /// <param name="spec">An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec..</param>
         /// <param name="alias">A list of aliases for this input in different platforms..</param>
-        public FunctionObjectInput
+        public FunctionJSONObjectInput
         (
              string name, // Required parameters
-            Dictionary<string, string> annotations= default, string description= default, Object _default= default, Object spec= default, List<AnyOf<DAGGenericInputAlias,DAGStringInputAlias,DAGIntegerInputAlias,DAGNumberInputAlias,DAGBooleanInputAlias,DAGFolderInputAlias,DAGFileInputAlias,DAGPathInputAlias,DAGArrayInputAlias,DAGObjectInputAlias>> alias= default // Optional parameters
+            Dictionary<string, string> annotations= default, string description= default, Object _default= default, Object spec= default, List<AnyOf<DAGGenericInputAlias,DAGStringInputAlias,DAGIntegerInputAlias,DAGNumberInputAlias,DAGBooleanInputAlias,DAGFolderInputAlias,DAGFileInputAlias,DAGPathInputAlias,DAGArrayInputAlias,DAGJSONObjectInputAlias>> alias= default // Optional parameters
         ) : base()// BaseClass
         {
             // to ensure "name" is required (not null)
-            this.Name = name ?? throw new ArgumentNullException("name is a required property for FunctionObjectInput and cannot be null");
+            this.Name = name ?? throw new ArgumentNullException("name is a required property for FunctionJSONObjectInput and cannot be null");
             this.Annotations = annotations;
             this.Description = description;
             this.Default = _default;
@@ -65,7 +63,7 @@ namespace QueenbeeSDK
             this.Alias = alias;
 
             // Set non-required readonly properties with defaultValue
-            this.Type = "FunctionObjectInput";
+            this.Type = "FunctionJSONObjectInput";
         }
 
         /// <summary>
@@ -73,43 +71,37 @@ namespace QueenbeeSDK
         /// </summary>
         /// <value>Input name.</value>
         [DataMember(Name = "name", IsRequired = true, EmitDefaultValue = false)]
-        
         public string Name { get; set; } 
         /// <summary>
         /// An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.
         /// </summary>
         /// <value>An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.</value>
         [DataMember(Name = "annotations", EmitDefaultValue = false)]
-        
         public Dictionary<string, string> Annotations { get; set; } 
         /// <summary>
         /// Optional description for input.
         /// </summary>
         /// <value>Optional description for input.</value>
         [DataMember(Name = "description", EmitDefaultValue = false)]
-        
         public string Description { get; set; } 
         /// <summary>
         /// Default value to use for an input if a value was not supplied.
         /// </summary>
         /// <value>Default value to use for an input if a value was not supplied.</value>
         [DataMember(Name = "default", EmitDefaultValue = false)]
-        
         public Object Default { get; set; } 
         /// <summary>
         /// An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec.
         /// </summary>
         /// <value>An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec.</value>
         [DataMember(Name = "spec", EmitDefaultValue = false)]
-        
         public Object Spec { get; set; } 
         /// <summary>
         /// A list of aliases for this input in different platforms.
         /// </summary>
         /// <value>A list of aliases for this input in different platforms.</value>
         [DataMember(Name = "alias", EmitDefaultValue = false)]
-        
-        public List<AnyOf<DAGGenericInputAlias,DAGStringInputAlias,DAGIntegerInputAlias,DAGNumberInputAlias,DAGBooleanInputAlias,DAGFolderInputAlias,DAGFileInputAlias,DAGPathInputAlias,DAGArrayInputAlias,DAGObjectInputAlias>> Alias { get; set; } 
+        public List<AnyOf<DAGGenericInputAlias,DAGStringInputAlias,DAGIntegerInputAlias,DAGNumberInputAlias,DAGBooleanInputAlias,DAGFolderInputAlias,DAGFileInputAlias,DAGPathInputAlias,DAGArrayInputAlias,DAGJSONObjectInputAlias>> Alias { get; set; } 
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -117,7 +109,7 @@ namespace QueenbeeSDK
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            return "FunctionObjectInput";
+            return "FunctionJSONObjectInput";
         }
 
         /// <summary>
@@ -130,7 +122,7 @@ namespace QueenbeeSDK
                 return this.ToString();
             
             var sb = new StringBuilder();
-            sb.Append("FunctionObjectInput:\n");
+            sb.Append("FunctionJSONObjectInput:\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  Annotations: ").Append(Annotations).Append("\n");
@@ -144,10 +136,10 @@ namespace QueenbeeSDK
         /// <summary>
         /// Returns the object from JSON string
         /// </summary>
-        /// <returns>FunctionObjectInput object</returns>
-        public static FunctionObjectInput FromJson(string json)
+        /// <returns>FunctionJSONObjectInput object</returns>
+        public static FunctionJSONObjectInput FromJson(string json)
         {
-            var obj = JsonConvert.DeserializeObject<FunctionObjectInput>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<FunctionJSONObjectInput>(json, JsonSetting.AnyOfConvertSetting);
             if (obj == null)
                 return null;
             return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
@@ -156,8 +148,8 @@ namespace QueenbeeSDK
         /// <summary>
         /// Creates a new instance with the same properties.
         /// </summary>
-        /// <returns>FunctionObjectInput object</returns>
-        public virtual FunctionObjectInput DuplicateFunctionObjectInput()
+        /// <returns>FunctionJSONObjectInput object</returns>
+        public virtual FunctionJSONObjectInput DuplicateFunctionJSONObjectInput()
         {
             return FromJson(this.ToJson());
         }
@@ -168,7 +160,7 @@ namespace QueenbeeSDK
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return DuplicateFunctionObjectInput();
+            return DuplicateFunctionJSONObjectInput();
         }
 
         /// <summary>
@@ -177,7 +169,7 @@ namespace QueenbeeSDK
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
         {
-            return DuplicateFunctionObjectInput();
+            return DuplicateFunctionJSONObjectInput();
         }
      
         /// <summary>
@@ -187,15 +179,15 @@ namespace QueenbeeSDK
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as FunctionObjectInput);
+            return this.Equals(input as FunctionJSONObjectInput);
         }
 
         /// <summary>
-        /// Returns true if FunctionObjectInput instances are equal
+        /// Returns true if FunctionJSONObjectInput instances are equal
         /// </summary>
-        /// <param name="input">Instance of FunctionObjectInput to be compared</param>
+        /// <param name="input">Instance of FunctionJSONObjectInput to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(FunctionObjectInput input)
+        public bool Equals(FunctionJSONObjectInput input)
         {
             if (input == null)
                 return false;
@@ -277,7 +269,7 @@ namespace QueenbeeSDK
 
             
             // Type (string) pattern
-            Regex regexType = new Regex(@"^FunctionObjectInput$", RegexOptions.CultureInvariant);
+            Regex regexType = new Regex(@"^FunctionJSONObjectInput$", RegexOptions.CultureInvariant);
             if (false == regexType.Match(this.Type).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });

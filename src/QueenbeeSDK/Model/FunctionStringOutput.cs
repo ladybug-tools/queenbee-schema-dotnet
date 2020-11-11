@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,12 +27,6 @@ namespace QueenbeeSDK
     /// Function string output.  This output loads the content from a file as a string.
     /// </summary>
     [DataContract(Name = "FunctionStringOutput")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
-    [JsonSubtypes.KnownSubType(typeof(FunctionNumberOutput), "FunctionNumberOutput")]
-    [JsonSubtypes.KnownSubType(typeof(FunctionBooleanOutput), "FunctionBooleanOutput")]
-    [JsonSubtypes.KnownSubType(typeof(FunctionIntegerOutput), "FunctionIntegerOutput")]
-    [JsonSubtypes.KnownSubType(typeof(FunctionObjectOutput), "FunctionObjectOutput")]
-    [JsonSubtypes.KnownSubType(typeof(FunctionArrayOutput), "FunctionArrayOutput")]
     public partial class FunctionStringOutput : FunctionFileOutput, IEquatable<FunctionStringOutput>, IValidatableObject
     {
         /// <summary>

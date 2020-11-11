@@ -25,11 +25,6 @@
   },
   "tags": [
     {
-      "name": "config_model",
-      "x-displayName": "Config",
-      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/Config\" />\n"
-    },
-    {
       "name": "dag_model",
       "x-displayName": "DAG",
       "description": "<SchemaDefinition schemaRef=\"#/components/schemas/DAG\" />\n"
@@ -155,6 +150,26 @@
       "description": "<SchemaDefinition schemaRef=\"#/components/schemas/DAGIntegerOutputAlias\" />\n"
     },
     {
+      "name": "dagjsonobjectinput_model",
+      "x-displayName": "DAGJSONObjectInput",
+      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/DAGJSONObjectInput\" />\n"
+    },
+    {
+      "name": "dagjsonobjectinputalias_model",
+      "x-displayName": "DAGJSONObjectInputAlias",
+      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/DAGJSONObjectInputAlias\" />\n"
+    },
+    {
+      "name": "dagjsonobjectoutput_model",
+      "x-displayName": "DAGJSONObjectOutput",
+      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/DAGJSONObjectOutput\" />\n"
+    },
+    {
+      "name": "dagjsonobjectoutputalias_model",
+      "x-displayName": "DAGJSONObjectOutputAlias",
+      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/DAGJSONObjectOutputAlias\" />\n"
+    },
+    {
       "name": "dagnumberinput_model",
       "x-displayName": "DAGNumberInput",
       "description": "<SchemaDefinition schemaRef=\"#/components/schemas/DAGNumberInput\" />\n"
@@ -173,26 +188,6 @@
       "name": "dagnumberoutputalias_model",
       "x-displayName": "DAGNumberOutputAlias",
       "description": "<SchemaDefinition schemaRef=\"#/components/schemas/DAGNumberOutputAlias\" />\n"
-    },
-    {
-      "name": "dagobjectinput_model",
-      "x-displayName": "DAGObjectInput",
-      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/DAGObjectInput\" />\n"
-    },
-    {
-      "name": "dagobjectinputalias_model",
-      "x-displayName": "DAGObjectInputAlias",
-      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/DAGObjectInputAlias\" />\n"
-    },
-    {
-      "name": "dagobjectoutput_model",
-      "x-displayName": "DAGObjectOutput",
-      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/DAGObjectOutput\" />\n"
-    },
-    {
-      "name": "dagobjectoutputalias_model",
-      "x-displayName": "DAGObjectOutputAlias",
-      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/DAGObjectOutputAlias\" />\n"
     },
     {
       "name": "dagpathinput_model",
@@ -250,9 +245,9 @@
       "description": "<SchemaDefinition schemaRef=\"#/components/schemas/Dependency\" />\n"
     },
     {
-      "name": "dependencytype_model",
-      "x-displayName": "DependencyType",
-      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/DependencyType\" />\n"
+      "name": "dependencykind_model",
+      "x-displayName": "DependencyKind",
+      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/DependencyKind\" />\n"
     },
     {
       "name": "dockerconfig_model",
@@ -325,6 +320,16 @@
       "description": "<SchemaDefinition schemaRef=\"#/components/schemas/FunctionIntegerOutput\" />\n"
     },
     {
+      "name": "functionjsonobjectinput_model",
+      "x-displayName": "FunctionJSONObjectInput",
+      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/FunctionJSONObjectInput\" />\n"
+    },
+    {
+      "name": "functionjsonobjectoutput_model",
+      "x-displayName": "FunctionJSONObjectOutput",
+      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/FunctionJSONObjectOutput\" />\n"
+    },
+    {
       "name": "functionnumberinput_model",
       "x-displayName": "FunctionNumberInput",
       "description": "<SchemaDefinition schemaRef=\"#/components/schemas/FunctionNumberInput\" />\n"
@@ -333,16 +338,6 @@
       "name": "functionnumberoutput_model",
       "x-displayName": "FunctionNumberOutput",
       "description": "<SchemaDefinition schemaRef=\"#/components/schemas/FunctionNumberOutput\" />\n"
-    },
-    {
-      "name": "functionobjectinput_model",
-      "x-displayName": "FunctionObjectInput",
-      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/FunctionObjectInput\" />\n"
-    },
-    {
-      "name": "functionobjectoutput_model",
-      "x-displayName": "FunctionObjectOutput",
-      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/FunctionObjectOutput\" />\n"
     },
     {
       "name": "functionpathinput_model",
@@ -430,6 +425,11 @@
       "description": "<SchemaDefinition schemaRef=\"#/components/schemas/Operator\" />\n"
     },
     {
+      "name": "operatorconfig_model",
+      "x-displayName": "OperatorConfig",
+      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/OperatorConfig\" />\n"
+    },
+    {
       "name": "projectfolder_model",
       "x-displayName": "ProjectFolder",
       "description": "<SchemaDefinition schemaRef=\"#/components/schemas/ProjectFolder\" />\n"
@@ -509,7 +509,6 @@
     {
       "name": "Models",
       "tags": [
-        "config_model",
         "dag_model",
         "dagarrayinput_model",
         "dagarrayinputalias_model",
@@ -535,14 +534,14 @@
         "dagintegerinputalias_model",
         "dagintegeroutput_model",
         "dagintegeroutputalias_model",
+        "dagjsonobjectinput_model",
+        "dagjsonobjectinputalias_model",
+        "dagjsonobjectoutput_model",
+        "dagjsonobjectoutputalias_model",
         "dagnumberinput_model",
         "dagnumberinputalias_model",
         "dagnumberoutput_model",
         "dagnumberoutputalias_model",
-        "dagobjectinput_model",
-        "dagobjectinputalias_model",
-        "dagobjectoutput_model",
-        "dagobjectoutputalias_model",
         "dagpathinput_model",
         "dagpathinputalias_model",
         "dagpathoutput_model",
@@ -554,7 +553,7 @@
         "dagtask_model",
         "dagtaskloop_model",
         "dependency_model",
-        "dependencytype_model",
+        "dependencykind_model",
         "dockerconfig_model",
         "filereference_model",
         "folderreference_model",
@@ -569,10 +568,10 @@
         "functionfolderoutput_model",
         "functionintegerinput_model",
         "functionintegeroutput_model",
+        "functionjsonobjectinput_model",
+        "functionjsonobjectoutput_model",
         "functionnumberinput_model",
         "functionnumberoutput_model",
-        "functionobjectinput_model",
-        "functionobjectoutput_model",
         "functionpathinput_model",
         "functionpathoutput_model",
         "functionstringinput_model",
@@ -590,6 +589,7 @@
         "maintainer_model",
         "metadata_model",
         "operator_model",
+        "operatorconfig_model",
         "projectfolder_model",
         "recipe_model",
         "s3_model",
@@ -621,6 +621,13 @@
             "description": "The name of the author/maintainer person or organization.",
             "type": "string"
           },
+          "type": {
+            "title": "Type",
+            "default": "Maintainer",
+            "pattern": "^Maintainer$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -633,13 +640,6 @@
             "title": "Email",
             "description": "The email address of the author/maintainer person or organization.",
             "type": "string"
-          },
-          "type": {
-            "title": "Type",
-            "default": "Maintainer",
-            "type": "string",
-            "pattern": "^Maintainer$",
-            "readOnly": true
           }
         },
         "required": [
@@ -659,6 +659,13 @@
             "description": "The license name used for the package.",
             "type": "string"
           },
+          "type": {
+            "title": "Type",
+            "default": "License",
+            "pattern": "^License$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -671,13 +678,6 @@
             "title": "Url",
             "description": "A URL to the license used for the package.",
             "type": "string"
-          },
-          "type": {
-            "title": "Type",
-            "default": "License",
-            "type": "string",
-            "pattern": "^License$",
-            "readOnly": true
           }
         },
         "required": [
@@ -701,6 +701,13 @@
             "title": "Tag",
             "description": "The tag of the package",
             "type": "string"
+          },
+          "type": {
+            "title": "Type",
+            "default": "MetaData",
+            "pattern": "^MetaData$",
+            "type": "string",
+            "readOnly": true
           },
           "annotations": {
             "title": "Annotations",
@@ -767,13 +774,6 @@
                 "$ref": "#/components/schemas/License"
               }
             ]
-          },
-          "type": {
-            "title": "Type",
-            "default": "MetaData",
-            "type": "string",
-            "pattern": "^MetaData$",
-            "readOnly": true
           }
         },
         "required": [
@@ -784,12 +784,12 @@
           "propertyName": "type"
         }
       },
-      "DependencyType": {
-        "title": "DependencyType",
-        "description": "An enumeration.",
+      "DependencyKind": {
+        "title": "DependencyKind",
+        "description": "Dependency kind.",
         "enum": [
-          "recipe",
-          "operator"
+          "recipe_kind",
+          "operator_kind"
         ],
         "type": "string"
       },
@@ -798,14 +798,13 @@
         "description": "Configuration to fetch a Recipe or Operator that another Recipe depends on.",
         "type": "object",
         "properties": {
-          "type": {
-            "description": "The type of dependency",
+          "kind": {
+            "description": "The kind of dependency. It can be a recipe_kind or an operator_kind.",
             "allOf": [
               {
-                "$ref": "#/components/schemas/DependencyType"
+                "$ref": "#/components/schemas/DependencyKind"
               }
-            ],
-            "readOnly": true
+            ]
           },
           "name": {
             "title": "Name",
@@ -825,6 +824,13 @@
               "https://some-random-user.github.io/registry"
             ],
             "type": "string"
+          },
+          "type": {
+            "title": "Type",
+            "default": "Dependency",
+            "pattern": "^Dependency$",
+            "type": "string",
+            "readOnly": true
           },
           "annotations": {
             "title": "Annotations",
@@ -846,7 +852,7 @@
           }
         },
         "required": [
-          "type",
+          "kind",
           "name",
           "tag",
           "source"
@@ -876,6 +882,13 @@
             "description": "Name of the function. The input value will be passed to this function as the first argument.",
             "type": "string"
           },
+          "type": {
+            "title": "Type",
+            "default": "IOAliasHandler",
+            "pattern": "^IOAliasHandler$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -883,13 +896,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "IOAliasHandler",
-            "pattern": "^IOAliasHandler$",
-            "type": "string",
-            "readOnly": true
           }
         },
         "required": [
@@ -927,6 +933,13 @@
               "$ref": "#/components/schemas/IOAliasHandler"
             }
           },
+          "type": {
+            "title": "Type",
+            "default": "DAGGenericInputAlias",
+            "pattern": "^DAGGenericInputAlias$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -934,13 +947,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "DAGGenericInputAlias",
-            "pattern": "^DAGGenericInputAlias$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -993,6 +999,13 @@
               "$ref": "#/components/schemas/IOAliasHandler"
             }
           },
+          "type": {
+            "title": "Type",
+            "default": "DAGStringInputAlias",
+            "pattern": "^DAGStringInputAlias$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -1000,13 +1013,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "DAGStringInputAlias",
-            "pattern": "^DAGStringInputAlias$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -1059,6 +1065,13 @@
               "$ref": "#/components/schemas/IOAliasHandler"
             }
           },
+          "type": {
+            "title": "Type",
+            "default": "DAGIntegerInputAlias",
+            "pattern": "^DAGIntegerInputAlias$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -1066,13 +1079,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "DAGIntegerInputAlias",
-            "pattern": "^DAGIntegerInputAlias$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -1126,6 +1132,13 @@
               "$ref": "#/components/schemas/IOAliasHandler"
             }
           },
+          "type": {
+            "title": "Type",
+            "default": "DAGNumberInputAlias",
+            "pattern": "^DAGNumberInputAlias$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -1133,13 +1146,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "DAGNumberInputAlias",
-            "pattern": "^DAGNumberInputAlias$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -1193,6 +1199,13 @@
               "$ref": "#/components/schemas/IOAliasHandler"
             }
           },
+          "type": {
+            "title": "Type",
+            "default": "DAGBooleanInputAlias",
+            "pattern": "^DAGBooleanInputAlias$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -1200,13 +1213,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "DAGBooleanInputAlias",
-            "pattern": "^DAGBooleanInputAlias$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -1243,6 +1249,13 @@
             "description": "For a HTTP endpoint this can be http://climate.onebuilding.org.",
             "type": "string"
           },
+          "type": {
+            "title": "Type",
+            "default": "HTTP",
+            "pattern": "^HTTP$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -1250,13 +1263,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "HTTP",
-            "pattern": "^HTTP$",
-            "type": "string",
-            "readOnly": true
           }
         },
         "required": [
@@ -1286,6 +1292,13 @@
             "description": "The name of the S3 bucket on the host server.",
             "type": "string"
           },
+          "type": {
+            "title": "Type",
+            "default": "S3",
+            "pattern": "^S3$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -1293,13 +1306,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "S3",
-            "pattern": "^S3$",
-            "type": "string",
-            "readOnly": true
           },
           "credentials_path": {
             "title": "Credentials Path",
@@ -1321,6 +1327,13 @@
         "description": "Project Folder Source\n\nThis is the path to a folder where files and folders can be sourced. In the context\nof a desktop run Workflow this folder will correspond to a local folder. In the\ncontext of a workflow run on Pollination this folder will correspond to a Project\nscoped folder.",
         "type": "object",
         "properties": {
+          "type": {
+            "title": "Type",
+            "default": "ProjectFolder",
+            "pattern": "^ProjectFolder$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -1328,13 +1341,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "ProjectFolder",
-            "pattern": "^ProjectFolder$",
-            "type": "string",
-            "readOnly": true
           },
           "path": {
             "title": "Path",
@@ -1372,6 +1378,13 @@
               "$ref": "#/components/schemas/IOAliasHandler"
             }
           },
+          "type": {
+            "title": "Type",
+            "default": "DAGFolderInputAlias",
+            "pattern": "^DAGFolderInputAlias$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -1379,13 +1392,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "DAGFolderInputAlias",
-            "pattern": "^DAGFolderInputAlias$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -1448,6 +1454,13 @@
               "$ref": "#/components/schemas/IOAliasHandler"
             }
           },
+          "type": {
+            "title": "Type",
+            "default": "DAGFileInputAlias",
+            "pattern": "^DAGFileInputAlias$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -1455,13 +1468,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "DAGFileInputAlias",
-            "pattern": "^DAGFileInputAlias$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -1532,6 +1538,13 @@
               "$ref": "#/components/schemas/IOAliasHandler"
             }
           },
+          "type": {
+            "title": "Type",
+            "default": "DAGPathInputAlias",
+            "pattern": "^DAGPathInputAlias$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -1539,13 +1552,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "DAGPathInputAlias",
-            "pattern": "^DAGPathInputAlias$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -1631,6 +1637,13 @@
               "$ref": "#/components/schemas/IOAliasHandler"
             }
           },
+          "type": {
+            "title": "Type",
+            "default": "DAGArrayInputAlias",
+            "pattern": "^DAGArrayInputAlias$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -1638,13 +1651,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "DAGArrayInputAlias",
-            "pattern": "^DAGArrayInputAlias$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -1681,8 +1687,8 @@
           "propertyName": "type"
         }
       },
-      "DAGObjectInputAlias": {
-        "title": "DAGObjectInputAlias",
+      "DAGJSONObjectInputAlias": {
+        "title": "DAGJSONObjectInputAlias",
         "description": "An alias JSON object input.\n\nJSON objects are similar to Python dictionaries.\n\nYou can add additional validation by defining a JSONSchema specification.\n\nSee http://json-schema.org/understanding-json-schema/reference/object.html for\nmore information.",
         "type": "object",
         "properties": {
@@ -1707,6 +1713,13 @@
               "$ref": "#/components/schemas/IOAliasHandler"
             }
           },
+          "type": {
+            "title": "Type",
+            "default": "DAGJSONObjectInputAlias",
+            "pattern": "^DAGJSONObjectInputAlias$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -1714,13 +1727,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "DAGObjectInputAlias",
-            "pattern": "^DAGObjectInputAlias$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -1757,6 +1763,13 @@
             "description": "Input name.",
             "type": "string"
           },
+          "type": {
+            "title": "Type",
+            "default": "DAGGenericInput",
+            "pattern": "^DAGGenericInput$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -1764,13 +1777,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "DAGGenericInput",
-            "pattern": "^DAGGenericInput$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -1821,7 +1827,7 @@
                   "$ref": "#/components/schemas/DAGArrayInputAlias"
                 },
                 {
-                  "$ref": "#/components/schemas/DAGObjectInputAlias"
+                  "$ref": "#/components/schemas/DAGJSONObjectInputAlias"
                 }
               ]
             }
@@ -1844,6 +1850,13 @@
             "description": "Input name.",
             "type": "string"
           },
+          "type": {
+            "title": "Type",
+            "default": "DAGStringInput",
+            "pattern": "^DAGStringInput$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -1851,13 +1864,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "DAGStringInput",
-            "pattern": "^DAGStringInput$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -1908,7 +1914,7 @@
                   "$ref": "#/components/schemas/DAGArrayInputAlias"
                 },
                 {
-                  "$ref": "#/components/schemas/DAGObjectInputAlias"
+                  "$ref": "#/components/schemas/DAGJSONObjectInputAlias"
                 }
               ]
             }
@@ -1931,6 +1937,13 @@
             "description": "Input name.",
             "type": "string"
           },
+          "type": {
+            "title": "Type",
+            "default": "DAGIntegerInput",
+            "pattern": "^DAGIntegerInput$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -1938,13 +1951,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "DAGIntegerInput",
-            "pattern": "^DAGIntegerInput$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -1996,7 +2002,7 @@
                   "$ref": "#/components/schemas/DAGArrayInputAlias"
                 },
                 {
-                  "$ref": "#/components/schemas/DAGObjectInputAlias"
+                  "$ref": "#/components/schemas/DAGJSONObjectInputAlias"
                 }
               ]
             }
@@ -2019,6 +2025,13 @@
             "description": "Input name.",
             "type": "string"
           },
+          "type": {
+            "title": "Type",
+            "default": "DAGNumberInput",
+            "pattern": "^DAGNumberInput$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -2026,13 +2039,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "DAGNumberInput",
-            "pattern": "^DAGNumberInput$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -2084,7 +2090,7 @@
                   "$ref": "#/components/schemas/DAGArrayInputAlias"
                 },
                 {
-                  "$ref": "#/components/schemas/DAGObjectInputAlias"
+                  "$ref": "#/components/schemas/DAGJSONObjectInputAlias"
                 }
               ]
             }
@@ -2107,6 +2113,13 @@
             "description": "Input name.",
             "type": "string"
           },
+          "type": {
+            "title": "Type",
+            "default": "DAGBooleanInput",
+            "pattern": "^DAGBooleanInput$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -2114,13 +2127,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "DAGBooleanInput",
-            "pattern": "^DAGBooleanInput$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -2171,7 +2177,7 @@
                   "$ref": "#/components/schemas/DAGArrayInputAlias"
                 },
                 {
-                  "$ref": "#/components/schemas/DAGObjectInputAlias"
+                  "$ref": "#/components/schemas/DAGJSONObjectInputAlias"
                 }
               ]
             }
@@ -2194,6 +2200,13 @@
             "description": "Input name.",
             "type": "string"
           },
+          "type": {
+            "title": "Type",
+            "default": "DAGFolderInput",
+            "pattern": "^DAGFolderInput$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -2201,13 +2214,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "DAGFolderInput",
-            "pattern": "^DAGFolderInput$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -2268,7 +2274,7 @@
                   "$ref": "#/components/schemas/DAGArrayInputAlias"
                 },
                 {
-                  "$ref": "#/components/schemas/DAGObjectInputAlias"
+                  "$ref": "#/components/schemas/DAGJSONObjectInputAlias"
                 }
               ]
             }
@@ -2291,6 +2297,13 @@
             "description": "Input name.",
             "type": "string"
           },
+          "type": {
+            "title": "Type",
+            "default": "DAGFileInput",
+            "pattern": "^DAGFileInput$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -2298,13 +2311,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "DAGFileInput",
-            "pattern": "^DAGFileInput$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -2365,7 +2371,7 @@
                   "$ref": "#/components/schemas/DAGArrayInputAlias"
                 },
                 {
-                  "$ref": "#/components/schemas/DAGObjectInputAlias"
+                  "$ref": "#/components/schemas/DAGJSONObjectInputAlias"
                 }
               ]
             }
@@ -2396,6 +2402,13 @@
             "description": "Input name.",
             "type": "string"
           },
+          "type": {
+            "title": "Type",
+            "default": "DAGPathInput",
+            "pattern": "^DAGPathInput$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -2403,13 +2416,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "DAGPathInput",
-            "pattern": "^DAGPathInput$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -2470,7 +2476,7 @@
                   "$ref": "#/components/schemas/DAGArrayInputAlias"
                 },
                 {
-                  "$ref": "#/components/schemas/DAGObjectInputAlias"
+                  "$ref": "#/components/schemas/DAGJSONObjectInputAlias"
                 }
               ]
             }
@@ -2501,6 +2507,13 @@
             "description": "Input name.",
             "type": "string"
           },
+          "type": {
+            "title": "Type",
+            "default": "DAGArrayInput",
+            "pattern": "^DAGArrayInput$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -2508,13 +2521,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "DAGArrayInput",
-            "pattern": "^DAGArrayInput$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -2566,7 +2572,7 @@
                   "$ref": "#/components/schemas/DAGArrayInputAlias"
                 },
                 {
-                  "$ref": "#/components/schemas/DAGObjectInputAlias"
+                  "$ref": "#/components/schemas/DAGJSONObjectInputAlias"
                 }
               ]
             }
@@ -2588,8 +2594,8 @@
           "propertyName": "type"
         }
       },
-      "DAGObjectInput": {
-        "title": "DAGObjectInput",
+      "DAGJSONObjectInput": {
+        "title": "DAGJSONObjectInput",
         "description": "A JSON object input.\n\nJSON objects are similar to Python dictionaries.\n\nYou can add additional validation by defining a JSONSchema specification.\n\nSee http://json-schema.org/understanding-json-schema/reference/object.html for\nmore information.",
         "type": "object",
         "properties": {
@@ -2598,6 +2604,13 @@
             "description": "Input name.",
             "type": "string"
           },
+          "type": {
+            "title": "Type",
+            "default": "DAGJSONObjectInput",
+            "pattern": "^DAGJSONObjectInput$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -2605,13 +2618,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "DAGObjectInput",
-            "pattern": "^DAGObjectInput$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -2662,7 +2668,7 @@
                   "$ref": "#/components/schemas/DAGArrayInputAlias"
                 },
                 {
-                  "$ref": "#/components/schemas/DAGObjectInputAlias"
+                  "$ref": "#/components/schemas/DAGJSONObjectInputAlias"
                 }
               ]
             }
@@ -2705,6 +2711,13 @@
               "$ref": "#/components/schemas/IOAliasHandler"
             }
           },
+          "type": {
+            "title": "Type",
+            "default": "DAGGenericOutputAlias",
+            "pattern": "^DAGGenericOutputAlias$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -2712,13 +2725,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "DAGGenericOutputAlias",
-            "pattern": "^DAGGenericOutputAlias$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -2751,6 +2757,13 @@
             "description": "The name of the variable.",
             "type": "string"
           },
+          "type": {
+            "title": "Type",
+            "default": "TaskReference",
+            "pattern": "^TaskReference$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -2758,13 +2771,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "TaskReference",
-            "pattern": "^TaskReference$",
-            "type": "string",
-            "readOnly": true
           }
         },
         "required": [
@@ -2785,6 +2791,13 @@
             "description": "Relative path to a file.",
             "type": "string"
           },
+          "type": {
+            "title": "Type",
+            "default": "FileReference",
+            "pattern": "^FileReference$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -2792,13 +2805,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "FileReference",
-            "pattern": "^FileReference$",
-            "type": "string",
-            "readOnly": true
           }
         },
         "required": [
@@ -2846,6 +2852,13 @@
               "$ref": "#/components/schemas/IOAliasHandler"
             }
           },
+          "type": {
+            "title": "Type",
+            "default": "DAGStringOutputAlias",
+            "pattern": "^DAGStringOutputAlias$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -2853,13 +2866,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "DAGStringOutputAlias",
-            "pattern": "^DAGStringOutputAlias$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -2915,6 +2921,13 @@
               "$ref": "#/components/schemas/IOAliasHandler"
             }
           },
+          "type": {
+            "title": "Type",
+            "default": "DAGIntegerOutputAlias",
+            "pattern": "^DAGIntegerOutputAlias$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -2922,13 +2935,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "DAGIntegerOutputAlias",
-            "pattern": "^DAGIntegerOutputAlias$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -2984,6 +2990,13 @@
               "$ref": "#/components/schemas/IOAliasHandler"
             }
           },
+          "type": {
+            "title": "Type",
+            "default": "DAGNumberOutputAlias",
+            "pattern": "^DAGNumberOutputAlias$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -2991,13 +3004,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "DAGNumberOutputAlias",
-            "pattern": "^DAGNumberOutputAlias$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -3053,6 +3059,13 @@
               "$ref": "#/components/schemas/IOAliasHandler"
             }
           },
+          "type": {
+            "title": "Type",
+            "default": "DAGBooleanOutputAlias",
+            "pattern": "^DAGBooleanOutputAlias$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -3060,13 +3073,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "DAGBooleanOutputAlias",
-            "pattern": "^DAGBooleanOutputAlias$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -3094,6 +3100,13 @@
             "description": "Relative path to a folder.",
             "type": "string"
           },
+          "type": {
+            "title": "Type",
+            "default": "FolderReference",
+            "pattern": "^FolderReference$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -3101,13 +3114,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "FolderReference",
-            "pattern": "^FolderReference$",
-            "type": "string",
-            "readOnly": true
           }
         },
         "required": [
@@ -3155,6 +3161,13 @@
               "$ref": "#/components/schemas/IOAliasHandler"
             }
           },
+          "type": {
+            "title": "Type",
+            "default": "DAGFolderOutputAlias",
+            "pattern": "^DAGFolderOutputAlias$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -3162,13 +3175,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "DAGFolderOutputAlias",
-            "pattern": "^DAGFolderOutputAlias$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -3224,6 +3230,13 @@
               "$ref": "#/components/schemas/IOAliasHandler"
             }
           },
+          "type": {
+            "title": "Type",
+            "default": "DAGFileOutputAlias",
+            "pattern": "^DAGFileOutputAlias$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -3231,13 +3244,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "DAGFileOutputAlias",
-            "pattern": "^DAGFileOutputAlias$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -3296,6 +3302,13 @@
               "$ref": "#/components/schemas/IOAliasHandler"
             }
           },
+          "type": {
+            "title": "Type",
+            "default": "DAGPathOutputAlias",
+            "pattern": "^DAGPathOutputAlias$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -3303,13 +3316,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "DAGPathOutputAlias",
-            "pattern": "^DAGPathOutputAlias$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -3365,6 +3371,13 @@
               "$ref": "#/components/schemas/IOAliasHandler"
             }
           },
+          "type": {
+            "title": "Type",
+            "default": "DAGArrayOutputAlias",
+            "pattern": "^DAGArrayOutputAlias$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -3372,13 +3385,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "DAGArrayOutputAlias",
-            "pattern": "^DAGArrayOutputAlias$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -3405,8 +3411,8 @@
           "propertyName": "type"
         }
       },
-      "DAGObjectOutputAlias": {
-        "title": "DAGObjectOutputAlias",
+      "DAGJSONObjectOutputAlias": {
+        "title": "DAGJSONObjectOutputAlias",
         "description": "DAG alias object output.\n\nThis output loads the content from a file as a JSON object.",
         "type": "object",
         "properties": {
@@ -3443,6 +3449,13 @@
               "$ref": "#/components/schemas/IOAliasHandler"
             }
           },
+          "type": {
+            "title": "Type",
+            "default": "DAGJSONObjectOutputAlias",
+            "pattern": "^DAGJSONObjectOutputAlias$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -3450,13 +3463,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "DAGObjectOutputAlias",
-            "pattern": "^DAGObjectOutputAlias$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -3488,6 +3494,13 @@
             "title": "From",
             "description": "Reference to a file or a task output. Task output must be file."
           },
+          "type": {
+            "title": "Type",
+            "default": "DAGGenericOutput",
+            "pattern": "^DAGGenericOutput$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -3495,13 +3508,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "DAGGenericOutput",
-            "pattern": "^DAGGenericOutput$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -3542,7 +3548,7 @@
                   "$ref": "#/components/schemas/DAGArrayOutputAlias"
                 },
                 {
-                  "$ref": "#/components/schemas/DAGObjectOutputAlias"
+                  "$ref": "#/components/schemas/DAGJSONObjectOutputAlias"
                 }
               ]
             }
@@ -3578,6 +3584,13 @@
               }
             ]
           },
+          "type": {
+            "title": "Type",
+            "default": "DAGStringOutput",
+            "pattern": "^DAGStringOutput$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -3585,13 +3598,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "DAGStringOutput",
-            "pattern": "^DAGStringOutput$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -3632,7 +3638,7 @@
                   "$ref": "#/components/schemas/DAGArrayOutputAlias"
                 },
                 {
-                  "$ref": "#/components/schemas/DAGObjectOutputAlias"
+                  "$ref": "#/components/schemas/DAGJSONObjectOutputAlias"
                 }
               ]
             }
@@ -3668,6 +3674,13 @@
               }
             ]
           },
+          "type": {
+            "title": "Type",
+            "default": "DAGIntegerOutput",
+            "pattern": "^DAGIntegerOutput$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -3675,13 +3688,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "DAGIntegerOutput",
-            "pattern": "^DAGIntegerOutput$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -3722,7 +3728,7 @@
                   "$ref": "#/components/schemas/DAGArrayOutputAlias"
                 },
                 {
-                  "$ref": "#/components/schemas/DAGObjectOutputAlias"
+                  "$ref": "#/components/schemas/DAGJSONObjectOutputAlias"
                 }
               ]
             }
@@ -3758,6 +3764,13 @@
               }
             ]
           },
+          "type": {
+            "title": "Type",
+            "default": "DAGNumberOutput",
+            "pattern": "^DAGNumberOutput$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -3765,13 +3778,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "DAGNumberOutput",
-            "pattern": "^DAGNumberOutput$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -3812,7 +3818,7 @@
                   "$ref": "#/components/schemas/DAGArrayOutputAlias"
                 },
                 {
-                  "$ref": "#/components/schemas/DAGObjectOutputAlias"
+                  "$ref": "#/components/schemas/DAGJSONObjectOutputAlias"
                 }
               ]
             }
@@ -3848,6 +3854,13 @@
               }
             ]
           },
+          "type": {
+            "title": "Type",
+            "default": "DAGBooleanOutput",
+            "pattern": "^DAGBooleanOutput$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -3855,13 +3868,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "DAGBooleanOutput",
-            "pattern": "^DAGBooleanOutput$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -3902,7 +3908,7 @@
                   "$ref": "#/components/schemas/DAGArrayOutputAlias"
                 },
                 {
-                  "$ref": "#/components/schemas/DAGObjectOutputAlias"
+                  "$ref": "#/components/schemas/DAGJSONObjectOutputAlias"
                 }
               ]
             }
@@ -3938,6 +3944,13 @@
               }
             ]
           },
+          "type": {
+            "title": "Type",
+            "default": "DAGFolderOutput",
+            "pattern": "^DAGFolderOutput$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -3945,13 +3958,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "DAGFolderOutput",
-            "pattern": "^DAGFolderOutput$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -3992,7 +3998,7 @@
                   "$ref": "#/components/schemas/DAGArrayOutputAlias"
                 },
                 {
-                  "$ref": "#/components/schemas/DAGObjectOutputAlias"
+                  "$ref": "#/components/schemas/DAGJSONObjectOutputAlias"
                 }
               ]
             }
@@ -4028,6 +4034,13 @@
               }
             ]
           },
+          "type": {
+            "title": "Type",
+            "default": "DAGFileOutput",
+            "pattern": "^DAGFileOutput$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -4035,13 +4048,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "DAGFileOutput",
-            "pattern": "^DAGFileOutput$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -4082,7 +4088,7 @@
                   "$ref": "#/components/schemas/DAGArrayOutputAlias"
                 },
                 {
-                  "$ref": "#/components/schemas/DAGObjectOutputAlias"
+                  "$ref": "#/components/schemas/DAGJSONObjectOutputAlias"
                 }
               ]
             }
@@ -4121,6 +4127,13 @@
               }
             ]
           },
+          "type": {
+            "title": "Type",
+            "default": "DAGPathOutput",
+            "pattern": "^DAGPathOutput$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -4128,13 +4141,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "DAGPathOutput",
-            "pattern": "^DAGPathOutput$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -4175,7 +4181,7 @@
                   "$ref": "#/components/schemas/DAGArrayOutputAlias"
                 },
                 {
-                  "$ref": "#/components/schemas/DAGObjectOutputAlias"
+                  "$ref": "#/components/schemas/DAGJSONObjectOutputAlias"
                 }
               ]
             }
@@ -4211,6 +4217,13 @@
               }
             ]
           },
+          "type": {
+            "title": "Type",
+            "default": "DAGArrayOutput",
+            "pattern": "^DAGArrayOutput$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -4218,13 +4231,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "DAGArrayOutput",
-            "pattern": "^DAGArrayOutput$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -4265,7 +4271,7 @@
                   "$ref": "#/components/schemas/DAGArrayOutputAlias"
                 },
                 {
-                  "$ref": "#/components/schemas/DAGObjectOutputAlias"
+                  "$ref": "#/components/schemas/DAGJSONObjectOutputAlias"
                 }
               ]
             }
@@ -4288,8 +4294,8 @@
           "propertyName": "type"
         }
       },
-      "DAGObjectOutput": {
-        "title": "DAGObjectOutput",
+      "DAGJSONObjectOutput": {
+        "title": "DAGJSONObjectOutput",
         "description": "DAG object output.\n\nThis output loads the content from a file as a JSON object.",
         "type": "object",
         "properties": {
@@ -4310,6 +4316,13 @@
               }
             ]
           },
+          "type": {
+            "title": "Type",
+            "default": "DAGJSONObjectOutput",
+            "pattern": "^DAGJSONObjectOutput$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -4317,13 +4330,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "DAGObjectOutput",
-            "pattern": "^DAGObjectOutput$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -4364,7 +4370,7 @@
                   "$ref": "#/components/schemas/DAGArrayOutputAlias"
                 },
                 {
-                  "$ref": "#/components/schemas/DAGObjectOutputAlias"
+                  "$ref": "#/components/schemas/DAGJSONObjectOutputAlias"
                 }
               ]
             }
@@ -4388,6 +4394,13 @@
             "description": "The name of the DAG input variable",
             "type": "string"
           },
+          "type": {
+            "title": "Type",
+            "default": "InputReference",
+            "pattern": "^InputReference$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -4395,13 +4408,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "InputReference",
-            "pattern": "^InputReference$",
-            "type": "string",
-            "readOnly": true
           }
         },
         "required": [
@@ -4416,6 +4422,13 @@
         "description": "An Item Reference.",
         "type": "object",
         "properties": {
+          "type": {
+            "title": "Type",
+            "default": "ItemReference",
+            "pattern": "^ItemReference$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -4423,13 +4436,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "ItemReference",
-            "pattern": "^ItemReference$",
-            "type": "string",
-            "readOnly": true
           },
           "variable": {
             "title": "Variable",
@@ -4450,6 +4456,13 @@
             "title": "Value",
             "description": "A fixed value for this reference."
           },
+          "type": {
+            "title": "Type",
+            "default": "ValueReference",
+            "pattern": "^ValueReference$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -4457,13 +4470,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "ValueReference",
-            "pattern": "^ValueReference$",
-            "type": "string",
-            "readOnly": true
           }
         },
         "required": [
@@ -4501,6 +4507,13 @@
               }
             ]
           },
+          "type": {
+            "title": "Type",
+            "default": "TaskArgument",
+            "pattern": "^TaskArgument$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -4508,13 +4521,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "TaskArgument",
-            "pattern": "^TaskArgument$",
-            "type": "string",
-            "readOnly": true
           }
         },
         "required": [
@@ -4535,6 +4541,13 @@
             "description": "The name of the DAG input variable",
             "type": "string"
           },
+          "type": {
+            "title": "Type",
+            "default": "InputFileReference",
+            "pattern": "^InputFileReference$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -4542,13 +4555,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "InputFileReference",
-            "pattern": "^InputFileReference$",
-            "type": "string",
-            "readOnly": true
           }
         },
         "required": [
@@ -4568,6 +4574,13 @@
             "description": "The name of the DAG input variable",
             "type": "string"
           },
+          "type": {
+            "title": "Type",
+            "default": "InputFolderReference",
+            "pattern": "^InputFolderReference$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -4575,13 +4588,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "InputFolderReference",
-            "pattern": "^InputFolderReference$",
-            "type": "string",
-            "readOnly": true
           }
         },
         "required": [
@@ -4601,6 +4607,13 @@
             "description": "The name of the DAG input variable",
             "type": "string"
           },
+          "type": {
+            "title": "Type",
+            "default": "InputPathReference",
+            "pattern": "^InputPathReference$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -4608,13 +4621,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "InputPathReference",
-            "pattern": "^InputPathReference$",
-            "type": "string",
-            "readOnly": true
           }
         },
         "required": [
@@ -4639,6 +4645,13 @@
             "description": "The name of the variable.",
             "type": "string"
           },
+          "type": {
+            "title": "Type",
+            "default": "TaskFileReference",
+            "pattern": "^TaskFileReference$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -4646,13 +4659,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "TaskFileReference",
-            "pattern": "^TaskFileReference$",
-            "type": "string",
-            "readOnly": true
           }
         },
         "required": [
@@ -4678,6 +4684,13 @@
             "description": "The name of the variable.",
             "type": "string"
           },
+          "type": {
+            "title": "Type",
+            "default": "TaskFolderReference",
+            "pattern": "^TaskFolderReference$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -4685,13 +4698,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "TaskFolderReference",
-            "pattern": "^TaskFolderReference$",
-            "type": "string",
-            "readOnly": true
           }
         },
         "required": [
@@ -4717,6 +4723,13 @@
             "description": "The name of the variable.",
             "type": "string"
           },
+          "type": {
+            "title": "Type",
+            "default": "TaskPathReference",
+            "pattern": "^TaskPathReference$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -4724,13 +4737,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "TaskPathReference",
-            "pattern": "^TaskPathReference$",
-            "type": "string",
-            "readOnly": true
           }
         },
         "required": [
@@ -4751,6 +4757,13 @@
             "description": "A fixed value for this reference.",
             "type": "string"
           },
+          "type": {
+            "title": "Type",
+            "default": "ValueFileReference",
+            "pattern": "^ValueFileReference$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -4758,13 +4771,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "ValueFileReference",
-            "pattern": "^ValueFileReference$",
-            "type": "string",
-            "readOnly": true
           }
         },
         "required": [
@@ -4784,6 +4790,13 @@
             "description": "A fixed value for this reference.",
             "type": "string"
           },
+          "type": {
+            "title": "Type",
+            "default": "ValueFolderReference",
+            "pattern": "^ValueFolderReference$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -4791,13 +4804,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "ValueFolderReference",
-            "pattern": "^ValueFolderReference$",
-            "type": "string",
-            "readOnly": true
           }
         },
         "required": [
@@ -4847,6 +4853,13 @@
               }
             ]
           },
+          "type": {
+            "title": "Type",
+            "default": "TaskPathArgument",
+            "pattern": "^TaskPathArgument$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -4854,13 +4867,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "TaskPathArgument",
-            "pattern": "^TaskPathArgument$",
-            "type": "string",
-            "readOnly": true
           },
           "sub_path": {
             "title": "Sub Path",
@@ -4887,6 +4893,13 @@
             "type": "array",
             "items": {}
           },
+          "type": {
+            "title": "Type",
+            "default": "ValueListReference",
+            "pattern": "^ValueListReference$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -4894,13 +4907,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "ValueListReference",
-            "pattern": "^ValueListReference$",
-            "type": "string",
-            "readOnly": true
           }
         },
         "required": [
@@ -4915,6 +4921,13 @@
         "description": "Loop configuration for the task.\n\nThis will run the template provided multiple times and in parallel relative to an\ninput or task parameter which should be a list.",
         "type": "object",
         "properties": {
+          "type": {
+            "title": "Type",
+            "default": "DAGTaskLoop",
+            "pattern": "^DAGTaskLoop$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -4937,13 +4950,6 @@
                 "$ref": "#/components/schemas/ValueListReference"
               }
             ]
-          },
-          "type": {
-            "title": "Type",
-            "default": "DAGTaskLoop",
-            "type": "string",
-            "pattern": "^DAGTaskLoop$",
-            "readOnly": true
           }
         },
         "discriminator": {
@@ -4960,6 +4966,13 @@
             "description": "Output name.",
             "type": "string"
           },
+          "type": {
+            "title": "Type",
+            "default": "TaskReturn",
+            "pattern": "^TaskReturn$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -4967,13 +4980,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "TaskReturn",
-            "pattern": "^TaskReturn$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -5003,6 +5009,13 @@
             "description": "Path to the output artifact relative to where the function command is executed.",
             "type": "string"
           },
+          "type": {
+            "title": "Type",
+            "default": "TaskPathReturn",
+            "pattern": "^TaskPathReturn$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -5010,13 +5023,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "TaskPathReturn",
-            "pattern": "^TaskPathReturn$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -5046,6 +5052,13 @@
             "title": "Template",
             "description": "Template name. A template is a Function or a DAG. This template must be available in the dependencies.",
             "type": "string"
+          },
+          "type": {
+            "title": "Type",
+            "default": "DAGTask",
+            "pattern": "^DAGTask$",
+            "type": "string",
+            "readOnly": true
           },
           "annotations": {
             "title": "Annotations",
@@ -5106,13 +5119,6 @@
                 }
               ]
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "DAGTask",
-            "type": "string",
-            "pattern": "^DAGTask$",
-            "readOnly": true
           }
         },
         "required": [
@@ -5140,6 +5146,13 @@
             "items": {
               "$ref": "#/components/schemas/DAGTask"
             }
+          },
+          "type": {
+            "title": "Type",
+            "default": "DAG",
+            "pattern": "^DAG$",
+            "type": "string",
+            "readOnly": true
           },
           "annotations": {
             "title": "Annotations",
@@ -5183,7 +5196,7 @@
                   "$ref": "#/components/schemas/DAGArrayInput"
                 },
                 {
-                  "$ref": "#/components/schemas/DAGObjectInput"
+                  "$ref": "#/components/schemas/DAGJSONObjectInput"
                 }
               ]
             }
@@ -5222,7 +5235,7 @@
                   "$ref": "#/components/schemas/DAGArrayOutput"
                 },
                 {
-                  "$ref": "#/components/schemas/DAGObjectOutput"
+                  "$ref": "#/components/schemas/DAGJSONObjectOutput"
                 }
               ]
             }
@@ -5232,13 +5245,6 @@
             "description": "Stop scheduling new steps, as soon as it detects that one of the DAG nodes is failed. Default is True.",
             "default": true,
             "type": "boolean"
-          },
-          "type": {
-            "title": "Type",
-            "default": "DAG",
-            "type": "string",
-            "pattern": "^DAG$",
-            "readOnly": true
           }
         },
         "required": [
@@ -5261,6 +5267,13 @@
             "items": {
               "$ref": "#/components/schemas/DAG"
             }
+          },
+          "type": {
+            "title": "Type",
+            "default": "Recipe",
+            "pattern": "^Recipe$",
+            "type": "string",
+            "readOnly": true
           },
           "annotations": {
             "title": "Annotations",
@@ -5286,13 +5299,6 @@
             "items": {
               "$ref": "#/components/schemas/Dependency"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "Recipe",
-            "type": "string",
-            "pattern": "^Recipe$",
-            "readOnly": true
           }
         },
         "required": [
@@ -5317,6 +5323,13 @@
             "description": "The working directory the entrypoint command of the container runsin. This is used to determine where to load artifacts when running in the container.",
             "type": "string"
           },
+          "type": {
+            "title": "Type",
+            "default": "DockerConfig",
+            "pattern": "^DockerConfig",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -5329,13 +5342,6 @@
             "title": "Registry",
             "description": "The container registry URLs that this container should be pulled from. Will default to Dockerhub if none is specified.",
             "type": "string"
-          },
-          "type": {
-            "title": "Type",
-            "default": "DockerConfig",
-            "type": "string",
-            "pattern": "^DockerConfig$",
-            "readOnly": true
           }
         },
         "required": [
@@ -5351,6 +5357,13 @@
         "description": "Operator Configuration to run on a desktop.",
         "type": "object",
         "properties": {
+          "type": {
+            "title": "Type",
+            "default": "LocalConfig",
+            "pattern": "^LocalConfig",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -5358,21 +5371,14 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "LocalConfig",
-            "type": "string",
-            "pattern": "^LocalConfig$",
-            "readOnly": true
           }
         },
         "discriminator": {
           "propertyName": "type"
         }
       },
-      "Config": {
-        "title": "Config",
+      "OperatorConfig": {
+        "title": "OperatorConfig",
         "description": "Operator configuration.\n\nThe config is used to schedule functions on a desktop or in other contexts\n(ie: Docker).",
         "type": "object",
         "properties": {
@@ -5384,6 +5390,13 @@
                 "$ref": "#/components/schemas/DockerConfig"
               }
             ]
+          },
+          "type": {
+            "title": "Type",
+            "default": "OperatorConfig",
+            "pattern": "^OperatorConfig",
+            "type": "string",
+            "readOnly": true
           },
           "annotations": {
             "title": "Annotations",
@@ -5401,13 +5414,6 @@
                 "$ref": "#/components/schemas/LocalConfig"
               }
             ]
-          },
-          "type": {
-            "title": "Type",
-            "default": "Config",
-            "type": "string",
-            "pattern": "^Config$",
-            "readOnly": true
           }
         },
         "required": [
@@ -5427,6 +5433,13 @@
             "description": "Input name.",
             "type": "string"
           },
+          "type": {
+            "title": "Type",
+            "default": "FunctionStringInput",
+            "pattern": "^FunctionStringInput$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -5434,13 +5447,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "FunctionStringInput",
-            "pattern": "^FunctionStringInput$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -5491,7 +5497,7 @@
                   "$ref": "#/components/schemas/DAGArrayInputAlias"
                 },
                 {
-                  "$ref": "#/components/schemas/DAGObjectInputAlias"
+                  "$ref": "#/components/schemas/DAGJSONObjectInputAlias"
                 }
               ]
             }
@@ -5514,6 +5520,13 @@
             "description": "Input name.",
             "type": "string"
           },
+          "type": {
+            "title": "Type",
+            "default": "FunctionIntegerInput",
+            "pattern": "^FunctionIntegerInput$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -5521,13 +5534,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "FunctionIntegerInput",
-            "pattern": "^FunctionIntegerInput$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -5579,7 +5585,7 @@
                   "$ref": "#/components/schemas/DAGArrayInputAlias"
                 },
                 {
-                  "$ref": "#/components/schemas/DAGObjectInputAlias"
+                  "$ref": "#/components/schemas/DAGJSONObjectInputAlias"
                 }
               ]
             }
@@ -5602,6 +5608,13 @@
             "description": "Input name.",
             "type": "string"
           },
+          "type": {
+            "title": "Type",
+            "default": "FunctionNumberInput",
+            "pattern": "^FunctionNumberInput$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -5609,13 +5622,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "FunctionNumberInput",
-            "pattern": "^FunctionNumberInput$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -5667,7 +5673,7 @@
                   "$ref": "#/components/schemas/DAGArrayInputAlias"
                 },
                 {
-                  "$ref": "#/components/schemas/DAGObjectInputAlias"
+                  "$ref": "#/components/schemas/DAGJSONObjectInputAlias"
                 }
               ]
             }
@@ -5690,6 +5696,13 @@
             "description": "Input name.",
             "type": "string"
           },
+          "type": {
+            "title": "Type",
+            "default": "FunctionBooleanInput",
+            "pattern": "^FunctionBooleanInput$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -5697,13 +5710,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "FunctionBooleanInput",
-            "pattern": "^FunctionBooleanInput$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -5754,7 +5760,7 @@
                   "$ref": "#/components/schemas/DAGArrayInputAlias"
                 },
                 {
-                  "$ref": "#/components/schemas/DAGObjectInputAlias"
+                  "$ref": "#/components/schemas/DAGJSONObjectInputAlias"
                 }
               ]
             }
@@ -5782,6 +5788,13 @@
             "description": "Path to the target location that the input will be copied to.  This path is relative to the working directory where the command is executed.",
             "type": "string"
           },
+          "type": {
+            "title": "Type",
+            "default": "FunctionFolderInput",
+            "pattern": "^FunctionFolderInput$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -5789,13 +5802,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "FunctionFolderInput",
-            "pattern": "^FunctionFolderInput$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -5856,7 +5862,7 @@
                   "$ref": "#/components/schemas/DAGArrayInputAlias"
                 },
                 {
-                  "$ref": "#/components/schemas/DAGObjectInputAlias"
+                  "$ref": "#/components/schemas/DAGJSONObjectInputAlias"
                 }
               ]
             }
@@ -5885,6 +5891,13 @@
             "description": "Path to the target location that the input will be copied to.  This path is relative to the working directory where the command is executed.",
             "type": "string"
           },
+          "type": {
+            "title": "Type",
+            "default": "FunctionFileInput",
+            "pattern": "^FunctionFileInput$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -5892,13 +5905,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "FunctionFileInput",
-            "pattern": "^FunctionFileInput$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -5959,7 +5965,7 @@
                   "$ref": "#/components/schemas/DAGArrayInputAlias"
                 },
                 {
-                  "$ref": "#/components/schemas/DAGObjectInputAlias"
+                  "$ref": "#/components/schemas/DAGJSONObjectInputAlias"
                 }
               ]
             }
@@ -5996,6 +6002,13 @@
             "description": "Path to the target location that the input will be copied to.  This path is relative to the working directory where the command is executed.",
             "type": "string"
           },
+          "type": {
+            "title": "Type",
+            "default": "FunctionPathInput",
+            "pattern": "^FunctionPathInput$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -6003,13 +6016,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "FunctionPathInput",
-            "pattern": "^FunctionPathInput$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -6070,7 +6076,7 @@
                   "$ref": "#/components/schemas/DAGArrayInputAlias"
                 },
                 {
-                  "$ref": "#/components/schemas/DAGObjectInputAlias"
+                  "$ref": "#/components/schemas/DAGJSONObjectInputAlias"
                 }
               ]
             }
@@ -6102,6 +6108,13 @@
             "description": "Input name.",
             "type": "string"
           },
+          "type": {
+            "title": "Type",
+            "default": "FunctionArrayInput",
+            "pattern": "^FunctionArrayInput$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -6109,13 +6122,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "FunctionArrayInput",
-            "pattern": "^FunctionArrayInput$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -6167,7 +6173,7 @@
                   "$ref": "#/components/schemas/DAGArrayInputAlias"
                 },
                 {
-                  "$ref": "#/components/schemas/DAGObjectInputAlias"
+                  "$ref": "#/components/schemas/DAGJSONObjectInputAlias"
                 }
               ]
             }
@@ -6189,8 +6195,8 @@
           "propertyName": "type"
         }
       },
-      "FunctionObjectInput": {
-        "title": "FunctionObjectInput",
+      "FunctionJSONObjectInput": {
+        "title": "FunctionJSONObjectInput",
         "description": "A JSON object input.\n\nJSON objects are similar to Python dictionaries.\n\nYou can add additional validation by defining a JSONSchema specification.\n\nSee http://json-schema.org/understanding-json-schema/reference/object.html for\nmore information.",
         "type": "object",
         "properties": {
@@ -6199,6 +6205,13 @@
             "description": "Input name.",
             "type": "string"
           },
+          "type": {
+            "title": "Type",
+            "default": "FunctionJSONObjectInput",
+            "pattern": "^FunctionJSONObjectInput$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -6206,13 +6219,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "FunctionObjectInput",
-            "pattern": "^FunctionObjectInput$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -6263,7 +6269,7 @@
                   "$ref": "#/components/schemas/DAGArrayInputAlias"
                 },
                 {
-                  "$ref": "#/components/schemas/DAGObjectInputAlias"
+                  "$ref": "#/components/schemas/DAGJSONObjectInputAlias"
                 }
               ]
             }
@@ -6291,6 +6297,13 @@
             "description": "Path to the output file relative to where the function command is executed.",
             "type": "string"
           },
+          "type": {
+            "title": "Type",
+            "default": "FunctionStringOutput",
+            "pattern": "^FunctionStringOutput$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -6298,13 +6311,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "FunctionStringOutput",
-            "pattern": "^FunctionStringOutput$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -6335,6 +6341,13 @@
             "description": "Path to the output file relative to where the function command is executed.",
             "type": "string"
           },
+          "type": {
+            "title": "Type",
+            "default": "FunctionIntegerOutput",
+            "pattern": "^FunctionIntegerOutput$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -6342,13 +6355,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "FunctionIntegerOutput",
-            "pattern": "^FunctionIntegerOutput$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -6379,6 +6385,13 @@
             "description": "Path to the output file relative to where the function command is executed.",
             "type": "string"
           },
+          "type": {
+            "title": "Type",
+            "default": "FunctionNumberOutput",
+            "pattern": "^FunctionNumberOutput$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -6386,13 +6399,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "FunctionNumberOutput",
-            "pattern": "^FunctionNumberOutput$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -6423,6 +6429,13 @@
             "description": "Path to the output file relative to where the function command is executed.",
             "type": "string"
           },
+          "type": {
+            "title": "Type",
+            "default": "FunctionBooleanOutput",
+            "pattern": "^FunctionBooleanOutput$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -6430,13 +6443,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "FunctionBooleanOutput",
-            "pattern": "^FunctionBooleanOutput$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -6467,6 +6473,13 @@
             "description": "Path to the output folder relative to where the function command is executed.",
             "type": "string"
           },
+          "type": {
+            "title": "Type",
+            "default": "FunctionFolderOutput",
+            "pattern": "^FunctionFolderOutput$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -6474,13 +6487,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "FunctionFolderOutput",
-            "pattern": "^FunctionFolderOutput$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -6511,6 +6517,13 @@
             "description": "Path to the output file relative to where the function command is executed.",
             "type": "string"
           },
+          "type": {
+            "title": "Type",
+            "default": "FunctionFileOutput",
+            "pattern": "^FunctionFileOutput$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -6518,13 +6531,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "FunctionFileOutput",
-            "pattern": "^FunctionFileOutput$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -6555,6 +6561,13 @@
             "description": "Path to the output file or folder relative to where the function command is executed.",
             "type": "string"
           },
+          "type": {
+            "title": "Type",
+            "default": "FunctionPathOutput",
+            "pattern": "^FunctionPathOutput$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -6562,13 +6575,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "FunctionPathOutput",
-            "pattern": "^FunctionPathOutput$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -6599,6 +6605,13 @@
             "description": "Path to the output file relative to where the function command is executed.",
             "type": "string"
           },
+          "type": {
+            "title": "Type",
+            "default": "FunctionArrayOutput",
+            "pattern": "^FunctionArrayOutput$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -6606,13 +6619,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "FunctionArrayOutput",
-            "pattern": "^FunctionArrayOutput$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -6637,8 +6643,8 @@
           "propertyName": "type"
         }
       },
-      "FunctionObjectOutput": {
-        "title": "FunctionObjectOutput",
+      "FunctionJSONObjectOutput": {
+        "title": "FunctionJSONObjectOutput",
         "description": "Function object output.\n\nThis output loads the content from a file as a JSON object.",
         "type": "object",
         "properties": {
@@ -6652,6 +6658,13 @@
             "description": "Path to the output file relative to where the function command is executed.",
             "type": "string"
           },
+          "type": {
+            "title": "Type",
+            "default": "FunctionJSONObjectOutput",
+            "pattern": "^FunctionJSONObjectOutput$",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -6659,13 +6672,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "FunctionObjectOutput",
-            "pattern": "^FunctionObjectOutput$",
-            "type": "string",
-            "readOnly": true
           },
           "description": {
             "title": "Description",
@@ -6695,6 +6701,13 @@
             "title": "Command",
             "description": "Full shell command for this function. Each function accepts only one command. The command will be executed as a shell command in operator. For running several commands after each other use && between the commands or pipe data from one to another using |",
             "type": "string"
+          },
+          "type": {
+            "title": "Type",
+            "default": "Function",
+            "pattern": "^Function$",
+            "type": "string",
+            "readOnly": true
           },
           "annotations": {
             "title": "Annotations",
@@ -6735,7 +6748,7 @@
                   "$ref": "#/components/schemas/FunctionArrayInput"
                 },
                 {
-                  "$ref": "#/components/schemas/FunctionObjectInput"
+                  "$ref": "#/components/schemas/FunctionJSONObjectInput"
                 }
               ]
             }
@@ -6771,7 +6784,7 @@
                   "$ref": "#/components/schemas/FunctionArrayOutput"
                 },
                 {
-                  "$ref": "#/components/schemas/FunctionObjectOutput"
+                  "$ref": "#/components/schemas/FunctionJSONObjectOutput"
                 }
               ]
             }
@@ -6780,13 +6793,6 @@
             "title": "Description",
             "description": "Function description. A short human readable description for this function.",
             "type": "string"
-          },
-          "type": {
-            "title": "Type",
-            "default": "Function",
-            "type": "string",
-            "pattern": "^Function$",
-            "readOnly": true
           }
         },
         "required": [
@@ -6816,7 +6822,7 @@
             "description": "The configuration information to run this operator",
             "allOf": [
               {
-                "$ref": "#/components/schemas/Config"
+                "$ref": "#/components/schemas/OperatorConfig"
               }
             ]
           },
@@ -6828,6 +6834,13 @@
               "$ref": "#/components/schemas/Function"
             }
           },
+          "type": {
+            "title": "Type",
+            "default": "Operator",
+            "pattern": "^Operator",
+            "type": "string",
+            "readOnly": true
+          },
           "annotations": {
             "title": "Annotations",
             "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
@@ -6835,13 +6848,6 @@
             "additionalProperties": {
               "type": "string"
             }
-          },
-          "type": {
-            "title": "Type",
-            "default": "Operator",
-            "type": "string",
-            "pattern": "^Operator$",
-            "readOnly": true
           }
         },
         "required": [

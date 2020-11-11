@@ -6,10 +6,10 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Flow** | [**List&lt;DAG&gt;**](DAG.md) | A list of tasks to create a DAG recipe. | 
+**Type** | **string** |  | [optional] [readonly] [default to "Recipe"]
 **Annotations** | **Dictionary&lt;string, string&gt;** | An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries. | [optional] 
 **Metadata** | [**MetaData**](MetaData.md) | Recipe metadata information. | [optional] 
 **Dependencies** | [**List&lt;Dependency&gt;**](Dependency.md) | A list of operators and other recipes this recipe depends on. | [optional] 
-**Type** | **string** |  | [optional] [readonly] [default to "Recipe"]
 
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to API list]](../README.md#documentation-for-api-endpoints)

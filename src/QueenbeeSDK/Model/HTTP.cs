@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace QueenbeeSDK
     /// HTTP Source  A web HTTP to an FTP server or an API for example.
     /// </summary>
     [DataContract(Name = "HTTP")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class HTTP : ArtifactSource, IEquatable<HTTP>, IValidatableObject
     {
         /// <summary>
@@ -64,7 +62,6 @@ namespace QueenbeeSDK
         /// </summary>
         /// <value>For a HTTP endpoint this can be http://climate.onebuilding.org.</value>
         [DataMember(Name = "url", IsRequired = true, EmitDefaultValue = false)]
-        
         public string Url { get; set; } 
 
         /// <summary>

@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace QueenbeeSDK
     /// An alias number input.  You can add additional validation by defining a JSONSchema specification.  See http://json-schema.org/understanding-json-schema/reference/numeric.html#numeric for more information.
     /// </summary>
     [DataContract(Name = "DAGNumberInputAlias")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class DAGNumberInputAlias : OpenAPIGenBaseModel, IEquatable<DAGNumberInputAlias>, IValidatableObject
     {
         /// <summary>
@@ -77,49 +75,42 @@ namespace QueenbeeSDK
         /// </summary>
         /// <value>Input name.</value>
         [DataMember(Name = "name", IsRequired = true, EmitDefaultValue = false)]
-        
         public string Name { get; set; } 
         /// <summary>
         /// Name of the client platform (e.g. Grasshopper, Revit, etc). The value can be any strings as long as it has been agreed between client-side developer and author of the recipe.
         /// </summary>
         /// <value>Name of the client platform (e.g. Grasshopper, Revit, etc). The value can be any strings as long as it has been agreed between client-side developer and author of the recipe.</value>
         [DataMember(Name = "platform", IsRequired = true, EmitDefaultValue = false)]
-        
         public List<string> Platform { get; set; } 
         /// <summary>
         /// List of process actions to process the input or output value.
         /// </summary>
         /// <value>List of process actions to process the input or output value.</value>
         [DataMember(Name = "handler", IsRequired = true, EmitDefaultValue = false)]
-        
         public List<IOAliasHandler> Handler { get; set; } 
         /// <summary>
         /// An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.
         /// </summary>
         /// <value>An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.</value>
         [DataMember(Name = "annotations", EmitDefaultValue = false)]
-        
         public Dictionary<string, string> Annotations { get; set; } 
         /// <summary>
         /// Optional description for input.
         /// </summary>
         /// <value>Optional description for input.</value>
         [DataMember(Name = "description", EmitDefaultValue = false)]
-        
         public string Description { get; set; } 
         /// <summary>
         /// Default value to use for an input if a value was not supplied.
         /// </summary>
         /// <value>Default value to use for an input if a value was not supplied.</value>
         [DataMember(Name = "default", EmitDefaultValue = false)]
-        
         public double Default { get; set; } 
         /// <summary>
         /// An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec.
         /// </summary>
         /// <value>An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec.</value>
         [DataMember(Name = "spec", EmitDefaultValue = false)]
-        
         public Object Spec { get; set; } 
 
         /// <summary>

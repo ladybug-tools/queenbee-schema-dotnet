@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,9 +27,6 @@ namespace QueenbeeSDK
     /// Base class for all input types.
     /// </summary>
     [DataContract(Name = "GenericInput")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
-    [JsonSubtypes.KnownSubType(typeof(DAGGenericInput), "DAGGenericInput")]
-    [JsonSubtypes.KnownSubType(typeof(DAGGenericInputAlias), "DAGGenericInputAlias")]
     public partial class GenericInput : OpenAPIGenBaseModel, IEquatable<GenericInput>, IValidatableObject
     {
         /// <summary>
@@ -73,35 +69,30 @@ namespace QueenbeeSDK
         /// </summary>
         /// <value>Input name.</value>
         [DataMember(Name = "name", IsRequired = true, EmitDefaultValue = false)]
-        
         public string Name { get; set; } 
         /// <summary>
         /// An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.
         /// </summary>
         /// <value>An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.</value>
         [DataMember(Name = "annotations", EmitDefaultValue = false)]
-        
         public Dictionary<string, string> Annotations { get; set; } 
         /// <summary>
         /// Optional description for input.
         /// </summary>
         /// <value>Optional description for input.</value>
         [DataMember(Name = "description", EmitDefaultValue = false)]
-        
         public string Description { get; set; } 
         /// <summary>
         /// Place-holder. Overwrite this!
         /// </summary>
         /// <value>Place-holder. Overwrite this!</value>
         [DataMember(Name = "default", EmitDefaultValue = false)]
-        
         public string Default { get; set; } 
         /// <summary>
         /// An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec.
         /// </summary>
         /// <value>An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec.</value>
         [DataMember(Name = "spec", EmitDefaultValue = false)]
-        
         public Object Spec { get; set; } 
 
         /// <summary>
@@ -198,15 +189,15 @@ namespace QueenbeeSDK
                     this.Name.Equals(input.Name))
                 ) && base.Equals(input) && 
                 (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
+                ) && base.Equals(input) && 
+                (
                     this.Annotations == input.Annotations ||
                     this.Annotations != null &&
                     input.Annotations != null &&
                     this.Annotations.SequenceEqual(input.Annotations)
-                ) && base.Equals(input) && 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
                 ) && base.Equals(input) && 
                 (
                     this.Description == input.Description ||
@@ -236,10 +227,10 @@ namespace QueenbeeSDK
                 int hashCode = base.GetHashCode();
                 if (this.Name != null)
                     hashCode = hashCode * 59 + this.Name.GetHashCode();
-                if (this.Annotations != null)
-                    hashCode = hashCode * 59 + this.Annotations.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
+                if (this.Annotations != null)
+                    hashCode = hashCode * 59 + this.Annotations.GetHashCode();
                 if (this.Description != null)
                     hashCode = hashCode * 59 + this.Description.GetHashCode();
                 if (this.Default != null)

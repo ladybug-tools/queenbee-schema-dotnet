@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace QueenbeeSDK
     /// A Function with a single command
     /// </summary>
     [DataContract(Name = "Function")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class Function : OpenAPIGenBaseModel, IEquatable<Function>, IValidatableObject
     {
         /// <summary>
@@ -53,7 +51,7 @@ namespace QueenbeeSDK
         public Function
         (
              string name, string command, // Required parameters
-            Dictionary<string, string> annotations= default, List<AnyOf<FunctionStringInput,FunctionIntegerInput,FunctionNumberInput,FunctionBooleanInput,FunctionFolderInput,FunctionFileInput,FunctionPathInput,FunctionArrayInput,FunctionObjectInput>> inputs= default, List<AnyOf<FunctionStringOutput,FunctionIntegerOutput,FunctionNumberOutput,FunctionBooleanOutput,FunctionFolderOutput,FunctionFileOutput,FunctionPathOutput,FunctionArrayOutput,FunctionObjectOutput>> outputs= default, string description= default // Optional parameters
+            Dictionary<string, string> annotations= default, List<AnyOf<FunctionStringInput,FunctionIntegerInput,FunctionNumberInput,FunctionBooleanInput,FunctionFolderInput,FunctionFileInput,FunctionPathInput,FunctionArrayInput,FunctionJSONObjectInput>> inputs= default, List<AnyOf<FunctionStringOutput,FunctionIntegerOutput,FunctionNumberOutput,FunctionBooleanOutput,FunctionFolderOutput,FunctionFileOutput,FunctionPathOutput,FunctionArrayOutput,FunctionJSONObjectOutput>> outputs= default, string description= default // Optional parameters
         ) : base()// BaseClass
         {
             // to ensure "name" is required (not null)
@@ -74,42 +72,36 @@ namespace QueenbeeSDK
         /// </summary>
         /// <value>Function name. Must be unique within an operator.</value>
         [DataMember(Name = "name", IsRequired = true, EmitDefaultValue = false)]
-        
         public string Name { get; set; } 
         /// <summary>
         /// Full shell command for this function. Each function accepts only one command. The command will be executed as a shell command in operator. For running several commands after each other use &amp;&amp; between the commands or pipe data from one to another using |
         /// </summary>
         /// <value>Full shell command for this function. Each function accepts only one command. The command will be executed as a shell command in operator. For running several commands after each other use &amp;&amp; between the commands or pipe data from one to another using |</value>
         [DataMember(Name = "command", IsRequired = true, EmitDefaultValue = false)]
-        
         public string Command { get; set; } 
         /// <summary>
         /// An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.
         /// </summary>
         /// <value>An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.</value>
         [DataMember(Name = "annotations", EmitDefaultValue = false)]
-        
         public Dictionary<string, string> Annotations { get; set; } 
         /// <summary>
         /// Input arguments for this function.
         /// </summary>
         /// <value>Input arguments for this function.</value>
         [DataMember(Name = "inputs", EmitDefaultValue = false)]
-        
-        public List<AnyOf<FunctionStringInput,FunctionIntegerInput,FunctionNumberInput,FunctionBooleanInput,FunctionFolderInput,FunctionFileInput,FunctionPathInput,FunctionArrayInput,FunctionObjectInput>> Inputs { get; set; } 
+        public List<AnyOf<FunctionStringInput,FunctionIntegerInput,FunctionNumberInput,FunctionBooleanInput,FunctionFolderInput,FunctionFileInput,FunctionPathInput,FunctionArrayInput,FunctionJSONObjectInput>> Inputs { get; set; } 
         /// <summary>
         /// List of output arguments.
         /// </summary>
         /// <value>List of output arguments.</value>
         [DataMember(Name = "outputs", EmitDefaultValue = false)]
-        
-        public List<AnyOf<FunctionStringOutput,FunctionIntegerOutput,FunctionNumberOutput,FunctionBooleanOutput,FunctionFolderOutput,FunctionFileOutput,FunctionPathOutput,FunctionArrayOutput,FunctionObjectOutput>> Outputs { get; set; } 
+        public List<AnyOf<FunctionStringOutput,FunctionIntegerOutput,FunctionNumberOutput,FunctionBooleanOutput,FunctionFolderOutput,FunctionFileOutput,FunctionPathOutput,FunctionArrayOutput,FunctionJSONObjectOutput>> Outputs { get; set; } 
         /// <summary>
         /// Function description. A short human readable description for this function.
         /// </summary>
         /// <value>Function description. A short human readable description for this function.</value>
         [DataMember(Name = "description", EmitDefaultValue = false)]
-        
         public string Description { get; set; } 
 
         /// <summary>

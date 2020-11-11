@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace QueenbeeSDK
     /// Loop configuration for the task.  This will run the template provided multiple times and in parallel relative to an input or task parameter which should be a list.
     /// </summary>
     [DataContract(Name = "DAGTaskLoop")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class DAGTaskLoop : OpenAPIGenBaseModel, IEquatable<DAGTaskLoop>, IValidatableObject
     {
         /// <summary>
@@ -39,7 +37,7 @@ namespace QueenbeeSDK
         public DAGTaskLoop
         (
              // Required parameters
-            Dictionary<string, string> annotations= default, AnyOf<InputReference,TaskReference,ValueListReference> from= default // Optional parameters
+            Dictionary<string, string> annotations= default, AnyOf<InputReference,TaskReference,ValueListReference> from= default// Optional parameters
         ) : base()// BaseClass
         {
             this.Annotations = annotations;
@@ -54,14 +52,12 @@ namespace QueenbeeSDK
         /// </summary>
         /// <value>An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.</value>
         [DataMember(Name = "annotations", EmitDefaultValue = false)]
-        
         public Dictionary<string, string> Annotations { get; set; } 
         /// <summary>
         /// The task or DAG parameter to loop over (must be iterable).
         /// </summary>
         /// <value>The task or DAG parameter to loop over (must be iterable).</value>
         [DataMember(Name = "from", EmitDefaultValue = false)]
-        
         public AnyOf<InputReference,TaskReference,ValueListReference> From { get; set; } 
 
         /// <summary>
@@ -150,6 +146,11 @@ namespace QueenbeeSDK
                 return false;
             return base.Equals(input) && 
                 (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
+                ) && base.Equals(input) && 
+                (
                     this.Annotations == input.Annotations ||
                     this.Annotations != null &&
                     input.Annotations != null &&
@@ -159,11 +160,6 @@ namespace QueenbeeSDK
                     this.From == input.From ||
                     (this.From != null &&
                     this.From.Equals(input.From))
-                ) && base.Equals(input) && 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
                 );
         }
 
@@ -176,12 +172,12 @@ namespace QueenbeeSDK
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Annotations != null)
                     hashCode = hashCode * 59 + this.Annotations.GetHashCode();
                 if (this.From != null)
                     hashCode = hashCode * 59 + this.From.GetHashCode();
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;
             }
         }

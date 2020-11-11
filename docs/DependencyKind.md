@@ -1,5 +1,5 @@
 
-# QueenbeeSDK.Model.DependencyType
+# QueenbeeSDK.Model.DependencyKind
 
 ## Properties
 
