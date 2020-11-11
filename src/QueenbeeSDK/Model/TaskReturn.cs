@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace QueenbeeSDK
     /// A Task return output that exposes the values from a function or a DAG.
     /// </summary>
     [DataContract(Name = "TaskReturn")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class TaskReturn : GenericOutput, IEquatable<TaskReturn>, IValidatableObject
     {
         /// <summary>

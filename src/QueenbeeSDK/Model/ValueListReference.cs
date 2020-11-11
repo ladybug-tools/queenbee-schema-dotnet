@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace QueenbeeSDK
     /// A reference to a fixed value.
     /// </summary>
     [DataContract(Name = "ValueListReference")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class ValueListReference : BaseReference, IEquatable<ValueListReference>, IValidatableObject
     {
         /// <summary>
@@ -64,7 +62,6 @@ namespace QueenbeeSDK
         /// </summary>
         /// <value>A fixed value for this reference.</value>
         [DataMember(Name = "value", IsRequired = true, EmitDefaultValue = false)]
-        
         public List<object> Value { get; set; } 
 
         /// <summary>

@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace QueenbeeSDK
     /// Operator Configuration to run on a desktop.
     /// </summary>
     [DataContract(Name = "LocalConfig")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class LocalConfig : OpenAPIGenBaseModel, IEquatable<LocalConfig>, IValidatableObject
     {
         /// <summary>
@@ -38,7 +36,7 @@ namespace QueenbeeSDK
         public LocalConfig
         (
              // Required parameters
-            Dictionary<string, string> annotations= default // Optional parameters
+            Dictionary<string, string> annotations= default// Optional parameters
         ) : base()// BaseClass
         {
             this.Annotations = annotations;
@@ -52,7 +50,6 @@ namespace QueenbeeSDK
         /// </summary>
         /// <value>An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.</value>
         [DataMember(Name = "annotations", EmitDefaultValue = false)]
-        
         public Dictionary<string, string> Annotations { get; set; } 
 
         /// <summary>
@@ -140,15 +137,15 @@ namespace QueenbeeSDK
                 return false;
             return base.Equals(input) && 
                 (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
+                ) && base.Equals(input) && 
+                (
                     this.Annotations == input.Annotations ||
                     this.Annotations != null &&
                     input.Annotations != null &&
                     this.Annotations.SequenceEqual(input.Annotations)
-                ) && base.Equals(input) && 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
                 );
         }
 
@@ -161,10 +158,10 @@ namespace QueenbeeSDK
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                if (this.Annotations != null)
-                    hashCode = hashCode * 59 + this.Annotations.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
+                if (this.Annotations != null)
+                    hashCode = hashCode * 59 + this.Annotations.GetHashCode();
                 return hashCode;
             }
         }
@@ -180,7 +177,7 @@ namespace QueenbeeSDK
 
             
             // Type (string) pattern
-            Regex regexType = new Regex(@"^LocalConfig$", RegexOptions.CultureInvariant);
+            Regex regexType = new Regex(@"^LocalConfig", RegexOptions.CultureInvariant);
             if (false == regexType.Match(this.Type).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });

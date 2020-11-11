@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,11 +27,6 @@ namespace QueenbeeSDK
     /// An input reference.
     /// </summary>
     [DataContract(Name = "_InputReferenceBase")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
-    [JsonSubtypes.KnownSubType(typeof(InputFileReference), "InputFileReference")]
-    [JsonSubtypes.KnownSubType(typeof(InputPathReference), "InputPathReference")]
-    [JsonSubtypes.KnownSubType(typeof(InputReference), "InputReference")]
-    [JsonSubtypes.KnownSubType(typeof(InputFolderReference), "InputFolderReference")]
     public partial class InputReferenceBase : BaseReference, IEquatable<InputReferenceBase>, IValidatableObject
     {
         /// <summary>
@@ -68,7 +62,6 @@ namespace QueenbeeSDK
         /// </summary>
         /// <value>The name of the DAG input variable</value>
         [DataMember(Name = "variable", IsRequired = true, EmitDefaultValue = false)]
-        
         public string Variable { get; set; } 
 
         /// <summary>

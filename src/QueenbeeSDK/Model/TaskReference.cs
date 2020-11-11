@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace QueenbeeSDK
     /// A Task reference for parameters other than files or folders.
     /// </summary>
     [DataContract(Name = "TaskReference")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class TaskReference : TaskReferenceBase, IEquatable<TaskReference>, IValidatableObject
     {
         /// <summary>

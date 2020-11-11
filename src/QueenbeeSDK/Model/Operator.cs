@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace QueenbeeSDK
     /// A Queenbee Operator.  An Operator contains runtime configuration for a Command Line Interface (CLI) and a list of functions that can be executed using this CLI tool.
     /// </summary>
     [DataContract(Name = "Operator")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class Operator : OpenAPIGenBaseModel, IEquatable<Operator>, IValidatableObject
     {
         /// <summary>
@@ -50,8 +48,8 @@ namespace QueenbeeSDK
         /// <param name="annotations">An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries..</param>
         public Operator
         (
-             MetaData metadata, Config config, List<Function> functions, // Required parameters
-            Dictionary<string, string> annotations= default // Optional parameters
+             MetaData metadata, OperatorConfig config, List<Function> functions, // Required parameters
+            Dictionary<string, string> annotations= default// Optional parameters
         ) : base()// BaseClass
         {
             // to ensure "metadata" is required (not null)
@@ -71,28 +69,24 @@ namespace QueenbeeSDK
         /// </summary>
         /// <value>The Operator metadata information</value>
         [DataMember(Name = "metadata", IsRequired = true, EmitDefaultValue = false)]
-        
         public MetaData Metadata { get; set; } 
         /// <summary>
         /// The configuration information to run this operator
         /// </summary>
         /// <value>The configuration information to run this operator</value>
         [DataMember(Name = "config", IsRequired = true, EmitDefaultValue = false)]
-        
-        public Config Config { get; set; } 
+        public OperatorConfig Config { get; set; } 
         /// <summary>
         /// List of Operator functions
         /// </summary>
         /// <value>List of Operator functions</value>
         [DataMember(Name = "functions", IsRequired = true, EmitDefaultValue = false)]
-        
         public List<Function> Functions { get; set; } 
         /// <summary>
         /// An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.
         /// </summary>
         /// <value>An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.</value>
         [DataMember(Name = "annotations", EmitDefaultValue = false)]
-        
         public Dictionary<string, string> Annotations { get; set; } 
 
         /// <summary>
@@ -199,15 +193,15 @@ namespace QueenbeeSDK
                     this.Functions.SequenceEqual(input.Functions)
                 ) && base.Equals(input) && 
                 (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
+                ) && base.Equals(input) && 
+                (
                     this.Annotations == input.Annotations ||
                     this.Annotations != null &&
                     input.Annotations != null &&
                     this.Annotations.SequenceEqual(input.Annotations)
-                ) && base.Equals(input) && 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
                 );
         }
 
@@ -226,10 +220,10 @@ namespace QueenbeeSDK
                     hashCode = hashCode * 59 + this.Config.GetHashCode();
                 if (this.Functions != null)
                     hashCode = hashCode * 59 + this.Functions.GetHashCode();
-                if (this.Annotations != null)
-                    hashCode = hashCode * 59 + this.Annotations.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
+                if (this.Annotations != null)
+                    hashCode = hashCode * 59 + this.Annotations.GetHashCode();
                 return hashCode;
             }
         }
@@ -245,7 +239,7 @@ namespace QueenbeeSDK
 
             
             // Type (string) pattern
-            Regex regexType = new Regex(@"^Operator$", RegexOptions.CultureInvariant);
+            Regex regexType = new Regex(@"^Operator", RegexOptions.CultureInvariant);
             if (false == regexType.Match(this.Type).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });

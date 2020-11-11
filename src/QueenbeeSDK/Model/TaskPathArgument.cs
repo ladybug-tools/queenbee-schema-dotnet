@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace QueenbeeSDK
     /// BaseModel with functionality to return the object as a yaml string      
     /// </summary>
     [DataContract(Name = "TaskPathArgument")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class TaskPathArgument : OpenAPIGenBaseModel, IEquatable<TaskPathArgument>, IValidatableObject
     {
         /// <summary>
@@ -70,28 +68,24 @@ namespace QueenbeeSDK
         /// </summary>
         /// <value>Argument name. The name must match one of the input names from Task&#39;s template which can be a function or DAG.</value>
         [DataMember(Name = "name", IsRequired = true, EmitDefaultValue = false)]
-        
         public string Name { get; set; } 
         /// <summary>
         /// A reference to a DAG input, a DAG output or another task output. You can also use the ValueReference type to hard-code an input value.
         /// </summary>
         /// <value>A reference to a DAG input, a DAG output or another task output. You can also use the ValueReference type to hard-code an input value.</value>
         [DataMember(Name = "from", IsRequired = true, EmitDefaultValue = false)]
-        
         public AnyOf<InputFileReference,InputFolderReference,InputPathReference,TaskFileReference,TaskFolderReference,TaskPathReference,ValueFileReference,ValueFolderReference> From { get; set; } 
         /// <summary>
         /// An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.
         /// </summary>
         /// <value>An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.</value>
         [DataMember(Name = "annotations", EmitDefaultValue = false)]
-        
         public Dictionary<string, string> Annotations { get; set; } 
         /// <summary>
         /// A sub_path inside the path that is provided in the &#x60;&#x60;from&#x60;&#x60; field. Use sub_path to only access part of the Path that is needed instead of copying all the files and folders inside the path.
         /// </summary>
         /// <value>A sub_path inside the path that is provided in the &#x60;&#x60;from&#x60;&#x60; field. Use sub_path to only access part of the Path that is needed instead of copying all the files and folders inside the path.</value>
         [DataMember(Name = "sub_path", EmitDefaultValue = false)]
-        
         public string SubPath { get; set; } 
 
         /// <summary>
@@ -192,15 +186,15 @@ namespace QueenbeeSDK
                     this.From.Equals(input.From))
                 ) && base.Equals(input) && 
                 (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
+                ) && base.Equals(input) && 
+                (
                     this.Annotations == input.Annotations ||
                     this.Annotations != null &&
                     input.Annotations != null &&
                     this.Annotations.SequenceEqual(input.Annotations)
-                ) && base.Equals(input) && 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
                 ) && base.Equals(input) && 
                 (
                     this.SubPath == input.SubPath ||
@@ -222,10 +216,10 @@ namespace QueenbeeSDK
                     hashCode = hashCode * 59 + this.Name.GetHashCode();
                 if (this.From != null)
                     hashCode = hashCode * 59 + this.From.GetHashCode();
-                if (this.Annotations != null)
-                    hashCode = hashCode * 59 + this.Annotations.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
+                if (this.Annotations != null)
+                    hashCode = hashCode * 59 + this.Annotations.GetHashCode();
                 if (this.SubPath != null)
                     hashCode = hashCode * 59 + this.SubPath.GetHashCode();
                 return hashCode;

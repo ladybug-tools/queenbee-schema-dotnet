@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,8 +27,6 @@ namespace QueenbeeSDK
     /// A reference to a fixed file.
     /// </summary>
     [DataContract(Name = "ValueFileReference")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
-    [JsonSubtypes.KnownSubType(typeof(ValueFolderReference), "ValueFolderReference")]
     public partial class ValueFileReference : BaseReference, IEquatable<ValueFileReference>, IValidatableObject
     {
         /// <summary>
@@ -65,7 +62,6 @@ namespace QueenbeeSDK
         /// </summary>
         /// <value>A fixed value for this reference.</value>
         [DataMember(Name = "path", IsRequired = true, EmitDefaultValue = false)]
-        
         public string Path { get; set; } 
 
         /// <summary>

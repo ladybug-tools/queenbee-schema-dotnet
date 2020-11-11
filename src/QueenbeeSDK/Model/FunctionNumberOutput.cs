@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace QueenbeeSDK
     /// Function number output.  This output loads the content from a file as a floating number.
     /// </summary>
     [DataContract(Name = "FunctionNumberOutput")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class FunctionNumberOutput : FunctionStringOutput, IEquatable<FunctionNumberOutput>, IValidatableObject
     {
         /// <summary>

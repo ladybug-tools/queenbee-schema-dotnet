@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace QueenbeeSDK
     /// DAG generic output.  In most cases, you should not be using the generic output unless you need a dynamic output that changes its type in different platforms because of returning different objects in handler.
     /// </summary>
     [DataContract(Name = "DAGGenericOutput")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class DAGGenericOutput : FromOutput, IEquatable<DAGGenericOutput>, IValidatableObject
     {
         /// <summary>
@@ -52,7 +50,7 @@ namespace QueenbeeSDK
         public DAGGenericOutput
         (
             string name, object from, // Required parameters
-            Dictionary<string, string> annotations= default, string description= default, List<AnyOf<DAGGenericOutputAlias,DAGStringOutputAlias,DAGIntegerOutputAlias,DAGNumberOutputAlias,DAGBooleanOutputAlias,DAGFolderOutputAlias,DAGFileOutputAlias,DAGPathOutputAlias,DAGArrayOutputAlias,DAGObjectOutputAlias>> alias= default // Optional parameters
+            Dictionary<string, string> annotations= default, string description= default, List<AnyOf<DAGGenericOutputAlias,DAGStringOutputAlias,DAGIntegerOutputAlias,DAGNumberOutputAlias,DAGBooleanOutputAlias,DAGFolderOutputAlias,DAGFileOutputAlias,DAGPathOutputAlias,DAGArrayOutputAlias,DAGJSONObjectOutputAlias>> alias= default // Optional parameters
         ) : base(name: name, annotations: annotations, description: description, from: from)// BaseClass
         {
             this.Alias = alias;
@@ -66,8 +64,7 @@ namespace QueenbeeSDK
         /// </summary>
         /// <value>A list of additional processes for loading this output on different platforms.</value>
         [DataMember(Name = "alias", EmitDefaultValue = false)]
-        
-        public List<AnyOf<DAGGenericOutputAlias,DAGStringOutputAlias,DAGIntegerOutputAlias,DAGNumberOutputAlias,DAGBooleanOutputAlias,DAGFolderOutputAlias,DAGFileOutputAlias,DAGPathOutputAlias,DAGArrayOutputAlias,DAGObjectOutputAlias>> Alias { get; set; } 
+        public List<AnyOf<DAGGenericOutputAlias,DAGStringOutputAlias,DAGIntegerOutputAlias,DAGNumberOutputAlias,DAGBooleanOutputAlias,DAGFolderOutputAlias,DAGFileOutputAlias,DAGPathOutputAlias,DAGArrayOutputAlias,DAGJSONObjectOutputAlias>> Alias { get; set; } 
 
         /// <summary>
         /// Returns the string presentation of the object

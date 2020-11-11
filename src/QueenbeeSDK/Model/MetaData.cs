@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace QueenbeeSDK
     /// Package metadata information.
     /// </summary>
     [DataContract(Name = "MetaData")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class MetaData : OpenAPIGenBaseModel, IEquatable<MetaData>, IValidatableObject
     {
         /// <summary>
@@ -59,7 +57,7 @@ namespace QueenbeeSDK
         public MetaData
         (
              string name, string tag, // Required parameters
-            Dictionary<string, string> annotations= default, string appVersion= default, List<string> keywords= default, List<Maintainer> maintainers= default, string home= default, List<string> sources= default, string icon= default, bool deprecated= default, string description= default, License license= default // Optional parameters
+            Dictionary<string, string> annotations= default, string appVersion= default, List<string> keywords= default, List<Maintainer> maintainers= default, string home= default, List<string> sources= default, string icon= default, bool deprecated= default, string description= default, License license= default// Optional parameters
         ) : base()// BaseClass
         {
             // to ensure "name" is required (not null)
@@ -86,84 +84,72 @@ namespace QueenbeeSDK
         /// </summary>
         /// <value>Package name. Make it descriptive and helpful ;)</value>
         [DataMember(Name = "name", IsRequired = true, EmitDefaultValue = false)]
-        
         public string Name { get; set; } 
         /// <summary>
         /// The tag of the package
         /// </summary>
         /// <value>The tag of the package</value>
         [DataMember(Name = "tag", IsRequired = true, EmitDefaultValue = false)]
-        
         public string Tag { get; set; } 
         /// <summary>
         /// An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.
         /// </summary>
         /// <value>An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.</value>
         [DataMember(Name = "annotations", EmitDefaultValue = false)]
-        
         public Dictionary<string, string> Annotations { get; set; } 
         /// <summary>
         /// The version of the application code underlying the manifest
         /// </summary>
         /// <value>The version of the application code underlying the manifest</value>
         [DataMember(Name = "app_version", EmitDefaultValue = false)]
-        
         public string AppVersion { get; set; } 
         /// <summary>
         /// A list of keywords to search the package by
         /// </summary>
         /// <value>A list of keywords to search the package by</value>
         [DataMember(Name = "keywords", EmitDefaultValue = false)]
-        
         public List<string> Keywords { get; set; } 
         /// <summary>
         /// A list of maintainers for the package
         /// </summary>
         /// <value>A list of maintainers for the package</value>
         [DataMember(Name = "maintainers", EmitDefaultValue = false)]
-        
         public List<Maintainer> Maintainers { get; set; } 
         /// <summary>
         /// The URL of this package&#39;s home page
         /// </summary>
         /// <value>The URL of this package&#39;s home page</value>
         [DataMember(Name = "home", EmitDefaultValue = false)]
-        
         public string Home { get; set; } 
         /// <summary>
         /// A list of URLs to source code for this project
         /// </summary>
         /// <value>A list of URLs to source code for this project</value>
         [DataMember(Name = "sources", EmitDefaultValue = false)]
-        
         public List<string> Sources { get; set; } 
         /// <summary>
         /// A URL to an SVG or PNG image to be used as an icon
         /// </summary>
         /// <value>A URL to an SVG or PNG image to be used as an icon</value>
         [DataMember(Name = "icon", EmitDefaultValue = false)]
-        
         public string Icon { get; set; } 
         /// <summary>
         /// Whether this package is deprecated
         /// </summary>
         /// <value>Whether this package is deprecated</value>
         [DataMember(Name = "deprecated", EmitDefaultValue = false)]
-        
         public bool Deprecated { get; set; } 
         /// <summary>
         /// A description of what this package does
         /// </summary>
         /// <value>A description of what this package does</value>
         [DataMember(Name = "description", EmitDefaultValue = false)]
-        
         public string Description { get; set; } 
         /// <summary>
         /// The license information.
         /// </summary>
         /// <value>The license information.</value>
         [DataMember(Name = "license", EmitDefaultValue = false)]
-        
         public License License { get; set; } 
 
         /// <summary>
@@ -272,6 +258,11 @@ namespace QueenbeeSDK
                     this.Tag.Equals(input.Tag))
                 ) && base.Equals(input) && 
                 (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
+                ) && base.Equals(input) && 
+                (
                     this.Annotations == input.Annotations ||
                     this.Annotations != null &&
                     input.Annotations != null &&
@@ -324,11 +315,6 @@ namespace QueenbeeSDK
                     this.License == input.License ||
                     (this.License != null &&
                     this.License.Equals(input.License))
-                ) && base.Equals(input) && 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
                 );
         }
 
@@ -345,6 +331,8 @@ namespace QueenbeeSDK
                     hashCode = hashCode * 59 + this.Name.GetHashCode();
                 if (this.Tag != null)
                     hashCode = hashCode * 59 + this.Tag.GetHashCode();
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Annotations != null)
                     hashCode = hashCode * 59 + this.Annotations.GetHashCode();
                 if (this.AppVersion != null)
@@ -365,8 +353,6 @@ namespace QueenbeeSDK
                     hashCode = hashCode * 59 + this.Description.GetHashCode();
                 if (this.License != null)
                     hashCode = hashCode * 59 + this.License.GetHashCode();
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;
             }
         }

@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace QueenbeeSDK
     /// DAG alias path output.
     /// </summary>
     [DataContract(Name = "DAGPathOutputAlias")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class DAGPathOutputAlias : GenericOutput, IEquatable<DAGPathOutputAlias>, IValidatableObject
     {
         /// <summary>
@@ -72,21 +70,18 @@ namespace QueenbeeSDK
         /// </summary>
         /// <value>Reference to a file, folder or a task output. Task output must either be a file or a folder.</value>
         [DataMember(Name = "from", IsRequired = true, EmitDefaultValue = false)]
-        
         public AnyOf<TaskReference,FileReference,FolderReference> From { get; set; } 
         /// <summary>
         /// Name of the client platform (e.g. Grasshopper, Revit, etc). The value can be any strings as long as it has been agreed between client-side developer and author of the recipe.
         /// </summary>
         /// <value>Name of the client platform (e.g. Grasshopper, Revit, etc). The value can be any strings as long as it has been agreed between client-side developer and author of the recipe.</value>
         [DataMember(Name = "platform", IsRequired = true, EmitDefaultValue = false)]
-        
         public List<string> Platform { get; set; } 
         /// <summary>
         /// List of process actions to process the input or output value.
         /// </summary>
         /// <value>List of process actions to process the input or output value.</value>
         [DataMember(Name = "handler", IsRequired = true, EmitDefaultValue = false)]
-        
         public List<IOAliasHandler> Handler { get; set; } 
 
         /// <summary>

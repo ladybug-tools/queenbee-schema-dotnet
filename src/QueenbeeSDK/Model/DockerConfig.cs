@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace QueenbeeSDK
     /// Operator Configuration to run in a Docker container
     /// </summary>
     [DataContract(Name = "DockerConfig")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class DockerConfig : OpenAPIGenBaseModel, IEquatable<DockerConfig>, IValidatableObject
     {
         /// <summary>
@@ -51,7 +49,7 @@ namespace QueenbeeSDK
         public DockerConfig
         (
              string image, string workdir, // Required parameters
-            Dictionary<string, string> annotations= default, string registry= default // Optional parameters
+            Dictionary<string, string> annotations= default, string registry= default// Optional parameters
         ) : base()// BaseClass
         {
             // to ensure "image" is required (not null)
@@ -70,28 +68,24 @@ namespace QueenbeeSDK
         /// </summary>
         /// <value>Docker image name. Must include tag.</value>
         [DataMember(Name = "image", IsRequired = true, EmitDefaultValue = false)]
-        
         public string Image { get; set; } 
         /// <summary>
         /// The working directory the entrypoint command of the container runsin. This is used to determine where to load artifacts when running in the container.
         /// </summary>
         /// <value>The working directory the entrypoint command of the container runsin. This is used to determine where to load artifacts when running in the container.</value>
         [DataMember(Name = "workdir", IsRequired = true, EmitDefaultValue = false)]
-        
         public string Workdir { get; set; } 
         /// <summary>
         /// An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.
         /// </summary>
         /// <value>An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.</value>
         [DataMember(Name = "annotations", EmitDefaultValue = false)]
-        
         public Dictionary<string, string> Annotations { get; set; } 
         /// <summary>
         /// The container registry URLs that this container should be pulled from. Will default to Dockerhub if none is specified.
         /// </summary>
         /// <value>The container registry URLs that this container should be pulled from. Will default to Dockerhub if none is specified.</value>
         [DataMember(Name = "registry", EmitDefaultValue = false)]
-        
         public string Registry { get; set; } 
 
         /// <summary>
@@ -192,6 +186,11 @@ namespace QueenbeeSDK
                     this.Workdir.Equals(input.Workdir))
                 ) && base.Equals(input) && 
                 (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
+                ) && base.Equals(input) && 
+                (
                     this.Annotations == input.Annotations ||
                     this.Annotations != null &&
                     input.Annotations != null &&
@@ -201,11 +200,6 @@ namespace QueenbeeSDK
                     this.Registry == input.Registry ||
                     (this.Registry != null &&
                     this.Registry.Equals(input.Registry))
-                ) && base.Equals(input) && 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
                 );
         }
 
@@ -222,12 +216,12 @@ namespace QueenbeeSDK
                     hashCode = hashCode * 59 + this.Image.GetHashCode();
                 if (this.Workdir != null)
                     hashCode = hashCode * 59 + this.Workdir.GetHashCode();
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Annotations != null)
                     hashCode = hashCode * 59 + this.Annotations.GetHashCode();
                 if (this.Registry != null)
                     hashCode = hashCode * 59 + this.Registry.GetHashCode();
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;
             }
         }
@@ -243,7 +237,7 @@ namespace QueenbeeSDK
 
             
             // Type (string) pattern
-            Regex regexType = new Regex(@"^DockerConfig$", RegexOptions.CultureInvariant);
+            Regex regexType = new Regex(@"^DockerConfig", RegexOptions.CultureInvariant);
             if (false == regexType.Match(this.Type).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });

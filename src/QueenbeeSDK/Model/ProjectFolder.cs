@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace QueenbeeSDK
     /// Project Folder Source  This is the path to a folder where files and folders can be sourced. In the context of a desktop run Workflow this folder will correspond to a local folder. In the context of a workflow run on Pollination this folder will correspond to a Project scoped folder.
     /// </summary>
     [DataContract(Name = "ProjectFolder")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class ProjectFolder : ArtifactSource, IEquatable<ProjectFolder>, IValidatableObject
     {
         /// <summary>
@@ -39,7 +37,7 @@ namespace QueenbeeSDK
         public ProjectFolder
         (
              // Required parameters
-            Dictionary<string, string> annotations= default, string path= default// Optional parameters
+            Dictionary<string, string> annotations= default, string path= default // Optional parameters
         ) : base(annotations: annotations)// BaseClass
         {
             this.Path = path;
@@ -53,7 +51,6 @@ namespace QueenbeeSDK
         /// </summary>
         /// <value>The path to a folder where files and folders can be sourced. For a local filesystem this can be \&quot;C:\\Users\\me\\simulations\\test\&quot;.</value>
         [DataMember(Name = "path", EmitDefaultValue = false)]
-        
         public string Path { get; set; } 
 
         /// <summary>
@@ -142,14 +139,14 @@ namespace QueenbeeSDK
                 return false;
             return base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
-                ) && base.Equals(input) && 
-                (
                     this.Path == input.Path ||
                     (this.Path != null &&
                     this.Path.Equals(input.Path))
+                ) && base.Equals(input) && 
+                (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
                 );
         }
 
@@ -162,10 +159,10 @@ namespace QueenbeeSDK
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Path != null)
                     hashCode = hashCode * 59 + this.Path.GetHashCode();
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;
             }
         }

@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace QueenbeeSDK
     /// An Item Reference.
     /// </summary>
     [DataContract(Name = "ItemReference")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class ItemReference : BaseReference, IEquatable<ItemReference>, IValidatableObject
     {
         /// <summary>
@@ -53,7 +51,6 @@ namespace QueenbeeSDK
         /// </summary>
         /// <value>The name of the looped item variable (use dot notation for nested json values)</value>
         [DataMember(Name = "variable", EmitDefaultValue = false)]
-        
         public string Variable { get; set; } 
 
         /// <summary>

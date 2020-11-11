@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace QueenbeeSDK
     /// An input parameter reference which is not a file or a folder.  For a file or a folder use InputFileReference, InputFolderReference or InputPathReference instead.
     /// </summary>
     [DataContract(Name = "InputReference")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class InputReference : InputReferenceBase, IEquatable<InputReference>, IValidatableObject
     {
         /// <summary>

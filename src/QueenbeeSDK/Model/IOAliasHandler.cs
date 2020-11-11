@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace QueenbeeSDK
     /// Input and output alias handler object.
     /// </summary>
     [DataContract(Name = "IOAliasHandler")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class IOAliasHandler : OpenAPIGenBaseModel, IEquatable<IOAliasHandler>, IValidatableObject
     {
         /// <summary>
@@ -51,7 +49,7 @@ namespace QueenbeeSDK
         public IOAliasHandler
         (
              string language, string module, string function, // Required parameters
-            Dictionary<string, string> annotations= default // Optional parameters
+            Dictionary<string, string> annotations= default// Optional parameters
         ) : base()// BaseClass
         {
             // to ensure "language" is required (not null)
@@ -71,28 +69,24 @@ namespace QueenbeeSDK
         /// </summary>
         /// <value>Declare the language (e.g. python, csharp, etc.). This option allows the recipe to be flexible on handling different programming languages.</value>
         [DataMember(Name = "language", IsRequired = true, EmitDefaultValue = false)]
-        
         public string Language { get; set; } 
         /// <summary>
         /// Target module or namespace to load the alias function.
         /// </summary>
         /// <value>Target module or namespace to load the alias function.</value>
         [DataMember(Name = "module", IsRequired = true, EmitDefaultValue = false)]
-        
         public string Module { get; set; } 
         /// <summary>
         /// Name of the function. The input value will be passed to this function as the first argument.
         /// </summary>
         /// <value>Name of the function. The input value will be passed to this function as the first argument.</value>
         [DataMember(Name = "function", IsRequired = true, EmitDefaultValue = false)]
-        
         public string Function { get; set; } 
         /// <summary>
         /// An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.
         /// </summary>
         /// <value>An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.</value>
         [DataMember(Name = "annotations", EmitDefaultValue = false)]
-        
         public Dictionary<string, string> Annotations { get; set; } 
 
         /// <summary>
@@ -198,15 +192,15 @@ namespace QueenbeeSDK
                     this.Function.Equals(input.Function))
                 ) && base.Equals(input) && 
                 (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
+                ) && base.Equals(input) && 
+                (
                     this.Annotations == input.Annotations ||
                     this.Annotations != null &&
                     input.Annotations != null &&
                     this.Annotations.SequenceEqual(input.Annotations)
-                ) && base.Equals(input) && 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
                 );
         }
 
@@ -225,10 +219,10 @@ namespace QueenbeeSDK
                     hashCode = hashCode * 59 + this.Module.GetHashCode();
                 if (this.Function != null)
                     hashCode = hashCode * 59 + this.Function.GetHashCode();
-                if (this.Annotations != null)
-                    hashCode = hashCode * 59 + this.Annotations.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
+                if (this.Annotations != null)
+                    hashCode = hashCode * 59 + this.Annotations.GetHashCode();
                 return hashCode;
             }
         }

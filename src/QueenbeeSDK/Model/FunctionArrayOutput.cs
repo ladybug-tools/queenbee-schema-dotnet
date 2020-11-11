@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace QueenbeeSDK
     /// Function array output.  This output loads the content from a JSON file which must be a JSON Array.
     /// </summary>
     [DataContract(Name = "FunctionArrayOutput")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class FunctionArrayOutput : FunctionStringOutput, IEquatable<FunctionArrayOutput>, IValidatableObject
     {
         /// <summary>

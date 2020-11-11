@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace QueenbeeSDK
     /// Maintainer information
     /// </summary>
     [DataContract(Name = "Maintainer")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class Maintainer : OpenAPIGenBaseModel, IEquatable<Maintainer>, IValidatableObject
     {
         /// <summary>
@@ -50,7 +48,7 @@ namespace QueenbeeSDK
         public Maintainer
         (
              string name, // Required parameters
-            Dictionary<string, string> annotations= default, string email= default // Optional parameters
+            Dictionary<string, string> annotations= default, string email= default// Optional parameters
         ) : base()// BaseClass
         {
             // to ensure "name" is required (not null)
@@ -67,21 +65,18 @@ namespace QueenbeeSDK
         /// </summary>
         /// <value>The name of the author/maintainer person or organization.</value>
         [DataMember(Name = "name", IsRequired = true, EmitDefaultValue = false)]
-        
         public string Name { get; set; } 
         /// <summary>
         /// An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.
         /// </summary>
         /// <value>An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.</value>
         [DataMember(Name = "annotations", EmitDefaultValue = false)]
-        
         public Dictionary<string, string> Annotations { get; set; } 
         /// <summary>
         /// The email address of the author/maintainer person or organization.
         /// </summary>
         /// <value>The email address of the author/maintainer person or organization.</value>
         [DataMember(Name = "email", EmitDefaultValue = false)]
-        
         public string Email { get; set; } 
 
         /// <summary>
@@ -176,6 +171,11 @@ namespace QueenbeeSDK
                     this.Name.Equals(input.Name))
                 ) && base.Equals(input) && 
                 (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
+                ) && base.Equals(input) && 
+                (
                     this.Annotations == input.Annotations ||
                     this.Annotations != null &&
                     input.Annotations != null &&
@@ -185,11 +185,6 @@ namespace QueenbeeSDK
                     this.Email == input.Email ||
                     (this.Email != null &&
                     this.Email.Equals(input.Email))
-                ) && base.Equals(input) && 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
                 );
         }
 
@@ -204,12 +199,12 @@ namespace QueenbeeSDK
                 int hashCode = base.GetHashCode();
                 if (this.Name != null)
                     hashCode = hashCode * 59 + this.Name.GetHashCode();
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Annotations != null)
                     hashCode = hashCode * 59 + this.Annotations.GetHashCode();
                 if (this.Email != null)
                     hashCode = hashCode * 59 + this.Email.GetHashCode();
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;
             }
         }

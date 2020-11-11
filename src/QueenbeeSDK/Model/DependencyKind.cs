@@ -24,25 +24,25 @@ using System.ComponentModel.DataAnnotations;
 namespace QueenbeeSDK
 {
     /// <summary>
-    /// An enumeration.
+    /// Dependency kind.
     /// </summary>
-    /// <value>An enumeration.</value>
+    /// <value>Dependency kind.</value>
     
     [JsonConverter(typeof(StringEnumConverter))]
     
-    public enum DependencyType
+    public enum DependencyKind
     {
         /// <summary>
-        /// Enum Recipe for value: recipe
+        /// Enum Recipekind for value: recipe_kind
         /// </summary>
-        [EnumMember(Value = "recipe")]
-        recipe = 1,
+        [EnumMember(Value = "recipe_kind")]
+        Recipekind = 1,
 
         /// <summary>
-        /// Enum Operator for value: operator
+        /// Enum Operatorkind for value: operator_kind
         /// </summary>
-        [EnumMember(Value = "operator")]
-        _operator = 2
+        [EnumMember(Value = "operator_kind")]
+        Operatorkind = 2
 
     }
 

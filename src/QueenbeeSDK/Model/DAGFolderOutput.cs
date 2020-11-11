@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace QueenbeeSDK
     /// DAG folder output.
     /// </summary>
     [DataContract(Name = "DAGFolderOutput")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class DAGFolderOutput : GenericOutput, IEquatable<DAGFolderOutput>, IValidatableObject
     {
         /// <summary>
@@ -52,7 +50,7 @@ namespace QueenbeeSDK
         public DAGFolderOutput
         (
             string name, AnyOf<TaskReference,FolderReference> from, // Required parameters
-            Dictionary<string, string> annotations= default, string description= default, List<AnyOf<DAGGenericOutputAlias,DAGStringOutputAlias,DAGIntegerOutputAlias,DAGNumberOutputAlias,DAGBooleanOutputAlias,DAGFolderOutputAlias,DAGFileOutputAlias,DAGPathOutputAlias,DAGArrayOutputAlias,DAGObjectOutputAlias>> alias= default // Optional parameters
+            Dictionary<string, string> annotations= default, string description= default, List<AnyOf<DAGGenericOutputAlias,DAGStringOutputAlias,DAGIntegerOutputAlias,DAGNumberOutputAlias,DAGBooleanOutputAlias,DAGFolderOutputAlias,DAGFileOutputAlias,DAGPathOutputAlias,DAGArrayOutputAlias,DAGJSONObjectOutputAlias>> alias= default // Optional parameters
         ) : base(name: name, annotations: annotations, description: description)// BaseClass
         {
             // to ensure "from" is required (not null)
@@ -68,15 +66,13 @@ namespace QueenbeeSDK
         /// </summary>
         /// <value>Reference to a folder or a task output. Task output must be folder.</value>
         [DataMember(Name = "from", IsRequired = true, EmitDefaultValue = false)]
-        
         public AnyOf<TaskReference,FolderReference> From { get; set; } 
         /// <summary>
         /// A list of additional processes for loading this output on different platforms.
         /// </summary>
         /// <value>A list of additional processes for loading this output on different platforms.</value>
         [DataMember(Name = "alias", EmitDefaultValue = false)]
-        
-        public List<AnyOf<DAGGenericOutputAlias,DAGStringOutputAlias,DAGIntegerOutputAlias,DAGNumberOutputAlias,DAGBooleanOutputAlias,DAGFolderOutputAlias,DAGFileOutputAlias,DAGPathOutputAlias,DAGArrayOutputAlias,DAGObjectOutputAlias>> Alias { get; set; } 
+        public List<AnyOf<DAGGenericOutputAlias,DAGStringOutputAlias,DAGIntegerOutputAlias,DAGNumberOutputAlias,DAGBooleanOutputAlias,DAGFolderOutputAlias,DAGFileOutputAlias,DAGPathOutputAlias,DAGArrayOutputAlias,DAGJSONObjectOutputAlias>> Alias { get; set; } 
 
         /// <summary>
         /// Returns the string presentation of the object
