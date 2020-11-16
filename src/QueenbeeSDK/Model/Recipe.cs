@@ -45,7 +45,7 @@ namespace QueenbeeSDK
         /// <param name="flow">A list of tasks to create a DAG recipe. (required).</param>
         /// <param name="annotations">An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries..</param>
         /// <param name="metadata">Recipe metadata information..</param>
-        /// <param name="dependencies">A list of operators and other recipes this recipe depends on..</param>
+        /// <param name="dependencies">A list of plugins and other recipes this recipe depends on..</param>
         public Recipe
         (
              List<DAG> flow, // Required parameters
@@ -81,9 +81,9 @@ namespace QueenbeeSDK
         [DataMember(Name = "metadata", EmitDefaultValue = false)]
         public MetaData Metadata { get; set; } 
         /// <summary>
-        /// A list of operators and other recipes this recipe depends on.
+        /// A list of plugins and other recipes this recipe depends on.
         /// </summary>
-        /// <value>A list of operators and other recipes this recipe depends on.</value>
+        /// <value>A list of plugins and other recipes this recipe depends on.</value>
         [DataMember(Name = "dependencies", EmitDefaultValue = false)]
         public List<Dependency> Dependencies { get; set; } 
 

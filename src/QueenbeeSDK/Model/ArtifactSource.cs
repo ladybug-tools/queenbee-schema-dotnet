@@ -42,7 +42,7 @@ namespace QueenbeeSDK
             this.Annotations = annotations;
 
             // Set non-required readonly properties with defaultValue
-            this.Type = "BaseModel";
+            this.Type = "_ArtifactSource";
         }
 
         /// <summary>
@@ -187,7 +187,7 @@ namespace QueenbeeSDK
 
             
             // Type (string) pattern
-            Regex regexType = new Regex(@"^BaseModel$", RegexOptions.CultureInvariant);
+            Regex regexType = new Regex(@"^_ArtifactSource$", RegexOptions.CultureInvariant);
             if (false == regexType.Match(this.Type).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });

@@ -42,8 +42,8 @@ namespace QueenbeeSDK
         /// <summary>
         /// Initializes a new instance of the <see cref="Function" /> class.
         /// </summary>
-        /// <param name="name">Function name. Must be unique within an operator. (required).</param>
-        /// <param name="command">Full shell command for this function. Each function accepts only one command. The command will be executed as a shell command in operator. For running several commands after each other use &amp;&amp; between the commands or pipe data from one to another using | (required).</param>
+        /// <param name="name">Function name. Must be unique within a plugin. (required).</param>
+        /// <param name="command">Full shell command for this function. Each function accepts only one command. The command will be executed as a shell command in plugin. For running several commands after each other use &amp;&amp; between the commands or pipe data from one to another using | (required).</param>
         /// <param name="annotations">An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries..</param>
         /// <param name="inputs">Input arguments for this function..</param>
         /// <param name="outputs">List of output arguments..</param>
@@ -68,15 +68,15 @@ namespace QueenbeeSDK
         }
 
         /// <summary>
-        /// Function name. Must be unique within an operator.
+        /// Function name. Must be unique within a plugin.
         /// </summary>
-        /// <value>Function name. Must be unique within an operator.</value>
+        /// <value>Function name. Must be unique within a plugin.</value>
         [DataMember(Name = "name", IsRequired = true, EmitDefaultValue = false)]
         public string Name { get; set; } 
         /// <summary>
-        /// Full shell command for this function. Each function accepts only one command. The command will be executed as a shell command in operator. For running several commands after each other use &amp;&amp; between the commands or pipe data from one to another using |
+        /// Full shell command for this function. Each function accepts only one command. The command will be executed as a shell command in plugin. For running several commands after each other use &amp;&amp; between the commands or pipe data from one to another using |
         /// </summary>
-        /// <value>Full shell command for this function. Each function accepts only one command. The command will be executed as a shell command in operator. For running several commands after each other use &amp;&amp; between the commands or pipe data from one to another using |</value>
+        /// <value>Full shell command for this function. Each function accepts only one command. The command will be executed as a shell command in plugin. For running several commands after each other use &amp;&amp; between the commands or pipe data from one to another using |</value>
         [DataMember(Name = "command", IsRequired = true, EmitDefaultValue = false)]
         public string Command { get; set; } 
         /// <summary>

@@ -47,13 +47,14 @@ namespace QueenbeeSDK
         /// <param name="annotations">An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries..</param>
         /// <param name="description">Optional description for input..</param>
         /// <param name="_default">The default source for file if the value is not provided..</param>
+        /// <param name="required">A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided. (default to false).</param>
         /// <param name="spec">An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec..</param>
         /// <param name="alias">A list of aliases for this input in different platforms..</param>
         /// <param name="extensions">Optional list of extensions for file. The check for extension is case-insensitive..</param>
         public FunctionPathInput
         (
              string name, string path, // Required parameters
-            Dictionary<string, string> annotations= default, string description= default, AnyOf<HTTP,S3,ProjectFolder> _default= default, Object spec= default, List<AnyOf<DAGGenericInputAlias,DAGStringInputAlias,DAGIntegerInputAlias,DAGNumberInputAlias,DAGBooleanInputAlias,DAGFolderInputAlias,DAGFileInputAlias,DAGPathInputAlias,DAGArrayInputAlias,DAGJSONObjectInputAlias>> alias= default, List<string> extensions= default // Optional parameters
+            Dictionary<string, string> annotations= default, string description= default, AnyOf<HTTP,S3,ProjectFolder> _default= default, bool required = false, Object spec= default, List<AnyOf<DAGGenericInputAlias,DAGStringInputAlias,DAGIntegerInputAlias,DAGNumberInputAlias,DAGBooleanInputAlias,DAGFolderInputAlias,DAGFileInputAlias,DAGPathInputAlias,DAGArrayInputAlias,DAGJSONObjectInputAlias>> alias= default, List<string> extensions= default // Optional parameters
         ) : base()// BaseClass
         {
             // to ensure "name" is required (not null)
@@ -63,6 +64,7 @@ namespace QueenbeeSDK
             this.Annotations = annotations;
             this.Description = description;
             this.Default = _default;
+            this.Required = required;
             this.Spec = spec;
             this.Alias = alias;
             this.Extensions = extensions;
@@ -101,6 +103,12 @@ namespace QueenbeeSDK
         /// <value>The default source for file if the value is not provided.</value>
         [DataMember(Name = "default", EmitDefaultValue = false)]
         public AnyOf<HTTP,S3,ProjectFolder> Default { get; set; } 
+        /// <summary>
+        /// A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided.
+        /// </summary>
+        /// <value>A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided.</value>
+        [DataMember(Name = "required", EmitDefaultValue = true)]
+        public bool Required { get; set; }  = false;
         /// <summary>
         /// An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec.
         /// </summary>
@@ -146,6 +154,7 @@ namespace QueenbeeSDK
             sb.Append("  Annotations: ").Append(Annotations).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  Default: ").Append(Default).Append("\n");
+            sb.Append("  Required: ").Append(Required).Append("\n");
             sb.Append("  Spec: ").Append(Spec).Append("\n");
             sb.Append("  Alias: ").Append(Alias).Append("\n");
             sb.Append("  Extensions: ").Append(Extensions).Append("\n");
@@ -238,6 +247,11 @@ namespace QueenbeeSDK
                     this.Default.Equals(input.Default))
                 ) && base.Equals(input) && 
                 (
+                    this.Required == input.Required ||
+                    (this.Required != null &&
+                    this.Required.Equals(input.Required))
+                ) && base.Equals(input) && 
+                (
                     this.Spec == input.Spec ||
                     (this.Spec != null &&
                     this.Spec.Equals(input.Spec))
@@ -280,6 +294,8 @@ namespace QueenbeeSDK
                     hashCode = hashCode * 59 + this.Description.GetHashCode();
                 if (this.Default != null)
                     hashCode = hashCode * 59 + this.Default.GetHashCode();
+                if (this.Required != null)
+                    hashCode = hashCode * 59 + this.Required.GetHashCode();
                 if (this.Spec != null)
                     hashCode = hashCode * 59 + this.Spec.GetHashCode();
                 if (this.Alias != null)

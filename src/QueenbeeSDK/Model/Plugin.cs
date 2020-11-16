@@ -24,60 +24,70 @@ using System.ComponentModel.DataAnnotations;
 namespace QueenbeeSDK
 {
     /// <summary>
-    /// Operator configuration.  The config is used to schedule functions on a desktop or in other contexts (ie: Docker).
+    /// A Queenbee Plugin.  A plugin contains runtime configuration for a Command Line Interface (CLI) and a list of functions that can be executed using this CLI tool.
     /// </summary>
-    [DataContract(Name = "OperatorConfig")]
-    public partial class OperatorConfig : OpenAPIGenBaseModel, IEquatable<OperatorConfig>, IValidatableObject
+    [DataContract(Name = "Plugin")]
+    public partial class Plugin : OpenAPIGenBaseModel, IEquatable<Plugin>, IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="OperatorConfig" /> class.
+        /// Initializes a new instance of the <see cref="Plugin" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected OperatorConfig() 
+        protected Plugin() 
         { 
             // Set non-required readonly properties with defaultValue
-            this.Type = "OperatorConfig";
+            this.Type = "Plugin";
         }
         
         /// <summary>
-        /// Initializes a new instance of the <see cref="OperatorConfig" /> class.
+        /// Initializes a new instance of the <see cref="Plugin" /> class.
         /// </summary>
-        /// <param name="docker">The configuration to use this operator in a docker container (required).</param>
+        /// <param name="metadata">The Plugin metadata information (required).</param>
+        /// <param name="config">The configuration information to run this plugin (required).</param>
+        /// <param name="functions">List of Plugin functions (required).</param>
         /// <param name="annotations">An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries..</param>
-        /// <param name="local">The configuration to use this operator locally.</param>
-        public OperatorConfig
+        public Plugin
         (
-             DockerConfig docker, // Required parameters
-            Dictionary<string, string> annotations= default, LocalConfig local= default// Optional parameters
+             MetaData metadata, PluginConfig config, List<Function> functions, // Required parameters
+            Dictionary<string, string> annotations= default// Optional parameters
         ) : base()// BaseClass
         {
-            // to ensure "docker" is required (not null)
-            this.Docker = docker ?? throw new ArgumentNullException("docker is a required property for OperatorConfig and cannot be null");
+            // to ensure "metadata" is required (not null)
+            this.Metadata = metadata ?? throw new ArgumentNullException("metadata is a required property for Plugin and cannot be null");
+            // to ensure "config" is required (not null)
+            this.Config = config ?? throw new ArgumentNullException("config is a required property for Plugin and cannot be null");
+            // to ensure "functions" is required (not null)
+            this.Functions = functions ?? throw new ArgumentNullException("functions is a required property for Plugin and cannot be null");
             this.Annotations = annotations;
-            this.Local = local;
 
             // Set non-required readonly properties with defaultValue
-            this.Type = "OperatorConfig";
+            this.Type = "Plugin";
         }
 
         /// <summary>
-        /// The configuration to use this operator in a docker container
+        /// The Plugin metadata information
         /// </summary>
-        /// <value>The configuration to use this operator in a docker container</value>
-        [DataMember(Name = "docker", IsRequired = true, EmitDefaultValue = false)]
-        public DockerConfig Docker { get; set; } 
+        /// <value>The Plugin metadata information</value>
+        [DataMember(Name = "metadata", IsRequired = true, EmitDefaultValue = false)]
+        public MetaData Metadata { get; set; } 
+        /// <summary>
+        /// The configuration information to run this plugin
+        /// </summary>
+        /// <value>The configuration information to run this plugin</value>
+        [DataMember(Name = "config", IsRequired = true, EmitDefaultValue = false)]
+        public PluginConfig Config { get; set; } 
+        /// <summary>
+        /// List of Plugin functions
+        /// </summary>
+        /// <value>List of Plugin functions</value>
+        [DataMember(Name = "functions", IsRequired = true, EmitDefaultValue = false)]
+        public List<Function> Functions { get; set; } 
         /// <summary>
         /// An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.
         /// </summary>
         /// <value>An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.</value>
         [DataMember(Name = "annotations", EmitDefaultValue = false)]
         public Dictionary<string, string> Annotations { get; set; } 
-        /// <summary>
-        /// The configuration to use this operator locally
-        /// </summary>
-        /// <value>The configuration to use this operator locally</value>
-        [DataMember(Name = "local", EmitDefaultValue = false)]
-        public LocalConfig Local { get; set; } 
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -85,7 +95,7 @@ namespace QueenbeeSDK
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            return "OperatorConfig";
+            return "Plugin";
         }
 
         /// <summary>
@@ -98,21 +108,22 @@ namespace QueenbeeSDK
                 return this.ToString();
             
             var sb = new StringBuilder();
-            sb.Append("OperatorConfig:\n");
+            sb.Append("Plugin:\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Docker: ").Append(Docker).Append("\n");
+            sb.Append("  Metadata: ").Append(Metadata).Append("\n");
+            sb.Append("  Config: ").Append(Config).Append("\n");
+            sb.Append("  Functions: ").Append(Functions).Append("\n");
             sb.Append("  Annotations: ").Append(Annotations).Append("\n");
-            sb.Append("  Local: ").Append(Local).Append("\n");
             return sb.ToString();
         }
   
         /// <summary>
         /// Returns the object from JSON string
         /// </summary>
-        /// <returns>OperatorConfig object</returns>
-        public static OperatorConfig FromJson(string json)
+        /// <returns>Plugin object</returns>
+        public static Plugin FromJson(string json)
         {
-            var obj = JsonConvert.DeserializeObject<OperatorConfig>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<Plugin>(json, JsonSetting.AnyOfConvertSetting);
             if (obj == null)
                 return null;
             return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
@@ -121,8 +132,8 @@ namespace QueenbeeSDK
         /// <summary>
         /// Creates a new instance with the same properties.
         /// </summary>
-        /// <returns>OperatorConfig object</returns>
-        public virtual OperatorConfig DuplicateOperatorConfig()
+        /// <returns>Plugin object</returns>
+        public virtual Plugin DuplicatePlugin()
         {
             return FromJson(this.ToJson());
         }
@@ -133,7 +144,7 @@ namespace QueenbeeSDK
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return DuplicateOperatorConfig();
+            return DuplicatePlugin();
         }
 
         /// <summary>
@@ -142,7 +153,7 @@ namespace QueenbeeSDK
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
         {
-            return DuplicateOperatorConfig();
+            return DuplicatePlugin();
         }
      
         /// <summary>
@@ -152,23 +163,34 @@ namespace QueenbeeSDK
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as OperatorConfig);
+            return this.Equals(input as Plugin);
         }
 
         /// <summary>
-        /// Returns true if OperatorConfig instances are equal
+        /// Returns true if Plugin instances are equal
         /// </summary>
-        /// <param name="input">Instance of OperatorConfig to be compared</param>
+        /// <param name="input">Instance of Plugin to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(OperatorConfig input)
+        public bool Equals(Plugin input)
         {
             if (input == null)
                 return false;
             return base.Equals(input) && 
                 (
-                    this.Docker == input.Docker ||
-                    (this.Docker != null &&
-                    this.Docker.Equals(input.Docker))
+                    this.Metadata == input.Metadata ||
+                    (this.Metadata != null &&
+                    this.Metadata.Equals(input.Metadata))
+                ) && base.Equals(input) && 
+                (
+                    this.Config == input.Config ||
+                    (this.Config != null &&
+                    this.Config.Equals(input.Config))
+                ) && base.Equals(input) && 
+                (
+                    this.Functions == input.Functions ||
+                    this.Functions != null &&
+                    input.Functions != null &&
+                    this.Functions.SequenceEqual(input.Functions)
                 ) && base.Equals(input) && 
                 (
                     this.Type == input.Type ||
@@ -180,11 +202,6 @@ namespace QueenbeeSDK
                     this.Annotations != null &&
                     input.Annotations != null &&
                     this.Annotations.SequenceEqual(input.Annotations)
-                ) && base.Equals(input) && 
-                (
-                    this.Local == input.Local ||
-                    (this.Local != null &&
-                    this.Local.Equals(input.Local))
                 );
         }
 
@@ -197,14 +214,16 @@ namespace QueenbeeSDK
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                if (this.Docker != null)
-                    hashCode = hashCode * 59 + this.Docker.GetHashCode();
+                if (this.Metadata != null)
+                    hashCode = hashCode * 59 + this.Metadata.GetHashCode();
+                if (this.Config != null)
+                    hashCode = hashCode * 59 + this.Config.GetHashCode();
+                if (this.Functions != null)
+                    hashCode = hashCode * 59 + this.Functions.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Annotations != null)
                     hashCode = hashCode * 59 + this.Annotations.GetHashCode();
-                if (this.Local != null)
-                    hashCode = hashCode * 59 + this.Local.GetHashCode();
                 return hashCode;
             }
         }
@@ -220,7 +239,7 @@ namespace QueenbeeSDK
 
             
             // Type (string) pattern
-            Regex regexType = new Regex(@"^OperatorConfig", RegexOptions.CultureInvariant);
+            Regex regexType = new Regex(@"^Plugin", RegexOptions.CultureInvariant);
             if (false == regexType.Match(this.Type).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });

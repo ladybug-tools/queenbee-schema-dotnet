@@ -24,7 +24,7 @@ using System.ComponentModel.DataAnnotations;
 namespace QueenbeeSDK
 {
     /// <summary>
-    /// Operator Configuration to run on a desktop.
+    /// Plugin Configuration to run on a desktop.
     /// </summary>
     [DataContract(Name = "LocalConfig")]
     public partial class LocalConfig : OpenAPIGenBaseModel, IEquatable<LocalConfig>, IValidatableObject

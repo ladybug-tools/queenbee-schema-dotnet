@@ -1,14 +1,14 @@
 
-# QueenbeeSDK.Model.Operator
+# QueenbeeSDK.Model.Plugin
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Metadata** | [**MetaData**](MetaData.md) | The Operator metadata information | 
-**Config** | [**OperatorConfig**](OperatorConfig.md) | The configuration information to run this operator | 
-**Functions** | [**List&lt;Function&gt;**](Function.md) | List of Operator functions | 
-**Type** | **string** |  | [optional] [readonly] [default to "Operator"]
+**Metadata** | [**MetaData**](MetaData.md) | The Plugin metadata information | 
+**Config** | [**PluginConfig**](PluginConfig.md) | The configuration information to run this plugin | 
+**Functions** | [**List&lt;Function&gt;**](Function.md) | List of Plugin functions | 
+**Type** | **string** |  | [optional] [readonly] [default to "Plugin"]
 **Annotations** | **Dictionary&lt;string, string&gt;** | An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models)

@@ -24,15 +24,15 @@ using System.ComponentModel.DataAnnotations;
 namespace QueenbeeSDK
 {
     /// <summary>
-    /// Configuration to fetch a Recipe or Operator that another Recipe depends on.
+    /// Configuration to fetch a Recipe or Plugin that another Recipe depends on.
     /// </summary>
     [DataContract(Name = "Dependency")]
     public partial class Dependency : OpenAPIGenBaseModel, IEquatable<Dependency>, IValidatableObject
     {
         /// <summary>
-        /// The kind of dependency. It can be a recipe_kind or an operator_kind.
+        /// The kind of dependency. It can be a recipe or an plugin.
         /// </summary>
-        /// <value>The kind of dependency. It can be a recipe_kind or an operator_kind.</value>
+        /// <value>The kind of dependency. It can be a recipe or an plugin.</value>
         [DataMember(Name="kind", EmitDefaultValue=false)]
         public DependencyKind Kind { get; set; }   
         /// <summary>
@@ -48,7 +48,7 @@ namespace QueenbeeSDK
         /// <summary>
         /// Initializes a new instance of the <see cref="Dependency" /> class.
         /// </summary>
-        /// <param name="kind">The kind of dependency. It can be a recipe_kind or an operator_kind. (required).</param>
+        /// <param name="kind">The kind of dependency. It can be a recipe or an plugin. (required).</param>
         /// <param name="name">Workflow name. This name should be unique among all the resources in your resource. Use an alias if this is not the case. (required).</param>
         /// <param name="tag">Tag of the resource. (required).</param>
         /// <param name="source">URL to a repository where this resource can be found. (required).</param>
