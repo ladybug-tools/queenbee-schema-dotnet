@@ -24,7 +24,7 @@ using System.ComponentModel.DataAnnotations;
 namespace QueenbeeSDK
 {
     /// <summary>
-    /// Operator Configuration to run in a Docker container
+    /// Plugin Configuration to run in a Docker container
     /// </summary>
     [DataContract(Name = "DockerConfig")]
     public partial class DockerConfig : OpenAPIGenBaseModel, IEquatable<DockerConfig>, IValidatableObject

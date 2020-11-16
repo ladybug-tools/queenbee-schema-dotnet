@@ -420,14 +420,14 @@
       "description": "<SchemaDefinition schemaRef=\"#/components/schemas/MetaData\" />\n"
     },
     {
-      "name": "operator_model",
-      "x-displayName": "Operator",
-      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/Operator\" />\n"
+      "name": "plugin_model",
+      "x-displayName": "Plugin",
+      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/Plugin\" />\n"
     },
     {
-      "name": "operatorconfig_model",
-      "x-displayName": "OperatorConfig",
-      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/OperatorConfig\" />\n"
+      "name": "pluginconfig_model",
+      "x-displayName": "PluginConfig",
+      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/PluginConfig\" />\n"
     },
     {
       "name": "projectfolder_model",
@@ -588,8 +588,8 @@
         "localconfig_model",
         "maintainer_model",
         "metadata_model",
-        "operator_model",
-        "operatorconfig_model",
+        "plugin_model",
+        "pluginconfig_model",
         "projectfolder_model",
         "recipe_model",
         "s3_model",
@@ -788,18 +788,18 @@
         "title": "DependencyKind",
         "description": "Dependency kind.",
         "enum": [
-          "recipe_kind",
-          "operator_kind"
+          "recipe",
+          "plugin"
         ],
         "type": "string"
       },
       "Dependency": {
         "title": "Dependency",
-        "description": "Configuration to fetch a Recipe or Operator that another Recipe depends on.",
+        "description": "Configuration to fetch a Recipe or Plugin that another Recipe depends on.",
         "type": "object",
         "properties": {
           "kind": {
-            "description": "The kind of dependency. It can be a recipe_kind or an operator_kind.",
+            "description": "The kind of dependency. It can be a recipe or an plugin.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/DependencyKind"
@@ -958,6 +958,12 @@
             "description": "Place-holder. Overwrite this!",
             "type": "string"
           },
+          "required": {
+            "title": "Required",
+            "description": "A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided.",
+            "default": false,
+            "type": "boolean"
+          },
           "spec": {
             "title": "Spec",
             "description": "An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec.",
@@ -1023,6 +1029,12 @@
             "title": "Default",
             "description": "Default value to use for an input if a value was not supplied.",
             "type": "string"
+          },
+          "required": {
+            "title": "Required",
+            "description": "A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided.",
+            "default": false,
+            "type": "boolean"
           },
           "spec": {
             "title": "Spec",
@@ -1091,6 +1103,12 @@
             "type": "integer",
             "format": "int32"
           },
+          "required": {
+            "title": "Required",
+            "description": "A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided.",
+            "default": false,
+            "type": "boolean"
+          },
           "spec": {
             "title": "Spec",
             "description": "An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec.",
@@ -1158,6 +1176,12 @@
             "type": "number",
             "format": "double"
           },
+          "required": {
+            "title": "Required",
+            "description": "A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided.",
+            "default": false,
+            "type": "boolean"
+          },
           "spec": {
             "title": "Spec",
             "description": "An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec.",
@@ -1222,6 +1246,12 @@
           "default": {
             "title": "Default",
             "description": "Default value to use for an input if a value was not supplied.",
+            "type": "boolean"
+          },
+          "required": {
+            "title": "Required",
+            "description": "A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided.",
+            "default": false,
             "type": "boolean"
           },
           "spec": {
@@ -1413,6 +1443,12 @@
               }
             ]
           },
+          "required": {
+            "title": "Required",
+            "description": "A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided.",
+            "default": false,
+            "type": "boolean"
+          },
           "spec": {
             "title": "Spec",
             "description": "An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec.",
@@ -1488,6 +1524,12 @@
                 "$ref": "#/components/schemas/ProjectFolder"
               }
             ]
+          },
+          "required": {
+            "title": "Required",
+            "description": "A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided.",
+            "default": false,
+            "type": "boolean"
           },
           "spec": {
             "title": "Spec",
@@ -1573,6 +1615,12 @@
               }
             ]
           },
+          "required": {
+            "title": "Required",
+            "description": "A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided.",
+            "default": false,
+            "type": "boolean"
+          },
           "spec": {
             "title": "Spec",
             "description": "An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec.",
@@ -1600,14 +1648,14 @@
         "title": "ItemType",
         "description": "Type enum for items in a list.",
         "enum": [
-          "Any",
+          "Generic",
           "String",
           "Integer",
           "Number",
           "Boolean",
           "Folder",
           "Array",
-          "Object"
+          "JSONObject"
         ],
         "type": "string"
       },
@@ -1662,6 +1710,12 @@
             "description": "Default value to use for an input if a value was not supplied.",
             "type": "array",
             "items": {}
+          },
+          "required": {
+            "title": "Required",
+            "description": "A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided.",
+            "default": false,
+            "type": "boolean"
           },
           "spec": {
             "title": "Spec",
@@ -1738,6 +1792,12 @@
             "description": "Default value to use for an input if a value was not supplied.",
             "type": "object"
           },
+          "required": {
+            "title": "Required",
+            "description": "A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided.",
+            "default": false,
+            "type": "boolean"
+          },
           "spec": {
             "title": "Spec",
             "description": "An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec.",
@@ -1787,6 +1847,12 @@
             "title": "Default",
             "description": "Place-holder. Overwrite this!",
             "type": "string"
+          },
+          "required": {
+            "title": "Required",
+            "description": "A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided.",
+            "default": false,
+            "type": "boolean"
           },
           "spec": {
             "title": "Spec",
@@ -1874,6 +1940,12 @@
             "title": "Default",
             "description": "Default value to use for an input if a value was not supplied.",
             "type": "string"
+          },
+          "required": {
+            "title": "Required",
+            "description": "A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided.",
+            "default": false,
+            "type": "boolean"
           },
           "spec": {
             "title": "Spec",
@@ -1963,6 +2035,12 @@
             "type": "integer",
             "format": "int32"
           },
+          "required": {
+            "title": "Required",
+            "description": "A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided.",
+            "default": false,
+            "type": "boolean"
+          },
           "spec": {
             "title": "Spec",
             "description": "An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec.",
@@ -2051,6 +2129,12 @@
             "type": "number",
             "format": "double"
           },
+          "required": {
+            "title": "Required",
+            "description": "A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided.",
+            "default": false,
+            "type": "boolean"
+          },
           "spec": {
             "title": "Spec",
             "description": "An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec.",
@@ -2136,6 +2220,12 @@
           "default": {
             "title": "Default",
             "description": "Default value to use for an input if a value was not supplied.",
+            "type": "boolean"
+          },
+          "required": {
+            "title": "Required",
+            "description": "A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided.",
+            "default": false,
             "type": "boolean"
           },
           "spec": {
@@ -2235,6 +2325,12 @@
               }
             ]
           },
+          "required": {
+            "title": "Required",
+            "description": "A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided.",
+            "default": false,
+            "type": "boolean"
+          },
           "spec": {
             "title": "Spec",
             "description": "An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec.",
@@ -2331,6 +2427,12 @@
                 "$ref": "#/components/schemas/ProjectFolder"
               }
             ]
+          },
+          "required": {
+            "title": "Required",
+            "description": "A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided.",
+            "default": false,
+            "type": "boolean"
           },
           "spec": {
             "title": "Spec",
@@ -2437,6 +2539,12 @@
               }
             ]
           },
+          "required": {
+            "title": "Required",
+            "description": "A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided.",
+            "default": false,
+            "type": "boolean"
+          },
           "spec": {
             "title": "Spec",
             "description": "An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec.",
@@ -2533,6 +2641,12 @@
             "type": "array",
             "items": {}
           },
+          "required": {
+            "title": "Required",
+            "description": "A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided.",
+            "default": false,
+            "type": "boolean"
+          },
           "spec": {
             "title": "Spec",
             "description": "An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec.",
@@ -2628,6 +2742,12 @@
             "title": "Default",
             "description": "Default value to use for an input if a value was not supplied.",
             "type": "object"
+          },
+          "required": {
+            "title": "Required",
+            "description": "A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided.",
+            "default": false,
+            "type": "boolean"
           },
           "spec": {
             "title": "Spec",
@@ -5294,7 +5414,7 @@
           },
           "dependencies": {
             "title": "Dependencies",
-            "description": "A list of operators and other recipes this recipe depends on.",
+            "description": "A list of plugins and other recipes this recipe depends on.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Dependency"
@@ -5310,7 +5430,7 @@
       },
       "DockerConfig": {
         "title": "DockerConfig",
-        "description": "Operator Configuration to run in a Docker container",
+        "description": "Plugin Configuration to run in a Docker container",
         "type": "object",
         "properties": {
           "image": {
@@ -5354,7 +5474,7 @@
       },
       "LocalConfig": {
         "title": "LocalConfig",
-        "description": "Operator Configuration to run on a desktop.",
+        "description": "Plugin Configuration to run on a desktop.",
         "type": "object",
         "properties": {
           "type": {
@@ -5377,14 +5497,14 @@
           "propertyName": "type"
         }
       },
-      "OperatorConfig": {
-        "title": "OperatorConfig",
-        "description": "Operator configuration.\n\nThe config is used to schedule functions on a desktop or in other contexts\n(ie: Docker).",
+      "PluginConfig": {
+        "title": "PluginConfig",
+        "description": "Plugin configuration.\n\nThe config is used to schedule functions on a desktop or in other contexts\n(ie: Docker).",
         "type": "object",
         "properties": {
           "docker": {
             "title": "Docker",
-            "description": "The configuration to use this operator in a docker container",
+            "description": "The configuration to use this plugin in a docker container",
             "allOf": [
               {
                 "$ref": "#/components/schemas/DockerConfig"
@@ -5393,8 +5513,8 @@
           },
           "type": {
             "title": "Type",
-            "default": "OperatorConfig",
-            "pattern": "^OperatorConfig",
+            "default": "PluginConfig",
+            "pattern": "^PluginConfig",
             "type": "string",
             "readOnly": true
           },
@@ -5408,7 +5528,7 @@
           },
           "local": {
             "title": "Local",
-            "description": "The configuration to use this operator locally",
+            "description": "The configuration to use this plugin locally",
             "allOf": [
               {
                 "$ref": "#/components/schemas/LocalConfig"
@@ -5457,6 +5577,12 @@
             "title": "Default",
             "description": "Default value to use for an input if a value was not supplied.",
             "type": "string"
+          },
+          "required": {
+            "title": "Required",
+            "description": "A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided.",
+            "default": false,
+            "type": "boolean"
           },
           "spec": {
             "title": "Spec",
@@ -5546,6 +5672,12 @@
             "type": "integer",
             "format": "int32"
           },
+          "required": {
+            "title": "Required",
+            "description": "A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided.",
+            "default": false,
+            "type": "boolean"
+          },
           "spec": {
             "title": "Spec",
             "description": "An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec.",
@@ -5634,6 +5766,12 @@
             "type": "number",
             "format": "double"
           },
+          "required": {
+            "title": "Required",
+            "description": "A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided.",
+            "default": false,
+            "type": "boolean"
+          },
           "spec": {
             "title": "Spec",
             "description": "An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec.",
@@ -5719,6 +5857,12 @@
           "default": {
             "title": "Default",
             "description": "Default value to use for an input if a value was not supplied.",
+            "type": "boolean"
+          },
+          "required": {
+            "title": "Required",
+            "description": "A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided.",
+            "default": false,
             "type": "boolean"
           },
           "spec": {
@@ -5823,6 +5967,12 @@
               }
             ]
           },
+          "required": {
+            "title": "Required",
+            "description": "A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided.",
+            "default": false,
+            "type": "boolean"
+          },
           "spec": {
             "title": "Spec",
             "description": "An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec.",
@@ -5925,6 +6075,12 @@
                 "$ref": "#/components/schemas/ProjectFolder"
               }
             ]
+          },
+          "required": {
+            "title": "Required",
+            "description": "A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided.",
+            "default": false,
+            "type": "boolean"
           },
           "spec": {
             "title": "Spec",
@@ -6037,6 +6193,12 @@
               }
             ]
           },
+          "required": {
+            "title": "Required",
+            "description": "A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided.",
+            "default": false,
+            "type": "boolean"
+          },
           "spec": {
             "title": "Spec",
             "description": "An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec.",
@@ -6134,6 +6296,12 @@
             "type": "array",
             "items": {}
           },
+          "required": {
+            "title": "Required",
+            "description": "A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided.",
+            "default": false,
+            "type": "boolean"
+          },
           "spec": {
             "title": "Spec",
             "description": "An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec.",
@@ -6229,6 +6397,12 @@
             "title": "Default",
             "description": "Default value to use for an input if a value was not supplied.",
             "type": "object"
+          },
+          "required": {
+            "title": "Required",
+            "description": "A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided.",
+            "default": false,
+            "type": "boolean"
           },
           "spec": {
             "title": "Spec",
@@ -6694,12 +6868,12 @@
         "properties": {
           "name": {
             "title": "Name",
-            "description": "Function name. Must be unique within an operator.",
+            "description": "Function name. Must be unique within a plugin.",
             "type": "string"
           },
           "command": {
             "title": "Command",
-            "description": "Full shell command for this function. Each function accepts only one command. The command will be executed as a shell command in operator. For running several commands after each other use && between the commands or pipe data from one to another using |",
+            "description": "Full shell command for this function. Each function accepts only one command. The command will be executed as a shell command in plugin. For running several commands after each other use && between the commands or pipe data from one to another using |",
             "type": "string"
           },
           "type": {
@@ -6803,14 +6977,14 @@
           "propertyName": "type"
         }
       },
-      "Operator": {
-        "title": "Operator",
-        "description": "A Queenbee Operator.\n\nAn Operator contains runtime configuration for a Command Line Interface (CLI) and\na list of functions that can be executed using this CLI tool.",
+      "Plugin": {
+        "title": "Plugin",
+        "description": "A Queenbee Plugin.\n\nA plugin contains runtime configuration for a Command Line Interface (CLI) and\na list of functions that can be executed using this CLI tool.",
         "type": "object",
         "properties": {
           "metadata": {
             "title": "Metadata",
-            "description": "The Operator metadata information",
+            "description": "The Plugin metadata information",
             "allOf": [
               {
                 "$ref": "#/components/schemas/MetaData"
@@ -6819,16 +6993,16 @@
           },
           "config": {
             "title": "Config",
-            "description": "The configuration information to run this operator",
+            "description": "The configuration information to run this plugin",
             "allOf": [
               {
-                "$ref": "#/components/schemas/OperatorConfig"
+                "$ref": "#/components/schemas/PluginConfig"
               }
             ]
           },
           "functions": {
             "title": "Functions",
-            "description": "List of Operator functions",
+            "description": "List of Plugin functions",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Function"
@@ -6836,8 +7010,8 @@
           },
           "type": {
             "title": "Type",
-            "default": "Operator",
-            "pattern": "^Operator",
+            "default": "Plugin",
+            "pattern": "^Plugin",
             "type": "string",
             "readOnly": true
           },

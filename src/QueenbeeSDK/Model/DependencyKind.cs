@@ -33,16 +33,16 @@ namespace QueenbeeSDK
     public enum DependencyKind
     {
         /// <summary>
-        /// Enum Recipekind for value: recipe_kind
+        /// Enum Recipe for value: recipe
         /// </summary>
-        [EnumMember(Value = "recipe_kind")]
-        Recipekind = 1,
+        [EnumMember(Value = "recipe")]
+        Recipe = 1,
 
         /// <summary>
-        /// Enum Operatorkind for value: operator_kind
+        /// Enum Plugin for value: plugin
         /// </summary>
-        [EnumMember(Value = "operator_kind")]
-        Operatorkind = 2
+        [EnumMember(Value = "plugin")]
+        Plugin = 2
 
     }
 

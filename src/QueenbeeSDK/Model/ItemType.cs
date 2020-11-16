@@ -33,10 +33,10 @@ namespace QueenbeeSDK
     public enum ItemType
     {
         /// <summary>
-        /// Enum Any for value: Any
+        /// Enum Generic for value: Generic
         /// </summary>
-        [EnumMember(Value = "Any")]
-        Any = 1,
+        [EnumMember(Value = "Generic")]
+        Generic = 1,
 
         /// <summary>
         /// Enum String for value: String
@@ -75,10 +75,10 @@ namespace QueenbeeSDK
         Array = 7,
 
         /// <summary>
-        /// Enum Object for value: Object
+        /// Enum JSONObject for value: JSONObject
         /// </summary>
-        [EnumMember(Value = "Object")]
-        Object = 8
+        [EnumMember(Value = "JSONObject")]
+        JSONObject = 8
 
     }
 
