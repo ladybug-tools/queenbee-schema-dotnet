@@ -13,7 +13,7 @@
     <Copyright>Copyright © 2020 Ladybug Tools LLC</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RootNamespace>QueenbeeSDK</RootNamespace>
-    <Version>1.17.4.1</Version>
+    <Version>1.17.4.9</Version>
     <DocumentationFile></DocumentationFile>
     <RepositoryUrl>https://github.com/ladybug-tools/queenbee-schema-dotnet</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>

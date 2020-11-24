@@ -24,49 +24,59 @@ using System.ComponentModel.DataAnnotations;
 namespace QueenbeeSDK
 {
     /// <summary>
-    /// Base class for DAG inputs.  This class adds a handler to input to handle the process of loading the input from different graphical interfaces.
+    /// Base class for DAG Alias inputs.  This class adds a handler to input to handle the process of loading the input from different graphical interfaces.
     /// </summary>
-    [DataContract(Name = "DAGGenericInput")]
-    public partial class DAGGenericInput : GenericInput, IEquatable<DAGGenericInput>, IValidatableObject
+    [DataContract(Name = "DAGLinkModelInputAlias")]
+    public partial class DAGLinkModelInputAlias : GenericInput, IEquatable<DAGLinkModelInputAlias>, IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="DAGGenericInput" /> class.
+        /// Initializes a new instance of the <see cref="DAGLinkModelInputAlias" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected DAGGenericInput() 
+        protected DAGLinkModelInputAlias() 
         { 
             // Set non-required readonly properties with defaultValue
-            this.Type = "DAGGenericInput";
+            this.Type = "DAGLinkModelInputAlias";
         }
         
         /// <summary>
-        /// Initializes a new instance of the <see cref="DAGGenericInput" /> class.
+        /// Initializes a new instance of the <see cref="DAGLinkModelInputAlias" /> class.
         /// </summary>
-        /// <param name="alias">A list of aliases for this input in different platforms..</param>
+        /// <param name="platform">Name of the client platform (e.g. Grasshopper, Revit, etc). The value can be any strings as long as it has been agreed between client-side developer and author of the recipe. (required).</param>
+        /// <param name="handler">List of process actions to process the input or output value. (required).</param>
         /// <param name="name">Input name. (required).</param>
         /// <param name="annotations">An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries..</param>
         /// <param name="description">Optional description for input..</param>
         /// <param name="_default">Place-holder. Overwrite this!.</param>
         /// <param name="required">A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided. (default to false).</param>
         /// <param name="spec">An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec..</param>
-        public DAGGenericInput
+        public DAGLinkModelInputAlias
         (
-            string name, // Required parameters
-            Dictionary<string, string> annotations= default, string description= default, object _default= default, bool required = false, Object spec= default, List<AnyOf<DAGGenericInputAlias,DAGStringInputAlias,DAGIntegerInputAlias,DAGNumberInputAlias,DAGBooleanInputAlias,DAGFolderInputAlias,DAGFileInputAlias,DAGPathInputAlias,DAGArrayInputAlias,DAGJSONObjectInputAlias,DAGLinkModelInputAlias>> alias= default // Optional parameters
+            string name, List<string> platform, List<IOAliasHandler> handler, // Required parameters
+            Dictionary<string, string> annotations= default, string description= default, string _default= default, bool required = false, Object spec= default // Optional parameters
         ) : base(name: name, annotations: annotations, description: description, _default: _default, required: required, spec: spec)// BaseClass
         {
-            this.Alias = alias;
+            // to ensure "platform" is required (not null)
+            this.Platform = platform ?? throw new ArgumentNullException("platform is a required property for DAGLinkModelInputAlias and cannot be null");
+            // to ensure "handler" is required (not null)
+            this.Handler = handler ?? throw new ArgumentNullException("handler is a required property for DAGLinkModelInputAlias and cannot be null");
 
             // Set non-required readonly properties with defaultValue
-            this.Type = "DAGGenericInput";
+            this.Type = "DAGLinkModelInputAlias";
         }
 
         /// <summary>
-        /// A list of aliases for this input in different platforms.
+        /// Name of the client platform (e.g. Grasshopper, Revit, etc). The value can be any strings as long as it has been agreed between client-side developer and author of the recipe.
         /// </summary>
-        /// <value>A list of aliases for this input in different platforms.</value>
-        [DataMember(Name = "alias", EmitDefaultValue = false)]
-        public List<AnyOf<DAGGenericInputAlias,DAGStringInputAlias,DAGIntegerInputAlias,DAGNumberInputAlias,DAGBooleanInputAlias,DAGFolderInputAlias,DAGFileInputAlias,DAGPathInputAlias,DAGArrayInputAlias,DAGJSONObjectInputAlias,DAGLinkModelInputAlias>> Alias { get; set; } 
+        /// <value>Name of the client platform (e.g. Grasshopper, Revit, etc). The value can be any strings as long as it has been agreed between client-side developer and author of the recipe.</value>
+        [DataMember(Name = "platform", IsRequired = true, EmitDefaultValue = false)]
+        public List<string> Platform { get; set; } 
+        /// <summary>
+        /// List of process actions to process the input or output value.
+        /// </summary>
+        /// <value>List of process actions to process the input or output value.</value>
+        [DataMember(Name = "handler", IsRequired = true, EmitDefaultValue = false)]
+        public List<IOAliasHandler> Handler { get; set; } 
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -74,7 +84,7 @@ namespace QueenbeeSDK
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            return "DAGGenericInput";
+            return "DAGLinkModelInputAlias";
         }
 
         /// <summary>
@@ -87,7 +97,7 @@ namespace QueenbeeSDK
                 return this.ToString();
             
             var sb = new StringBuilder();
-            sb.Append("DAGGenericInput:\n");
+            sb.Append("DAGLinkModelInputAlias:\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  Annotations: ").Append(Annotations).Append("\n");
@@ -95,17 +105,18 @@ namespace QueenbeeSDK
             sb.Append("  Default: ").Append(Default).Append("\n");
             sb.Append("  Required: ").Append(Required).Append("\n");
             sb.Append("  Spec: ").Append(Spec).Append("\n");
-            sb.Append("  Alias: ").Append(Alias).Append("\n");
+            sb.Append("  Platform: ").Append(Platform).Append("\n");
+            sb.Append("  Handler: ").Append(Handler).Append("\n");
             return sb.ToString();
         }
   
         /// <summary>
         /// Returns the object from JSON string
         /// </summary>
-        /// <returns>DAGGenericInput object</returns>
-        public static DAGGenericInput FromJson(string json)
+        /// <returns>DAGLinkModelInputAlias object</returns>
+        public static DAGLinkModelInputAlias FromJson(string json)
         {
-            var obj = JsonConvert.DeserializeObject<DAGGenericInput>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<DAGLinkModelInputAlias>(json, JsonSetting.AnyOfConvertSetting);
             if (obj == null)
                 return null;
             return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
@@ -114,8 +125,8 @@ namespace QueenbeeSDK
         /// <summary>
         /// Creates a new instance with the same properties.
         /// </summary>
-        /// <returns>DAGGenericInput object</returns>
-        public virtual DAGGenericInput DuplicateDAGGenericInput()
+        /// <returns>DAGLinkModelInputAlias object</returns>
+        public virtual DAGLinkModelInputAlias DuplicateDAGLinkModelInputAlias()
         {
             return FromJson(this.ToJson());
         }
@@ -126,7 +137,7 @@ namespace QueenbeeSDK
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return DuplicateDAGGenericInput();
+            return DuplicateDAGLinkModelInputAlias();
         }
 
         /// <summary>
@@ -135,7 +146,7 @@ namespace QueenbeeSDK
         /// <returns>OpenAPIGenBaseModel</returns>
         public override GenericInput DuplicateGenericInput()
         {
-            return DuplicateDAGGenericInput();
+            return DuplicateDAGLinkModelInputAlias();
         }
      
         /// <summary>
@@ -145,24 +156,30 @@ namespace QueenbeeSDK
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as DAGGenericInput);
+            return this.Equals(input as DAGLinkModelInputAlias);
         }
 
         /// <summary>
-        /// Returns true if DAGGenericInput instances are equal
+        /// Returns true if DAGLinkModelInputAlias instances are equal
         /// </summary>
-        /// <param name="input">Instance of DAGGenericInput to be compared</param>
+        /// <param name="input">Instance of DAGLinkModelInputAlias to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(DAGGenericInput input)
+        public bool Equals(DAGLinkModelInputAlias input)
         {
             if (input == null)
                 return false;
             return base.Equals(input) && 
                 (
-                    this.Alias == input.Alias ||
-                    this.Alias != null &&
-                    input.Alias != null &&
-                    this.Alias.SequenceEqual(input.Alias)
+                    this.Platform == input.Platform ||
+                    this.Platform != null &&
+                    input.Platform != null &&
+                    this.Platform.SequenceEqual(input.Platform)
+                ) && base.Equals(input) && 
+                (
+                    this.Handler == input.Handler ||
+                    this.Handler != null &&
+                    input.Handler != null &&
+                    this.Handler.SequenceEqual(input.Handler)
                 ) && base.Equals(input) && 
                 (
                     this.Type == input.Type ||
@@ -180,8 +197,10 @@ namespace QueenbeeSDK
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                if (this.Alias != null)
-                    hashCode = hashCode * 59 + this.Alias.GetHashCode();
+                if (this.Platform != null)
+                    hashCode = hashCode * 59 + this.Platform.GetHashCode();
+                if (this.Handler != null)
+                    hashCode = hashCode * 59 + this.Handler.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;
@@ -209,7 +228,7 @@ namespace QueenbeeSDK
 
             
             // Type (string) pattern
-            Regex regexType = new Regex(@"^DAGGenericInput$", RegexOptions.CultureInvariant);
+            Regex regexType = new Regex(@"^DAGLinkModelInputAlias$", RegexOptions.CultureInvariant);
             if (false == regexType.Match(this.Type).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });

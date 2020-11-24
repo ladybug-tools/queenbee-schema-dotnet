@@ -52,7 +52,7 @@ namespace QueenbeeSDK
         public DAGStringInput
         (
             string name, // Required parameters
-            Dictionary<string, string> annotations= default, string description= default, string _default= default, bool required = false, Object spec= default, List<AnyOf<DAGGenericInputAlias,DAGStringInputAlias,DAGIntegerInputAlias,DAGNumberInputAlias,DAGBooleanInputAlias,DAGFolderInputAlias,DAGFileInputAlias,DAGPathInputAlias,DAGArrayInputAlias,DAGJSONObjectInputAlias>> alias= default // Optional parameters
+            Dictionary<string, string> annotations= default, string description= default, string _default= default, bool required = false, Object spec= default, List<AnyOf<DAGGenericInputAlias,DAGStringInputAlias,DAGIntegerInputAlias,DAGNumberInputAlias,DAGBooleanInputAlias,DAGFolderInputAlias,DAGFileInputAlias,DAGPathInputAlias,DAGArrayInputAlias,DAGJSONObjectInputAlias,DAGLinkModelInputAlias>> alias= default // Optional parameters
         ) : base(name: name, annotations: annotations, description: description, _default: _default, required: required, spec: spec, alias: alias)// BaseClass
         {
 
