@@ -9,24 +9,13 @@ namespace QueenbeeSDK.Interface.Io
 namespace QueenbeeSDK
 {
 	public partial class DAGArrayInputAlias: QueenbeeSDK.Interface.Io.IAlias {}
-	public partial class DAGArrayOutputAlias: QueenbeeSDK.Interface.Io.IAlias {}
 	public partial class DAGBooleanInputAlias: QueenbeeSDK.Interface.Io.IAlias {}
-	public partial class DAGBooleanOutputAlias: QueenbeeSDK.Interface.Io.IAlias {}
 	public partial class DAGFileInputAlias: QueenbeeSDK.Interface.Io.IAlias {}
-	public partial class DAGFileOutputAlias: QueenbeeSDK.Interface.Io.IAlias {}
 	public partial class DAGFolderInputAlias: QueenbeeSDK.Interface.Io.IAlias {}
-	public partial class DAGFolderOutputAlias: QueenbeeSDK.Interface.Io.IAlias {}
 	public partial class DAGGenericInputAlias: QueenbeeSDK.Interface.Io.IAlias {}
-	public partial class DAGGenericOutputAlias: QueenbeeSDK.Interface.Io.IAlias {}
 	public partial class DAGIntegerInputAlias: QueenbeeSDK.Interface.Io.IAlias {}
-	public partial class DAGIntegerOutputAlias: QueenbeeSDK.Interface.Io.IAlias {}
 	public partial class DAGJSONObjectInputAlias: QueenbeeSDK.Interface.Io.IAlias {}
-	public partial class DAGJSONObjectOutputAlias: QueenbeeSDK.Interface.Io.IAlias {}
 	public partial class DAGNumberInputAlias: QueenbeeSDK.Interface.Io.IAlias {}
-	public partial class DAGNumberOutputAlias: QueenbeeSDK.Interface.Io.IAlias {}
 	public partial class DAGPathInputAlias: QueenbeeSDK.Interface.Io.IAlias {}
-	public partial class DAGPathOutputAlias: QueenbeeSDK.Interface.Io.IAlias {}
 	public partial class DAGStringInputAlias: QueenbeeSDK.Interface.Io.IAlias {}
-	public partial class DAGStringOutputAlias: QueenbeeSDK.Interface.Io.IAlias {}
-	public partial class IOAliasHandler: QueenbeeSDK.Interface.Io.IAlias {}
 }

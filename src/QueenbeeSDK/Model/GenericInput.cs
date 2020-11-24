@@ -51,7 +51,7 @@ namespace QueenbeeSDK
         public GenericInput
         (
              string name, // Required parameters
-            Dictionary<string, string> annotations= default, string description= default, string _default= default, bool required = false, Object spec= default// Optional parameters
+            Dictionary<string, string> annotations= default, string description= default, object _default= default, bool required = false, Object spec= default// Optional parameters
         ) : base()// BaseClass
         {
             // to ensure "name" is required (not null)
@@ -89,7 +89,7 @@ namespace QueenbeeSDK
         /// </summary>
         /// <value>Place-holder. Overwrite this!</value>
         [DataMember(Name = "default", EmitDefaultValue = false)]
-        public string Default { get; set; } 
+        public object Default { get; set; } 
         /// <summary>
         /// A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided.
         /// </summary>

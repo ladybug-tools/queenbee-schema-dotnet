@@ -27,7 +27,7 @@ namespace QueenbeeSDK
     /// The boolean type matches only two special values: True and False.  Note that values that evaluate to true or false, such as 1 and 0, are not accepted.  You can add additional validation by defining a JSONSchema specification.  See http://json-schema.org/understanding-json-schema/reference/boolean.html for more information.
     /// </summary>
     [DataContract(Name = "DAGBooleanInput")]
-    public partial class DAGBooleanInput : OpenAPIGenBaseModel, IEquatable<DAGBooleanInput>, IValidatableObject
+    public partial class DAGBooleanInput : DAGGenericInput, IEquatable<DAGBooleanInput>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DAGBooleanInput" /> class.
