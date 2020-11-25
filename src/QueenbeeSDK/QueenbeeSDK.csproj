@@ -13,7 +13,7 @@
     <Copyright>Copyright © 2020 Ladybug Tools LLC</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RootNamespace>QueenbeeSDK</RootNamespace>
-    <Version>1.17.4.9</Version>
+    <Version>1.17.5.1</Version>
     <DocumentationFile></DocumentationFile>
     <RepositoryUrl>https://github.com/ladybug-tools/queenbee-schema-dotnet</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -26,7 +26,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="JsonSubTypes" Version="1.8.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
   </ItemGroup>

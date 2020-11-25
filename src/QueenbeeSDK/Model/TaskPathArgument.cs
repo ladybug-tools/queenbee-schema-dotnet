@@ -24,7 +24,7 @@ using System.ComponentModel.DataAnnotations;
 namespace QueenbeeSDK
 {
     /// <summary>
-    /// BaseModel with functionality to return the object as a yaml string      
+    /// BaseModel with functionality to return the object as a yaml string.
     /// </summary>
     [DataContract(Name = "TaskPathArgument")]
     public partial class TaskPathArgument : OpenAPIGenBaseModel, IEquatable<TaskPathArgument>, IValidatableObject
@@ -186,15 +186,15 @@ namespace QueenbeeSDK
                     this.From.Equals(input.From))
                 ) && base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
-                ) && base.Equals(input) && 
-                (
                     this.Annotations == input.Annotations ||
                     this.Annotations != null &&
                     input.Annotations != null &&
                     this.Annotations.SequenceEqual(input.Annotations)
+                ) && base.Equals(input) && 
+                (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
                 ) && base.Equals(input) && 
                 (
                     this.SubPath == input.SubPath ||
@@ -216,10 +216,10 @@ namespace QueenbeeSDK
                     hashCode = hashCode * 59 + this.Name.GetHashCode();
                 if (this.From != null)
                     hashCode = hashCode * 59 + this.From.GetHashCode();
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Annotations != null)
                     hashCode = hashCode * 59 + this.Annotations.GetHashCode();
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.SubPath != null)
                     hashCode = hashCode * 59 + this.SubPath.GetHashCode();
                 return hashCode;

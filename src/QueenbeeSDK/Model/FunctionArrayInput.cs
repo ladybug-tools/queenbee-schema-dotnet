@@ -27,7 +27,7 @@ namespace QueenbeeSDK
     /// An array input.  You can add additional validation by defining a JSONSchema specification.  See http://json-schema.org/understanding-json-schema/reference/array.html for more information.
     /// </summary>
     [DataContract(Name = "FunctionArrayInput")]
-    public partial class FunctionArrayInput : OpenAPIGenBaseModel, IEquatable<FunctionArrayInput>, IValidatableObject
+    public partial class FunctionArrayInput : GenericInput, IEquatable<FunctionArrayInput>, IValidatableObject
     {
         /// <summary>
         /// Type of items in an array. All the items in an array must be from the same type.
@@ -48,28 +48,24 @@ namespace QueenbeeSDK
         /// <summary>
         /// Initializes a new instance of the <see cref="FunctionArrayInput" /> class.
         /// </summary>
+        /// <param name="_default">Default value to use for an input if a value was not supplied..</param>
+        /// <param name="alias">A list of aliases for this input in different platforms..</param>
+        /// <param name="required">A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided. (default to false).</param>
+        /// <param name="spec">An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec..</param>
+        /// <param name="itemsType">Type of items in an array. All the items in an array must be from the same type..</param>
         /// <param name="name">Input name. (required).</param>
         /// <param name="annotations">An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries..</param>
         /// <param name="description">Optional description for input..</param>
-        /// <param name="_default">Default value to use for an input if a value was not supplied..</param>
-        /// <param name="required">A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided. (default to false).</param>
-        /// <param name="spec">An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec..</param>
-        /// <param name="alias">A list of aliases for this input in different platforms..</param>
-        /// <param name="itemsType">Type of items in an array. All the items in an array must be from the same type..</param>
         public FunctionArrayInput
         (
-             string name, // Required parameters
-            Dictionary<string, string> annotations= default, string description= default, List<object> _default= default, bool required = false, Object spec= default, List<AnyOf<DAGGenericInputAlias,DAGStringInputAlias,DAGIntegerInputAlias,DAGNumberInputAlias,DAGBooleanInputAlias,DAGFolderInputAlias,DAGFileInputAlias,DAGPathInputAlias,DAGArrayInputAlias,DAGJSONObjectInputAlias>> alias= default, ItemType itemsType= ItemType.String // Optional parameters
-        ) : base()// BaseClass
+            string name, // Required parameters
+            Dictionary<string, string> annotations= default, string description= default, List<object> _default= default, List<AnyOf<DAGGenericInputAlias,DAGStringInputAlias,DAGIntegerInputAlias,DAGNumberInputAlias,DAGBooleanInputAlias,DAGFolderInputAlias,DAGFileInputAlias,DAGPathInputAlias,DAGArrayInputAlias,DAGJSONObjectInputAlias,DAGLinkedInputAlias>> alias= default, bool required = false, Object spec= default, ItemType itemsType= ItemType.String // Optional parameters
+        ) : base(name: name, annotations: annotations, description: description)// BaseClass
         {
-            // to ensure "name" is required (not null)
-            this.Name = name ?? throw new ArgumentNullException("name is a required property for FunctionArrayInput and cannot be null");
-            this.Annotations = annotations;
-            this.Description = description;
             this.Default = _default;
+            this.Alias = alias;
             this.Required = required;
             this.Spec = spec;
-            this.Alias = alias;
             this.ItemsType = itemsType;
 
             // Set non-required readonly properties with defaultValue
@@ -77,29 +73,17 @@ namespace QueenbeeSDK
         }
 
         /// <summary>
-        /// Input name.
-        /// </summary>
-        /// <value>Input name.</value>
-        [DataMember(Name = "name", IsRequired = true, EmitDefaultValue = false)]
-        public string Name { get; set; } 
-        /// <summary>
-        /// An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.
-        /// </summary>
-        /// <value>An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.</value>
-        [DataMember(Name = "annotations", EmitDefaultValue = false)]
-        public Dictionary<string, string> Annotations { get; set; } 
-        /// <summary>
-        /// Optional description for input.
-        /// </summary>
-        /// <value>Optional description for input.</value>
-        [DataMember(Name = "description", EmitDefaultValue = false)]
-        public string Description { get; set; } 
-        /// <summary>
         /// Default value to use for an input if a value was not supplied.
         /// </summary>
         /// <value>Default value to use for an input if a value was not supplied.</value>
         [DataMember(Name = "default", EmitDefaultValue = false)]
         public List<object> Default { get; set; } 
+        /// <summary>
+        /// A list of aliases for this input in different platforms.
+        /// </summary>
+        /// <value>A list of aliases for this input in different platforms.</value>
+        [DataMember(Name = "alias", EmitDefaultValue = false)]
+        public List<AnyOf<DAGGenericInputAlias,DAGStringInputAlias,DAGIntegerInputAlias,DAGNumberInputAlias,DAGBooleanInputAlias,DAGFolderInputAlias,DAGFileInputAlias,DAGPathInputAlias,DAGArrayInputAlias,DAGJSONObjectInputAlias,DAGLinkedInputAlias>> Alias { get; set; } 
         /// <summary>
         /// A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided.
         /// </summary>
@@ -112,12 +96,6 @@ namespace QueenbeeSDK
         /// <value>An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec.</value>
         [DataMember(Name = "spec", EmitDefaultValue = false)]
         public Object Spec { get; set; } 
-        /// <summary>
-        /// A list of aliases for this input in different platforms.
-        /// </summary>
-        /// <value>A list of aliases for this input in different platforms.</value>
-        [DataMember(Name = "alias", EmitDefaultValue = false)]
-        public List<AnyOf<DAGGenericInputAlias,DAGStringInputAlias,DAGIntegerInputAlias,DAGNumberInputAlias,DAGBooleanInputAlias,DAGFolderInputAlias,DAGFileInputAlias,DAGPathInputAlias,DAGArrayInputAlias,DAGJSONObjectInputAlias>> Alias { get; set; } 
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -144,9 +122,9 @@ namespace QueenbeeSDK
             sb.Append("  Annotations: ").Append(Annotations).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  Default: ").Append(Default).Append("\n");
+            sb.Append("  Alias: ").Append(Alias).Append("\n");
             sb.Append("  Required: ").Append(Required).Append("\n");
             sb.Append("  Spec: ").Append(Spec).Append("\n");
-            sb.Append("  Alias: ").Append(Alias).Append("\n");
             sb.Append("  ItemsType: ").Append(ItemsType).Append("\n");
             return sb.ToString();
         }
@@ -185,7 +163,7 @@ namespace QueenbeeSDK
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>OpenAPIGenBaseModel</returns>
-        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        public override GenericInput DuplicateGenericInput()
         {
             return DuplicateFunctionArrayInput();
         }
@@ -211,26 +189,16 @@ namespace QueenbeeSDK
                 return false;
             return base.Equals(input) && 
                 (
-                    this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
-                ) && base.Equals(input) && 
-                (
-                    this.Annotations == input.Annotations ||
-                    this.Annotations != null &&
-                    input.Annotations != null &&
-                    this.Annotations.SequenceEqual(input.Annotations)
-                ) && base.Equals(input) && 
-                (
-                    this.Description == input.Description ||
-                    (this.Description != null &&
-                    this.Description.Equals(input.Description))
-                ) && base.Equals(input) && 
-                (
                     this.Default == input.Default ||
                     this.Default != null &&
                     input.Default != null &&
                     this.Default.SequenceEqual(input.Default)
+                ) && base.Equals(input) && 
+                (
+                    this.Alias == input.Alias ||
+                    this.Alias != null &&
+                    input.Alias != null &&
+                    this.Alias.SequenceEqual(input.Alias)
                 ) && base.Equals(input) && 
                 (
                     this.Required == input.Required ||
@@ -241,12 +209,6 @@ namespace QueenbeeSDK
                     this.Spec == input.Spec ||
                     (this.Spec != null &&
                     this.Spec.Equals(input.Spec))
-                ) && base.Equals(input) && 
-                (
-                    this.Alias == input.Alias ||
-                    this.Alias != null &&
-                    input.Alias != null &&
-                    this.Alias.SequenceEqual(input.Alias)
                 ) && base.Equals(input) && 
                 (
                     this.ItemsType == input.ItemsType ||
@@ -269,20 +231,14 @@ namespace QueenbeeSDK
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                if (this.Name != null)
-                    hashCode = hashCode * 59 + this.Name.GetHashCode();
-                if (this.Annotations != null)
-                    hashCode = hashCode * 59 + this.Annotations.GetHashCode();
-                if (this.Description != null)
-                    hashCode = hashCode * 59 + this.Description.GetHashCode();
                 if (this.Default != null)
                     hashCode = hashCode * 59 + this.Default.GetHashCode();
+                if (this.Alias != null)
+                    hashCode = hashCode * 59 + this.Alias.GetHashCode();
                 if (this.Required != null)
                     hashCode = hashCode * 59 + this.Required.GetHashCode();
                 if (this.Spec != null)
                     hashCode = hashCode * 59 + this.Spec.GetHashCode();
-                if (this.Alias != null)
-                    hashCode = hashCode * 59 + this.Alias.GetHashCode();
                 if (this.ItemsType != null)
                     hashCode = hashCode * 59 + this.ItemsType.GetHashCode();
                 if (this.Type != null)

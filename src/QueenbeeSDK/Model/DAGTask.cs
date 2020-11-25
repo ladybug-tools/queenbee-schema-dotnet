@@ -45,15 +45,15 @@ namespace QueenbeeSDK
         /// <param name="name">Name for this task. It must be unique in a DAG. (required).</param>
         /// <param name="template">Template name. A template is a Function or a DAG. This template must be available in the dependencies. (required).</param>
         /// <param name="annotations">An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries..</param>
-        /// <param name="arguments">The input arguments for this task..</param>
         /// <param name="needs">List of DAG tasks that this task depends on and needs to be executed before this task..</param>
+        /// <param name="arguments">The input arguments for this task..</param>
         /// <param name="loop">Loop configuration for this task..</param>
         /// <param name="subFolder">A path relative to the current folder context where artifacts should be saved. This is useful when performing a loop or invoking another workflow and wanting to save results in a specific sub_folder..</param>
         /// <param name="returns">List of task returns..</param>
         public DAGTask
         (
              string name, string template, // Required parameters
-            Dictionary<string, string> annotations= default, List<AnyOf<TaskArgument,TaskPathArgument>> arguments= default, List<string> needs= default, DAGTaskLoop loop= default, string subFolder= default, List<AnyOf<TaskReturn,TaskPathReturn>> returns= default// Optional parameters
+            Dictionary<string, string> annotations= default, List<string> needs= default, List<AnyOf<TaskArgument,TaskPathArgument>> arguments= default, DAGTaskLoop loop= default, string subFolder= default, List<AnyOf<TaskReturn,TaskPathReturn>> returns= default// Optional parameters
         ) : base()// BaseClass
         {
             // to ensure "name" is required (not null)
@@ -61,8 +61,8 @@ namespace QueenbeeSDK
             // to ensure "template" is required (not null)
             this.Template = template ?? throw new ArgumentNullException("template is a required property for DAGTask and cannot be null");
             this.Annotations = annotations;
-            this.Arguments = arguments;
             this.Needs = needs;
+            this.Arguments = arguments;
             this.Loop = loop;
             this.SubFolder = subFolder;
             this.Returns = returns;
@@ -90,17 +90,17 @@ namespace QueenbeeSDK
         [DataMember(Name = "annotations", EmitDefaultValue = false)]
         public Dictionary<string, string> Annotations { get; set; } 
         /// <summary>
-        /// The input arguments for this task.
-        /// </summary>
-        /// <value>The input arguments for this task.</value>
-        [DataMember(Name = "arguments", EmitDefaultValue = false)]
-        public List<AnyOf<TaskArgument,TaskPathArgument>> Arguments { get; set; } 
-        /// <summary>
         /// List of DAG tasks that this task depends on and needs to be executed before this task.
         /// </summary>
         /// <value>List of DAG tasks that this task depends on and needs to be executed before this task.</value>
         [DataMember(Name = "needs", EmitDefaultValue = false)]
         public List<string> Needs { get; set; } 
+        /// <summary>
+        /// The input arguments for this task.
+        /// </summary>
+        /// <value>The input arguments for this task.</value>
+        [DataMember(Name = "arguments", EmitDefaultValue = false)]
+        public List<AnyOf<TaskArgument,TaskPathArgument>> Arguments { get; set; } 
         /// <summary>
         /// Loop configuration for this task.
         /// </summary>
@@ -144,8 +144,8 @@ namespace QueenbeeSDK
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  Template: ").Append(Template).Append("\n");
             sb.Append("  Annotations: ").Append(Annotations).Append("\n");
-            sb.Append("  Arguments: ").Append(Arguments).Append("\n");
             sb.Append("  Needs: ").Append(Needs).Append("\n");
+            sb.Append("  Arguments: ").Append(Arguments).Append("\n");
             sb.Append("  Loop: ").Append(Loop).Append("\n");
             sb.Append("  SubFolder: ").Append(SubFolder).Append("\n");
             sb.Append("  Returns: ").Append(Returns).Append("\n");
@@ -222,27 +222,27 @@ namespace QueenbeeSDK
                     this.Template.Equals(input.Template))
                 ) && base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
-                ) && base.Equals(input) && 
-                (
                     this.Annotations == input.Annotations ||
                     this.Annotations != null &&
                     input.Annotations != null &&
                     this.Annotations.SequenceEqual(input.Annotations)
                 ) && base.Equals(input) && 
                 (
-                    this.Arguments == input.Arguments ||
-                    this.Arguments != null &&
-                    input.Arguments != null &&
-                    this.Arguments.SequenceEqual(input.Arguments)
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
                 ) && base.Equals(input) && 
                 (
                     this.Needs == input.Needs ||
                     this.Needs != null &&
                     input.Needs != null &&
                     this.Needs.SequenceEqual(input.Needs)
+                ) && base.Equals(input) && 
+                (
+                    this.Arguments == input.Arguments ||
+                    this.Arguments != null &&
+                    input.Arguments != null &&
+                    this.Arguments.SequenceEqual(input.Arguments)
                 ) && base.Equals(input) && 
                 (
                     this.Loop == input.Loop ||
@@ -275,14 +275,14 @@ namespace QueenbeeSDK
                     hashCode = hashCode * 59 + this.Name.GetHashCode();
                 if (this.Template != null)
                     hashCode = hashCode * 59 + this.Template.GetHashCode();
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Annotations != null)
                     hashCode = hashCode * 59 + this.Annotations.GetHashCode();
-                if (this.Arguments != null)
-                    hashCode = hashCode * 59 + this.Arguments.GetHashCode();
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Needs != null)
                     hashCode = hashCode * 59 + this.Needs.GetHashCode();
+                if (this.Arguments != null)
+                    hashCode = hashCode * 59 + this.Arguments.GetHashCode();
                 if (this.Loop != null)
                     hashCode = hashCode * 59 + this.Loop.GetHashCode();
                 if (this.SubFolder != null)

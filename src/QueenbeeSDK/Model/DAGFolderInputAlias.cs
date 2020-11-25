@@ -27,7 +27,7 @@ namespace QueenbeeSDK
     /// An alias folder input.  Folder is a special string input. Unlike other string inputs, a folder will be copied from its location to execution folder when a workflow is executed.  You can add additional validation by defining a JSONSchema specification.  See http://json-schema.org/understanding-json-schema/reference/string.html#string for more information.  .. code-block:: python      \&quot;schema\&quot;: {         \&quot;type\&quot;: \&quot;string\&quot;,         \&quot;maxLength\&quot;: 50,     }
     /// </summary>
     [DataContract(Name = "DAGFolderInputAlias")]
-    public partial class DAGFolderInputAlias : OpenAPIGenBaseModel, IEquatable<DAGFolderInputAlias>, IValidatableObject
+    public partial class DAGFolderInputAlias : GenericInput, IEquatable<DAGFolderInputAlias>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DAGFolderInputAlias" /> class.
@@ -42,28 +42,24 @@ namespace QueenbeeSDK
         /// <summary>
         /// Initializes a new instance of the <see cref="DAGFolderInputAlias" /> class.
         /// </summary>
-        /// <param name="name">Input name. (required).</param>
         /// <param name="platform">Name of the client platform (e.g. Grasshopper, Revit, etc). The value can be any strings as long as it has been agreed between client-side developer and author of the recipe. (required).</param>
         /// <param name="handler">List of process actions to process the input or output value. (required).</param>
-        /// <param name="annotations">An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries..</param>
-        /// <param name="description">Optional description for input..</param>
         /// <param name="_default">The default source for file if the value is not provided..</param>
         /// <param name="required">A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided. (default to false).</param>
         /// <param name="spec">An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec..</param>
+        /// <param name="name">Input name. (required).</param>
+        /// <param name="annotations">An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries..</param>
+        /// <param name="description">Optional description for input..</param>
         public DAGFolderInputAlias
         (
-             string name, List<string> platform, List<IOAliasHandler> handler, // Required parameters
+            string name, List<string> platform, List<IOAliasHandler> handler, // Required parameters
             Dictionary<string, string> annotations= default, string description= default, AnyOf<HTTP,S3,ProjectFolder> _default= default, bool required = false, Object spec= default // Optional parameters
-        ) : base()// BaseClass
+        ) : base(name: name, annotations: annotations, description: description)// BaseClass
         {
-            // to ensure "name" is required (not null)
-            this.Name = name ?? throw new ArgumentNullException("name is a required property for DAGFolderInputAlias and cannot be null");
             // to ensure "platform" is required (not null)
             this.Platform = platform ?? throw new ArgumentNullException("platform is a required property for DAGFolderInputAlias and cannot be null");
             // to ensure "handler" is required (not null)
             this.Handler = handler ?? throw new ArgumentNullException("handler is a required property for DAGFolderInputAlias and cannot be null");
-            this.Annotations = annotations;
-            this.Description = description;
             this.Default = _default;
             this.Required = required;
             this.Spec = spec;
@@ -72,12 +68,6 @@ namespace QueenbeeSDK
             this.Type = "DAGFolderInputAlias";
         }
 
-        /// <summary>
-        /// Input name.
-        /// </summary>
-        /// <value>Input name.</value>
-        [DataMember(Name = "name", IsRequired = true, EmitDefaultValue = false)]
-        public string Name { get; set; } 
         /// <summary>
         /// Name of the client platform (e.g. Grasshopper, Revit, etc). The value can be any strings as long as it has been agreed between client-side developer and author of the recipe.
         /// </summary>
@@ -90,18 +80,6 @@ namespace QueenbeeSDK
         /// <value>List of process actions to process the input or output value.</value>
         [DataMember(Name = "handler", IsRequired = true, EmitDefaultValue = false)]
         public List<IOAliasHandler> Handler { get; set; } 
-        /// <summary>
-        /// An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.
-        /// </summary>
-        /// <value>An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.</value>
-        [DataMember(Name = "annotations", EmitDefaultValue = false)]
-        public Dictionary<string, string> Annotations { get; set; } 
-        /// <summary>
-        /// Optional description for input.
-        /// </summary>
-        /// <value>Optional description for input.</value>
-        [DataMember(Name = "description", EmitDefaultValue = false)]
-        public string Description { get; set; } 
         /// <summary>
         /// The default source for file if the value is not provided.
         /// </summary>
@@ -143,10 +121,10 @@ namespace QueenbeeSDK
             sb.Append("DAGFolderInputAlias:\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
-            sb.Append("  Platform: ").Append(Platform).Append("\n");
-            sb.Append("  Handler: ").Append(Handler).Append("\n");
             sb.Append("  Annotations: ").Append(Annotations).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
+            sb.Append("  Platform: ").Append(Platform).Append("\n");
+            sb.Append("  Handler: ").Append(Handler).Append("\n");
             sb.Append("  Default: ").Append(Default).Append("\n");
             sb.Append("  Required: ").Append(Required).Append("\n");
             sb.Append("  Spec: ").Append(Spec).Append("\n");
@@ -187,7 +165,7 @@ namespace QueenbeeSDK
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>OpenAPIGenBaseModel</returns>
-        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        public override GenericInput DuplicateGenericInput()
         {
             return DuplicateDAGFolderInputAlias();
         }
@@ -213,11 +191,6 @@ namespace QueenbeeSDK
                 return false;
             return base.Equals(input) && 
                 (
-                    this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
-                ) && base.Equals(input) && 
-                (
                     this.Platform == input.Platform ||
                     this.Platform != null &&
                     input.Platform != null &&
@@ -228,17 +201,6 @@ namespace QueenbeeSDK
                     this.Handler != null &&
                     input.Handler != null &&
                     this.Handler.SequenceEqual(input.Handler)
-                ) && base.Equals(input) && 
-                (
-                    this.Annotations == input.Annotations ||
-                    this.Annotations != null &&
-                    input.Annotations != null &&
-                    this.Annotations.SequenceEqual(input.Annotations)
-                ) && base.Equals(input) && 
-                (
-                    this.Description == input.Description ||
-                    (this.Description != null &&
-                    this.Description.Equals(input.Description))
                 ) && base.Equals(input) && 
                 (
                     this.Default == input.Default ||
@@ -271,16 +233,10 @@ namespace QueenbeeSDK
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                if (this.Name != null)
-                    hashCode = hashCode * 59 + this.Name.GetHashCode();
                 if (this.Platform != null)
                     hashCode = hashCode * 59 + this.Platform.GetHashCode();
                 if (this.Handler != null)
                     hashCode = hashCode * 59 + this.Handler.GetHashCode();
-                if (this.Annotations != null)
-                    hashCode = hashCode * 59 + this.Annotations.GetHashCode();
-                if (this.Description != null)
-                    hashCode = hashCode * 59 + this.Description.GetHashCode();
                 if (this.Default != null)
                     hashCode = hashCode * 59 + this.Default.GetHashCode();
                 if (this.Required != null)

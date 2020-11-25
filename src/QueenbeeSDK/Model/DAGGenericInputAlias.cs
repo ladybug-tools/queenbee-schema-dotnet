@@ -44,22 +44,25 @@ namespace QueenbeeSDK
         /// </summary>
         /// <param name="platform">Name of the client platform (e.g. Grasshopper, Revit, etc). The value can be any strings as long as it has been agreed between client-side developer and author of the recipe. (required).</param>
         /// <param name="handler">List of process actions to process the input or output value. (required).</param>
+        /// <param name="_default">Default value for generic input..</param>
+        /// <param name="required">A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided. (default to false).</param>
+        /// <param name="spec">An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec..</param>
         /// <param name="name">Input name. (required).</param>
         /// <param name="annotations">An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries..</param>
         /// <param name="description">Optional description for input..</param>
-        /// <param name="_default">Place-holder. Overwrite this!.</param>
-        /// <param name="required">A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided. (default to false).</param>
-        /// <param name="spec">An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec..</param>
         public DAGGenericInputAlias
         (
             string name, List<string> platform, List<IOAliasHandler> handler, // Required parameters
             Dictionary<string, string> annotations= default, string description= default, string _default= default, bool required = false, Object spec= default // Optional parameters
-        ) : base(name: name, annotations: annotations, description: description, _default: _default, required: required, spec: spec)// BaseClass
+        ) : base(name: name, annotations: annotations, description: description)// BaseClass
         {
             // to ensure "platform" is required (not null)
             this.Platform = platform ?? throw new ArgumentNullException("platform is a required property for DAGGenericInputAlias and cannot be null");
             // to ensure "handler" is required (not null)
             this.Handler = handler ?? throw new ArgumentNullException("handler is a required property for DAGGenericInputAlias and cannot be null");
+            this.Default = _default;
+            this.Required = required;
+            this.Spec = spec;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "DAGGenericInputAlias";
@@ -77,6 +80,24 @@ namespace QueenbeeSDK
         /// <value>List of process actions to process the input or output value.</value>
         [DataMember(Name = "handler", IsRequired = true, EmitDefaultValue = false)]
         public List<IOAliasHandler> Handler { get; set; } 
+        /// <summary>
+        /// Default value for generic input.
+        /// </summary>
+        /// <value>Default value for generic input.</value>
+        [DataMember(Name = "default", EmitDefaultValue = false)]
+        public string Default { get; set; } 
+        /// <summary>
+        /// A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided.
+        /// </summary>
+        /// <value>A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided.</value>
+        [DataMember(Name = "required", EmitDefaultValue = true)]
+        public bool Required { get; set; }  = false;
+        /// <summary>
+        /// An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec.
+        /// </summary>
+        /// <value>An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec.</value>
+        [DataMember(Name = "spec", EmitDefaultValue = false)]
+        public Object Spec { get; set; } 
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -102,11 +123,11 @@ namespace QueenbeeSDK
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  Annotations: ").Append(Annotations).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
+            sb.Append("  Platform: ").Append(Platform).Append("\n");
+            sb.Append("  Handler: ").Append(Handler).Append("\n");
             sb.Append("  Default: ").Append(Default).Append("\n");
             sb.Append("  Required: ").Append(Required).Append("\n");
             sb.Append("  Spec: ").Append(Spec).Append("\n");
-            sb.Append("  Platform: ").Append(Platform).Append("\n");
-            sb.Append("  Handler: ").Append(Handler).Append("\n");
             return sb.ToString();
         }
   
@@ -182,6 +203,21 @@ namespace QueenbeeSDK
                     this.Handler.SequenceEqual(input.Handler)
                 ) && base.Equals(input) && 
                 (
+                    this.Default == input.Default ||
+                    (this.Default != null &&
+                    this.Default.Equals(input.Default))
+                ) && base.Equals(input) && 
+                (
+                    this.Required == input.Required ||
+                    (this.Required != null &&
+                    this.Required.Equals(input.Required))
+                ) && base.Equals(input) && 
+                (
+                    this.Spec == input.Spec ||
+                    (this.Spec != null &&
+                    this.Spec.Equals(input.Spec))
+                ) && base.Equals(input) && 
+                (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
@@ -201,6 +237,12 @@ namespace QueenbeeSDK
                     hashCode = hashCode * 59 + this.Platform.GetHashCode();
                 if (this.Handler != null)
                     hashCode = hashCode * 59 + this.Handler.GetHashCode();
+                if (this.Default != null)
+                    hashCode = hashCode * 59 + this.Default.GetHashCode();
+                if (this.Required != null)
+                    hashCode = hashCode * 59 + this.Required.GetHashCode();
+                if (this.Spec != null)
+                    hashCode = hashCode * 59 + this.Spec.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;

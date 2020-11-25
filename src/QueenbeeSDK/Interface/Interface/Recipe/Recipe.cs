@@ -8,5 +8,7 @@ namespace QueenbeeSDK.Interface.Recipe
 //Classes implemented this interface:
 namespace QueenbeeSDK
 {
+	public partial class BakedRecipe: QueenbeeSDK.Interface.Recipe.IRecipe {}
 	public partial class Recipe: QueenbeeSDK.Interface.Recipe.IRecipe {}
+	public partial class TemplateFunction: QueenbeeSDK.Interface.Recipe.IRecipe {}
 }

@@ -45,16 +45,16 @@ namespace QueenbeeSDK
         /// <param name="name">Input name. (required).</param>
         /// <param name="annotations">An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries..</param>
         /// <param name="description">Optional description for input..</param>
-        /// <param name="_default">Place-holder. Overwrite this!.</param>
-        /// <param name="required">A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided. (default to false).</param>
-        /// <param name="spec">An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec..</param>
         /// <param name="platform">Name of the client platform (e.g. Grasshopper, Revit, etc). The value can be any strings as long as it has been agreed between client-side developer and author of the recipe. (required).</param>
         /// <param name="handler">List of process actions to process the input or output value. (required).</param>
+        /// <param name="_default">Default value for generic input..</param>
+        /// <param name="required">A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided. (default to false).</param>
+        /// <param name="spec">An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec..</param>
         public DAGStringInputAlias
         (
             string name, List<string> platform, List<IOAliasHandler> handler, // Required parameters
             Dictionary<string, string> annotations= default, string description= default, string _default= default, bool required = false, Object spec= default // Optional parameters
-        ) : base(name: name, annotations: annotations, description: description, _default: _default, required: required, spec: spec, platform: platform, handler: handler)// BaseClass
+        ) : base(name: name, annotations: annotations, description: description, platform: platform, handler: handler, _default: _default, required: required, spec: spec)// BaseClass
         {
 
             // Set non-required readonly properties with defaultValue
@@ -86,11 +86,11 @@ namespace QueenbeeSDK
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  Annotations: ").Append(Annotations).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
+            sb.Append("  Platform: ").Append(Platform).Append("\n");
+            sb.Append("  Handler: ").Append(Handler).Append("\n");
             sb.Append("  Default: ").Append(Default).Append("\n");
             sb.Append("  Required: ").Append(Required).Append("\n");
             sb.Append("  Spec: ").Append(Spec).Append("\n");
-            sb.Append("  Platform: ").Append(Platform).Append("\n");
-            sb.Append("  Handler: ").Append(Handler).Append("\n");
             return sb.ToString();
         }
   
