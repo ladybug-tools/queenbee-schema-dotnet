@@ -42,31 +42,52 @@ namespace QueenbeeSDK
         /// <summary>
         /// Initializes a new instance of the <see cref="DAGGenericInput" /> class.
         /// </summary>
+        /// <param name="_default">Default value for generic input..</param>
         /// <param name="alias">A list of aliases for this input in different platforms..</param>
+        /// <param name="required">A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided. (default to false).</param>
+        /// <param name="spec">An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec..</param>
         /// <param name="name">Input name. (required).</param>
         /// <param name="annotations">An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries..</param>
         /// <param name="description">Optional description for input..</param>
-        /// <param name="_default">Place-holder. Overwrite this!.</param>
-        /// <param name="required">A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided. (default to false).</param>
-        /// <param name="spec">An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec..</param>
         public DAGGenericInput
         (
             string name, // Required parameters
-            Dictionary<string, string> annotations= default, string description= default, object _default= default, bool required = false, Object spec= default, List<AnyOf<DAGGenericInputAlias,DAGStringInputAlias,DAGIntegerInputAlias,DAGNumberInputAlias,DAGBooleanInputAlias,DAGFolderInputAlias,DAGFileInputAlias,DAGPathInputAlias,DAGArrayInputAlias,DAGJSONObjectInputAlias,DAGLinkModelInputAlias>> alias= default // Optional parameters
-        ) : base(name: name, annotations: annotations, description: description, _default: _default, required: required, spec: spec)// BaseClass
+            Dictionary<string, string> annotations= default, string description= default, string _default= default, List<AnyOf<DAGGenericInputAlias,DAGStringInputAlias,DAGIntegerInputAlias,DAGNumberInputAlias,DAGBooleanInputAlias,DAGFolderInputAlias,DAGFileInputAlias,DAGPathInputAlias,DAGArrayInputAlias,DAGJSONObjectInputAlias,DAGLinkedInputAlias>> alias= default, bool required = false, Object spec= default // Optional parameters
+        ) : base(name: name, annotations: annotations, description: description)// BaseClass
         {
+            this.Default = _default;
             this.Alias = alias;
+            this.Required = required;
+            this.Spec = spec;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "DAGGenericInput";
         }
 
         /// <summary>
+        /// Default value for generic input.
+        /// </summary>
+        /// <value>Default value for generic input.</value>
+        [DataMember(Name = "default", EmitDefaultValue = false)]
+        public string Default { get; set; } 
+        /// <summary>
         /// A list of aliases for this input in different platforms.
         /// </summary>
         /// <value>A list of aliases for this input in different platforms.</value>
         [DataMember(Name = "alias", EmitDefaultValue = false)]
-        public List<AnyOf<DAGGenericInputAlias,DAGStringInputAlias,DAGIntegerInputAlias,DAGNumberInputAlias,DAGBooleanInputAlias,DAGFolderInputAlias,DAGFileInputAlias,DAGPathInputAlias,DAGArrayInputAlias,DAGJSONObjectInputAlias,DAGLinkModelInputAlias>> Alias { get; set; } 
+        public List<AnyOf<DAGGenericInputAlias,DAGStringInputAlias,DAGIntegerInputAlias,DAGNumberInputAlias,DAGBooleanInputAlias,DAGFolderInputAlias,DAGFileInputAlias,DAGPathInputAlias,DAGArrayInputAlias,DAGJSONObjectInputAlias,DAGLinkedInputAlias>> Alias { get; set; } 
+        /// <summary>
+        /// A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided.
+        /// </summary>
+        /// <value>A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided.</value>
+        [DataMember(Name = "required", EmitDefaultValue = true)]
+        public bool Required { get; set; }  = false;
+        /// <summary>
+        /// An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec.
+        /// </summary>
+        /// <value>An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec.</value>
+        [DataMember(Name = "spec", EmitDefaultValue = false)]
+        public Object Spec { get; set; } 
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -93,9 +114,9 @@ namespace QueenbeeSDK
             sb.Append("  Annotations: ").Append(Annotations).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  Default: ").Append(Default).Append("\n");
+            sb.Append("  Alias: ").Append(Alias).Append("\n");
             sb.Append("  Required: ").Append(Required).Append("\n");
             sb.Append("  Spec: ").Append(Spec).Append("\n");
-            sb.Append("  Alias: ").Append(Alias).Append("\n");
             return sb.ToString();
         }
   
@@ -159,10 +180,25 @@ namespace QueenbeeSDK
                 return false;
             return base.Equals(input) && 
                 (
+                    this.Default == input.Default ||
+                    (this.Default != null &&
+                    this.Default.Equals(input.Default))
+                ) && base.Equals(input) && 
+                (
                     this.Alias == input.Alias ||
                     this.Alias != null &&
                     input.Alias != null &&
                     this.Alias.SequenceEqual(input.Alias)
+                ) && base.Equals(input) && 
+                (
+                    this.Required == input.Required ||
+                    (this.Required != null &&
+                    this.Required.Equals(input.Required))
+                ) && base.Equals(input) && 
+                (
+                    this.Spec == input.Spec ||
+                    (this.Spec != null &&
+                    this.Spec.Equals(input.Spec))
                 ) && base.Equals(input) && 
                 (
                     this.Type == input.Type ||
@@ -180,8 +216,14 @@ namespace QueenbeeSDK
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
+                if (this.Default != null)
+                    hashCode = hashCode * 59 + this.Default.GetHashCode();
                 if (this.Alias != null)
                     hashCode = hashCode * 59 + this.Alias.GetHashCode();
+                if (this.Required != null)
+                    hashCode = hashCode * 59 + this.Required.GetHashCode();
+                if (this.Spec != null)
+                    hashCode = hashCode * 59 + this.Spec.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;

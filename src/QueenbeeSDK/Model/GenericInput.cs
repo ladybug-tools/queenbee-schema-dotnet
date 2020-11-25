@@ -45,22 +45,16 @@ namespace QueenbeeSDK
         /// <param name="name">Input name. (required).</param>
         /// <param name="annotations">An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries..</param>
         /// <param name="description">Optional description for input..</param>
-        /// <param name="_default">Place-holder. Overwrite this!.</param>
-        /// <param name="required">A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided. (default to false).</param>
-        /// <param name="spec">An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec..</param>
         public GenericInput
         (
              string name, // Required parameters
-            Dictionary<string, string> annotations= default, string description= default, object _default= default, bool required = false, Object spec= default// Optional parameters
+            Dictionary<string, string> annotations= default, string description= default// Optional parameters
         ) : base()// BaseClass
         {
             // to ensure "name" is required (not null)
             this.Name = name ?? throw new ArgumentNullException("name is a required property for GenericInput and cannot be null");
             this.Annotations = annotations;
             this.Description = description;
-            this.Default = _default;
-            this.Required = required;
-            this.Spec = spec;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "GenericInput";
@@ -84,24 +78,6 @@ namespace QueenbeeSDK
         /// <value>Optional description for input.</value>
         [DataMember(Name = "description", EmitDefaultValue = false)]
         public string Description { get; set; } 
-        /// <summary>
-        /// Place-holder. Overwrite this!
-        /// </summary>
-        /// <value>Place-holder. Overwrite this!</value>
-        [DataMember(Name = "default", EmitDefaultValue = false)]
-        public object Default { get; set; } 
-        /// <summary>
-        /// A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided.
-        /// </summary>
-        /// <value>A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided.</value>
-        [DataMember(Name = "required", EmitDefaultValue = true)]
-        public bool Required { get; set; }  = false;
-        /// <summary>
-        /// An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec.
-        /// </summary>
-        /// <value>An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec.</value>
-        [DataMember(Name = "spec", EmitDefaultValue = false)]
-        public Object Spec { get; set; } 
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -127,9 +103,6 @@ namespace QueenbeeSDK
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  Annotations: ").Append(Annotations).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
-            sb.Append("  Default: ").Append(Default).Append("\n");
-            sb.Append("  Required: ").Append(Required).Append("\n");
-            sb.Append("  Spec: ").Append(Spec).Append("\n");
             return sb.ToString();
         }
   
@@ -198,35 +171,20 @@ namespace QueenbeeSDK
                     this.Name.Equals(input.Name))
                 ) && base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
-                ) && base.Equals(input) && 
-                (
                     this.Annotations == input.Annotations ||
                     this.Annotations != null &&
                     input.Annotations != null &&
                     this.Annotations.SequenceEqual(input.Annotations)
                 ) && base.Equals(input) && 
                 (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
+                ) && base.Equals(input) && 
+                (
                     this.Description == input.Description ||
                     (this.Description != null &&
                     this.Description.Equals(input.Description))
-                ) && base.Equals(input) && 
-                (
-                    this.Default == input.Default ||
-                    (this.Default != null &&
-                    this.Default.Equals(input.Default))
-                ) && base.Equals(input) && 
-                (
-                    this.Required == input.Required ||
-                    (this.Required != null &&
-                    this.Required.Equals(input.Required))
-                ) && base.Equals(input) && 
-                (
-                    this.Spec == input.Spec ||
-                    (this.Spec != null &&
-                    this.Spec.Equals(input.Spec))
                 );
         }
 
@@ -241,18 +199,12 @@ namespace QueenbeeSDK
                 int hashCode = base.GetHashCode();
                 if (this.Name != null)
                     hashCode = hashCode * 59 + this.Name.GetHashCode();
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Annotations != null)
                     hashCode = hashCode * 59 + this.Annotations.GetHashCode();
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Description != null)
                     hashCode = hashCode * 59 + this.Description.GetHashCode();
-                if (this.Default != null)
-                    hashCode = hashCode * 59 + this.Default.GetHashCode();
-                if (this.Required != null)
-                    hashCode = hashCode * 59 + this.Required.GetHashCode();
-                if (this.Spec != null)
-                    hashCode = hashCode * 59 + this.Spec.GetHashCode();
                 return hashCode;
             }
         }

@@ -27,7 +27,7 @@ namespace QueenbeeSDK
     /// A file input.  File is a special string input. Unlike other string inputs, a file will be copied from its location to execution folder when a workflow is executed.  You can add additional validation by defining a JSONSchema specification.  See http://json-schema.org/understanding-json-schema/reference/string.html#string for more information.  .. code-block:: python      # a file with maximum 50 characters with an &#x60;&#x60;epw&#x60;&#x60; extension.      \&quot;schema\&quot;: {         \&quot;type\&quot;: \&quot;string\&quot;,         \&quot;maxLength\&quot;: 50,         \&quot;pattern\&quot;: \&quot;(?i)(^.*\\.epw$)\&quot;     }
     /// </summary>
     [DataContract(Name = "DAGFileInput")]
-    public partial class DAGFileInput : OpenAPIGenBaseModel, IEquatable<DAGFileInput>, IValidatableObject
+    public partial class DAGFileInput : GenericInput, IEquatable<DAGFileInput>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DAGFileInput" /> class.
@@ -42,28 +42,24 @@ namespace QueenbeeSDK
         /// <summary>
         /// Initializes a new instance of the <see cref="DAGFileInput" /> class.
         /// </summary>
+        /// <param name="_default">The default source for file if the value is not provided..</param>
+        /// <param name="alias">A list of aliases for this input in different platforms..</param>
+        /// <param name="required">A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided. (default to false).</param>
+        /// <param name="spec">An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec..</param>
+        /// <param name="extensions">Optional list of extensions for file. The check for extension is case-insensitive..</param>
         /// <param name="name">Input name. (required).</param>
         /// <param name="annotations">An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries..</param>
         /// <param name="description">Optional description for input..</param>
-        /// <param name="_default">The default source for file if the value is not provided..</param>
-        /// <param name="required">A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided. (default to false).</param>
-        /// <param name="spec">An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec..</param>
-        /// <param name="alias">A list of aliases for this input in different platforms..</param>
-        /// <param name="extensions">Optional list of extensions for file. The check for extension is case-insensitive..</param>
         public DAGFileInput
         (
-             string name, // Required parameters
-            Dictionary<string, string> annotations= default, string description= default, AnyOf<HTTP,S3,ProjectFolder> _default= default, bool required = false, Object spec= default, List<AnyOf<DAGGenericInputAlias,DAGStringInputAlias,DAGIntegerInputAlias,DAGNumberInputAlias,DAGBooleanInputAlias,DAGFolderInputAlias,DAGFileInputAlias,DAGPathInputAlias,DAGArrayInputAlias,DAGJSONObjectInputAlias, DAGLinkModelInputAlias>> alias= default, List<string> extensions= default // Optional parameters
-        ) : base()// BaseClass
+            string name, // Required parameters
+            Dictionary<string, string> annotations= default, string description= default, AnyOf<HTTP,S3,ProjectFolder> _default= default, List<AnyOf<DAGGenericInputAlias,DAGStringInputAlias,DAGIntegerInputAlias,DAGNumberInputAlias,DAGBooleanInputAlias,DAGFolderInputAlias,DAGFileInputAlias,DAGPathInputAlias,DAGArrayInputAlias,DAGJSONObjectInputAlias,DAGLinkedInputAlias>> alias= default, bool required = false, Object spec= default, List<string> extensions= default // Optional parameters
+        ) : base(name: name, annotations: annotations, description: description)// BaseClass
         {
-            // to ensure "name" is required (not null)
-            this.Name = name ?? throw new ArgumentNullException("name is a required property for DAGFileInput and cannot be null");
-            this.Annotations = annotations;
-            this.Description = description;
             this.Default = _default;
+            this.Alias = alias;
             this.Required = required;
             this.Spec = spec;
-            this.Alias = alias;
             this.Extensions = extensions;
 
             // Set non-required readonly properties with defaultValue
@@ -71,29 +67,17 @@ namespace QueenbeeSDK
         }
 
         /// <summary>
-        /// Input name.
-        /// </summary>
-        /// <value>Input name.</value>
-        [DataMember(Name = "name", IsRequired = true, EmitDefaultValue = false)]
-        public string Name { get; set; } 
-        /// <summary>
-        /// An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.
-        /// </summary>
-        /// <value>An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.</value>
-        [DataMember(Name = "annotations", EmitDefaultValue = false)]
-        public Dictionary<string, string> Annotations { get; set; } 
-        /// <summary>
-        /// Optional description for input.
-        /// </summary>
-        /// <value>Optional description for input.</value>
-        [DataMember(Name = "description", EmitDefaultValue = false)]
-        public string Description { get; set; } 
-        /// <summary>
         /// The default source for file if the value is not provided.
         /// </summary>
         /// <value>The default source for file if the value is not provided.</value>
         [DataMember(Name = "default", EmitDefaultValue = false)]
         public AnyOf<HTTP,S3,ProjectFolder> Default { get; set; } 
+        /// <summary>
+        /// A list of aliases for this input in different platforms.
+        /// </summary>
+        /// <value>A list of aliases for this input in different platforms.</value>
+        [DataMember(Name = "alias", EmitDefaultValue = false)]
+        public List<AnyOf<DAGGenericInputAlias,DAGStringInputAlias,DAGIntegerInputAlias,DAGNumberInputAlias,DAGBooleanInputAlias,DAGFolderInputAlias,DAGFileInputAlias,DAGPathInputAlias,DAGArrayInputAlias,DAGJSONObjectInputAlias,DAGLinkedInputAlias>> Alias { get; set; } 
         /// <summary>
         /// A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided.
         /// </summary>
@@ -106,12 +90,6 @@ namespace QueenbeeSDK
         /// <value>An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec.</value>
         [DataMember(Name = "spec", EmitDefaultValue = false)]
         public Object Spec { get; set; } 
-        /// <summary>
-        /// A list of aliases for this input in different platforms.
-        /// </summary>
-        /// <value>A list of aliases for this input in different platforms.</value>
-        [DataMember(Name = "alias", EmitDefaultValue = false)]
-        public List<AnyOf<DAGGenericInputAlias,DAGStringInputAlias,DAGIntegerInputAlias,DAGNumberInputAlias,DAGBooleanInputAlias,DAGFolderInputAlias,DAGFileInputAlias,DAGPathInputAlias,DAGArrayInputAlias,DAGJSONObjectInputAlias, DAGLinkModelInputAlias>> Alias { get; set; } 
         /// <summary>
         /// Optional list of extensions for file. The check for extension is case-insensitive.
         /// </summary>
@@ -144,9 +122,9 @@ namespace QueenbeeSDK
             sb.Append("  Annotations: ").Append(Annotations).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  Default: ").Append(Default).Append("\n");
+            sb.Append("  Alias: ").Append(Alias).Append("\n");
             sb.Append("  Required: ").Append(Required).Append("\n");
             sb.Append("  Spec: ").Append(Spec).Append("\n");
-            sb.Append("  Alias: ").Append(Alias).Append("\n");
             sb.Append("  Extensions: ").Append(Extensions).Append("\n");
             return sb.ToString();
         }
@@ -185,7 +163,7 @@ namespace QueenbeeSDK
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>OpenAPIGenBaseModel</returns>
-        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        public override GenericInput DuplicateGenericInput()
         {
             return DuplicateDAGFileInput();
         }
@@ -211,25 +189,15 @@ namespace QueenbeeSDK
                 return false;
             return base.Equals(input) && 
                 (
-                    this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
-                ) && base.Equals(input) && 
-                (
-                    this.Annotations == input.Annotations ||
-                    this.Annotations != null &&
-                    input.Annotations != null &&
-                    this.Annotations.SequenceEqual(input.Annotations)
-                ) && base.Equals(input) && 
-                (
-                    this.Description == input.Description ||
-                    (this.Description != null &&
-                    this.Description.Equals(input.Description))
-                ) && base.Equals(input) && 
-                (
                     this.Default == input.Default ||
                     (this.Default != null &&
                     this.Default.Equals(input.Default))
+                ) && base.Equals(input) && 
+                (
+                    this.Alias == input.Alias ||
+                    this.Alias != null &&
+                    input.Alias != null &&
+                    this.Alias.SequenceEqual(input.Alias)
                 ) && base.Equals(input) && 
                 (
                     this.Required == input.Required ||
@@ -240,12 +208,6 @@ namespace QueenbeeSDK
                     this.Spec == input.Spec ||
                     (this.Spec != null &&
                     this.Spec.Equals(input.Spec))
-                ) && base.Equals(input) && 
-                (
-                    this.Alias == input.Alias ||
-                    this.Alias != null &&
-                    input.Alias != null &&
-                    this.Alias.SequenceEqual(input.Alias)
                 ) && base.Equals(input) && 
                 (
                     this.Extensions == input.Extensions ||
@@ -269,20 +231,14 @@ namespace QueenbeeSDK
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                if (this.Name != null)
-                    hashCode = hashCode * 59 + this.Name.GetHashCode();
-                if (this.Annotations != null)
-                    hashCode = hashCode * 59 + this.Annotations.GetHashCode();
-                if (this.Description != null)
-                    hashCode = hashCode * 59 + this.Description.GetHashCode();
                 if (this.Default != null)
                     hashCode = hashCode * 59 + this.Default.GetHashCode();
+                if (this.Alias != null)
+                    hashCode = hashCode * 59 + this.Alias.GetHashCode();
                 if (this.Required != null)
                     hashCode = hashCode * 59 + this.Required.GetHashCode();
                 if (this.Spec != null)
                     hashCode = hashCode * 59 + this.Spec.GetHashCode();
-                if (this.Alias != null)
-                    hashCode = hashCode * 59 + this.Alias.GetHashCode();
                 if (this.Extensions != null)
                     hashCode = hashCode * 59 + this.Extensions.GetHashCode();
                 if (this.Type != null)

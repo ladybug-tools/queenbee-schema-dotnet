@@ -186,15 +186,15 @@ namespace QueenbeeSDK
                     this.Workdir.Equals(input.Workdir))
                 ) && base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
-                ) && base.Equals(input) && 
-                (
                     this.Annotations == input.Annotations ||
                     this.Annotations != null &&
                     input.Annotations != null &&
                     this.Annotations.SequenceEqual(input.Annotations)
+                ) && base.Equals(input) && 
+                (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
                 ) && base.Equals(input) && 
                 (
                     this.Registry == input.Registry ||
@@ -216,10 +216,10 @@ namespace QueenbeeSDK
                     hashCode = hashCode * 59 + this.Image.GetHashCode();
                 if (this.Workdir != null)
                     hashCode = hashCode * 59 + this.Workdir.GetHashCode();
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Annotations != null)
                     hashCode = hashCode * 59 + this.Annotations.GetHashCode();
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Registry != null)
                     hashCode = hashCode * 59 + this.Registry.GetHashCode();
                 return hashCode;

@@ -63,22 +63,34 @@ namespace QueenbeeSDK
         Boolean = 5,
 
         /// <summary>
+        /// Enum File for value: File
+        /// </summary>
+        [EnumMember(Value = "File")]
+        File = 6,
+
+        /// <summary>
         /// Enum Folder for value: Folder
         /// </summary>
         [EnumMember(Value = "Folder")]
-        Folder = 6,
+        Folder = 7,
+
+        /// <summary>
+        /// Enum Path for value: Path
+        /// </summary>
+        [EnumMember(Value = "Path")]
+        Path = 8,
 
         /// <summary>
         /// Enum Array for value: Array
         /// </summary>
         [EnumMember(Value = "Array")]
-        Array = 7,
+        Array = 9,
 
         /// <summary>
         /// Enum JSONObject for value: JSONObject
         /// </summary>
         [EnumMember(Value = "JSONObject")]
-        JSONObject = 8
+        JSONObject = 10
 
     }
 

@@ -45,15 +45,15 @@ namespace QueenbeeSDK
         /// <param name="name">Input name. (required).</param>
         /// <param name="annotations">An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries..</param>
         /// <param name="description">Optional description for input..</param>
-        /// <param name="_default">Place-holder. Overwrite this!.</param>
+        /// <param name="_default">Default value for generic input..</param>
+        /// <param name="alias">A list of aliases for this input in different platforms..</param>
         /// <param name="required">A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided. (default to false).</param>
         /// <param name="spec">An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec..</param>
-        /// <param name="alias">A list of aliases for this input in different platforms..</param>
         public DAGStringInput
         (
             string name, // Required parameters
-            Dictionary<string, string> annotations= default, string description= default, string _default= default, bool required = false, Object spec= default, List<AnyOf<DAGGenericInputAlias,DAGStringInputAlias,DAGIntegerInputAlias,DAGNumberInputAlias,DAGBooleanInputAlias,DAGFolderInputAlias,DAGFileInputAlias,DAGPathInputAlias,DAGArrayInputAlias,DAGJSONObjectInputAlias,DAGLinkModelInputAlias>> alias= default // Optional parameters
-        ) : base(name: name, annotations: annotations, description: description, _default: _default, required: required, spec: spec, alias: alias)// BaseClass
+            Dictionary<string, string> annotations= default, string description= default, string _default= default, List<AnyOf<DAGGenericInputAlias,DAGStringInputAlias,DAGIntegerInputAlias,DAGNumberInputAlias,DAGBooleanInputAlias,DAGFolderInputAlias,DAGFileInputAlias,DAGPathInputAlias,DAGArrayInputAlias,DAGJSONObjectInputAlias,DAGLinkedInputAlias>> alias= default, bool required = false, Object spec= default // Optional parameters
+        ) : base(name: name, annotations: annotations, description: description, _default: _default, alias: alias, required: required, spec: spec)// BaseClass
         {
 
             // Set non-required readonly properties with defaultValue
@@ -86,9 +86,9 @@ namespace QueenbeeSDK
             sb.Append("  Annotations: ").Append(Annotations).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  Default: ").Append(Default).Append("\n");
+            sb.Append("  Alias: ").Append(Alias).Append("\n");
             sb.Append("  Required: ").Append(Required).Append("\n");
             sb.Append("  Spec: ").Append(Spec).Append("\n");
-            sb.Append("  Alias: ").Append(Alias).Append("\n");
             return sb.ToString();
         }
   
