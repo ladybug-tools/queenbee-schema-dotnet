@@ -1,7 +1,5 @@
 {
   "classes": {
-    "BakedRecipe": "queenbee.interface.recipe.recipe",
-    "BaseStatus": "queenbee.interface.workflow.status",
     "DAG": "queenbee.interface.recipe.dag",
     "DAGArrayInput": "queenbee.interface.io.inputs.dag",
     "DAGArrayInputAlias": "queenbee.interface.io.inputs.alias",
@@ -81,6 +79,9 @@
     "InputPathReference": "queenbee.interface.io.reference",
     "InputReference": "queenbee.interface.io.reference",
     "ItemReference": "queenbee.interface.io.reference",
+    "Job": "queenbee.interface.job.job",
+    "JobArgument": "queenbee.interface.io.inputs.job",
+    "JobPathArgument": "queenbee.interface.io.inputs.job",
     "License": "queenbee.interface.base.metadata",
     "LocalConfig": "queenbee.interface.plugin.plugin",
     "Maintainer": "queenbee.interface.base.metadata",
@@ -99,16 +100,10 @@
     "TaskPathReturn": "queenbee.interface.io.outputs.task",
     "TaskReference": "queenbee.interface.io.reference",
     "TaskReturn": "queenbee.interface.io.outputs.task",
-    "TaskStatus": "queenbee.interface.workflow.status",
-    "TemplateFunction": "queenbee.interface.recipe.recipe",
     "ValueFileReference": "queenbee.interface.io.reference",
     "ValueFolderReference": "queenbee.interface.io.reference",
     "ValueListReference": "queenbee.interface.io.reference",
     "ValueReference": "queenbee.interface.io.reference",
-    "Workflow": "queenbee.interface.workflow.workflow",
-    "WorkflowArgument": "queenbee.interface.io.inputs.workflow",
-    "WorkflowPathArgument": "queenbee.interface.io.inputs.workflow",
-    "WorkflowStatus": "queenbee.interface.workflow.status",
     "_ArtifactSource": "queenbee.interface.io.artifact_source",
     "_BaseReference": "queenbee.interface.io.reference",
     "_InputReferenceBase": "queenbee.interface.io.reference",
@@ -116,7 +111,6 @@
   },
   "enums": {
     "DependencyKind": "queenbee.interface.recipe.dependency",
-    "ItemType": "queenbee.interface.io.common",
-    "StatusType": "queenbee.interface.workflow.status"
+    "ItemType": "queenbee.interface.io.common"
   }
 }

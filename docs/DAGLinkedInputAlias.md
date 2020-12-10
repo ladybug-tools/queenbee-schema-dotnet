@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **Default** | **string** | Default value for generic input. | [optional] 
 **Required** | **bool** | A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided. | [optional] [default to false]
 **Spec** | **Object** | An optional JSON Schema specification to validate the input value. You can use validate_spec method to validate a value against the spec. | [optional] 
-**Type** | **string** |  | [optional] [readonly] [default to "DAGGenericInputAlias"]
+**Type** | **string** |  | [optional] [readonly] [default to "DAGLinkedInputAlias"]
 
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to API list]](../README.md#documentation-for-api-endpoints)

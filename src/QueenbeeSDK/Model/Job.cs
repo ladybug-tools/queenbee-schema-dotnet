@@ -24,53 +24,57 @@ using System.ComponentModel.DataAnnotations;
 namespace QueenbeeSDK
 {
     /// <summary>
-    /// A Queenbee Recipe
+    /// Queenbee Job.  A Job is an object to submit a list of arguments to execute a Queenbee recipe.
     /// </summary>
-    [DataContract(Name = "Recipe")]
-    public partial class Recipe : OpenAPIGenBaseModel, IEquatable<Recipe>, IValidatableObject
+    [DataContract(Name = "Job")]
+    public partial class Job : OpenAPIGenBaseModel, IEquatable<Job>, IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Recipe" /> class.
+        /// Initializes a new instance of the <see cref="Job" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Recipe() 
+        protected Job() 
         { 
             // Set non-required readonly properties with defaultValue
-            this.Type = "Recipe";
+            this.Type = "Job";
         }
         
         /// <summary>
-        /// Initializes a new instance of the <see cref="Recipe" /> class.
+        /// Initializes a new instance of the <see cref="Job" /> class.
         /// </summary>
-        /// <param name="flow">A list of tasks to create a DAG recipe. (required).</param>
+        /// <param name="source">The source url for downloading the recipe. (required).</param>
         /// <param name="annotations">An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries..</param>
         /// <param name="apiVersion">apiVersion (default to &quot;v1beta1&quot;).</param>
-        /// <param name="metadata">Recipe metadata information..</param>
-        /// <param name="dependencies">A list of plugins and other recipes this recipe depends on..</param>
-        public Recipe
+        /// <param name="arguments">Input arguments for this job..</param>
+        /// <param name="name">An optional name for this job. This name will be used a the display name for the run..</param>
+        /// <param name="description">Run description..</param>
+        /// <param name="labels">Optional user data as a dictionary. User data is for user reference only and will not be used in the execution of the job..</param>
+        public Job
         (
-             List<DAG> flow, // Required parameters
-            Dictionary<string, string> annotations= default, string apiVersion = "v1beta1", MetaData metadata= default, List<Dependency> dependencies= default// Optional parameters
+             string source, // Required parameters
+            Dictionary<string, string> annotations= default, string apiVersion = "v1beta1", List<AnyOf<JobArgument,JobPathArgument>> arguments= default, string name= default, string description= default, Dictionary<string, string> labels= default// Optional parameters
         ) : base()// BaseClass
         {
-            // to ensure "flow" is required (not null)
-            this.Flow = flow ?? throw new ArgumentNullException("flow is a required property for Recipe and cannot be null");
+            // to ensure "source" is required (not null)
+            this.Source = source ?? throw new ArgumentNullException("source is a required property for Job and cannot be null");
             this.Annotations = annotations;
             // use default value if no "apiVersion" provided
             this.ApiVersion = apiVersion ?? "v1beta1";
-            this.Metadata = metadata;
-            this.Dependencies = dependencies;
+            this.Arguments = arguments;
+            this.Name = name;
+            this.Description = description;
+            this.Labels = labels;
 
             // Set non-required readonly properties with defaultValue
-            this.Type = "Recipe";
+            this.Type = "Job";
         }
 
         /// <summary>
-        /// A list of tasks to create a DAG recipe.
+        /// The source url for downloading the recipe.
         /// </summary>
-        /// <value>A list of tasks to create a DAG recipe.</value>
-        [DataMember(Name = "flow", IsRequired = true, EmitDefaultValue = false)]
-        public List<DAG> Flow { get; set; } 
+        /// <value>The source url for downloading the recipe.</value>
+        [DataMember(Name = "source", IsRequired = true, EmitDefaultValue = false)]
+        public string Source { get; set; } 
         /// <summary>
         /// An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.
         /// </summary>
@@ -83,17 +87,29 @@ namespace QueenbeeSDK
         [DataMember(Name = "api_version", EmitDefaultValue = true)]
         public string ApiVersion { get; set; }  = "v1beta1";
         /// <summary>
-        /// Recipe metadata information.
+        /// Input arguments for this job.
         /// </summary>
-        /// <value>Recipe metadata information.</value>
-        [DataMember(Name = "metadata", EmitDefaultValue = false)]
-        public MetaData Metadata { get; set; } 
+        /// <value>Input arguments for this job.</value>
+        [DataMember(Name = "arguments", EmitDefaultValue = false)]
+        public List<AnyOf<JobArgument,JobPathArgument>> Arguments { get; set; } 
         /// <summary>
-        /// A list of plugins and other recipes this recipe depends on.
+        /// An optional name for this job. This name will be used a the display name for the run.
         /// </summary>
-        /// <value>A list of plugins and other recipes this recipe depends on.</value>
-        [DataMember(Name = "dependencies", EmitDefaultValue = false)]
-        public List<Dependency> Dependencies { get; set; } 
+        /// <value>An optional name for this job. This name will be used a the display name for the run.</value>
+        [DataMember(Name = "name", EmitDefaultValue = false)]
+        public string Name { get; set; } 
+        /// <summary>
+        /// Run description.
+        /// </summary>
+        /// <value>Run description.</value>
+        [DataMember(Name = "description", EmitDefaultValue = false)]
+        public string Description { get; set; } 
+        /// <summary>
+        /// Optional user data as a dictionary. User data is for user reference only and will not be used in the execution of the job.
+        /// </summary>
+        /// <value>Optional user data as a dictionary. User data is for user reference only and will not be used in the execution of the job.</value>
+        [DataMember(Name = "labels", EmitDefaultValue = false)]
+        public Dictionary<string, string> Labels { get; set; } 
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -101,7 +117,7 @@ namespace QueenbeeSDK
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            return "Recipe";
+            return "Job";
         }
 
         /// <summary>
@@ -114,23 +130,25 @@ namespace QueenbeeSDK
                 return this.ToString();
             
             var sb = new StringBuilder();
-            sb.Append("Recipe:\n");
+            sb.Append("Job:\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Flow: ").Append(Flow).Append("\n");
+            sb.Append("  Source: ").Append(Source).Append("\n");
             sb.Append("  Annotations: ").Append(Annotations).Append("\n");
             sb.Append("  ApiVersion: ").Append(ApiVersion).Append("\n");
-            sb.Append("  Metadata: ").Append(Metadata).Append("\n");
-            sb.Append("  Dependencies: ").Append(Dependencies).Append("\n");
+            sb.Append("  Arguments: ").Append(Arguments).Append("\n");
+            sb.Append("  Name: ").Append(Name).Append("\n");
+            sb.Append("  Description: ").Append(Description).Append("\n");
+            sb.Append("  Labels: ").Append(Labels).Append("\n");
             return sb.ToString();
         }
   
         /// <summary>
         /// Returns the object from JSON string
         /// </summary>
-        /// <returns>Recipe object</returns>
-        public static Recipe FromJson(string json)
+        /// <returns>Job object</returns>
+        public static Job FromJson(string json)
         {
-            var obj = JsonConvert.DeserializeObject<Recipe>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<Job>(json, JsonSetting.AnyOfConvertSetting);
             if (obj == null)
                 return null;
             return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
@@ -139,8 +157,8 @@ namespace QueenbeeSDK
         /// <summary>
         /// Creates a new instance with the same properties.
         /// </summary>
-        /// <returns>Recipe object</returns>
-        public virtual Recipe DuplicateRecipe()
+        /// <returns>Job object</returns>
+        public virtual Job DuplicateJob()
         {
             return FromJson(this.ToJson());
         }
@@ -151,7 +169,7 @@ namespace QueenbeeSDK
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return DuplicateRecipe();
+            return DuplicateJob();
         }
 
         /// <summary>
@@ -160,7 +178,7 @@ namespace QueenbeeSDK
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
         {
-            return DuplicateRecipe();
+            return DuplicateJob();
         }
      
         /// <summary>
@@ -170,24 +188,23 @@ namespace QueenbeeSDK
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as Recipe);
+            return this.Equals(input as Job);
         }
 
         /// <summary>
-        /// Returns true if Recipe instances are equal
+        /// Returns true if Job instances are equal
         /// </summary>
-        /// <param name="input">Instance of Recipe to be compared</param>
+        /// <param name="input">Instance of Job to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(Recipe input)
+        public bool Equals(Job input)
         {
             if (input == null)
                 return false;
             return base.Equals(input) && 
                 (
-                    this.Flow == input.Flow ||
-                    this.Flow != null &&
-                    input.Flow != null &&
-                    this.Flow.SequenceEqual(input.Flow)
+                    this.Source == input.Source ||
+                    (this.Source != null &&
+                    this.Source.Equals(input.Source))
                 ) && base.Equals(input) && 
                 (
                     this.Type == input.Type ||
@@ -206,15 +223,26 @@ namespace QueenbeeSDK
                     this.ApiVersion.Equals(input.ApiVersion))
                 ) && base.Equals(input) && 
                 (
-                    this.Metadata == input.Metadata ||
-                    (this.Metadata != null &&
-                    this.Metadata.Equals(input.Metadata))
+                    this.Arguments == input.Arguments ||
+                    this.Arguments != null &&
+                    input.Arguments != null &&
+                    this.Arguments.SequenceEqual(input.Arguments)
                 ) && base.Equals(input) && 
                 (
-                    this.Dependencies == input.Dependencies ||
-                    this.Dependencies != null &&
-                    input.Dependencies != null &&
-                    this.Dependencies.SequenceEqual(input.Dependencies)
+                    this.Name == input.Name ||
+                    (this.Name != null &&
+                    this.Name.Equals(input.Name))
+                ) && base.Equals(input) && 
+                (
+                    this.Description == input.Description ||
+                    (this.Description != null &&
+                    this.Description.Equals(input.Description))
+                ) && base.Equals(input) && 
+                (
+                    this.Labels == input.Labels ||
+                    this.Labels != null &&
+                    input.Labels != null &&
+                    this.Labels.SequenceEqual(input.Labels)
                 );
         }
 
@@ -227,18 +255,22 @@ namespace QueenbeeSDK
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                if (this.Flow != null)
-                    hashCode = hashCode * 59 + this.Flow.GetHashCode();
+                if (this.Source != null)
+                    hashCode = hashCode * 59 + this.Source.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Annotations != null)
                     hashCode = hashCode * 59 + this.Annotations.GetHashCode();
                 if (this.ApiVersion != null)
                     hashCode = hashCode * 59 + this.ApiVersion.GetHashCode();
-                if (this.Metadata != null)
-                    hashCode = hashCode * 59 + this.Metadata.GetHashCode();
-                if (this.Dependencies != null)
-                    hashCode = hashCode * 59 + this.Dependencies.GetHashCode();
+                if (this.Arguments != null)
+                    hashCode = hashCode * 59 + this.Arguments.GetHashCode();
+                if (this.Name != null)
+                    hashCode = hashCode * 59 + this.Name.GetHashCode();
+                if (this.Description != null)
+                    hashCode = hashCode * 59 + this.Description.GetHashCode();
+                if (this.Labels != null)
+                    hashCode = hashCode * 59 + this.Labels.GetHashCode();
                 return hashCode;
             }
         }
@@ -254,7 +286,7 @@ namespace QueenbeeSDK
 
             
             // Type (string) pattern
-            Regex regexType = new Regex(@"^Recipe$", RegexOptions.CultureInvariant);
+            Regex regexType = new Regex(@"^Job$", RegexOptions.CultureInvariant);
             if (false == regexType.Match(this.Type).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
