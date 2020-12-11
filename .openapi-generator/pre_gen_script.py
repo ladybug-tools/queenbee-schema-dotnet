@@ -2,6 +2,7 @@ import os
 import sys
 import json
 import shutil
+import re
 
 
 args = sys.argv[1:]
@@ -15,7 +16,8 @@ with open(model_json, "r") as jsonFile:
 
 print(version)
 version = version.replace('v', '')
-
+version = re.sub(r"[^0-9^.]", "", version)
+print(f'Cleaned version: {version}')
 
 config_file = os.path.join(os.getcwd(), '.openapi-config.json')
 

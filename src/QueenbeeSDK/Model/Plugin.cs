@@ -37,6 +37,7 @@ namespace QueenbeeSDK
         { 
             // Set non-required readonly properties with defaultValue
             this.Type = "Plugin";
+            this.ApiVersion = "v1beta1";
         }
         
         /// <summary>
@@ -46,11 +47,10 @@ namespace QueenbeeSDK
         /// <param name="config">The configuration information to run this plugin (required).</param>
         /// <param name="functions">List of Plugin functions (required).</param>
         /// <param name="annotations">An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries..</param>
-        /// <param name="apiVersion">apiVersion (default to &quot;v1beta1&quot;).</param>
         public Plugin
         (
              MetaData metadata, PluginConfig config, List<Function> functions, // Required parameters
-            Dictionary<string, string> annotations= default, string apiVersion = "v1beta1"// Optional parameters
+            Dictionary<string, string> annotations= default // Optional parameters
         ) : base()// BaseClass
         {
             // to ensure "metadata" is required (not null)
@@ -60,11 +60,10 @@ namespace QueenbeeSDK
             // to ensure "functions" is required (not null)
             this.Functions = functions ?? throw new ArgumentNullException("functions is a required property for Plugin and cannot be null");
             this.Annotations = annotations;
-            // use default value if no "apiVersion" provided
-            this.ApiVersion = apiVersion ?? "v1beta1";
 
             // Set non-required readonly properties with defaultValue
             this.Type = "Plugin";
+            this.ApiVersion = "v1beta1";
         }
 
         /// <summary>
@@ -91,11 +90,6 @@ namespace QueenbeeSDK
         /// <value>An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.</value>
         [DataMember(Name = "annotations", EmitDefaultValue = false)]
         public Dictionary<string, string> Annotations { get; set; } 
-        /// <summary>
-        /// Gets or Sets ApiVersion
-        /// </summary>
-        [DataMember(Name = "api_version", EmitDefaultValue = true)]
-        public string ApiVersion { get; set; }  = "v1beta1";
 
         /// <summary>
         /// Returns the string presentation of the object
