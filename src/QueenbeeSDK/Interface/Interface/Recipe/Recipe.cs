@@ -9,4 +9,5 @@ namespace QueenbeeSDK.Interface.Recipe
 namespace QueenbeeSDK
 {
 	public partial class Recipe: QueenbeeSDK.Interface.Recipe.IRecipe {}
+	public partial class RecipeInterface: QueenbeeSDK.Interface.Recipe.IRecipe {}
 }

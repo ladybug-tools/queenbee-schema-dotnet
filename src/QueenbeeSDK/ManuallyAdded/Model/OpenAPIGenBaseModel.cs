@@ -9,7 +9,9 @@ namespace QueenbeeSDK
         /// The default value is set to "InvalidSchemaObject", which should be overridden in subclass' constructor.
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
         public virtual string Type { get; protected internal set; } = "InvalidSchemaObject";
+
+        [DataMember(Name = "app_version", EmitDefaultValue = false)]
+        public virtual string ApiVersion { get; protected internal set; } = "";
     }
 }

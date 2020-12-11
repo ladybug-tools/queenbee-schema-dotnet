@@ -37,6 +37,7 @@ namespace QueenbeeSDK
         { 
             // Set non-required readonly properties with defaultValue
             this.Type = "Recipe";
+            this.ApiVersion = "v1beta1";
         }
         
         /// <summary>
@@ -44,25 +45,23 @@ namespace QueenbeeSDK
         /// </summary>
         /// <param name="flow">A list of tasks to create a DAG recipe. (required).</param>
         /// <param name="annotations">An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries..</param>
-        /// <param name="apiVersion">apiVersion (default to &quot;v1beta1&quot;).</param>
         /// <param name="metadata">Recipe metadata information..</param>
         /// <param name="dependencies">A list of plugins and other recipes this recipe depends on..</param>
         public Recipe
         (
              List<DAG> flow, // Required parameters
-            Dictionary<string, string> annotations= default, string apiVersion = "v1beta1", MetaData metadata= default, List<Dependency> dependencies= default// Optional parameters
+            Dictionary<string, string> annotations= default, MetaData metadata= default, List<Dependency> dependencies= default// Optional parameters
         ) : base()// BaseClass
         {
             // to ensure "flow" is required (not null)
             this.Flow = flow ?? throw new ArgumentNullException("flow is a required property for Recipe and cannot be null");
             this.Annotations = annotations;
-            // use default value if no "apiVersion" provided
-            this.ApiVersion = apiVersion ?? "v1beta1";
             this.Metadata = metadata;
             this.Dependencies = dependencies;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "Recipe";
+            this.ApiVersion = "v1beta1";
         }
 
         /// <summary>
@@ -77,11 +76,6 @@ namespace QueenbeeSDK
         /// <value>An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.</value>
         [DataMember(Name = "annotations", EmitDefaultValue = false)]
         public Dictionary<string, string> Annotations { get; set; } 
-        /// <summary>
-        /// Gets or Sets ApiVersion
-        /// </summary>
-        [DataMember(Name = "api_version", EmitDefaultValue = true)]
-        public string ApiVersion { get; set; }  = "v1beta1";
         /// <summary>
         /// Recipe metadata information.
         /// </summary>

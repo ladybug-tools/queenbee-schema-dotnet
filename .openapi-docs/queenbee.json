@@ -3,7 +3,7 @@
   "servers": [],
   "info": {
     "description": "Documentation for Queenbee schema.",
-    "version": "0.1.dev1+g326b731",
+    "version": "0.1.dev1+gb50912c",
     "title": "Queenbee Schema",
     "contact": {
       "name": "Ladybug Tools",
@@ -5490,6 +5490,7 @@
           "api_version": {
             "title": "Api Version",
             "default": "v1beta1",
+            "readOnly": true,
             "pattern": "^v1beta1$",
             "type": "string"
           },
@@ -7097,6 +7098,7 @@
           "api_version": {
             "title": "Api Version",
             "default": "v1beta1",
+            "readOnly": true,
             "pattern": "^v1beta1$",
             "type": "string"
           }
@@ -7220,6 +7222,7 @@
           "api_version": {
             "title": "Api Version",
             "default": "v1beta1",
+            "readOnly": true,
             "pattern": "^v1beta1$",
             "type": "string"
           },

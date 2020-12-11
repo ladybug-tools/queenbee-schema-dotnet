@@ -37,6 +37,7 @@ namespace QueenbeeSDK
         { 
             // Set non-required readonly properties with defaultValue
             this.Type = "Job";
+            this.ApiVersion = "v1beta1";
         }
         
         /// <summary>
@@ -44,7 +45,6 @@ namespace QueenbeeSDK
         /// </summary>
         /// <param name="source">The source url for downloading the recipe. (required).</param>
         /// <param name="annotations">An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries..</param>
-        /// <param name="apiVersion">apiVersion (default to &quot;v1beta1&quot;).</param>
         /// <param name="arguments">Input arguments for this job..</param>
         /// <param name="name">An optional name for this job. This name will be used a the display name for the run..</param>
         /// <param name="description">Run description..</param>
@@ -52,14 +52,12 @@ namespace QueenbeeSDK
         public Job
         (
              string source, // Required parameters
-            Dictionary<string, string> annotations= default, string apiVersion = "v1beta1", List<AnyOf<JobArgument,JobPathArgument>> arguments= default, string name= default, string description= default, Dictionary<string, string> labels= default// Optional parameters
+            Dictionary<string, string> annotations= default, List<AnyOf<JobArgument,JobPathArgument>> arguments= default, string name= default, string description= default, Dictionary<string, string> labels= default// Optional parameters
         ) : base()// BaseClass
         {
             // to ensure "source" is required (not null)
             this.Source = source ?? throw new ArgumentNullException("source is a required property for Job and cannot be null");
             this.Annotations = annotations;
-            // use default value if no "apiVersion" provided
-            this.ApiVersion = apiVersion ?? "v1beta1";
             this.Arguments = arguments;
             this.Name = name;
             this.Description = description;
@@ -67,6 +65,7 @@ namespace QueenbeeSDK
 
             // Set non-required readonly properties with defaultValue
             this.Type = "Job";
+            this.ApiVersion = "v1beta1";
         }
 
         /// <summary>
@@ -81,11 +80,6 @@ namespace QueenbeeSDK
         /// <value>An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.</value>
         [DataMember(Name = "annotations", EmitDefaultValue = false)]
         public Dictionary<string, string> Annotations { get; set; } 
-        /// <summary>
-        /// Gets or Sets ApiVersion
-        /// </summary>
-        [DataMember(Name = "api_version", EmitDefaultValue = true)]
-        public string ApiVersion { get; set; }  = "v1beta1";
         /// <summary>
         /// Input arguments for this job.
         /// </summary>
