@@ -59,6 +59,13 @@ namespace QueenbeeSDK
             this.Type = "DAGLinkedOutputAlias";
         }
 
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "DAGLinkedOutputAlias";
+
 
         /// <summary>
         /// Returns the string presentation of the object

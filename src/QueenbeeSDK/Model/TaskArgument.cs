@@ -47,7 +47,7 @@ namespace QueenbeeSDK
         /// <param name="annotations">An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries..</param>
         public TaskArgument
         (
-             string name, AnyOf<InputReference,TaskReference,ItemReference,ValueReference> from, // Required parameters
+            string name, AnyOf<InputReference,TaskReference,ItemReference,ValueReference> from, // Required parameters
             Dictionary<string, string> annotations= default// Optional parameters
         ) : base()// BaseClass
         {
@@ -60,6 +60,13 @@ namespace QueenbeeSDK
             // Set non-required readonly properties with defaultValue
             this.Type = "TaskArgument";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "TaskArgument";
 
         /// <summary>
         /// Argument name. The name must match one of the input names from Task&#39;s template which can be a function or DAG.

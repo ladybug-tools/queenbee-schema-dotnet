@@ -60,6 +60,13 @@ namespace QueenbeeSDK
             this.Type = "StepFileOutput";
         }
 
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "StepFileOutput";
+
         /// <summary>
         /// The path to source the file from.
         /// </summary>

@@ -60,6 +60,13 @@ namespace QueenbeeSDK
             this.Type = "StepStringOutput";
         }
 
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "StepStringOutput";
+
         /// <summary>
         /// Gets or Sets Value
         /// </summary>

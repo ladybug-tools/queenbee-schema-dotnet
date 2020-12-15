@@ -48,7 +48,7 @@ namespace QueenbeeSDK
         /// <param name="subPath">A sub_path inside the path that is provided in the &#x60;&#x60;from&#x60;&#x60; field. Use sub_path to only access part of the Path that is needed instead of copying all the files and folders inside the path..</param>
         public TaskPathArgument
         (
-             string name, AnyOf<InputFileReference,InputFolderReference,InputPathReference,TaskFileReference,TaskFolderReference,TaskPathReference,ValueFileReference,ValueFolderReference> from, // Required parameters
+            string name, AnyOf<InputFileReference,InputFolderReference,InputPathReference,TaskFileReference,TaskFolderReference,TaskPathReference,ValueFileReference,ValueFolderReference> from, // Required parameters
             Dictionary<string, string> annotations= default, string subPath= default// Optional parameters
         ) : base()// BaseClass
         {
@@ -62,6 +62,13 @@ namespace QueenbeeSDK
             // Set non-required readonly properties with defaultValue
             this.Type = "TaskPathArgument";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "TaskPathArgument";
 
         /// <summary>
         /// Argument name. The name must match one of the input names from Task&#39;s template which can be a function or DAG.

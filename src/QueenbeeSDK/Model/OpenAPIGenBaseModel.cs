@@ -44,6 +44,14 @@ namespace QueenbeeSDK
             this.Type = "InvalidType";
         }
 
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// A base class to use when there is no baseclass available to fall on.
+        /// </summary>
+        /// <value>A base class to use when there is no baseclass available to fall on.</value>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "InvalidType";
+
 
         /// <summary>
         /// Returns the string presentation of the object

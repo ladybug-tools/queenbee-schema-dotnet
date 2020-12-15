@@ -61,6 +61,13 @@ namespace QueenbeeSDK
             this.Type = "DAGNumberOutput";
         }
 
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "DAGNumberOutput";
+
         /// <summary>
         /// Reference to a file or a task output. Task output must be file.
         /// </summary>

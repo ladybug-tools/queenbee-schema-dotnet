@@ -63,7 +63,7 @@ namespace QueenbeeSDK
         /// <param name="manifest">The package Recipe or Plugin manifest.</param>
         public PackageVersion
         (
-             string name, string tag, string url, DateTime created, string digest, // Required parameters
+            string name, string tag, string url, DateTime created, string digest, // Required parameters
             Dictionary<string, string> annotations= default, string appVersion= default, List<string> keywords= default, List<Maintainer> maintainers= default, string home= default, List<string> sources= default, string icon= default, bool deprecated= default, string description= default, License license= default, string slug= default, string kind = "", string readme= default, AnyOf<Recipe,Plugin> manifest= default // Optional parameters
         ) : base()// BaseClass
         {
@@ -95,6 +95,13 @@ namespace QueenbeeSDK
             // Set non-required readonly properties with defaultValue
             this.Type = "PackageVersion";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "PackageVersion";
 
         /// <summary>
         /// Package name. Make it descriptive and helpful ;)

@@ -65,6 +65,13 @@ namespace QueenbeeSDK
             this.Type = "DAGPathOutputAlias";
         }
 
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "DAGPathOutputAlias";
+
         /// <summary>
         /// Reference to a file, folder or a task output. Task output must either be a file or a folder.
         /// </summary>

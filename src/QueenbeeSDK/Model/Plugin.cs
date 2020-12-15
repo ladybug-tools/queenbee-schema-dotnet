@@ -49,7 +49,7 @@ namespace QueenbeeSDK
         /// <param name="annotations">An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries..</param>
         public Plugin
         (
-             MetaData metadata, PluginConfig config, List<Function> functions, // Required parameters
+            MetaData metadata, PluginConfig config, List<Function> functions, // Required parameters
             Dictionary<string, string> annotations= default // Optional parameters
         ) : base()// BaseClass
         {
@@ -65,6 +65,19 @@ namespace QueenbeeSDK
             this.Type = "Plugin";
             this.ApiVersion = "v1beta1";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "Plugin";
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets ApiVersion
+        /// </summary>
+        [DataMember(Name = "api_version", EmitDefaultValue = true)]
+        public string ApiVersion { get; protected internal set; }  = "v1beta1";
 
         /// <summary>
         /// The Plugin metadata information

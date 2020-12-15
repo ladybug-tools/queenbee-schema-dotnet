@@ -55,6 +55,13 @@ namespace QueenbeeSDK
             this.Type = "InputFileReference";
         }
 
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "InputFileReference";
+
 
         /// <summary>
         /// Returns the string presentation of the object

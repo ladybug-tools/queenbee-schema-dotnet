@@ -60,6 +60,13 @@ namespace QueenbeeSDK
             this.Type = "FunctionStringInput";
         }
 
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "FunctionStringInput";
+
 
         /// <summary>
         /// Returns the string presentation of the object

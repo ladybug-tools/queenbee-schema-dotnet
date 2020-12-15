@@ -47,7 +47,7 @@ namespace QueenbeeSDK
         /// <param name="email">The email address of the author/maintainer person or organization..</param>
         public Maintainer
         (
-             string name, // Required parameters
+            string name, // Required parameters
             Dictionary<string, string> annotations= default, string email= default// Optional parameters
         ) : base()// BaseClass
         {
@@ -59,6 +59,13 @@ namespace QueenbeeSDK
             // Set non-required readonly properties with defaultValue
             this.Type = "Maintainer";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "Maintainer";
 
         /// <summary>
         /// The name of the author/maintainer person or organization.

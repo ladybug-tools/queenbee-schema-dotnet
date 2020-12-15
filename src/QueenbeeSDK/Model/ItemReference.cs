@@ -46,6 +46,13 @@ namespace QueenbeeSDK
             this.Type = "ItemReference";
         }
 
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "ItemReference";
+
         /// <summary>
         /// The name of the looped item variable (use dot notation for nested json values)
         /// </summary>

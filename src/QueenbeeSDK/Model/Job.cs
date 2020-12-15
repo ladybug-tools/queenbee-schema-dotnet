@@ -51,7 +51,7 @@ namespace QueenbeeSDK
         /// <param name="labels">Optional user data as a dictionary. User data is for user reference only and will not be used in the execution of the job..</param>
         public Job
         (
-             string source, // Required parameters
+            string source, // Required parameters
             Dictionary<string, string> annotations= default, List<AnyOf<JobArgument,JobPathArgument>> arguments= default, string name= default, string description= default, Dictionary<string, string> labels= default// Optional parameters
         ) : base()// BaseClass
         {
@@ -67,6 +67,19 @@ namespace QueenbeeSDK
             this.Type = "Job";
             this.ApiVersion = "v1beta1";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "Job";
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets ApiVersion
+        /// </summary>
+        [DataMember(Name = "api_version", EmitDefaultValue = true)]
+        public string ApiVersion { get; protected internal set; }  = "v1beta1";
 
         /// <summary>
         /// The source url for downloading the recipe.

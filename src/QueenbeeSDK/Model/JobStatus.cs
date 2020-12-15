@@ -56,7 +56,7 @@ namespace QueenbeeSDK
         /// <param name="steps">steps.</param>
         public JobStatus
         (
-             List<AnyOf<StepStringInput,StepIntegerInput,StepNumberInput,StepBooleanInput,StepFolderInput,StepFileInput,StepPathInput,StepArrayInput,StepJSONObjectInput>> inputs, List<AnyOf<StepStringOutput,StepIntegerOutput,StepNumberOutput,StepBooleanOutput,StepFolderOutput,StepFileOutput,StepPathOutput,StepArrayOutput,StepJSONObjectOutput>> outputs, string status, DateTime startedAt, string id, // Required parameters
+            List<AnyOf<StepStringInput,StepIntegerInput,StepNumberInput,StepBooleanInput,StepFolderInput,StepFileInput,StepPathInput,StepArrayInput,StepJSONObjectInput>> inputs, List<AnyOf<StepStringOutput,StepIntegerOutput,StepNumberOutput,StepBooleanOutput,StepFolderOutput,StepFileOutput,StepPathOutput,StepArrayOutput,StepJSONObjectOutput>> outputs, string status, DateTime startedAt, string id, // Required parameters
             Dictionary<string, string> annotations= default, string message= default, DateTime finishedAt= default, string source= default, string entrypoint= default, Dictionary<string, StepStatus> steps= default // Optional parameters
         ) : base()// BaseClass
         {
@@ -80,6 +80,19 @@ namespace QueenbeeSDK
             this.ApiVersion = "v1beta1";
             this.Type = "JobStatus";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets ApiVersion
+        /// </summary>
+        [DataMember(Name = "api_version", EmitDefaultValue = true)]
+        public string ApiVersion { get; protected internal set; }  = "v1beta1";
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "JobStatus";
 
         /// <summary>
         /// The inputs used for this job.

@@ -48,7 +48,7 @@ namespace QueenbeeSDK
         /// <param name="annotations">An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries..</param>
         public IOAliasHandler
         (
-             string language, string module, string function, // Required parameters
+            string language, string module, string function, // Required parameters
             Dictionary<string, string> annotations= default// Optional parameters
         ) : base()// BaseClass
         {
@@ -63,6 +63,13 @@ namespace QueenbeeSDK
             // Set non-required readonly properties with defaultValue
             this.Type = "IOAliasHandler";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "IOAliasHandler";
 
         /// <summary>
         /// Declare the language (e.g. python, csharp, etc.). This option allows the recipe to be flexible on handling different programming languages.

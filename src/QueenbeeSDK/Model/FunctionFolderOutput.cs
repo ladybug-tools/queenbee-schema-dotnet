@@ -57,6 +57,13 @@ namespace QueenbeeSDK
             this.Type = "FunctionFolderOutput";
         }
 
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "FunctionFolderOutput";
+
 
         /// <summary>
         /// Returns the string presentation of the object

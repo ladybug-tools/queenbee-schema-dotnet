@@ -52,7 +52,7 @@ namespace QueenbeeSDK
         /// <param name="returns">List of task returns..</param>
         public DAGTask
         (
-             string name, string template, // Required parameters
+            string name, string template, // Required parameters
             Dictionary<string, string> annotations= default, List<string> needs= default, List<AnyOf<TaskArgument,TaskPathArgument>> arguments= default, DAGTaskLoop loop= default, string subFolder= default, List<AnyOf<TaskReturn,TaskPathReturn>> returns= default// Optional parameters
         ) : base()// BaseClass
         {
@@ -70,6 +70,13 @@ namespace QueenbeeSDK
             // Set non-required readonly properties with defaultValue
             this.Type = "DAGTask";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "DAGTask";
 
         /// <summary>
         /// Name for this task. It must be unique in a DAG.

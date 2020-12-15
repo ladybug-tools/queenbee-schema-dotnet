@@ -46,7 +46,7 @@ namespace QueenbeeSDK
         /// <param name="annotations">An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries..</param>
         public ValueReference
         (
-             object value, // Required parameters
+            object value, // Required parameters
             Dictionary<string, string> annotations= default // Optional parameters
         ) : base(annotations: annotations)// BaseClass
         {
@@ -56,6 +56,13 @@ namespace QueenbeeSDK
             // Set non-required readonly properties with defaultValue
             this.Type = "ValueReference";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "ValueReference";
 
         /// <summary>
         /// A fixed value for this reference.

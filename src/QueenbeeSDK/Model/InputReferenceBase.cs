@@ -46,7 +46,7 @@ namespace QueenbeeSDK
         /// <param name="annotations">An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries..</param>
         public InputReferenceBase
         (
-             string variable, // Required parameters
+            string variable, // Required parameters
             Dictionary<string, string> annotations= default // Optional parameters
         ) : base(annotations: annotations)// BaseClass
         {
@@ -56,6 +56,13 @@ namespace QueenbeeSDK
             // Set non-required readonly properties with defaultValue
             this.Type = "_InputReferenceBase";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "_InputReferenceBase";
 
         /// <summary>
         /// The name of the DAG input variable

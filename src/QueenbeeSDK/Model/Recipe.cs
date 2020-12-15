@@ -49,7 +49,7 @@ namespace QueenbeeSDK
         /// <param name="dependencies">A list of plugins and other recipes this recipe depends on..</param>
         public Recipe
         (
-             List<DAG> flow, // Required parameters
+            List<DAG> flow, // Required parameters
             Dictionary<string, string> annotations= default, MetaData metadata= default, List<Dependency> dependencies= default// Optional parameters
         ) : base()// BaseClass
         {
@@ -63,6 +63,19 @@ namespace QueenbeeSDK
             this.Type = "Recipe";
             this.ApiVersion = "v1beta1";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "Recipe";
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets ApiVersion
+        /// </summary>
+        [DataMember(Name = "api_version", EmitDefaultValue = true)]
+        public string ApiVersion { get; protected internal set; }  = "v1beta1";
 
         /// <summary>
         /// A list of tasks to create a DAG recipe.

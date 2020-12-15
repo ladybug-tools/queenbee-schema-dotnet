@@ -57,7 +57,7 @@ namespace QueenbeeSDK
         /// <param name="alias">An optional alias to refer to this dependency. Useful if the name is already used somewhere else..</param>
         public Dependency
         (
-             DependencyKind kind, string name, string tag, string source, // Required parameters
+            DependencyKind kind, string name, string tag, string source, // Required parameters
             Dictionary<string, string> annotations= default, string hash= default, string alias= default// Optional parameters
         ) : base()// BaseClass
         {
@@ -75,6 +75,13 @@ namespace QueenbeeSDK
             // Set non-required readonly properties with defaultValue
             this.Type = "Dependency";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "Dependency";
 
         /// <summary>
         /// Workflow name. This name should be unique among all the resources in your resource. Use an alias if this is not the case.

@@ -64,6 +64,13 @@ namespace QueenbeeSDK
             this.Type = "DAGFolderInput";
         }
 
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "DAGFolderInput";
+
         /// <summary>
         /// The default source for file if the value is not provided.
         /// </summary>

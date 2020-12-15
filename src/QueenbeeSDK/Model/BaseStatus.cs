@@ -52,7 +52,7 @@ namespace QueenbeeSDK
         /// <param name="outputs">Place-holder. Overwrite this!.</param>
         public BaseStatus
         (
-             string status, DateTime startedAt, // Required parameters
+            string status, DateTime startedAt, // Required parameters
             Dictionary<string, string> annotations= default, List<object> inputs= default, List<object> outputs= default, string message= default, DateTime finishedAt= default, string source= default // Optional parameters
         ) : base(annotations: annotations, inputs: inputs, outputs: outputs)// BaseClass
         {
@@ -66,6 +66,13 @@ namespace QueenbeeSDK
             // Set non-required readonly properties with defaultValue
             this.Type = "BaseStatus";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "BaseStatus";
 
         /// <summary>
         /// The status of this task. Can be \&quot;Running\&quot;, \&quot;Succeeded\&quot;, \&quot;Failed\&quot; or \&quot;Error\&quot;
