@@ -49,7 +49,7 @@ namespace QueenbeeSDK
         /// <param name="annotations">An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries..</param>
         public S3
         (
-             string key, string endpoint, string bucket, // Required parameters
+            string key, string endpoint, string bucket, // Required parameters
             Dictionary<string, string> annotations= default, string credentialsPath= default // Optional parameters
         ) : base(annotations: annotations)// BaseClass
         {
@@ -64,6 +64,13 @@ namespace QueenbeeSDK
             // Set non-required readonly properties with defaultValue
             this.Type = "S3";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "S3";
 
         /// <summary>
         /// The path inside the bucket to source artifacts from.

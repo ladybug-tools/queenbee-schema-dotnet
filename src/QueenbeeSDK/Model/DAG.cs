@@ -50,7 +50,7 @@ namespace QueenbeeSDK
         /// <param name="failFast">Stop scheduling new steps, as soon as it detects that one of the DAG nodes is failed. Default is True. (default to true).</param>
         public DAG
         (
-             string name, List<DAGTask> tasks, // Required parameters
+            string name, List<DAGTask> tasks, // Required parameters
             Dictionary<string, string> annotations= default, List<AnyOf<DAGGenericInput,DAGStringInput,DAGIntegerInput,DAGNumberInput,DAGBooleanInput,DAGFolderInput,DAGFileInput,DAGPathInput,DAGArrayInput,DAGJSONObjectInput>> inputs= default, List<AnyOf<DAGGenericOutput,DAGStringOutput,DAGIntegerOutput,DAGNumberOutput,DAGBooleanOutput,DAGFolderOutput,DAGFileOutput,DAGPathOutput,DAGArrayOutput,DAGJSONObjectOutput>> outputs= default, bool failFast = true // Optional parameters
         ) : base()// BaseClass
         {
@@ -66,6 +66,13 @@ namespace QueenbeeSDK
             // Set non-required readonly properties with defaultValue
             this.Type = "DAG";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "DAG";
 
         /// <summary>
         /// A unique name for this dag.

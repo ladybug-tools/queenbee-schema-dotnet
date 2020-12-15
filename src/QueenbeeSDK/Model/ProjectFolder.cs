@@ -46,6 +46,13 @@ namespace QueenbeeSDK
             this.Type = "ProjectFolder";
         }
 
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "ProjectFolder";
+
         /// <summary>
         /// The path to a folder where files and folders can be sourced. For a local filesystem this can be \&quot;C:\\Users\\me\\jobs\\test\&quot;.
         /// </summary>

@@ -56,7 +56,7 @@ namespace QueenbeeSDK
         /// <param name="license">The license information..</param>
         public MetaData
         (
-             string name, string tag, // Required parameters
+            string name, string tag, // Required parameters
             Dictionary<string, string> annotations= default, string appVersion= default, List<string> keywords= default, List<Maintainer> maintainers= default, string home= default, List<string> sources= default, string icon= default, bool deprecated= default, string description= default, License license= default// Optional parameters
         ) : base()// BaseClass
         {
@@ -78,6 +78,13 @@ namespace QueenbeeSDK
             // Set non-required readonly properties with defaultValue
             this.Type = "MetaData";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "MetaData";
 
         /// <summary>
         /// Package name. Make it descriptive and helpful ;)

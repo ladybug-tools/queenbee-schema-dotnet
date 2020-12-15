@@ -47,7 +47,7 @@ namespace QueenbeeSDK
         /// <param name="local">The configuration to use this plugin locally.</param>
         public PluginConfig
         (
-             DockerConfig docker, // Required parameters
+            DockerConfig docker, // Required parameters
             Dictionary<string, string> annotations= default, LocalConfig local= default// Optional parameters
         ) : base()// BaseClass
         {
@@ -59,6 +59,13 @@ namespace QueenbeeSDK
             // Set non-required readonly properties with defaultValue
             this.Type = "PluginConfig";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "PluginConfig";
 
         /// <summary>
         /// The configuration to use this plugin in a docker container

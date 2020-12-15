@@ -48,7 +48,7 @@ namespace QueenbeeSDK
         /// <param name="registry">The container registry URLs that this container should be pulled from. Will default to Dockerhub if none is specified..</param>
         public DockerConfig
         (
-             string image, string workdir, // Required parameters
+            string image, string workdir, // Required parameters
             Dictionary<string, string> annotations= default, string registry= default// Optional parameters
         ) : base()// BaseClass
         {
@@ -62,6 +62,13 @@ namespace QueenbeeSDK
             // Set non-required readonly properties with defaultValue
             this.Type = "DockerConfig";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "DockerConfig";
 
         /// <summary>
         /// Docker image name. Must include tag.

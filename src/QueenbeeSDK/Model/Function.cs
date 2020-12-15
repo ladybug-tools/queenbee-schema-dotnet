@@ -50,7 +50,7 @@ namespace QueenbeeSDK
         /// <param name="description">Function description. A short human readable description for this function..</param>
         public Function
         (
-             string name, string command, // Required parameters
+            string name, string command, // Required parameters
             Dictionary<string, string> annotations= default, List<AnyOf<FunctionStringInput,FunctionIntegerInput,FunctionNumberInput,FunctionBooleanInput,FunctionFolderInput,FunctionFileInput,FunctionPathInput,FunctionArrayInput,FunctionJSONObjectInput>> inputs= default, List<AnyOf<FunctionStringOutput,FunctionIntegerOutput,FunctionNumberOutput,FunctionBooleanOutput,FunctionFolderOutput,FunctionFileOutput,FunctionPathOutput,FunctionArrayOutput,FunctionJSONObjectOutput>> outputs= default, string description= default // Optional parameters
         ) : base()// BaseClass
         {
@@ -66,6 +66,13 @@ namespace QueenbeeSDK
             // Set non-required readonly properties with defaultValue
             this.Type = "Function";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "Function";
 
         /// <summary>
         /// Function name. Must be unique within a plugin.

@@ -66,7 +66,7 @@ namespace QueenbeeSDK
         /// <param name="boundaryId">This indicates the step ID of the associated template root             step in which this step belongs to. A DAG step will have the id of the             parent DAG for example..</param>
         public StepStatus
         (
-             List<AnyOf<StepStringInput,StepIntegerInput,StepNumberInput,StepBooleanInput,StepFolderInput,StepFileInput,StepPathInput,StepArrayInput,StepJSONObjectInput>> inputs, List<AnyOf<StepStringOutput,StepIntegerOutput,StepNumberOutput,StepBooleanOutput,StepFolderOutput,StepFileOutput,StepPathOutput,StepArrayOutput,StepJSONObjectOutput>> outputs, string status, DateTime startedAt, string id, string name, StatusType statusType, string templateRef, List<string> childrenIds, List<string> outboundSteps, // Required parameters
+            List<AnyOf<StepStringInput,StepIntegerInput,StepNumberInput,StepBooleanInput,StepFolderInput,StepFileInput,StepPathInput,StepArrayInput,StepJSONObjectInput>> inputs, List<AnyOf<StepStringOutput,StepIntegerOutput,StepNumberOutput,StepBooleanOutput,StepFolderOutput,StepFileOutput,StepPathOutput,StepArrayOutput,StepJSONObjectOutput>> outputs, string status, DateTime startedAt, string id, string name, StatusType statusType, string templateRef, List<string> childrenIds, List<string> outboundSteps, // Required parameters
             Dictionary<string, string> annotations= default, string message= default, DateTime finishedAt= default, string source= default, string command= default, string boundaryId= default // Optional parameters
         ) : base()// BaseClass
         {
@@ -98,6 +98,13 @@ namespace QueenbeeSDK
             // Set non-required readonly properties with defaultValue
             this.Type = "StepStatus";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "StepStatus";
 
         /// <summary>
         /// The inputs used by this step.

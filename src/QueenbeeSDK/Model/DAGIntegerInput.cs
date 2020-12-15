@@ -64,6 +64,13 @@ namespace QueenbeeSDK
             this.Type = "DAGIntegerInput";
         }
 
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "DAGIntegerInput";
+
         /// <summary>
         /// Default value to use for an input if a value was not supplied.
         /// </summary>

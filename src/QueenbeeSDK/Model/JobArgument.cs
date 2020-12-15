@@ -47,7 +47,7 @@ namespace QueenbeeSDK
         /// <param name="annotations">An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries..</param>
         public JobArgument
         (
-             string name, string value, // Required parameters
+            string name, string value, // Required parameters
             Dictionary<string, string> annotations= default// Optional parameters
         ) : base()// BaseClass
         {
@@ -60,6 +60,13 @@ namespace QueenbeeSDK
             // Set non-required readonly properties with defaultValue
             this.Type = "JobArgument";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "JobArgument";
 
         /// <summary>
         /// Argument name. The name must match one of the input names from Job&#39;s DAG template.

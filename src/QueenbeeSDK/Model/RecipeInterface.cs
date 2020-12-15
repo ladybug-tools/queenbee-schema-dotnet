@@ -50,7 +50,7 @@ namespace QueenbeeSDK
         /// <param name="outputs">A list of recipe outputs..</param>
         public RecipeInterface
         (
-             MetaData metadata, // Required parameters
+            MetaData metadata, // Required parameters
             Dictionary<string, string> annotations= default, string source= default, List<AnyOf<DAGGenericInput,DAGStringInput,DAGIntegerInput,DAGNumberInput,DAGBooleanInput,DAGFolderInput,DAGFileInput,DAGPathInput,DAGArrayInput,DAGJSONObjectInput>> inputs= default, List<AnyOf<DAGGenericOutput,DAGStringOutput,DAGIntegerOutput,DAGNumberOutput,DAGBooleanOutput,DAGFolderOutput,DAGFileOutput,DAGPathOutput,DAGArrayOutput,DAGJSONObjectOutput>> outputs= default// Optional parameters
         ) : base()// BaseClass
         {
@@ -65,6 +65,19 @@ namespace QueenbeeSDK
             this.Type = "RecipeInterface";
             this.ApiVersion = "v1beta1";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "RecipeInterface";
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets ApiVersion
+        /// </summary>
+        [DataMember(Name = "api_version", EmitDefaultValue = true)]
+        public string ApiVersion { get; protected internal set; }  = "v1beta1";
 
         /// <summary>
         /// Recipe metadata information.

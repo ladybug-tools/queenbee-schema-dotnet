@@ -47,7 +47,7 @@ namespace QueenbeeSDK
         /// <param name="url">A URL to the license used for the package..</param>
         public License
         (
-             string name, // Required parameters
+            string name, // Required parameters
             Dictionary<string, string> annotations= default, string url= default// Optional parameters
         ) : base()// BaseClass
         {
@@ -59,6 +59,13 @@ namespace QueenbeeSDK
             // Set non-required readonly properties with defaultValue
             this.Type = "License";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "License";
 
         /// <summary>
         /// The license name used for the package.
