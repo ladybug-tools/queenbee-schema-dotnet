@@ -43,7 +43,7 @@ def get_allof_types(obj, allofList):
 def fix_constructor(read_data):
     regexs = [
         r"(?<=(\w|\d)),\s*,\s*(?=\w)",
-        r"(?<=\(\n\s{12})\s*(,)(?=\s\w*.*, \/\/ Required parameters)", # remove "," at begining of required
+        r"(?<=\(\n\s{12})\s*(,\s*)(?=\w*.*, \/\/ Required parameters)", # remove "," at begining of required
         r"(?<=\/\/ Required parameters\n\s{12})(,\s){1,}(?=\s*\w)",      # remove "," at begining of optional
         r"(?<=\w)(,\s){2,}(?=\s*\/\/ Required parameters\s*\n\s*(\w|,))",
         r"(,\s)+(?=\s*\/\/ Optional parameters)",
@@ -198,6 +198,16 @@ def replace_AnyType(read_data):
     return data
     
 
+def add_override_to_type_property(read_data):
+    data = read_data
+    replace_source = "public string Type { get; protected internal set; }"
+    replace_new = "public override string Type { get; protected internal set; }"
+    rex = replace_source
+    if re.findall(rex, data) != []:
+        data = re.sub(rex, replace_new, data)
+    return data
+
+
 def replace_anyof_type(read_data, anyof_types):
     data = read_data
     for items in anyof_types:
@@ -232,6 +242,7 @@ def check_csfiles(source_folder, anyof_types):
         # replace decimal/number to double
         # data = replace_decimal(data)
         data = fix_constructor(data)
+        data = add_override_to_type_property(data)
         f.close()
 
         # save data
@@ -271,6 +282,11 @@ def check_types(source_json_url, mapper_json):
     root = os.path.dirname(os.path.dirname(__file__))
     source_folder = os.path.join(root, 'src', name_space, 'Model')
     check_csfiles(source_folder, all_types)
+
+    source_folder = os.path.join(root, 'src', name_space, 'Api')
+    if os.path.exists(source_folder):
+        check_csfiles(source_folder, all_types)
+
 
 
 def cleanup(projectName):
