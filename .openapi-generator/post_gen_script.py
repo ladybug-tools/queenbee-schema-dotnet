@@ -208,6 +208,16 @@ def add_override_to_type_property(read_data):
     return data
 
 
+def change_spec_type(read_data):
+    data = read_data
+    replace_source = "this.Spec.Equals\(input.Spec\)\)"
+    replace_new = "this.Spec.ToString().Equals(input.Spec.ToString()))"
+    rex = replace_source
+    if re.findall(rex, data) != []:
+        data = re.sub(rex, replace_new, data)
+    return data
+
+
 def replace_anyof_type(read_data, anyof_types):
     data = read_data
     for items in anyof_types:
@@ -243,6 +253,7 @@ def check_csfiles(source_folder, anyof_types):
         # data = replace_decimal(data)
         data = fix_constructor(data)
         data = add_override_to_type_property(data)
+        data = change_spec_type(data)
         f.close()
 
         # save data
