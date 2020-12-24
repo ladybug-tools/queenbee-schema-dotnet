@@ -192,6 +192,7 @@ namespace QueenbeeSDK
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
+            input = input is AnyOf anyOf ? anyOf.Obj : input;
             return this.Equals(input as FunctionPathInput);
         }
 
@@ -229,7 +230,7 @@ namespace QueenbeeSDK
                 (
                     this.Spec == input.Spec ||
                     (this.Spec != null &&
-                    this.Spec.Equals(input.Spec))
+                    this.Spec.ToString().Equals(input.Spec.ToString()))
                 ) && base.Equals(input) && 
                 (
                     this.Extensions == input.Extensions ||
