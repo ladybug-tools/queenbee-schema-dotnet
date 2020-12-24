@@ -95,16 +95,15 @@ namespace QueenbeeSDK.Test
 
             Assert.IsTrue(value > 0);
 
-            var input = this.instance.Inputs.OfType<DAGFileInput>().First();
+            var input = this.instance.Inputs.OfType<DAGFileInput>().First(_ => _.Name == "model");
             Assert.IsTrue(input != null);
             Assert.IsTrue(input.Type == "DAGFileInput");
-            Assert.IsTrue(input.Name == "input-grid");
         }
 
         [Test]
         public void InputAliasTest()
         {
-            var input = this.instance.Inputs.OfType<DAGFileInput>().First(_=>_.Name == "model_hbjson");
+            var input = this.instance.Inputs.OfType<DAGFileInput>().First(_=>_.Name == "model");
             Assert.IsTrue(input != null);
 
             var alias = input.Alias.OfType<DAGGenericInputAlias>().First();
@@ -112,7 +111,7 @@ namespace QueenbeeSDK.Test
             Assert.IsTrue(alias.Platform.First() == "grasshopper");
 
             var pythonHandler = alias.Handler.OfType<IOAliasHandler>().First(_ => _.Language == "python");
-            Assert.IsTrue(pythonHandler.Function == "hb_model_to_hbjson");
+            Assert.IsTrue(pythonHandler.Function == "model_to_json_path");
 
         }
 
@@ -124,11 +123,10 @@ namespace QueenbeeSDK.Test
 
             Assert.IsTrue(value > 0);
 
-            var input = this.instance.Outputs.OfType<DAGFolderOutput>().First();
+            var input = this.instance.Outputs.OfType<DAGFolderOutput>().First(_ => _.Name == "results");
             Assert.IsTrue(input != null);
-            Assert.IsTrue(input.Name == "data");
 
-            Assert.IsTrue(input.From.Obj is TaskReference);
+            Assert.IsTrue(input.From.Obj is FolderReference);
         }
         /// <summary>
         /// Test the property 'Tasks'
