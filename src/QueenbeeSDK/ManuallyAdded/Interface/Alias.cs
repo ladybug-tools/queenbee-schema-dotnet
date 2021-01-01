@@ -13,3 +13,16 @@ namespace QueenbeeSDK.Interface.Io.Inputs
 
 }
 
+
+namespace QueenbeeSDK.Interface.Io.Outputs
+{
+
+    public partial interface IAlias : IoBase
+    {
+        List<string> Platform { get; set; }
+        List<IOAliasHandler> Handler { get; set; }
+
+    }
+
+
+}

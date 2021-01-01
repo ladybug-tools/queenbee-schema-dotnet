@@ -9,3 +9,11 @@ namespace QueenbeeSDK.Interface.Io.Inputs
 	}
 }
 
+namespace QueenbeeSDK.Interface.Io.Outputs
+{
+	public partial interface IDag : IoBase
+	{
+		List<AnyOf<DAGGenericOutputAlias, DAGStringOutputAlias, DAGIntegerOutputAlias, DAGNumberOutputAlias, DAGBooleanOutputAlias, DAGFolderOutputAlias, DAGFileOutputAlias, DAGPathOutputAlias, DAGArrayOutputAlias, DAGJSONObjectOutputAlias, DAGLinkedOutputAlias>> Alias { get; set; }
+
+	}
+}
