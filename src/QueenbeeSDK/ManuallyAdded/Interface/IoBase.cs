@@ -12,3 +12,14 @@ namespace QueenbeeSDK.Interface.Io.Inputs
     }
 
 }
+
+namespace QueenbeeSDK.Interface.Io.Outputs
+{
+    public partial interface IoBase
+    {
+        string Name { get; set; }
+        Dictionary<string, string> Annotations { get; set; }
+        string Description { get; set; }
+    }
+
+}
