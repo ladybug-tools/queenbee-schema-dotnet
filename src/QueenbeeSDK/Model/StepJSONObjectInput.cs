@@ -52,8 +52,8 @@ namespace QueenbeeSDK
         /// <param name="description">Optional description for input..</param>
         public StepJSONObjectInput
         (
-            string name, AnyOf<array,object> value, // Required parameters
-            Dictionary<string, string> annotations= default, string description= default, AnyOf<array,object> _default= default, List<AnyOf<DAGGenericInputAlias,DAGStringInputAlias,DAGIntegerInputAlias,DAGNumberInputAlias,DAGBooleanInputAlias,DAGFolderInputAlias,DAGFileInputAlias,DAGPathInputAlias,DAGArrayInputAlias,DAGJSONObjectInputAlias,DAGLinkedInputAlias>> alias= default, bool required = false, Object spec= default // Optional parameters
+            string name, object value, // Required parameters
+            Dictionary<string, string> annotations= default, string description= default, object _default= default, List<AnyOf<DAGGenericInputAlias,DAGStringInputAlias,DAGIntegerInputAlias,DAGNumberInputAlias,DAGBooleanInputAlias,DAGFolderInputAlias,DAGFileInputAlias,DAGPathInputAlias,DAGArrayInputAlias,DAGJSONObjectInputAlias,DAGLinkedInputAlias>> alias= default, bool required = false, Object spec= default // Optional parameters
         ) : base(name: name, annotations: annotations, description: description)// BaseClass
         {
             // to ensure "value" is required (not null)
@@ -78,13 +78,13 @@ namespace QueenbeeSDK
         /// Gets or Sets Value
         /// </summary>
         [DataMember(Name = "value", IsRequired = true, EmitDefaultValue = false)]
-        public AnyOf<array,object> Value { get; set; } 
+        public object Value { get; set; } 
         /// <summary>
         /// Default value to use for an input if a value was not supplied.
         /// </summary>
         /// <value>Default value to use for an input if a value was not supplied.</value>
         [DataMember(Name = "default", EmitDefaultValue = false)]
-        public AnyOf<array,object> Default { get; set; } 
+        public object Default { get; set; } 
         /// <summary>
         /// A list of aliases for this input in different platforms.
         /// </summary>
