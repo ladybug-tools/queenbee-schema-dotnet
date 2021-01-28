@@ -52,7 +52,7 @@ namespace QueenbeeSDK
         public FunctionJSONObjectInput
         (
             string name, // Required parameters
-            Dictionary<string, string> annotations= default, string description= default, AnyOf<array,object> _default= default, List<AnyOf<DAGGenericInputAlias,DAGStringInputAlias,DAGIntegerInputAlias,DAGNumberInputAlias,DAGBooleanInputAlias,DAGFolderInputAlias,DAGFileInputAlias,DAGPathInputAlias,DAGArrayInputAlias,DAGJSONObjectInputAlias,DAGLinkedInputAlias>> alias= default, bool required = false, Object spec= default // Optional parameters
+            Dictionary<string, string> annotations= default, string description= default, object _default= default, List<AnyOf<DAGGenericInputAlias,DAGStringInputAlias,DAGIntegerInputAlias,DAGNumberInputAlias,DAGBooleanInputAlias,DAGFolderInputAlias,DAGFileInputAlias,DAGPathInputAlias,DAGArrayInputAlias,DAGJSONObjectInputAlias,DAGLinkedInputAlias>> alias= default, bool required = false, Object spec= default // Optional parameters
         ) : base(name: name, annotations: annotations, description: description)// BaseClass
         {
             this.Default = _default;
@@ -76,7 +76,7 @@ namespace QueenbeeSDK
         /// </summary>
         /// <value>Default value to use for an input if a value was not supplied.</value>
         [DataMember(Name = "default", EmitDefaultValue = false)]
-        public AnyOf<array,object> Default { get; set; } 
+        public object Default { get; set; } 
         /// <summary>
         /// A list of aliases for this input in different platforms.
         /// </summary>
