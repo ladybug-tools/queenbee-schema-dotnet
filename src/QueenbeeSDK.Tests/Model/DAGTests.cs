@@ -24,29 +24,29 @@ namespace QueenbeeSDK.Test
         public void Init()
         {
             // load from url
-            //var url = @"https://raw.githubusercontent.com/ladybug-tools/queenbee/io-refactor/tests/assets/recipes/baked/daylight-factor.yaml";
-            //using (var wc = new WebClient())
-            //{
-            //    var yaml = wc.DownloadString(url);
-            //    var deserializer = new YamlDotNet.Serialization.Deserializer();
-            //    var yamlObject = deserializer.Deserialize(new StringReader(yaml));
+            var url = @"https://raw.githubusercontent.com/pollination/queenbee/master/tests/assets/recipes/valid/daylight-factor.yaml";
+            using (var wc = new WebClient())
+            {
+                var yaml = wc.DownloadString(url);
+                var deserializer = new YamlDotNet.Serialization.Deserializer();
+                var yamlObject = deserializer.Deserialize(new StringReader(yaml));
 
-            //    var json = JsonConvert.SerializeObject(yamlObject);
-            //    var recipe = Recipe.FromJson(json);
+                var json = JsonConvert.SerializeObject(yamlObject);
+                var recipe = Recipe.FromJson(json);
 
-            //    this.instance = recipe.Flow.First();
-            //}
+                this.instance = recipe.Flow.First();
+            }
 
 
-            // load local yaml file
-            var path = @"..\..\..\TestSource\daylight-factor.yaml";
-            string yaml = System.IO.File.ReadAllText(path);
-            var deserializer = new YamlDotNet.Serialization.Deserializer();
-            var yamlObject = deserializer.Deserialize(new StringReader(yaml));
+            //// load local yaml file
+            //var path = @"..\..\..\TestSource\daylight-factor.yaml";
+            //string yaml = System.IO.File.ReadAllText(path);
+            //var deserializer = new YamlDotNet.Serialization.Deserializer();
+            //var yamlObject = deserializer.Deserialize(new StringReader(yaml));
 
-            var json = JsonConvert.SerializeObject(yamlObject);
-            var recipe = Recipe.FromJson(json);
-            this.instance = recipe.Flow.First();
+            //var json = JsonConvert.SerializeObject(yamlObject);
+            //var recipe = Recipe.FromJson(json);
+            //this.instance = recipe.Flow.First();
 
 
             // load local json file
@@ -95,7 +95,7 @@ namespace QueenbeeSDK.Test
 
             Assert.IsTrue(value > 0);
 
-            var input = this.instance.Inputs.OfType<DAGFileInput>().First(_ => _.Name == "model");
+            var input = this.instance.Inputs.OfType<DAGFileInput>().First(_ => _.Name.Contains("model"));
             Assert.IsTrue(input != null);
             Assert.IsTrue(input.Type == "DAGFileInput");
         }
@@ -103,7 +103,7 @@ namespace QueenbeeSDK.Test
         [Test]
         public void InputAliasTest()
         {
-            var input = this.instance.Inputs.OfType<DAGFileInput>().First(_=>_.Name == "model");
+            var input = this.instance.Inputs.OfType<DAGFileInput>().First(_=>_.Name.Contains("model"));
             Assert.IsTrue(input != null);
 
             var alias = input.Alias.OfType<DAGGenericInputAlias>().First();
@@ -111,7 +111,7 @@ namespace QueenbeeSDK.Test
             Assert.IsTrue(alias.Platform.First() == "grasshopper");
 
             var pythonHandler = alias.Handler.OfType<IOAliasHandler>().First(_ => _.Language == "python");
-            Assert.IsTrue(pythonHandler.Function == "model_to_json_path");
+            Assert.IsTrue(pythonHandler.Function == "hb_model_to_hbjson");
 
         }
 
@@ -123,10 +123,10 @@ namespace QueenbeeSDK.Test
 
             Assert.IsTrue(value > 0);
 
-            var input = this.instance.Outputs.OfType<DAGFolderOutput>().First(_ => _.Name == "results");
+            var input = this.instance.Outputs.OfType<DAGFolderOutput>().First(_ => _.Name == "data");
             Assert.IsTrue(input != null);
 
-            Assert.IsTrue(input.From.Obj is FolderReference);
+            Assert.IsTrue(input.From.Obj is TaskReference);
         }
         /// <summary>
         /// Test the property 'Tasks'
