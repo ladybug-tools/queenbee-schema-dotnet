@@ -1,7 +1,10 @@
-﻿using NUnit.Framework;
+﻿using Newtonsoft.Json;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 
 namespace QueenbeeSDK.Test
@@ -13,15 +16,28 @@ namespace QueenbeeSDK.Test
         [SetUp]
         public void Init()
         {
-            // load local yaml file
-            var path = @"..\..\..\TestSource\daylight-factor.yaml";
-            string yaml = System.IO.File.ReadAllText(path);
-            var deserializer = new YamlDotNet.Serialization.Deserializer();
-            var yamlObject = deserializer.Deserialize(new System.IO.StringReader(yaml));
+            var url = @"https://raw.githubusercontent.com/pollination/queenbee/master/tests/assets/recipes/valid/daylight-factor.yaml";
+            using (var wc = new WebClient())
+            {
+                var yaml = wc.DownloadString(url);
+                var deserializer = new YamlDotNet.Serialization.Deserializer();
+                var yamlObject = deserializer.Deserialize(new StringReader(yaml));
 
-            var json = Newtonsoft.Json.JsonConvert.SerializeObject(yamlObject);
-            var recipe = Recipe.FromJson(json);
-            this.instance = recipe;
+                var json = JsonConvert.SerializeObject(yamlObject);
+                var recipe = Recipe.FromJson(json);
+
+                this.instance = recipe;
+            }
+
+            //// load local yaml file
+            //var path = @"..\..\..\TestSource\daylight-factor.yaml";
+            //string yaml = System.IO.File.ReadAllText(path);
+            //var deserializer = new YamlDotNet.Serialization.Deserializer();
+            //var yamlObject = deserializer.Deserialize(new System.IO.StringReader(yaml));
+
+            //var json = Newtonsoft.Json.JsonConvert.SerializeObject(yamlObject);
+            //var recipe = Recipe.FromJson(json);
+            //this.instance = recipe;
 
         }
 
