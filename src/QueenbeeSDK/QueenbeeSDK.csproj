@@ -10,10 +10,10 @@
     <Company>Ladybug Tools</Company>
     <AssemblyTitle>QueenbeeSDK</AssemblyTitle>
     <Description>This is the .Net version of Queenbee Schema</Description>
-    <Copyright>Copyright © 2020 Ladybug Tools LLC</Copyright>
+    <Copyright>Copyright © 2021 Ladybug Tools LLC</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RootNamespace>QueenbeeSDK</RootNamespace>
-    <Version>0.1.6</Version>
+    <Version>1.22.15.0</Version>
     <DocumentationFile></DocumentationFile>
     <RepositoryUrl>https://github.com/ladybug-tools/queenbee-schema-dotnet</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>

@@ -46,11 +46,12 @@ namespace QueenbeeSDK
         /// <param name="annotations">An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries..</param>
         /// <param name="description">Optional description for output..</param>
         /// <param name="path">Path to the output artifact relative to where the function command is executed. (required).</param>
+        /// <param name="required">A boolean to indicate if an artifact output is required. A False value makes the artifact optional. (default to true).</param>
         public FunctionStringOutput
         (
             string name, string path, // Required parameters
-            Dictionary<string, string> annotations= default, string description= default // Optional parameters
-        ) : base(name: name, annotations: annotations, description: description, path: path)// BaseClass
+            Dictionary<string, string> annotations= default, string description= default, bool required = true // Optional parameters
+        ) : base(name: name, annotations: annotations, description: description, path: path, required: required)// BaseClass
         {
 
             // Set non-required readonly properties with defaultValue
@@ -90,6 +91,7 @@ namespace QueenbeeSDK
             sb.Append("  Annotations: ").Append(Annotations).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  Path: ").Append(Path).Append("\n");
+            sb.Append("  Required: ").Append(Required).Append("\n");
             return sb.ToString();
         }
   

@@ -3,7 +3,7 @@
   "servers": [],
   "info": {
     "description": "Documentation for Queenbee schema.",
-    "version": "1.22.5",
+    "version": "1.22.15",
     "title": "Queenbee Schema",
     "contact": {
       "name": "Ladybug Tools",
@@ -824,8 +824,7 @@
         },
         "required": [
           "name"
-        ],
-        "additionalProperties": false
+        ]
       },
       "License": {
         "title": "License",
@@ -863,8 +862,7 @@
         },
         "required": [
           "name"
-        ],
-        "additionalProperties": false
+        ]
       },
       "MetaData": {
         "title": "MetaData",
@@ -958,8 +956,7 @@
         "required": [
           "name",
           "tag"
-        ],
-        "additionalProperties": false
+        ]
       },
       "DependencyKind": {
         "title": "DependencyKind",
@@ -1033,8 +1030,7 @@
           "name",
           "tag",
           "source"
-        ],
-        "additionalProperties": false
+        ]
       },
       "IOAliasHandler": {
         "title": "IOAliasHandler",
@@ -1077,8 +1073,7 @@
           "language",
           "module",
           "function"
-        ],
-        "additionalProperties": false
+        ]
       },
       "DAGGenericInputAlias": {
         "title": "DAGGenericInputAlias",
@@ -1147,8 +1142,7 @@
           "name",
           "platform",
           "handler"
-        ],
-        "additionalProperties": false
+        ]
       },
       "DAGStringInputAlias": {
         "title": "DAGStringInputAlias",
@@ -1217,8 +1211,7 @@
           "name",
           "platform",
           "handler"
-        ],
-        "additionalProperties": false
+        ]
       },
       "DAGIntegerInputAlias": {
         "title": "DAGIntegerInputAlias",
@@ -1288,8 +1281,7 @@
           "name",
           "platform",
           "handler"
-        ],
-        "additionalProperties": false
+        ]
       },
       "DAGNumberInputAlias": {
         "title": "DAGNumberInputAlias",
@@ -1359,8 +1351,7 @@
           "name",
           "platform",
           "handler"
-        ],
-        "additionalProperties": false
+        ]
       },
       "DAGBooleanInputAlias": {
         "title": "DAGBooleanInputAlias",
@@ -1429,8 +1420,7 @@
           "name",
           "platform",
           "handler"
-        ],
-        "additionalProperties": false
+        ]
       },
       "HTTP": {
         "title": "HTTP",
@@ -1460,8 +1450,7 @@
         },
         "required": [
           "url"
-        ],
-        "additionalProperties": false
+        ]
       },
       "S3": {
         "title": "S3",
@@ -1508,8 +1497,7 @@
           "key",
           "endpoint",
           "bucket"
-        ],
-        "additionalProperties": false
+        ]
       },
       "ProjectFolder": {
         "title": "ProjectFolder",
@@ -1536,8 +1524,7 @@
             "description": "The path to a folder where files and folders can be sourced. For a local filesystem this can be \"C:\\Users\\me\\jobs\\test\".",
             "type": "string"
           }
-        },
-        "additionalProperties": false
+        }
       },
       "DAGFolderInputAlias": {
         "title": "DAGFolderInputAlias",
@@ -1616,8 +1603,7 @@
           "name",
           "platform",
           "handler"
-        ],
-        "additionalProperties": false
+        ]
       },
       "DAGFileInputAlias": {
         "title": "DAGFileInputAlias",
@@ -1704,8 +1690,7 @@
           "name",
           "platform",
           "handler"
-        ],
-        "additionalProperties": false
+        ]
       },
       "DAGPathInputAlias": {
         "title": "DAGPathInputAlias",
@@ -1792,21 +1777,17 @@
           "name",
           "platform",
           "handler"
-        ],
-        "additionalProperties": false
+        ]
       },
       "ItemType": {
         "title": "ItemType",
-        "description": "Type enum for items in a list.",
+        "description": "Type enum for items in a list.\n\nItems can not be files or folder. For a list of files you should copy them to a\nfolder and use FolderInput input instead of using ArrayInput.",
         "enum": [
           "Generic",
           "String",
           "Integer",
           "Number",
           "Boolean",
-          "File",
-          "Folder",
-          "Path",
           "Array",
           "JSONObject"
         ],
@@ -1814,7 +1795,7 @@
       },
       "DAGArrayInputAlias": {
         "title": "DAGArrayInputAlias",
-        "description": "An array input.\n\nYou can add additional validation by defining a JSONSchema specification.\n\nSee http://json-schema.org/understanding-json-schema/reference/array.html for\nmore information.",
+        "description": "A JSON array input.\n\nYou can add additional validation by defining a JSONSchema specification.\n\nSee http://json-schema.org/understanding-json-schema/reference/array.html for\nmore information.",
         "type": "object",
         "properties": {
           "name": {
@@ -1889,8 +1870,7 @@
           "name",
           "platform",
           "handler"
-        ],
-        "additionalProperties": false
+        ]
       },
       "DAGJSONObjectInputAlias": {
         "title": "DAGJSONObjectInputAlias",
@@ -1941,7 +1921,15 @@
           "default": {
             "title": "Default",
             "description": "Default value to use for an input if a value was not supplied.",
-            "type": "object"
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {}
+              },
+              {
+                "type": "object"
+              }
+            ]
           },
           "required": {
             "title": "Required",
@@ -1959,8 +1947,7 @@
           "name",
           "platform",
           "handler"
-        ],
-        "additionalProperties": false
+        ]
       },
       "DAGLinkedInputAlias": {
         "title": "DAGLinkedInputAlias",
@@ -2029,8 +2016,7 @@
           "name",
           "platform",
           "handler"
-        ],
-        "additionalProperties": false
+        ]
       },
       "DAGGenericInput": {
         "title": "DAGGenericInput",
@@ -2123,8 +2109,7 @@
         },
         "required": [
           "name"
-        ],
-        "additionalProperties": false
+        ]
       },
       "DAGStringInput": {
         "title": "DAGStringInput",
@@ -2217,8 +2202,7 @@
         },
         "required": [
           "name"
-        ],
-        "additionalProperties": false
+        ]
       },
       "DAGIntegerInput": {
         "title": "DAGIntegerInput",
@@ -2312,8 +2296,7 @@
         },
         "required": [
           "name"
-        ],
-        "additionalProperties": false
+        ]
       },
       "DAGNumberInput": {
         "title": "DAGNumberInput",
@@ -2407,8 +2390,7 @@
         },
         "required": [
           "name"
-        ],
-        "additionalProperties": false
+        ]
       },
       "DAGBooleanInput": {
         "title": "DAGBooleanInput",
@@ -2501,8 +2483,7 @@
         },
         "required": [
           "name"
-        ],
-        "additionalProperties": false
+        ]
       },
       "DAGFolderInput": {
         "title": "DAGFolderInput",
@@ -2605,8 +2586,7 @@
         },
         "required": [
           "name"
-        ],
-        "additionalProperties": false
+        ]
       },
       "DAGFileInput": {
         "title": "DAGFileInput",
@@ -2717,8 +2697,7 @@
         },
         "required": [
           "name"
-        ],
-        "additionalProperties": false
+        ]
       },
       "DAGPathInput": {
         "title": "DAGPathInput",
@@ -2829,12 +2808,11 @@
         },
         "required": [
           "name"
-        ],
-        "additionalProperties": false
+        ]
       },
       "DAGArrayInput": {
         "title": "DAGArrayInput",
-        "description": "An array input.\n\nYou can add additional validation by defining a JSONSchema specification.\n\nSee http://json-schema.org/understanding-json-schema/reference/array.html for\nmore information.",
+        "description": "A JSON array input.\n\nYou can add additional validation by defining a JSONSchema specification.\n\nSee http://json-schema.org/understanding-json-schema/reference/array.html for\nmore information.",
         "type": "object",
         "properties": {
           "name": {
@@ -2933,8 +2911,7 @@
         },
         "required": [
           "name"
-        ],
-        "additionalProperties": false
+        ]
       },
       "DAGJSONObjectInput": {
         "title": "DAGJSONObjectInput",
@@ -2969,7 +2946,15 @@
           "default": {
             "title": "Default",
             "description": "Default value to use for an input if a value was not supplied.",
-            "type": "object"
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {}
+              },
+              {
+                "type": "object"
+              }
+            ]
           },
           "alias": {
             "title": "Alias",
@@ -3027,8 +3012,7 @@
         },
         "required": [
           "name"
-        ],
-        "additionalProperties": false
+        ]
       },
       "DAGGenericOutputAlias": {
         "title": "DAGGenericOutputAlias",
@@ -3039,10 +3023,6 @@
             "title": "Name",
             "description": "Output name.",
             "type": "string"
-          },
-          "from": {
-            "title": "From",
-            "description": "Reference to a file or a task output. Task output must be file."
           },
           "platform": {
             "title": "Platform",
@@ -3083,11 +3063,9 @@
         },
         "required": [
           "name",
-          "from",
           "platform",
           "handler"
-        ],
-        "additionalProperties": false
+        ]
       },
       "TaskReference": {
         "title": "TaskReference",
@@ -3123,8 +3101,7 @@
         "required": [
           "name",
           "variable"
-        ],
-        "additionalProperties": false
+        ]
       },
       "FileReference": {
         "title": "FileReference",
@@ -3154,8 +3131,7 @@
         },
         "required": [
           "path"
-        ],
-        "additionalProperties": false
+        ]
       },
       "DAGStringOutputAlias": {
         "title": "DAGStringOutputAlias",
@@ -3166,18 +3142,6 @@
             "title": "Name",
             "description": "Output name.",
             "type": "string"
-          },
-          "from": {
-            "title": "From",
-            "description": "Reference to a file or a task output. Task output must be file.",
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/TaskReference"
-              },
-              {
-                "$ref": "#/components/schemas/FileReference"
-              }
-            ]
           },
           "platform": {
             "title": "Platform",
@@ -3194,6 +3158,18 @@
             "items": {
               "$ref": "#/components/schemas/IOAliasHandler"
             }
+          },
+          "from": {
+            "title": "From",
+            "description": "Reference to a file or a task output. Task output must be file.",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TaskReference"
+              },
+              {
+                "$ref": "#/components/schemas/FileReference"
+              }
+            ]
           },
           "type": {
             "title": "Type",
@@ -3214,15 +3190,20 @@
             "title": "Description",
             "description": "Optional description for output.",
             "type": "string"
+          },
+          "required": {
+            "title": "Required",
+            "description": "A boolean to indicate if an artifact output is required. A False value makes the artifact optional.",
+            "default": true,
+            "type": "boolean"
           }
         },
         "required": [
           "name",
-          "from",
           "platform",
-          "handler"
-        ],
-        "additionalProperties": false
+          "handler",
+          "from"
+        ]
       },
       "DAGIntegerOutputAlias": {
         "title": "DAGIntegerOutputAlias",
@@ -3233,18 +3214,6 @@
             "title": "Name",
             "description": "Output name.",
             "type": "string"
-          },
-          "from": {
-            "title": "From",
-            "description": "Reference to a file or a task output. Task output must be file.",
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/TaskReference"
-              },
-              {
-                "$ref": "#/components/schemas/FileReference"
-              }
-            ]
           },
           "platform": {
             "title": "Platform",
@@ -3261,6 +3230,18 @@
             "items": {
               "$ref": "#/components/schemas/IOAliasHandler"
             }
+          },
+          "from": {
+            "title": "From",
+            "description": "Reference to a file or a task output. Task output must be file.",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TaskReference"
+              },
+              {
+                "$ref": "#/components/schemas/FileReference"
+              }
+            ]
           },
           "type": {
             "title": "Type",
@@ -3281,15 +3262,20 @@
             "title": "Description",
             "description": "Optional description for output.",
             "type": "string"
+          },
+          "required": {
+            "title": "Required",
+            "description": "A boolean to indicate if an artifact output is required. A False value makes the artifact optional.",
+            "default": true,
+            "type": "boolean"
           }
         },
         "required": [
           "name",
-          "from",
           "platform",
-          "handler"
-        ],
-        "additionalProperties": false
+          "handler",
+          "from"
+        ]
       },
       "DAGNumberOutputAlias": {
         "title": "DAGNumberOutputAlias",
@@ -3300,18 +3286,6 @@
             "title": "Name",
             "description": "Output name.",
             "type": "string"
-          },
-          "from": {
-            "title": "From",
-            "description": "Reference to a file or a task output. Task output must be file.",
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/TaskReference"
-              },
-              {
-                "$ref": "#/components/schemas/FileReference"
-              }
-            ]
           },
           "platform": {
             "title": "Platform",
@@ -3328,6 +3302,18 @@
             "items": {
               "$ref": "#/components/schemas/IOAliasHandler"
             }
+          },
+          "from": {
+            "title": "From",
+            "description": "Reference to a file or a task output. Task output must be file.",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TaskReference"
+              },
+              {
+                "$ref": "#/components/schemas/FileReference"
+              }
+            ]
           },
           "type": {
             "title": "Type",
@@ -3348,15 +3334,20 @@
             "title": "Description",
             "description": "Optional description for output.",
             "type": "string"
+          },
+          "required": {
+            "title": "Required",
+            "description": "A boolean to indicate if an artifact output is required. A False value makes the artifact optional.",
+            "default": true,
+            "type": "boolean"
           }
         },
         "required": [
           "name",
-          "from",
           "platform",
-          "handler"
-        ],
-        "additionalProperties": false
+          "handler",
+          "from"
+        ]
       },
       "DAGBooleanOutputAlias": {
         "title": "DAGBooleanOutputAlias",
@@ -3367,18 +3358,6 @@
             "title": "Name",
             "description": "Output name.",
             "type": "string"
-          },
-          "from": {
-            "title": "From",
-            "description": "Reference to a file or a task output. Task output must be file.",
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/TaskReference"
-              },
-              {
-                "$ref": "#/components/schemas/FileReference"
-              }
-            ]
           },
           "platform": {
             "title": "Platform",
@@ -3395,6 +3374,18 @@
             "items": {
               "$ref": "#/components/schemas/IOAliasHandler"
             }
+          },
+          "from": {
+            "title": "From",
+            "description": "Reference to a file or a task output. Task output must be file.",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TaskReference"
+              },
+              {
+                "$ref": "#/components/schemas/FileReference"
+              }
+            ]
           },
           "type": {
             "title": "Type",
@@ -3415,15 +3406,20 @@
             "title": "Description",
             "description": "Optional description for output.",
             "type": "string"
+          },
+          "required": {
+            "title": "Required",
+            "description": "A boolean to indicate if an artifact output is required. A False value makes the artifact optional.",
+            "default": true,
+            "type": "boolean"
           }
         },
         "required": [
           "name",
-          "from",
           "platform",
-          "handler"
-        ],
-        "additionalProperties": false
+          "handler",
+          "from"
+        ]
       },
       "FolderReference": {
         "title": "FolderReference",
@@ -3453,8 +3449,7 @@
         },
         "required": [
           "path"
-        ],
-        "additionalProperties": false
+        ]
       },
       "DAGFolderOutputAlias": {
         "title": "DAGFolderOutputAlias",
@@ -3465,18 +3460,6 @@
             "title": "Name",
             "description": "Output name.",
             "type": "string"
-          },
-          "from": {
-            "title": "From",
-            "description": "Reference to a folder or a task output. Task output must be folder.",
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/TaskReference"
-              },
-              {
-                "$ref": "#/components/schemas/FolderReference"
-              }
-            ]
           },
           "platform": {
             "title": "Platform",
@@ -3493,6 +3476,18 @@
             "items": {
               "$ref": "#/components/schemas/IOAliasHandler"
             }
+          },
+          "from": {
+            "title": "From",
+            "description": "Reference to a folder or a task output. Task output must be folder.",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TaskReference"
+              },
+              {
+                "$ref": "#/components/schemas/FolderReference"
+              }
+            ]
           },
           "type": {
             "title": "Type",
@@ -3513,15 +3508,20 @@
             "title": "Description",
             "description": "Optional description for output.",
             "type": "string"
+          },
+          "required": {
+            "title": "Required",
+            "description": "A boolean to indicate if an artifact output is required. A False value makes the artifact optional.",
+            "default": true,
+            "type": "boolean"
           }
         },
         "required": [
           "name",
-          "from",
           "platform",
-          "handler"
-        ],
-        "additionalProperties": false
+          "handler",
+          "from"
+        ]
       },
       "DAGFileOutputAlias": {
         "title": "DAGFileOutputAlias",
@@ -3532,18 +3532,6 @@
             "title": "Name",
             "description": "Output name.",
             "type": "string"
-          },
-          "from": {
-            "title": "From",
-            "description": "Reference to a file or a task output. Task output must be file.",
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/TaskReference"
-              },
-              {
-                "$ref": "#/components/schemas/FileReference"
-              }
-            ]
           },
           "platform": {
             "title": "Platform",
@@ -3560,6 +3548,18 @@
             "items": {
               "$ref": "#/components/schemas/IOAliasHandler"
             }
+          },
+          "from": {
+            "title": "From",
+            "description": "Reference to a file or a task output. Task output must be file.",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TaskReference"
+              },
+              {
+                "$ref": "#/components/schemas/FileReference"
+              }
+            ]
           },
           "type": {
             "title": "Type",
@@ -3580,15 +3580,20 @@
             "title": "Description",
             "description": "Optional description for output.",
             "type": "string"
+          },
+          "required": {
+            "title": "Required",
+            "description": "A boolean to indicate if an artifact output is required. A False value makes the artifact optional.",
+            "default": true,
+            "type": "boolean"
           }
         },
         "required": [
           "name",
-          "from",
           "platform",
-          "handler"
-        ],
-        "additionalProperties": false
+          "handler",
+          "from"
+        ]
       },
       "DAGPathOutputAlias": {
         "title": "DAGPathOutputAlias",
@@ -3599,21 +3604,6 @@
             "title": "Name",
             "description": "Output name.",
             "type": "string"
-          },
-          "from": {
-            "title": "From",
-            "description": "Reference to a file, folder or a task output. Task output must either be a file or a folder.",
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/TaskReference"
-              },
-              {
-                "$ref": "#/components/schemas/FileReference"
-              },
-              {
-                "$ref": "#/components/schemas/FolderReference"
-              }
-            ]
           },
           "platform": {
             "title": "Platform",
@@ -3630,6 +3620,21 @@
             "items": {
               "$ref": "#/components/schemas/IOAliasHandler"
             }
+          },
+          "from": {
+            "title": "From",
+            "description": "Reference to a file, folder or a task output. Task output must either be a file or a folder.",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TaskReference"
+              },
+              {
+                "$ref": "#/components/schemas/FileReference"
+              },
+              {
+                "$ref": "#/components/schemas/FolderReference"
+              }
+            ]
           },
           "type": {
             "title": "Type",
@@ -3650,15 +3655,20 @@
             "title": "Description",
             "description": "Optional description for output.",
             "type": "string"
+          },
+          "required": {
+            "title": "Required",
+            "description": "A boolean to indicate if an artifact output is required. A False value makes the artifact optional.",
+            "default": true,
+            "type": "boolean"
           }
         },
         "required": [
           "name",
-          "from",
           "platform",
-          "handler"
-        ],
-        "additionalProperties": false
+          "handler",
+          "from"
+        ]
       },
       "DAGArrayOutputAlias": {
         "title": "DAGArrayOutputAlias",
@@ -3669,18 +3679,6 @@
             "title": "Name",
             "description": "Output name.",
             "type": "string"
-          },
-          "from": {
-            "title": "From",
-            "description": "Reference to a file or a task output. Task output must be file.",
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/TaskReference"
-              },
-              {
-                "$ref": "#/components/schemas/FileReference"
-              }
-            ]
           },
           "platform": {
             "title": "Platform",
@@ -3697,6 +3695,18 @@
             "items": {
               "$ref": "#/components/schemas/IOAliasHandler"
             }
+          },
+          "from": {
+            "title": "From",
+            "description": "Reference to a file or a task output. Task output must be file.",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TaskReference"
+              },
+              {
+                "$ref": "#/components/schemas/FileReference"
+              }
+            ]
           },
           "type": {
             "title": "Type",
@@ -3718,6 +3728,12 @@
             "description": "Optional description for output.",
             "type": "string"
           },
+          "required": {
+            "title": "Required",
+            "description": "A boolean to indicate if an artifact output is required. A False value makes the artifact optional.",
+            "default": true,
+            "type": "boolean"
+          },
           "items_type": {
             "description": "Type of items in this array. All the items in an array must be from the same type.",
             "default": "String",
@@ -3730,11 +3746,10 @@
         },
         "required": [
           "name",
-          "from",
           "platform",
-          "handler"
-        ],
-        "additionalProperties": false
+          "handler",
+          "from"
+        ]
       },
       "DAGJSONObjectOutputAlias": {
         "title": "DAGJSONObjectOutputAlias",
@@ -3745,18 +3760,6 @@
             "title": "Name",
             "description": "Output name.",
             "type": "string"
-          },
-          "from": {
-            "title": "From",
-            "description": "Reference to a file or a task output. Task output must be file.",
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/TaskReference"
-              },
-              {
-                "$ref": "#/components/schemas/FileReference"
-              }
-            ]
           },
           "platform": {
             "title": "Platform",
@@ -3773,6 +3776,18 @@
             "items": {
               "$ref": "#/components/schemas/IOAliasHandler"
             }
+          },
+          "from": {
+            "title": "From",
+            "description": "Reference to a file or a task output. Task output must be file.",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TaskReference"
+              },
+              {
+                "$ref": "#/components/schemas/FileReference"
+              }
+            ]
           },
           "type": {
             "title": "Type",
@@ -3793,15 +3808,20 @@
             "title": "Description",
             "description": "Optional description for output.",
             "type": "string"
+          },
+          "required": {
+            "title": "Required",
+            "description": "A boolean to indicate if an artifact output is required. A False value makes the artifact optional.",
+            "default": true,
+            "type": "boolean"
           }
         },
         "required": [
           "name",
-          "from",
           "platform",
-          "handler"
-        ],
-        "additionalProperties": false
+          "handler",
+          "from"
+        ]
       },
       "DAGLinkedOutputAlias": {
         "title": "DAGLinkedOutputAlias",
@@ -3812,10 +3832,6 @@
             "title": "Name",
             "description": "Output name.",
             "type": "string"
-          },
-          "from": {
-            "title": "From",
-            "description": "Reference to a file or a task output. Task output must be file."
           },
           "platform": {
             "title": "Platform",
@@ -3856,11 +3872,9 @@
         },
         "required": [
           "name",
-          "from",
           "platform",
           "handler"
-        ],
-        "additionalProperties": false
+        ]
       },
       "DAGGenericOutput": {
         "title": "DAGGenericOutput",
@@ -3942,8 +3956,7 @@
         "required": [
           "name",
           "from"
-        ],
-        "additionalProperties": false
+        ]
       },
       "DAGStringOutput": {
         "title": "DAGStringOutput",
@@ -4028,13 +4041,18 @@
                 }
               ]
             }
+          },
+          "required": {
+            "title": "Required",
+            "description": "A boolean to indicate if an artifact output is required. A False value makes the artifact optional.",
+            "default": true,
+            "type": "boolean"
           }
         },
         "required": [
           "name",
           "from"
-        ],
-        "additionalProperties": false
+        ]
       },
       "DAGIntegerOutput": {
         "title": "DAGIntegerOutput",
@@ -4119,13 +4137,18 @@
                 }
               ]
             }
+          },
+          "required": {
+            "title": "Required",
+            "description": "A boolean to indicate if an artifact output is required. A False value makes the artifact optional.",
+            "default": true,
+            "type": "boolean"
           }
         },
         "required": [
           "name",
           "from"
-        ],
-        "additionalProperties": false
+        ]
       },
       "DAGNumberOutput": {
         "title": "DAGNumberOutput",
@@ -4210,13 +4233,18 @@
                 }
               ]
             }
+          },
+          "required": {
+            "title": "Required",
+            "description": "A boolean to indicate if an artifact output is required. A False value makes the artifact optional.",
+            "default": true,
+            "type": "boolean"
           }
         },
         "required": [
           "name",
           "from"
-        ],
-        "additionalProperties": false
+        ]
       },
       "DAGBooleanOutput": {
         "title": "DAGBooleanOutput",
@@ -4301,13 +4329,18 @@
                 }
               ]
             }
+          },
+          "required": {
+            "title": "Required",
+            "description": "A boolean to indicate if an artifact output is required. A False value makes the artifact optional.",
+            "default": true,
+            "type": "boolean"
           }
         },
         "required": [
           "name",
           "from"
-        ],
-        "additionalProperties": false
+        ]
       },
       "DAGFolderOutput": {
         "title": "DAGFolderOutput",
@@ -4392,13 +4425,18 @@
                 }
               ]
             }
+          },
+          "required": {
+            "title": "Required",
+            "description": "A boolean to indicate if an artifact output is required. A False value makes the artifact optional.",
+            "default": true,
+            "type": "boolean"
           }
         },
         "required": [
           "name",
           "from"
-        ],
-        "additionalProperties": false
+        ]
       },
       "DAGFileOutput": {
         "title": "DAGFileOutput",
@@ -4483,13 +4521,18 @@
                 }
               ]
             }
+          },
+          "required": {
+            "title": "Required",
+            "description": "A boolean to indicate if an artifact output is required. A False value makes the artifact optional.",
+            "default": true,
+            "type": "boolean"
           }
         },
         "required": [
           "name",
           "from"
-        ],
-        "additionalProperties": false
+        ]
       },
       "DAGPathOutput": {
         "title": "DAGPathOutput",
@@ -4577,13 +4620,18 @@
                 }
               ]
             }
+          },
+          "required": {
+            "title": "Required",
+            "description": "A boolean to indicate if an artifact output is required. A False value makes the artifact optional.",
+            "default": true,
+            "type": "boolean"
           }
         },
         "required": [
           "name",
           "from"
-        ],
-        "additionalProperties": false
+        ]
       },
       "DAGArrayOutput": {
         "title": "DAGArrayOutput",
@@ -4669,6 +4717,12 @@
               ]
             }
           },
+          "required": {
+            "title": "Required",
+            "description": "A boolean to indicate if an artifact output is required. A False value makes the artifact optional.",
+            "default": true,
+            "type": "boolean"
+          },
           "items_type": {
             "description": "Type of items in this array. All the items in an array must be from the same type.",
             "default": "String",
@@ -4682,8 +4736,7 @@
         "required": [
           "name",
           "from"
-        ],
-        "additionalProperties": false
+        ]
       },
       "DAGJSONObjectOutput": {
         "title": "DAGJSONObjectOutput",
@@ -4768,13 +4821,18 @@
                 }
               ]
             }
+          },
+          "required": {
+            "title": "Required",
+            "description": "A boolean to indicate if an artifact output is required. A False value makes the artifact optional.",
+            "default": true,
+            "type": "boolean"
           }
         },
         "required": [
           "name",
           "from"
-        ],
-        "additionalProperties": false
+        ]
       },
       "InputReference": {
         "title": "InputReference",
@@ -4804,8 +4862,7 @@
         },
         "required": [
           "variable"
-        ],
-        "additionalProperties": false
+        ]
       },
       "ItemReference": {
         "title": "ItemReference",
@@ -4832,8 +4889,7 @@
             "description": "The name of the looped item variable (use dot notation for nested json values)",
             "type": "string"
           }
-        },
-        "additionalProperties": false
+        }
       },
       "ValueReference": {
         "title": "ValueReference",
@@ -4862,8 +4918,7 @@
         },
         "required": [
           "value"
-        ],
-        "additionalProperties": false
+        ]
       },
       "TaskArgument": {
         "title": "TaskArgument",
@@ -4912,8 +4967,7 @@
         "required": [
           "name",
           "from"
-        ],
-        "additionalProperties": false
+        ]
       },
       "InputFileReference": {
         "title": "InputFileReference",
@@ -4943,8 +4997,7 @@
         },
         "required": [
           "variable"
-        ],
-        "additionalProperties": false
+        ]
       },
       "InputFolderReference": {
         "title": "InputFolderReference",
@@ -4974,8 +5027,7 @@
         },
         "required": [
           "variable"
-        ],
-        "additionalProperties": false
+        ]
       },
       "InputPathReference": {
         "title": "InputPathReference",
@@ -5005,8 +5057,7 @@
         },
         "required": [
           "variable"
-        ],
-        "additionalProperties": false
+        ]
       },
       "TaskFileReference": {
         "title": "TaskFileReference",
@@ -5042,8 +5093,7 @@
         "required": [
           "name",
           "variable"
-        ],
-        "additionalProperties": false
+        ]
       },
       "TaskFolderReference": {
         "title": "TaskFolderReference",
@@ -5079,8 +5129,7 @@
         "required": [
           "name",
           "variable"
-        ],
-        "additionalProperties": false
+        ]
       },
       "TaskPathReference": {
         "title": "TaskPathReference",
@@ -5116,8 +5165,7 @@
         "required": [
           "name",
           "variable"
-        ],
-        "additionalProperties": false
+        ]
       },
       "ValueFileReference": {
         "title": "ValueFileReference",
@@ -5147,8 +5195,7 @@
         },
         "required": [
           "path"
-        ],
-        "additionalProperties": false
+        ]
       },
       "ValueFolderReference": {
         "title": "ValueFolderReference",
@@ -5178,8 +5225,7 @@
         },
         "required": [
           "path"
-        ],
-        "additionalProperties": false
+        ]
       },
       "TaskPathArgument": {
         "title": "TaskPathArgument",
@@ -5245,8 +5291,7 @@
         "required": [
           "name",
           "from"
-        ],
-        "additionalProperties": false
+        ]
       },
       "ValueListReference": {
         "title": "ValueListReference",
@@ -5277,8 +5322,7 @@
         },
         "required": [
           "value"
-        ],
-        "additionalProperties": false
+        ]
       },
       "DAGTaskLoop": {
         "title": "DAGTaskLoop",
@@ -5315,8 +5359,7 @@
               }
             ]
           }
-        },
-        "additionalProperties": false
+        }
       },
       "TaskReturn": {
         "title": "TaskReturn",
@@ -5351,8 +5394,7 @@
         },
         "required": [
           "name"
-        ],
-        "additionalProperties": false
+        ]
       },
       "TaskPathReturn": {
         "title": "TaskPathReturn",
@@ -5388,13 +5430,18 @@
             "title": "Description",
             "description": "Optional description for output.",
             "type": "string"
+          },
+          "required": {
+            "title": "Required",
+            "description": "A boolean to indicate if an artifact output is required. A False value makes the artifact optional.",
+            "default": true,
+            "type": "boolean"
           }
         },
         "required": [
           "name",
           "path"
-        ],
-        "additionalProperties": false
+        ]
       },
       "DAGTask": {
         "title": "DAGTask",
@@ -5482,8 +5529,7 @@
         "required": [
           "name",
           "template"
-        ],
-        "additionalProperties": false
+        ]
       },
       "DAG": {
         "title": "DAG",
@@ -5606,8 +5652,7 @@
         "required": [
           "name",
           "tasks"
-        ],
-        "additionalProperties": false
+        ]
       },
       "Recipe": {
         "title": "Recipe",
@@ -5664,8 +5709,7 @@
         },
         "required": [
           "flow"
-        ],
-        "additionalProperties": false
+        ]
       },
       "DockerConfig": {
         "title": "DockerConfig",
@@ -5706,8 +5750,7 @@
         "required": [
           "image",
           "workdir"
-        ],
-        "additionalProperties": false
+        ]
       },
       "LocalConfig": {
         "title": "LocalConfig",
@@ -5729,8 +5772,7 @@
               "type": "string"
             }
           }
-        },
-        "additionalProperties": false
+        }
       },
       "PluginConfig": {
         "title": "PluginConfig",
@@ -5773,8 +5815,7 @@
         },
         "required": [
           "docker"
-        ],
-        "additionalProperties": false
+        ]
       },
       "FunctionStringInput": {
         "title": "FunctionStringInput",
@@ -5867,8 +5908,7 @@
         },
         "required": [
           "name"
-        ],
-        "additionalProperties": false
+        ]
       },
       "FunctionIntegerInput": {
         "title": "FunctionIntegerInput",
@@ -5962,8 +6002,7 @@
         },
         "required": [
           "name"
-        ],
-        "additionalProperties": false
+        ]
       },
       "FunctionNumberInput": {
         "title": "FunctionNumberInput",
@@ -6057,8 +6096,7 @@
         },
         "required": [
           "name"
-        ],
-        "additionalProperties": false
+        ]
       },
       "FunctionBooleanInput": {
         "title": "FunctionBooleanInput",
@@ -6151,8 +6189,7 @@
         },
         "required": [
           "name"
-        ],
-        "additionalProperties": false
+        ]
       },
       "FunctionFolderInput": {
         "title": "FunctionFolderInput",
@@ -6261,8 +6298,7 @@
         "required": [
           "name",
           "path"
-        ],
-        "additionalProperties": false
+        ]
       },
       "FunctionFileInput": {
         "title": "FunctionFileInput",
@@ -6379,8 +6415,7 @@
         "required": [
           "name",
           "path"
-        ],
-        "additionalProperties": false
+        ]
       },
       "FunctionPathInput": {
         "title": "FunctionPathInput",
@@ -6497,12 +6532,11 @@
         "required": [
           "name",
           "path"
-        ],
-        "additionalProperties": false
+        ]
       },
       "FunctionArrayInput": {
         "title": "FunctionArrayInput",
-        "description": "An array input.\n\nYou can add additional validation by defining a JSONSchema specification.\n\nSee http://json-schema.org/understanding-json-schema/reference/array.html for\nmore information.",
+        "description": "A JSON array input.\n\nYou can add additional validation by defining a JSONSchema specification.\n\nSee http://json-schema.org/understanding-json-schema/reference/array.html for\nmore information.",
         "type": "object",
         "properties": {
           "name": {
@@ -6601,8 +6635,7 @@
         },
         "required": [
           "name"
-        ],
-        "additionalProperties": false
+        ]
       },
       "FunctionJSONObjectInput": {
         "title": "FunctionJSONObjectInput",
@@ -6637,7 +6670,15 @@
           "default": {
             "title": "Default",
             "description": "Default value to use for an input if a value was not supplied.",
-            "type": "object"
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {}
+              },
+              {
+                "type": "object"
+              }
+            ]
           },
           "alias": {
             "title": "Alias",
@@ -6695,8 +6736,7 @@
         },
         "required": [
           "name"
-        ],
-        "additionalProperties": false
+        ]
       },
       "FunctionStringOutput": {
         "title": "FunctionStringOutput",
@@ -6732,13 +6772,18 @@
             "title": "Description",
             "description": "Optional description for output.",
             "type": "string"
+          },
+          "required": {
+            "title": "Required",
+            "description": "A boolean to indicate if an artifact output is required. A False value makes the artifact optional.",
+            "default": true,
+            "type": "boolean"
           }
         },
         "required": [
           "name",
           "path"
-        ],
-        "additionalProperties": false
+        ]
       },
       "FunctionIntegerOutput": {
         "title": "FunctionIntegerOutput",
@@ -6774,13 +6819,18 @@
             "title": "Description",
             "description": "Optional description for output.",
             "type": "string"
+          },
+          "required": {
+            "title": "Required",
+            "description": "A boolean to indicate if an artifact output is required. A False value makes the artifact optional.",
+            "default": true,
+            "type": "boolean"
           }
         },
         "required": [
           "name",
           "path"
-        ],
-        "additionalProperties": false
+        ]
       },
       "FunctionNumberOutput": {
         "title": "FunctionNumberOutput",
@@ -6816,13 +6866,18 @@
             "title": "Description",
             "description": "Optional description for output.",
             "type": "string"
+          },
+          "required": {
+            "title": "Required",
+            "description": "A boolean to indicate if an artifact output is required. A False value makes the artifact optional.",
+            "default": true,
+            "type": "boolean"
           }
         },
         "required": [
           "name",
           "path"
-        ],
-        "additionalProperties": false
+        ]
       },
       "FunctionBooleanOutput": {
         "title": "FunctionBooleanOutput",
@@ -6858,13 +6913,18 @@
             "title": "Description",
             "description": "Optional description for output.",
             "type": "string"
+          },
+          "required": {
+            "title": "Required",
+            "description": "A boolean to indicate if an artifact output is required. A False value makes the artifact optional.",
+            "default": true,
+            "type": "boolean"
           }
         },
         "required": [
           "name",
           "path"
-        ],
-        "additionalProperties": false
+        ]
       },
       "FunctionFolderOutput": {
         "title": "FunctionFolderOutput",
@@ -6900,13 +6960,18 @@
             "title": "Description",
             "description": "Optional description for output.",
             "type": "string"
+          },
+          "required": {
+            "title": "Required",
+            "description": "A boolean to indicate if an artifact output is required. A False value makes the artifact optional.",
+            "default": true,
+            "type": "boolean"
           }
         },
         "required": [
           "name",
           "path"
-        ],
-        "additionalProperties": false
+        ]
       },
       "FunctionFileOutput": {
         "title": "FunctionFileOutput",
@@ -6942,13 +7007,18 @@
             "title": "Description",
             "description": "Optional description for output.",
             "type": "string"
+          },
+          "required": {
+            "title": "Required",
+            "description": "A boolean to indicate if an artifact output is required. A False value makes the artifact optional.",
+            "default": true,
+            "type": "boolean"
           }
         },
         "required": [
           "name",
           "path"
-        ],
-        "additionalProperties": false
+        ]
       },
       "FunctionPathOutput": {
         "title": "FunctionPathOutput",
@@ -6984,13 +7054,18 @@
             "title": "Description",
             "description": "Optional description for output.",
             "type": "string"
+          },
+          "required": {
+            "title": "Required",
+            "description": "A boolean to indicate if an artifact output is required. A False value makes the artifact optional.",
+            "default": true,
+            "type": "boolean"
           }
         },
         "required": [
           "name",
           "path"
-        ],
-        "additionalProperties": false
+        ]
       },
       "FunctionArrayOutput": {
         "title": "FunctionArrayOutput",
@@ -7027,6 +7102,12 @@
             "description": "Optional description for output.",
             "type": "string"
           },
+          "required": {
+            "title": "Required",
+            "description": "A boolean to indicate if an artifact output is required. A False value makes the artifact optional.",
+            "default": true,
+            "type": "boolean"
+          },
           "items_type": {
             "description": "Type of items in this array. All the items in an array must be from the same type.",
             "default": "String",
@@ -7040,8 +7121,7 @@
         "required": [
           "name",
           "path"
-        ],
-        "additionalProperties": false
+        ]
       },
       "FunctionJSONObjectOutput": {
         "title": "FunctionJSONObjectOutput",
@@ -7077,13 +7157,18 @@
             "title": "Description",
             "description": "Optional description for output.",
             "type": "string"
+          },
+          "required": {
+            "title": "Required",
+            "description": "A boolean to indicate if an artifact output is required. A False value makes the artifact optional.",
+            "default": true,
+            "type": "boolean"
           }
         },
         "required": [
           "name",
           "path"
-        ],
-        "additionalProperties": false
+        ]
       },
       "Function": {
         "title": "Function",
@@ -7196,8 +7281,7 @@
         "required": [
           "name",
           "command"
-        ],
-        "additionalProperties": false
+        ]
       },
       "Plugin": {
         "title": "Plugin",
@@ -7257,8 +7341,7 @@
           "metadata",
           "config",
           "functions"
-        ],
-        "additionalProperties": false
+        ]
       },
       "JobArgument": {
         "title": "JobArgument",
@@ -7294,8 +7377,7 @@
         "required": [
           "name",
           "value"
-        ],
-        "additionalProperties": false
+        ]
       },
       "JobPathArgument": {
         "title": "JobPathArgument",
@@ -7341,8 +7423,7 @@
         "required": [
           "name",
           "source"
-        ],
-        "additionalProperties": false
+        ]
       },
       "Job": {
         "title": "Job",
@@ -7412,8 +7493,7 @@
         },
         "required": [
           "source"
-        ],
-        "additionalProperties": false
+        ]
       },
       "RepositoryMetadata": {
         "title": "RepositoryMetadata",
@@ -7465,8 +7545,7 @@
             "type": "integer",
             "format": "int32"
           }
-        },
-        "additionalProperties": false
+        }
       },
       "PackageVersion": {
         "title": "PackageVersion",
@@ -7604,8 +7683,7 @@
           "url",
           "created",
           "digest"
-        ],
-        "additionalProperties": false
+        ]
       },
       "RepositoryIndex": {
         "title": "RepositoryIndex",
@@ -7682,8 +7760,7 @@
               }
             }
           }
-        },
-        "additionalProperties": false
+        }
       },
       "RecipeInterface": {
         "title": "RecipeInterface",
@@ -7807,8 +7884,7 @@
         },
         "required": [
           "metadata"
-        ],
-        "additionalProperties": false
+        ]
       },
       "StepStringInput": {
         "title": "StepStringInput",
@@ -7906,8 +7982,7 @@
         "required": [
           "name",
           "value"
-        ],
-        "additionalProperties": false
+        ]
       },
       "StepIntegerInput": {
         "title": "StepIntegerInput",
@@ -8007,8 +8082,7 @@
         "required": [
           "name",
           "value"
-        ],
-        "additionalProperties": false
+        ]
       },
       "StepNumberInput": {
         "title": "StepNumberInput",
@@ -8108,8 +8182,7 @@
         "required": [
           "name",
           "value"
-        ],
-        "additionalProperties": false
+        ]
       },
       "StepBooleanInput": {
         "title": "StepBooleanInput",
@@ -8207,8 +8280,7 @@
         "required": [
           "name",
           "value"
-        ],
-        "additionalProperties": false
+        ]
       },
       "StepFolderInput": {
         "title": "StepFolderInput",
@@ -8332,8 +8404,7 @@
         "required": [
           "name",
           "source"
-        ],
-        "additionalProperties": false
+        ]
       },
       "StepFileInput": {
         "title": "StepFileInput",
@@ -8465,8 +8536,7 @@
         "required": [
           "name",
           "source"
-        ],
-        "additionalProperties": false
+        ]
       },
       "StepPathInput": {
         "title": "StepPathInput",
@@ -8598,12 +8668,11 @@
         "required": [
           "name",
           "source"
-        ],
-        "additionalProperties": false
+        ]
       },
       "StepArrayInput": {
         "title": "StepArrayInput",
-        "description": "An array input.",
+        "description": "A JSON array input.",
         "type": "object",
         "properties": {
           "name": {
@@ -8708,8 +8777,7 @@
         "required": [
           "name",
           "value"
-        ],
-        "additionalProperties": false
+        ]
       },
       "StepJSONObjectInput": {
         "title": "StepJSONObjectInput",
@@ -8723,7 +8791,15 @@
           },
           "value": {
             "title": "Value",
-            "type": "object"
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {}
+              },
+              {
+                "type": "object"
+              }
+            ]
           },
           "type": {
             "title": "Type",
@@ -8748,7 +8824,15 @@
           "default": {
             "title": "Default",
             "description": "Default value to use for an input if a value was not supplied.",
-            "type": "object"
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {}
+              },
+              {
+                "type": "object"
+              }
+            ]
           },
           "alias": {
             "title": "Alias",
@@ -8807,8 +8891,7 @@
         "required": [
           "name",
           "value"
-        ],
-        "additionalProperties": false
+        ]
       },
       "StepStringOutput": {
         "title": "StepStringOutput",
@@ -8848,14 +8931,19 @@
             "title": "Description",
             "description": "Optional description for output.",
             "type": "string"
+          },
+          "required": {
+            "title": "Required",
+            "description": "A boolean to indicate if an artifact output is required. A False value makes the artifact optional.",
+            "default": true,
+            "type": "boolean"
           }
         },
         "required": [
           "name",
           "path",
           "value"
-        ],
-        "additionalProperties": false
+        ]
       },
       "StepIntegerOutput": {
         "title": "StepIntegerOutput",
@@ -8896,14 +8984,19 @@
             "title": "Description",
             "description": "Optional description for output.",
             "type": "string"
+          },
+          "required": {
+            "title": "Required",
+            "description": "A boolean to indicate if an artifact output is required. A False value makes the artifact optional.",
+            "default": true,
+            "type": "boolean"
           }
         },
         "required": [
           "name",
           "path",
           "value"
-        ],
-        "additionalProperties": false
+        ]
       },
       "StepNumberOutput": {
         "title": "StepNumberOutput",
@@ -8944,14 +9037,19 @@
             "title": "Description",
             "description": "Optional description for output.",
             "type": "string"
+          },
+          "required": {
+            "title": "Required",
+            "description": "A boolean to indicate if an artifact output is required. A False value makes the artifact optional.",
+            "default": true,
+            "type": "boolean"
           }
         },
         "required": [
           "name",
           "path",
           "value"
-        ],
-        "additionalProperties": false
+        ]
       },
       "StepBooleanOutput": {
         "title": "StepBooleanOutput",
@@ -8991,14 +9089,19 @@
             "title": "Description",
             "description": "Optional description for output.",
             "type": "string"
+          },
+          "required": {
+            "title": "Required",
+            "description": "A boolean to indicate if an artifact output is required. A False value makes the artifact optional.",
+            "default": true,
+            "type": "boolean"
           }
         },
         "required": [
           "name",
           "path",
           "value"
-        ],
-        "additionalProperties": false
+        ]
       },
       "StepFolderOutput": {
         "title": "StepFolderOutput",
@@ -9049,14 +9152,19 @@
             "title": "Description",
             "description": "Optional description for output.",
             "type": "string"
+          },
+          "required": {
+            "title": "Required",
+            "description": "A boolean to indicate if an artifact output is required. A False value makes the artifact optional.",
+            "default": true,
+            "type": "boolean"
           }
         },
         "required": [
           "name",
           "path",
           "source"
-        ],
-        "additionalProperties": false
+        ]
       },
       "StepFileOutput": {
         "title": "StepFileOutput",
@@ -9107,14 +9215,19 @@
             "title": "Description",
             "description": "Optional description for output.",
             "type": "string"
+          },
+          "required": {
+            "title": "Required",
+            "description": "A boolean to indicate if an artifact output is required. A False value makes the artifact optional.",
+            "default": true,
+            "type": "boolean"
           }
         },
         "required": [
           "name",
           "path",
           "source"
-        ],
-        "additionalProperties": false
+        ]
       },
       "StepPathOutput": {
         "title": "StepPathOutput",
@@ -9165,18 +9278,23 @@
             "title": "Description",
             "description": "Optional description for output.",
             "type": "string"
+          },
+          "required": {
+            "title": "Required",
+            "description": "A boolean to indicate if an artifact output is required. A False value makes the artifact optional.",
+            "default": true,
+            "type": "boolean"
           }
         },
         "required": [
           "name",
           "path",
           "source"
-        ],
-        "additionalProperties": false
+        ]
       },
       "StepArrayOutput": {
         "title": "StepArrayOutput",
-        "description": "An array output.",
+        "description": "A JSON array output.",
         "type": "object",
         "properties": {
           "name": {
@@ -9214,6 +9332,12 @@
             "description": "Optional description for output.",
             "type": "string"
           },
+          "required": {
+            "title": "Required",
+            "description": "A boolean to indicate if an artifact output is required. A False value makes the artifact optional.",
+            "default": true,
+            "type": "boolean"
+          },
           "items_type": {
             "description": "Type of items in this array. All the items in an array must be from the same type.",
             "default": "String",
@@ -9228,8 +9352,7 @@
           "name",
           "path",
           "value"
-        ],
-        "additionalProperties": false
+        ]
       },
       "StepJSONObjectOutput": {
         "title": "StepJSONObjectOutput",
@@ -9248,7 +9371,15 @@
           },
           "value": {
             "title": "Value",
-            "type": "object"
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {}
+              },
+              {
+                "type": "object"
+              }
+            ]
           },
           "type": {
             "title": "Type",
@@ -9269,14 +9400,19 @@
             "title": "Description",
             "description": "Optional description for output.",
             "type": "string"
+          },
+          "required": {
+            "title": "Required",
+            "description": "A boolean to indicate if an artifact output is required. A False value makes the artifact optional.",
+            "default": true,
+            "type": "boolean"
           }
         },
         "required": [
           "name",
           "path",
           "value"
-        ],
-        "additionalProperties": false
+        ]
       },
       "StatusType": {
         "title": "StatusType",
@@ -9469,8 +9605,7 @@
           "template_ref",
           "children_ids",
           "outbound_steps"
-        ],
-        "additionalProperties": false
+        ]
       },
       "JobStatus": {
         "title": "JobStatus",
@@ -9623,8 +9758,7 @@
           "status",
           "started_at",
           "id"
-        ],
-        "additionalProperties": false
+        ]
       }
     }
   }

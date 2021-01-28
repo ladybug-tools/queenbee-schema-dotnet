@@ -27,7 +27,7 @@ namespace QueenbeeSDK
     /// DAG generic alias output.  In most cases, you should not be using the generic output unless you need a dynamic output that changes its type in different platforms because of returning different objects in handler.
     /// </summary>
     [DataContract(Name = "DAGGenericOutputAlias")]
-    public partial class DAGGenericOutputAlias : FromOutput, IEquatable<DAGGenericOutputAlias>, IValidatableObject
+    public partial class DAGGenericOutputAlias : GenericOutput, IEquatable<DAGGenericOutputAlias>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DAGGenericOutputAlias" /> class.
@@ -47,12 +47,11 @@ namespace QueenbeeSDK
         /// <param name="name">Output name. (required).</param>
         /// <param name="annotations">An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries..</param>
         /// <param name="description">Optional description for output..</param>
-        /// <param name="from">Reference to a file or a task output. Task output must be file. (required).</param>
         public DAGGenericOutputAlias
         (
-            string name, object from, List<string> platform, List<IOAliasHandler> handler, // Required parameters
+            string name, List<string> platform, List<IOAliasHandler> handler, // Required parameters
             Dictionary<string, string> annotations= default, string description= default // Optional parameters
-        ) : base(name: name, annotations: annotations, description: description, from: from)// BaseClass
+        ) : base(name: name, annotations: annotations, description: description)// BaseClass
         {
             // to ensure "platform" is required (not null)
             this.Platform = platform ?? throw new ArgumentNullException("platform is a required property for DAGGenericOutputAlias and cannot be null");
@@ -107,7 +106,6 @@ namespace QueenbeeSDK
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  Annotations: ").Append(Annotations).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
-            sb.Append("  From: ").Append(From).Append("\n");
             sb.Append("  Platform: ").Append(Platform).Append("\n");
             sb.Append("  Handler: ").Append(Handler).Append("\n");
             return sb.ToString();
@@ -147,7 +145,7 @@ namespace QueenbeeSDK
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>OpenAPIGenBaseModel</returns>
-        public override FromOutput DuplicateFromOutput()
+        public override GenericOutput DuplicateGenericOutput()
         {
             return DuplicateDAGGenericOutputAlias();
         }

@@ -53,7 +53,7 @@ namespace QueenbeeSDK
         public DAGJSONObjectInputAlias
         (
             string name, List<string> platform, List<IOAliasHandler> handler, // Required parameters
-            Dictionary<string, string> annotations= default, string description= default, Object _default= default, bool required = false, Object spec= default // Optional parameters
+            Dictionary<string, string> annotations= default, string description= default, AnyOf<array,object> _default= default, bool required = false, Object spec= default // Optional parameters
         ) : base(name: name, annotations: annotations, description: description)// BaseClass
         {
             // to ensure "platform" is required (not null)
@@ -92,7 +92,7 @@ namespace QueenbeeSDK
         /// </summary>
         /// <value>Default value to use for an input if a value was not supplied.</value>
         [DataMember(Name = "default", EmitDefaultValue = false)]
-        public Object Default { get; set; } 
+        public AnyOf<array,object> Default { get; set; } 
         /// <summary>
         /// A field to indicate if this input is required. This input needs to be set explicitly even when a default value is provided.
         /// </summary>
