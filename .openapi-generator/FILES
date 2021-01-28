@@ -15,6 +15,10 @@ docs/DAGArrayOutput.md
 docs/DAGArrayOutputAlias.md
 docs/DAGArrayOutputAliasAllOf.md
 docs/DAGArrayOutputAllOf.md
+docs/DAGArtifactOutput.md
+docs/DAGArtifactOutputAlias.md
+docs/DAGArtifactOutputAliasAllOf.md
+docs/DAGArtifactOutputAllOf.md
 docs/DAGBooleanInput.md
 docs/DAGBooleanInputAlias.md
 docs/DAGBooleanInputAliasAllOf.md
@@ -284,6 +288,10 @@ src/QueenbeeSDK.Test/Model/DAGArrayOutputAliasAllOfTests.cs
 src/QueenbeeSDK.Test/Model/DAGArrayOutputAliasTests.cs
 src/QueenbeeSDK.Test/Model/DAGArrayOutputAllOfTests.cs
 src/QueenbeeSDK.Test/Model/DAGArrayOutputTests.cs
+src/QueenbeeSDK.Test/Model/DAGArtifactOutputAliasAllOfTests.cs
+src/QueenbeeSDK.Test/Model/DAGArtifactOutputAliasTests.cs
+src/QueenbeeSDK.Test/Model/DAGArtifactOutputAllOfTests.cs
+src/QueenbeeSDK.Test/Model/DAGArtifactOutputTests.cs
 src/QueenbeeSDK.Test/Model/DAGBooleanInputAliasAllOfTests.cs
 src/QueenbeeSDK.Test/Model/DAGBooleanInputAliasTests.cs
 src/QueenbeeSDK.Test/Model/DAGBooleanInputAllOfTests.cs
@@ -565,6 +573,10 @@ src/QueenbeeSDK/Model/DAGArrayOutput.cs
 src/QueenbeeSDK/Model/DAGArrayOutputAlias.cs
 src/QueenbeeSDK/Model/DAGArrayOutputAliasAllOf.cs
 src/QueenbeeSDK/Model/DAGArrayOutputAllOf.cs
+src/QueenbeeSDK/Model/DAGArtifactOutput.cs
+src/QueenbeeSDK/Model/DAGArtifactOutputAlias.cs
+src/QueenbeeSDK/Model/DAGArtifactOutputAliasAllOf.cs
+src/QueenbeeSDK/Model/DAGArtifactOutputAllOf.cs
 src/QueenbeeSDK/Model/DAGBooleanInput.cs
 src/QueenbeeSDK/Model/DAGBooleanInputAlias.cs
 src/QueenbeeSDK/Model/DAGBooleanInputAliasAllOf.cs

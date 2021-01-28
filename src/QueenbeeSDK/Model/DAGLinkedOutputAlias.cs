@@ -45,14 +45,13 @@ namespace QueenbeeSDK
         /// <param name="name">Output name. (required).</param>
         /// <param name="annotations">An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries..</param>
         /// <param name="description">Optional description for output..</param>
-        /// <param name="from">Reference to a file or a task output. Task output must be file. (required).</param>
         /// <param name="platform">Name of the client platform (e.g. Grasshopper, Revit, etc). The value can be any strings as long as it has been agreed between client-side developer and author of the recipe. (required).</param>
         /// <param name="handler">List of process actions to process the input or output value. (required).</param>
         public DAGLinkedOutputAlias
         (
-            string name, object from, List<string> platform, List<IOAliasHandler> handler, // Required parameters
+            string name, List<string> platform, List<IOAliasHandler> handler, // Required parameters
             Dictionary<string, string> annotations= default, string description= default // Optional parameters
-        ) : base(name: name, annotations: annotations, description: description, from: from, platform: platform, handler: handler)// BaseClass
+        ) : base(name: name, annotations: annotations, description: description, platform: platform, handler: handler)// BaseClass
         {
 
             // Set non-required readonly properties with defaultValue
@@ -91,7 +90,6 @@ namespace QueenbeeSDK
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  Annotations: ").Append(Annotations).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
-            sb.Append("  From: ").Append(From).Append("\n");
             sb.Append("  Platform: ").Append(Platform).Append("\n");
             sb.Append("  Handler: ").Append(Handler).Append("\n");
             return sb.ToString();

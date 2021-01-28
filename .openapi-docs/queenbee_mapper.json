@@ -131,6 +131,8 @@
     "ValueReference": "queenbee.interface.io.reference",
     "_ArtifactSource": "queenbee.interface.io.artifact_source",
     "_BaseReference": "queenbee.interface.io.reference",
+    "_DAGArtifactOutput": "queenbee.interface.io.outputs.dag",
+    "_DAGArtifactOutputAlias": "queenbee.interface.io.outputs.alias",
     "_InputReferenceBase": "queenbee.interface.io.reference",
     "_TaskReferenceBase": "queenbee.interface.io.reference"
   },

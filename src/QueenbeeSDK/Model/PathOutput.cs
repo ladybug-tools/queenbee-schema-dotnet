@@ -43,17 +43,19 @@ namespace QueenbeeSDK
         /// Initializes a new instance of the <see cref="PathOutput" /> class.
         /// </summary>
         /// <param name="path">Path to the output artifact relative to where the function command is executed. (required).</param>
+        /// <param name="required">A boolean to indicate if an artifact output is required. A False value makes the artifact optional. (default to true).</param>
         /// <param name="name">Output name. (required).</param>
         /// <param name="annotations">An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries..</param>
         /// <param name="description">Optional description for output..</param>
         public PathOutput
         (
             string name, string path, // Required parameters
-            Dictionary<string, string> annotations= default, string description= default // Optional parameters
+            Dictionary<string, string> annotations= default, string description= default, bool required = true // Optional parameters
         ) : base(name: name, annotations: annotations, description: description)// BaseClass
         {
             // to ensure "path" is required (not null)
             this.Path = path ?? throw new ArgumentNullException("path is a required property for PathOutput and cannot be null");
+            this.Required = required;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "PathOutput";
@@ -72,6 +74,12 @@ namespace QueenbeeSDK
         /// <value>Path to the output artifact relative to where the function command is executed.</value>
         [DataMember(Name = "path", IsRequired = true, EmitDefaultValue = false)]
         public string Path { get; set; } 
+        /// <summary>
+        /// A boolean to indicate if an artifact output is required. A False value makes the artifact optional.
+        /// </summary>
+        /// <value>A boolean to indicate if an artifact output is required. A False value makes the artifact optional.</value>
+        [DataMember(Name = "required", EmitDefaultValue = true)]
+        public bool Required { get; set; }  = true;
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -98,6 +106,7 @@ namespace QueenbeeSDK
             sb.Append("  Annotations: ").Append(Annotations).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  Path: ").Append(Path).Append("\n");
+            sb.Append("  Required: ").Append(Required).Append("\n");
             return sb.ToString();
         }
   
@@ -167,6 +176,11 @@ namespace QueenbeeSDK
                     this.Path.Equals(input.Path))
                 ) && base.Equals(input) && 
                 (
+                    this.Required == input.Required ||
+                    (this.Required != null &&
+                    this.Required.Equals(input.Required))
+                ) && base.Equals(input) && 
+                (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
@@ -184,6 +198,8 @@ namespace QueenbeeSDK
                 int hashCode = base.GetHashCode();
                 if (this.Path != null)
                     hashCode = hashCode * 59 + this.Path.GetHashCode();
+                if (this.Required != null)
+                    hashCode = hashCode * 59 + this.Required.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;

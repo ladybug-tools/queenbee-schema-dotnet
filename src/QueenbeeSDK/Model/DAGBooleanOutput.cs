@@ -44,18 +44,20 @@ namespace QueenbeeSDK
         /// </summary>
         /// <param name="from">Reference to a file or a task output. Task output must be file. (required).</param>
         /// <param name="alias">A list of additional processes for loading this output on different platforms..</param>
+        /// <param name="required">A boolean to indicate if an artifact output is required. A False value makes the artifact optional. (default to true).</param>
         /// <param name="name">Output name. (required).</param>
         /// <param name="annotations">An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries..</param>
         /// <param name="description">Optional description for output..</param>
         public DAGBooleanOutput
         (
             string name, AnyOf<TaskReference,FileReference> from, // Required parameters
-            Dictionary<string, string> annotations= default, string description= default, List<AnyOf<DAGGenericOutputAlias,DAGStringOutputAlias,DAGIntegerOutputAlias,DAGNumberOutputAlias,DAGBooleanOutputAlias,DAGFolderOutputAlias,DAGFileOutputAlias,DAGPathOutputAlias,DAGArrayOutputAlias,DAGJSONObjectOutputAlias,DAGLinkedOutputAlias>> alias= default // Optional parameters
+            Dictionary<string, string> annotations= default, string description= default, List<AnyOf<DAGGenericOutputAlias,DAGStringOutputAlias,DAGIntegerOutputAlias,DAGNumberOutputAlias,DAGBooleanOutputAlias,DAGFolderOutputAlias,DAGFileOutputAlias,DAGPathOutputAlias,DAGArrayOutputAlias,DAGJSONObjectOutputAlias,DAGLinkedOutputAlias>> alias= default, bool required = true // Optional parameters
         ) : base(name: name, annotations: annotations, description: description)// BaseClass
         {
             // to ensure "from" is required (not null)
             this.From = from ?? throw new ArgumentNullException("from is a required property for DAGBooleanOutput and cannot be null");
             this.Alias = alias;
+            this.Required = required;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "DAGBooleanOutput";
@@ -80,6 +82,12 @@ namespace QueenbeeSDK
         /// <value>A list of additional processes for loading this output on different platforms.</value>
         [DataMember(Name = "alias", EmitDefaultValue = false)]
         public List<AnyOf<DAGGenericOutputAlias,DAGStringOutputAlias,DAGIntegerOutputAlias,DAGNumberOutputAlias,DAGBooleanOutputAlias,DAGFolderOutputAlias,DAGFileOutputAlias,DAGPathOutputAlias,DAGArrayOutputAlias,DAGJSONObjectOutputAlias,DAGLinkedOutputAlias>> Alias { get; set; } 
+        /// <summary>
+        /// A boolean to indicate if an artifact output is required. A False value makes the artifact optional.
+        /// </summary>
+        /// <value>A boolean to indicate if an artifact output is required. A False value makes the artifact optional.</value>
+        [DataMember(Name = "required", EmitDefaultValue = true)]
+        public bool Required { get; set; }  = true;
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -107,6 +115,7 @@ namespace QueenbeeSDK
             sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  From: ").Append(From).Append("\n");
             sb.Append("  Alias: ").Append(Alias).Append("\n");
+            sb.Append("  Required: ").Append(Required).Append("\n");
             return sb.ToString();
         }
   
@@ -182,6 +191,11 @@ namespace QueenbeeSDK
                     this.Alias.SequenceEqual(input.Alias)
                 ) && base.Equals(input) && 
                 (
+                    this.Required == input.Required ||
+                    (this.Required != null &&
+                    this.Required.Equals(input.Required))
+                ) && base.Equals(input) && 
+                (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
@@ -201,6 +215,8 @@ namespace QueenbeeSDK
                     hashCode = hashCode * 59 + this.From.GetHashCode();
                 if (this.Alias != null)
                     hashCode = hashCode * 59 + this.Alias.GetHashCode();
+                if (this.Required != null)
+                    hashCode = hashCode * 59 + this.Required.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;

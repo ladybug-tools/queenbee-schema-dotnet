@@ -24,9 +24,9 @@ using System.ComponentModel.DataAnnotations;
 namespace QueenbeeSDK
 {
     /// <summary>
-    /// Type enum for items in a list.
+    /// Type enum for items in a list.  Items can not be files or folder. For a list of files you should copy them to a folder and use FolderInput input instead of using ArrayInput.
     /// </summary>
-    /// <value>Type enum for items in a list.</value>
+    /// <value>Type enum for items in a list.  Items can not be files or folder. For a list of files you should copy them to a folder and use FolderInput input instead of using ArrayInput.</value>
     
     [JsonConverter(typeof(StringEnumConverter))]
     
@@ -63,34 +63,16 @@ namespace QueenbeeSDK
         Boolean = 5,
 
         /// <summary>
-        /// Enum File for value: File
-        /// </summary>
-        [EnumMember(Value = "File")]
-        File = 6,
-
-        /// <summary>
-        /// Enum Folder for value: Folder
-        /// </summary>
-        [EnumMember(Value = "Folder")]
-        Folder = 7,
-
-        /// <summary>
-        /// Enum Path for value: Path
-        /// </summary>
-        [EnumMember(Value = "Path")]
-        Path = 8,
-
-        /// <summary>
         /// Enum Array for value: Array
         /// </summary>
         [EnumMember(Value = "Array")]
-        Array = 9,
+        Array = 6,
 
         /// <summary>
         /// Enum JSONObject for value: JSONObject
         /// </summary>
         [EnumMember(Value = "JSONObject")]
-        JSONObject = 10
+        JSONObject = 7
 
     }
 

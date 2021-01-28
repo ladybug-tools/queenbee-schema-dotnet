@@ -24,42 +24,40 @@ using System.ComponentModel.DataAnnotations;
 namespace QueenbeeSDK
 {
     /// <summary>
-    /// DAG alias file output.
+    /// Base class for DAG artifact output aliases.  This class add a required input. By default all artifact outputs are required.
     /// </summary>
-    [DataContract(Name = "DAGFileOutputAlias")]
-    public partial class DAGFileOutputAlias : DAGArtifactOutputAlias, IEquatable<DAGFileOutputAlias>, IValidatableObject
+    [DataContract(Name = "_DAGArtifactOutputAlias")]
+    public partial class DAGArtifactOutputAlias : DAGGenericOutputAlias, IEquatable<DAGArtifactOutputAlias>, IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="DAGFileOutputAlias" /> class.
+        /// Initializes a new instance of the <see cref="DAGArtifactOutputAlias" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected DAGFileOutputAlias() 
+        protected DAGArtifactOutputAlias() 
         { 
             // Set non-required readonly properties with defaultValue
-            this.Type = "DAGFileOutputAlias";
+            this.Type = "DAGGenericOutputAlias";
         }
         
         /// <summary>
-        /// Initializes a new instance of the <see cref="DAGFileOutputAlias" /> class.
+        /// Initializes a new instance of the <see cref="DAGArtifactOutputAlias" /> class.
         /// </summary>
-        /// <param name="from">Reference to a file or a task output. Task output must be file. (required).</param>
+        /// <param name="required">A boolean to indicate if an artifact output is required. A False value makes the artifact optional. (default to true).</param>
         /// <param name="name">Output name. (required).</param>
         /// <param name="annotations">An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries..</param>
         /// <param name="description">Optional description for output..</param>
         /// <param name="platform">Name of the client platform (e.g. Grasshopper, Revit, etc). The value can be any strings as long as it has been agreed between client-side developer and author of the recipe. (required).</param>
         /// <param name="handler">List of process actions to process the input or output value. (required).</param>
-        /// <param name="required">A boolean to indicate if an artifact output is required. A False value makes the artifact optional. (default to true).</param>
-        public DAGFileOutputAlias
+        public DAGArtifactOutputAlias
         (
-            string name, List<string> platform, List<IOAliasHandler> handler, AnyOf<TaskReference,FileReference> from, // Required parameters
+            string name, List<string> platform, List<IOAliasHandler> handler, // Required parameters
             Dictionary<string, string> annotations= default, string description= default, bool required = true // Optional parameters
-        ) : base(name: name, annotations: annotations, description: description, platform: platform, handler: handler, required: required)// BaseClass
+        ) : base(name: name, annotations: annotations, description: description, platform: platform, handler: handler)// BaseClass
         {
-            // to ensure "from" is required (not null)
-            this.From = from ?? throw new ArgumentNullException("from is a required property for DAGFileOutputAlias and cannot be null");
+            this.Required = required;
 
             // Set non-required readonly properties with defaultValue
-            this.Type = "DAGFileOutputAlias";
+            this.Type = "DAGGenericOutputAlias";
         }
 
         //============================================== is ReadOnly 
@@ -67,14 +65,14 @@ namespace QueenbeeSDK
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type", EmitDefaultValue = true)]
-        public override string Type { get; protected internal set; }  = "DAGFileOutputAlias";
+        public override string Type { get; protected internal set; }  = "DAGGenericOutputAlias";
 
         /// <summary>
-        /// Reference to a file or a task output. Task output must be file.
+        /// A boolean to indicate if an artifact output is required. A False value makes the artifact optional.
         /// </summary>
-        /// <value>Reference to a file or a task output. Task output must be file.</value>
-        [DataMember(Name = "from", IsRequired = true, EmitDefaultValue = false)]
-        public AnyOf<TaskReference,FileReference> From { get; set; } 
+        /// <value>A boolean to indicate if an artifact output is required. A False value makes the artifact optional.</value>
+        [DataMember(Name = "required", EmitDefaultValue = true)]
+        public bool Required { get; set; }  = true;
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -82,7 +80,7 @@ namespace QueenbeeSDK
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            return "DAGFileOutputAlias";
+            return "DAGArtifactOutputAlias";
         }
 
         /// <summary>
@@ -95,7 +93,7 @@ namespace QueenbeeSDK
                 return this.ToString();
             
             var sb = new StringBuilder();
-            sb.Append("DAGFileOutputAlias:\n");
+            sb.Append("DAGArtifactOutputAlias:\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  Annotations: ").Append(Annotations).Append("\n");
@@ -103,17 +101,16 @@ namespace QueenbeeSDK
             sb.Append("  Platform: ").Append(Platform).Append("\n");
             sb.Append("  Handler: ").Append(Handler).Append("\n");
             sb.Append("  Required: ").Append(Required).Append("\n");
-            sb.Append("  From: ").Append(From).Append("\n");
             return sb.ToString();
         }
   
         /// <summary>
         /// Returns the object from JSON string
         /// </summary>
-        /// <returns>DAGFileOutputAlias object</returns>
-        public static DAGFileOutputAlias FromJson(string json)
+        /// <returns>DAGArtifactOutputAlias object</returns>
+        public static DAGArtifactOutputAlias FromJson(string json)
         {
-            var obj = JsonConvert.DeserializeObject<DAGFileOutputAlias>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<DAGArtifactOutputAlias>(json, JsonSetting.AnyOfConvertSetting);
             if (obj == null)
                 return null;
             return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
@@ -122,8 +119,8 @@ namespace QueenbeeSDK
         /// <summary>
         /// Creates a new instance with the same properties.
         /// </summary>
-        /// <returns>DAGFileOutputAlias object</returns>
-        public virtual DAGFileOutputAlias DuplicateDAGFileOutputAlias()
+        /// <returns>DAGArtifactOutputAlias object</returns>
+        public virtual DAGArtifactOutputAlias DuplicateDAGArtifactOutputAlias()
         {
             return FromJson(this.ToJson());
         }
@@ -134,16 +131,16 @@ namespace QueenbeeSDK
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return DuplicateDAGFileOutputAlias();
+            return DuplicateDAGArtifactOutputAlias();
         }
 
         /// <summary>
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>OpenAPIGenBaseModel</returns>
-        public override DAGArtifactOutputAlias DuplicateDAGArtifactOutputAlias()
+        public override DAGGenericOutputAlias DuplicateDAGGenericOutputAlias()
         {
-            return DuplicateDAGFileOutputAlias();
+            return DuplicateDAGArtifactOutputAlias();
         }
      
         /// <summary>
@@ -154,23 +151,23 @@ namespace QueenbeeSDK
         public override bool Equals(object input)
         {
             input = input is AnyOf anyOf ? anyOf.Obj : input;
-            return this.Equals(input as DAGFileOutputAlias);
+            return this.Equals(input as DAGArtifactOutputAlias);
         }
 
         /// <summary>
-        /// Returns true if DAGFileOutputAlias instances are equal
+        /// Returns true if DAGArtifactOutputAlias instances are equal
         /// </summary>
-        /// <param name="input">Instance of DAGFileOutputAlias to be compared</param>
+        /// <param name="input">Instance of DAGArtifactOutputAlias to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(DAGFileOutputAlias input)
+        public bool Equals(DAGArtifactOutputAlias input)
         {
             if (input == null)
                 return false;
             return base.Equals(input) && 
                 (
-                    this.From == input.From ||
-                    (this.From != null &&
-                    this.From.Equals(input.From))
+                    this.Required == input.Required ||
+                    (this.Required != null &&
+                    this.Required.Equals(input.Required))
                 ) && base.Equals(input) && 
                 (
                     this.Type == input.Type ||
@@ -188,8 +185,8 @@ namespace QueenbeeSDK
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                if (this.From != null)
-                    hashCode = hashCode * 59 + this.From.GetHashCode();
+                if (this.Required != null)
+                    hashCode = hashCode * 59 + this.Required.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;
@@ -203,11 +200,21 @@ namespace QueenbeeSDK
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            return this.BaseValidate(validationContext);
+        }
+
+        /// <summary>
+        /// To validate all properties of the instance
+        /// </summary>
+        /// <param name="validationContext">Validation context</param>
+        /// <returns>Validation Result</returns>
+        protected IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> BaseValidate(ValidationContext validationContext)
+        {
             foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern
-            Regex regexType = new Regex(@"^DAGFileOutputAlias$", RegexOptions.CultureInvariant);
+            Regex regexType = new Regex(@"^DAGGenericOutputAlias$", RegexOptions.CultureInvariant);
             if (false == regexType.Match(this.Type).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });

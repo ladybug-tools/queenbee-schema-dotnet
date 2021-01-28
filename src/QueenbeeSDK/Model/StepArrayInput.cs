@@ -24,7 +24,7 @@ using System.ComponentModel.DataAnnotations;
 namespace QueenbeeSDK
 {
     /// <summary>
-    /// An array input.
+    /// A JSON array input.
     /// </summary>
     [DataContract(Name = "StepArrayInput")]
     public partial class StepArrayInput : GenericInput, IEquatable<StepArrayInput>, IValidatableObject
