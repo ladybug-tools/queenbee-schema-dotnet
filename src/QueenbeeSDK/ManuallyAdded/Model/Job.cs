@@ -1,28 +1,45 @@
 using System.Linq;
+using System.Collections.Generic;
 
 namespace QueenbeeSDK
 {
     public partial class Job
     {
-        public void AddArgument(JobArgument arg)
+        public void AddArgumentSet(List<AnyOf<JobArgument, JobPathArgument>> arg = default)
         {
-            if (Arguments == null) this.Arguments = new System.Collections.Generic.List<AnyOf<JobArgument, JobPathArgument>>();
+            this.Arguments = Arguments ?? new List<List<AnyOf<JobArgument, JobPathArgument>>>();
+            var argSet = arg ?? new List<AnyOf<JobArgument, JobPathArgument>>();
+            this.Arguments.Add(argSet);
+        }
+        public bool AddArgumentToTheLast(JobArgument arg)
+        {
+            this.Arguments = Arguments ?? new List<List<AnyOf<JobArgument, JobPathArgument>>>();
+            var argSet = this.Arguments.LastOrDefault();
+            argSet = argSet ?? new List<AnyOf<JobArgument, JobPathArgument>>();
 
-            var existing = this.Arguments.OfType<JobArgument>().FirstOrDefault(_ => _.Name == arg.Name);
+            var existing = argSet.OfType<JobArgument>().FirstOrDefault(_ => _.Name == arg.Name);
             if (existing == null)
-                this.Arguments.Add(arg);
+                argSet.Add(arg);
             else
                 existing.Value = arg.Value;
-        }
-        public void AddArgument(JobPathArgument arg)
-        {
-            if (Arguments == null) this.Arguments = new System.Collections.Generic.List<AnyOf<JobArgument, JobPathArgument>>();
 
-            var existing = this.Arguments.OfType<JobPathArgument>().FirstOrDefault(_ => _.Name == arg.Name);
+            this.Arguments.Add(argSet);
+            return true;
+        }
+        public bool AddArgumentToTheLast(JobPathArgument arg)
+        {
+            this.Arguments = Arguments ?? new List<List<AnyOf<JobArgument, JobPathArgument>>>();
+            var argSet = this.Arguments.LastOrDefault();
+            argSet = argSet ?? new List<AnyOf<JobArgument, JobPathArgument>>();
+
+            var existing = argSet.OfType<JobPathArgument>().FirstOrDefault(_ => _.Name == arg.Name);
             if (existing == null)
-                this.Arguments.Add(arg);
+                argSet.Add(arg);
             else
                 existing.Source = arg.Source;
+
+            this.Arguments.Add(argSet);
+            return true;
         }
     }
 }
