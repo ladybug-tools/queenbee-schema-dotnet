@@ -11,7 +11,7 @@ namespace QueenbeeSDK
             var argSet = arg ?? new List<AnyOf<JobArgument, JobPathArgument>>();
             this.Arguments.Add(argSet);
         }
-        public bool AddArgumentToTheLast(JobArgument arg)
+        public bool AddArgument(JobArgument arg)
         {
             this.Arguments = Arguments ?? new List<List<AnyOf<JobArgument, JobPathArgument>>>();
             var argSet = this.Arguments.LastOrDefault();
@@ -26,7 +26,7 @@ namespace QueenbeeSDK
             this.Arguments.Add(argSet);
             return true;
         }
-        public bool AddArgumentToTheLast(JobPathArgument arg)
+        public bool AddArgument(JobPathArgument arg)
         {
             this.Arguments = Arguments ?? new List<List<AnyOf<JobArgument, JobPathArgument>>>();
             var argSet = this.Arguments.LastOrDefault();

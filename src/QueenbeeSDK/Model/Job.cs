@@ -52,7 +52,7 @@ namespace QueenbeeSDK
         public Job
         (
             string source, // Required parameters
-            Dictionary<string, string> annotations= default, List<AnyOf<JobArgument,JobPathArgument>> arguments= default, string name= default, string description= default, Dictionary<string, string> labels= default// Optional parameters
+            Dictionary<string, string> annotations= default, List<List<AnyOf<JobArgument,JobPathArgument>>> arguments= default, string name= default, string description= default, Dictionary<string, string> labels= default// Optional parameters
         ) : base()// BaseClass
         {
             // to ensure "source" is required (not null)
@@ -98,7 +98,7 @@ namespace QueenbeeSDK
         /// </summary>
         /// <value>Input arguments for this job.</value>
         [DataMember(Name = "arguments", EmitDefaultValue = false)]
-        public List<AnyOf<JobArgument,JobPathArgument>> Arguments { get; set; } 
+        public List<List<AnyOf<JobArgument,JobPathArgument>>> Arguments { get; set; } 
         /// <summary>
         /// An optional name for this job. This name will be used a the display name for the run.
         /// </summary>
