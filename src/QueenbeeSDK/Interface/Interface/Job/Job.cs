@@ -9,4 +9,5 @@ namespace QueenbeeSDK.Interface.Job
 namespace QueenbeeSDK
 {
 	public partial class Job: QueenbeeSDK.Interface.Job.IJob {}
+	public partial class JobStatus: QueenbeeSDK.Interface.Job.IJob {}
 }

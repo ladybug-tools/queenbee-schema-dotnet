@@ -83,7 +83,7 @@
     "Job": "queenbee.interface.job.job",
     "JobArgument": "queenbee.interface.io.inputs.job",
     "JobPathArgument": "queenbee.interface.io.inputs.job",
-    "JobStatus": "queenbee.interface.job.status",
+    "JobStatus": "queenbee.interface.job.job",
     "License": "queenbee.interface.base.metadata",
     "LocalConfig": "queenbee.interface.plugin.plugin",
     "Maintainer": "queenbee.interface.base.metadata",
@@ -97,6 +97,7 @@
     "RecipeInterface": "queenbee.interface.recipe.recipe",
     "RepositoryIndex": "queenbee.interface.repository.index",
     "RepositoryMetadata": "queenbee.interface.repository.index",
+    "RunStatus": "queenbee.interface.job.run",
     "S3": "queenbee.interface.io.artifact_source",
     "StepArrayInput": "queenbee.interface.io.inputs.step",
     "StepArrayOutput": "queenbee.interface.io.outputs.step",
@@ -114,7 +115,7 @@
     "StepNumberOutput": "queenbee.interface.io.outputs.step",
     "StepPathInput": "queenbee.interface.io.inputs.step",
     "StepPathOutput": "queenbee.interface.io.outputs.step",
-    "StepStatus": "queenbee.interface.job.status",
+    "StepStatus": "queenbee.interface.job.run",
     "StepStringInput": "queenbee.interface.io.inputs.step",
     "StepStringOutput": "queenbee.interface.io.outputs.step",
     "TaskArgument": "queenbee.interface.io.inputs.task",
@@ -139,6 +140,6 @@
   "enums": {
     "DependencyKind": "queenbee.interface.recipe.dependency",
     "ItemType": "queenbee.interface.io.common",
-    "StatusType": "queenbee.interface.job.status"
+    "StatusType": "queenbee.interface.job.run"
   }
 }

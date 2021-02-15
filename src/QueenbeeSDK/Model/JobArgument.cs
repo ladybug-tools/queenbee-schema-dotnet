@@ -47,7 +47,7 @@ namespace QueenbeeSDK
         /// <param name="annotations">An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries..</param>
         public JobArgument
         (
-            string name, string value, // Required parameters
+            string name, object value, // Required parameters
             Dictionary<string, string> annotations= default// Optional parameters
         ) : base()// BaseClass
         {
@@ -78,8 +78,8 @@ namespace QueenbeeSDK
         /// The value of the job argument.
         /// </summary>
         /// <value>The value of the job argument.</value>
-        [DataMember(Name = "value", IsRequired = true, EmitDefaultValue = false)]
-        public string Value { get; set; } 
+        [DataMember(Name = "value", IsRequired = true, EmitDefaultValue = true)]
+        public object Value { get; set; } 
         /// <summary>
         /// An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.
         /// </summary>

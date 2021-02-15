@@ -3,7 +3,7 @@
   "servers": [],
   "info": {
     "description": "Documentation for Queenbee schema.",
-    "version": "1.22.15",
+    "version": "1.22.13",
     "title": "Queenbee Schema",
     "contact": {
       "name": "Ladybug Tools",
@@ -490,6 +490,11 @@
       "description": "<SchemaDefinition schemaRef=\"#/components/schemas/RepositoryMetadata\" />\n"
     },
     {
+      "name": "runstatus_model",
+      "x-displayName": "RunStatus",
+      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/RunStatus\" />\n"
+    },
+    {
       "name": "s3_model",
       "x-displayName": "S3",
       "description": "<SchemaDefinition schemaRef=\"#/components/schemas/S3\" />\n"
@@ -752,6 +757,7 @@
         "recipeinterface_model",
         "repositoryindex_model",
         "repositorymetadata_model",
+        "runstatus_model",
         "s3_model",
         "statustype_model",
         "steparrayinput_model",
@@ -1921,15 +1927,7 @@
           "default": {
             "title": "Default",
             "description": "Default value to use for an input if a value was not supplied.",
-            "anyOf": [
-              {
-                "type": "array",
-                "items": {}
-              },
-              {
-                "type": "object"
-              }
-            ]
+            "type": "object"
           },
           "required": {
             "title": "Required",
@@ -2946,15 +2944,7 @@
           "default": {
             "title": "Default",
             "description": "Default value to use for an input if a value was not supplied.",
-            "anyOf": [
-              {
-                "type": "array",
-                "items": {}
-              },
-              {
-                "type": "object"
-              }
-            ]
+            "type": "object"
           },
           "alias": {
             "title": "Alias",
@@ -6670,15 +6660,7 @@
           "default": {
             "title": "Default",
             "description": "Default value to use for an input if a value was not supplied.",
-            "anyOf": [
-              {
-                "type": "array",
-                "items": {}
-              },
-              {
-                "type": "object"
-              }
-            ]
+            "type": "object"
           },
           "alias": {
             "title": "Alias",
@@ -7355,8 +7337,7 @@
           },
           "value": {
             "title": "Value",
-            "description": "The value of the job argument.",
-            "type": "string"
+            "description": "The value of the job argument."
           },
           "type": {
             "title": "Type",
@@ -7462,14 +7443,17 @@
             "description": "Input arguments for this job.",
             "type": "array",
             "items": {
-              "anyOf": [
-                {
-                  "$ref": "#/components/schemas/JobArgument"
-                },
-                {
-                  "$ref": "#/components/schemas/JobPathArgument"
-                }
-              ]
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/JobArgument"
+                  },
+                  {
+                    "$ref": "#/components/schemas/JobPathArgument"
+                  }
+                ]
+              }
             }
           },
           "name": {
@@ -7884,6 +7868,100 @@
         },
         "required": [
           "metadata"
+        ]
+      },
+      "JobStatus": {
+        "title": "JobStatus",
+        "description": "Parametric Job Status.",
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "description": "The ID of the individual job.",
+            "type": "string"
+          },
+          "status": {
+            "title": "Status",
+            "description": "The status of this task. Can be \"Running\", \"Succeeded\", \"Failed\" or \"Error\"",
+            "type": "string"
+          },
+          "started_at": {
+            "title": "Started At",
+            "description": "The time at which the task was started",
+            "type": "string",
+            "format": "date-time"
+          },
+          "type": {
+            "title": "Type",
+            "default": "JobStatus",
+            "pattern": "^JobStatus$",
+            "type": "string",
+            "readOnly": true
+          },
+          "annotations": {
+            "title": "Annotations",
+            "description": "An optional dictionary to add annotations to inputs. These annotations will be used by the client side libraries.",
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "api_version": {
+            "title": "Api Version",
+            "default": "v1beta1",
+            "readOnly": true,
+            "pattern": "^v1beta1$",
+            "type": "string"
+          },
+          "message": {
+            "title": "Message",
+            "description": "Any message produced by the task. Usually error/debugging hints.",
+            "type": "string"
+          },
+          "finished_at": {
+            "title": "Finished At",
+            "description": "The time at which the task was completed",
+            "type": "string",
+            "format": "date-time"
+          },
+          "source": {
+            "title": "Source",
+            "description": "Source url for the status object. It can be a recipe or a function.",
+            "type": "string"
+          },
+          "runs_pending": {
+            "title": "Runs Pending",
+            "description": "The count of runs that are pending",
+            "default": 0,
+            "type": "integer",
+            "format": "int32"
+          },
+          "runs_running": {
+            "title": "Runs Running",
+            "description": "The count of runs that are running",
+            "default": 0,
+            "type": "integer",
+            "format": "int32"
+          },
+          "runs_completed": {
+            "title": "Runs Completed",
+            "description": "The count of runs that have completed",
+            "default": 0,
+            "type": "integer",
+            "format": "int32"
+          },
+          "runs_failed": {
+            "title": "Runs Failed",
+            "description": "The count of runs that have failed",
+            "default": 0,
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "required": [
+          "id",
+          "status",
+          "started_at"
         ]
       },
       "StepStringInput": {
@@ -8791,15 +8869,7 @@
           },
           "value": {
             "title": "Value",
-            "anyOf": [
-              {
-                "type": "array",
-                "items": {}
-              },
-              {
-                "type": "object"
-              }
-            ]
+            "type": "object"
           },
           "type": {
             "title": "Type",
@@ -8824,15 +8894,7 @@
           "default": {
             "title": "Default",
             "description": "Default value to use for an input if a value was not supplied.",
-            "anyOf": [
-              {
-                "type": "array",
-                "items": {}
-              },
-              {
-                "type": "object"
-              }
-            ]
+            "type": "object"
           },
           "alias": {
             "title": "Alias",
@@ -9371,15 +9433,7 @@
           },
           "value": {
             "title": "Value",
-            "anyOf": [
-              {
-                "type": "array",
-                "items": {}
-              },
-              {
-                "type": "object"
-              }
-            ]
+            "type": "object"
           },
           "type": {
             "title": "Type",
@@ -9607,14 +9661,14 @@
           "outbound_steps"
         ]
       },
-      "JobStatus": {
-        "title": "JobStatus",
+      "RunStatus": {
+        "title": "RunStatus",
         "description": "Job Status.",
         "type": "object",
         "properties": {
           "inputs": {
             "title": "Inputs",
-            "description": "The inputs used for this job.",
+            "description": "The inputs used for this run.",
             "type": "array",
             "items": {
               "anyOf": [
@@ -9650,7 +9704,7 @@
           },
           "outputs": {
             "title": "Outputs",
-            "description": "The outputs produced by this job.",
+            "description": "The outputs produced by this run.",
             "type": "array",
             "items": {
               "anyOf": [
@@ -9697,13 +9751,18 @@
           },
           "id": {
             "title": "Id",
-            "description": "The ID of the individual job.",
+            "description": "The ID of the individual run.",
+            "type": "string"
+          },
+          "job_id": {
+            "title": "Job Id",
+            "description": "The ID of the job that generated this run",
             "type": "string"
           },
           "type": {
             "title": "Type",
-            "default": "JobStatus",
-            "pattern": "^JobStatus$",
+            "default": "RunStatus",
+            "pattern": "^RunStatus$",
             "type": "string",
             "readOnly": true
           },
@@ -9740,7 +9799,7 @@
           },
           "entrypoint": {
             "title": "Entrypoint",
-            "description": "The ID of the first step in the job.",
+            "description": "The ID of the first step in the run.",
             "type": "string"
           },
           "steps": {
@@ -9757,7 +9816,8 @@
           "outputs",
           "status",
           "started_at",
-          "id"
+          "id",
+          "job_id"
         ]
       }
     }

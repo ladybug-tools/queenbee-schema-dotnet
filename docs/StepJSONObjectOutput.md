@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Value** | [**AnyOfarrayobject**](AnyOfarrayobject.md) |  | 
+**Value** | **Object** |  | 
 **Type** | **string** |  | [optional] [readonly] [default to "StepJSONObjectOutput"]
 
 [[Back to Model list]](../README.md#documentation-for-models)

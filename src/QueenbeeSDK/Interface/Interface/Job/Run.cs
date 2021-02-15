@@ -2,11 +2,12 @@
 //Do not edit this manually!.
 namespace QueenbeeSDK.Interface.Job
 {
-	public partial interface IStatus {}
+	public partial interface IRun {}
 }
 
 //Classes implemented this interface:
 namespace QueenbeeSDK
 {
-	public partial class BaseStatus: QueenbeeSDK.Interface.Job.IStatus {}
+	public partial class RunStatus: QueenbeeSDK.Interface.Job.IRun {}
+	public partial class StepStatus: QueenbeeSDK.Interface.Job.IRun {}
 }

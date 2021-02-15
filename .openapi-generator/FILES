@@ -206,6 +206,8 @@ docs/RepositoryIndex.md
 docs/RepositoryIndexAllOf.md
 docs/RepositoryMetadata.md
 docs/RepositoryMetadataAllOf.md
+docs/RunStatus.md
+docs/RunStatusAllOf.md
 docs/S3.md
 docs/S3AllOf.md
 docs/StatusType.md
@@ -480,6 +482,8 @@ src/QueenbeeSDK.Test/Model/RepositoryIndexAllOfTests.cs
 src/QueenbeeSDK.Test/Model/RepositoryIndexTests.cs
 src/QueenbeeSDK.Test/Model/RepositoryMetadataAllOfTests.cs
 src/QueenbeeSDK.Test/Model/RepositoryMetadataTests.cs
+src/QueenbeeSDK.Test/Model/RunStatusAllOfTests.cs
+src/QueenbeeSDK.Test/Model/RunStatusTests.cs
 src/QueenbeeSDK.Test/Model/S3AllOfTests.cs
 src/QueenbeeSDK.Test/Model/S3Tests.cs
 src/QueenbeeSDK.Test/Model/StatusTypeTests.cs
@@ -764,6 +768,8 @@ src/QueenbeeSDK/Model/RepositoryIndex.cs
 src/QueenbeeSDK/Model/RepositoryIndexAllOf.cs
 src/QueenbeeSDK/Model/RepositoryMetadata.cs
 src/QueenbeeSDK/Model/RepositoryMetadataAllOf.cs
+src/QueenbeeSDK/Model/RunStatus.cs
+src/QueenbeeSDK/Model/RunStatusAllOf.cs
 src/QueenbeeSDK/Model/S3.cs
 src/QueenbeeSDK/Model/S3AllOf.cs
 src/QueenbeeSDK/Model/StatusType.cs

@@ -50,7 +50,7 @@ namespace QueenbeeSDK
         /// <param name="required">A boolean to indicate if an artifact output is required. A False value makes the artifact optional. (default to true).</param>
         public StepJSONObjectOutput
         (
-            string name, string path, object value, // Required parameters
+            string name, string path, Object value, // Required parameters
             Dictionary<string, string> annotations= default, string description= default, bool required = true // Optional parameters
         ) : base(name: name, annotations: annotations, description: description, path: path, required: required)// BaseClass
         {
@@ -72,7 +72,7 @@ namespace QueenbeeSDK
         /// Gets or Sets Value
         /// </summary>
         [DataMember(Name = "value", IsRequired = true, EmitDefaultValue = false)]
-        public object Value { get; set; } 
+        public Object Value { get; set; } 
 
         /// <summary>
         /// Returns the string presentation of the object
