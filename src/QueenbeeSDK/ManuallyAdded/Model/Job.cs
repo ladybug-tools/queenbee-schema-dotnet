@@ -11,11 +11,15 @@ namespace QueenbeeSDK
             var argSet = arg ?? new List<AnyOf<JobArgument, JobPathArgument>>();
             this.Arguments.Add(argSet);
         }
-        public bool AddArgument(JobArgument arg)
+        public void AddArgument(JobArgument arg)
         {
             this.Arguments = Arguments ?? new List<List<AnyOf<JobArgument, JobPathArgument>>>();
             var argSet = this.Arguments.LastOrDefault();
-            argSet = argSet ?? new List<AnyOf<JobArgument, JobPathArgument>>();
+            if (argSet == null)
+            {
+                argSet = new List<AnyOf<JobArgument, JobPathArgument>>();
+                this.Arguments.Add(argSet);
+            }
 
             var existing = argSet.OfType<JobArgument>().FirstOrDefault(_ => _.Name == arg.Name);
             if (existing == null)
@@ -23,23 +27,23 @@ namespace QueenbeeSDK
             else
                 existing.Value = arg.Value;
 
-            this.Arguments.Add(argSet);
-            return true;
         }
-        public bool AddArgument(JobPathArgument arg)
+        public void AddArgument(JobPathArgument arg)
         {
             this.Arguments = Arguments ?? new List<List<AnyOf<JobArgument, JobPathArgument>>>();
             var argSet = this.Arguments.LastOrDefault();
-            argSet = argSet ?? new List<AnyOf<JobArgument, JobPathArgument>>();
-
+            if (argSet == null)
+            {
+                argSet = new List<AnyOf<JobArgument, JobPathArgument>>();
+                this.Arguments.Add(argSet);
+            }
+           
             var existing = argSet.OfType<JobPathArgument>().FirstOrDefault(_ => _.Name == arg.Name);
             if (existing == null)
                 argSet.Add(arg);
             else
                 existing.Source = arg.Source;
 
-            this.Arguments.Add(argSet);
-            return true;
         }
     }
 }
