@@ -1,0 +1,24 @@
+version: 2
+updates:
+- package-ecosystem: nuget
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: Grasshopper
+    versions:
+    - "> 6.0.18016.23451"
+  - dependency-name: Microsoft.NET.Test.Sdk
+    versions:
+    - "> 16.7.1"
+  - dependency-name: System.ComponentModel.Annotations
+    versions:
+    - "> 4.7.0"
+  - dependency-name: YamlDotNet
+    versions:
+    - "> 8.1.2"
+  - dependency-name: NUnit
+    versions:
+    - 3.13.0
+    - 3.13.1
